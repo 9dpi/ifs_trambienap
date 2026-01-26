@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="vi" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IFS - AI | Quản trị Cảm biến</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <div style="display:flex; align-items:center">
+            <button class="mobile-btn" onclick="toggleMobileMenu()">
+                <svg width="24" height="24" viewBox="0 0 24 24">
+                    <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" />
+                </svg>
+            </button>
+            <a href="dashboard.html" class="brand" style="text-decoration:none">
+                <div class="logo-box">I</div> IFS - AI
+            </a>
+        </div>
+
+        <div class="nav-menu" id="mainMenu">
+            <div class="nav-wrapper"><a href="dashboard.html" class="nav-link">TRANG CHỦ</a></div>
+            <div class="nav-wrapper"><a href="giamsattructiep.html" class="nav-link">GIÁM SÁT TRỰC TIẾP</a></div>
+            <div class="nav-wrapper">
+                <div class="nav-link">THEO DÕI ĐIỂM ĐO <svg class="nav-arrow" width="10" viewBox="0 0 24 24">
+                        <path d="M7 10l5 5 5-5z" />
+                    </svg></div>
+                <div class="dropdown-menu">
+                    <a href="theodoidiemdo_canhbaoai.html" class="menu-link">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polygon
+                                points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
+                            </polygon>
+                        </svg>
+                        Cảnh báo AI
+                    </a>
+                    <a href="theodoidiemdo_canhbao.html" class="menu-link">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="12" y1="8" x2="12" y2="12"></line>
+                            <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                        </svg>
+                        Nhiệt độ vượt ngưỡng
+                    </a>
+                    <a href="theodoidiemdo_nhatkynhietdo.html" class="menu-link">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                            <line x1="16" y1="2" x2="16" y2="6"></line>
+                            <line x1="8" y1="2" x2="8" y2="6"></line>
+                            <line x1="3" y1="10" x2="21" y2="10"></line>
+                        </svg>
+                        Nhật ký nhiệt độ
+                    </a>
+                    <a href="#" class="menu-link">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                            <polyline points="14 2 14 8 20 8"></polyline>
+                            <line x1="16" y1="13" x2="8" y2="13"></line>
+                            <line x1="16" y1="17" x2="8" y2="17"></line>
+                        </svg>
+                        Tổng hợp phân tích
+                    </a>
+                </div>
+            </div>
+            <div class="nav-wrapper">
+                <div class="nav-link active-link">QUẢN TRỊ HỆ THỐNG <svg class="nav-arrow" width="10"
+                        viewBox="0 0 24 24">
+                        <path d="M7 10l5 5 5-5z" />
+                    </svg></div>
+                <div class="dropdown-menu mega-menu">
+                    <div class="mega-col">
+                        <div class="col-header">HẠ TẦNG & THIẾT BỊ</div>
+                        <a href="quantrihethong_khuvuc.html" class="menu-link menu-item-with-bg">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                <circle cx="12" cy="10" r="3"></circle>
+                            </svg>
+                            Khu vực
+                        </a>
+                        <a href="quantrihethong_camera.html" class="menu-link menu-item-with-bg">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M23 7l-7 5 7 5V7z"></path>
+                                <rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect>
+                            </svg>
+                            Camera
+                        </a>
+                        <a href="quantrihethong_cambien.html" class="menu-link menu-item-with-bg active-link">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                <circle cx="12" cy="12" r="3"></circle>
+                            </svg>
+                            Cảm biến
+                        </a>
+                        <a href="quantrihethong_loaithietbi.html" class="menu-link menu-item-with-bg">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="21 8 21 21 3 21 3 8"></polyline>
+                                <rect x="1" y="3" width="22" height="5"></rect>
+                            </svg>
+                            Loại Thiết bị
+                        </a>
+                        <a href="quantrihethong_thietbi.html" class="menu-link menu-item-with-bg">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="5"></circle>
+                                <line x1="12" y1="1" x2="12" y2="3"></line>
+                                <line x1="12" y1="21" x2="12" y2="23"></line>
+                                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                                <line x1="1" y1="12" x2="3" y2="12"></line>
+                                <line x1="21" y1="12" x2="23" y2="12"></line>
+                            </svg>
+                            Thiết bị
+                        </a>
+                    </div>
+                    <div class="mega-col">
+                        <div class="col-header">THIẾT LẬP CẢNH BÁO</div>
+                        <a href="thietlapcanhbao_kenhcanhbao.html" class="menu-link menu-item-with-bg">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+                            </svg>
+                            Kênh Cảnh báo
+                        </a>
+                        <a href="theodoidiemdo_bocanhbao.html" class="menu-link menu-item-with-bg">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M5 12.55a11 11 0 0 1 14.08 0"></path>
+                                <path d="M1.42 9a16 16 0 0 1 21.16 0"></path>
+                                <path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path>
+                                <line x1="12" y1="20" x2="12.01" y2="20"></line>
+                            </svg>
+                            Bộ cảnh báo
+                        </a>
+                        <a href="#" class="menu-link menu-item-with-bg">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <polyline points="12 6 12 12 16 14"></polyline>
+                            </svg>
+                            Lịch sử
+                        </a>
+                    </div>
+                    <div class="mega-col">
+                        <div class="col-header">QUẢN LÝ NGƯỜI DÙNG</div>
+                        <a href="quantrihethong_nguoidung.html" class="menu-link menu-item-with-bg">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="12" cy="7" r="4"></circle>
+                            </svg>
+                            Người dùng
+                        </a>
+                        <a href="#" class="menu-link menu-item-with-bg">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="8.5" cy="7" r="4"></circle>
+                                <line x1="20" y1="8" x2="20" y2="14"></line>
+                                <line x1="23" y1="11" x2="17" y2="11"></line>
+                            </svg>
+                            Thêm người dùng mới
+                        </a>
+                        <a href="#" class="menu-link menu-item-with-bg">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+                                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+                            </svg>
+                            Hướng dẫn sử dụng
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="header-actions">
+            <div class="theme-switch" onclick="toggleTheme()">
+                <div class="switch-knob"></div>
+            </div>
+            <div
+                style="width:32px; height:32px; background:#E5E7EB; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:700; color:#4B5563">
+                A</div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="bread-crumb">Quản trị hệ thống / <span>Cảm biến</span></div>
+
+        <div class="grid">
+            <!-- Filter Section -->
+            <div class="card filter-card">
+                <div class="filter-row">
+                    <div class="filter-item">
+                        <div class="filter-label">Mã/tên cảm biến</div>
+                        <input type="text" class="filter-input" placeholder="Nhập mã hoặc tên...">
+                    </div>
+                    <div class="filter-item">
+                        <div class="filter-label">Khu vực</div>
+                        <select class="filter-input">
+                            <option>Chọn khu vực</option>
+                            <option>Trạm 110kV Nam Phú Quốc</option>
+                            <option>Trạm 110kV Liên Trì</option>
+                        </select>
+                    </div>
+                    <div class="filter-item">
+                        <div class="filter-label">Loại cảm biến</div>
+                        <select class="filter-input">
+                            <option>Chọn loại</option>
+                            <option>Nhiệt độ môi trường</option>
+                            <option>Nhiệt độ thiết bị</option>
+                        </select>
+                    </div>
+                    <div class="filter-item">
+                        <div class="filter-label">Trạng thái</div>
+                        <select class="filter-input">
+                            <option>Chọn trạng thái</option>
+                            <option>Đang bật</option>
+                            <option>Đang tắt</option>
+                        </select>
+                    </div>
+                    <button class="btn-search">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        </svg>
+                        Tìm kiếm
+                    </button>
+                </div>
+            </div>
+
+            <!-- Table/Card Section -->
+            <div class="card table-container-full">
+                <div
+                    style="padding: 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border)">
+                    <div style="font-size: 15px; font-weight: 700; color: var(--primary); text-transform: uppercase;">
+                        Danh sách cảm biến nhiệt</div>
+                    <div style="display: flex; align-items: center; gap: 15px;">
+                        <div class="view-switcher">
+                            <button class="view-btn active" onclick="switchView('table')">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <line x1="8" y1="6" x2="21" y2="6"></line>
+                                    <line x1="8" y1="12" x2="21" y2="12"></line>
+                                    <line x1="8" y1="18" x2="21" y2="18"></line>
+                                    <line x1="3" y1="6" x2="3.01" y2="6"></line>
+                                    <line x1="3" y1="12" x2="3.01" y2="12"></line>
+                                    <line x1="3" y1="18" x2="3.01" y2="18"></line>
+                                </svg>
+                            </button>
+                            <button class="view-btn" onclick="switchView('card')">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <rect x="3" y="3" width="7" height="7"></rect>
+                                    <rect x="14" y="3" width="7" height="7"></rect>
+                                    <rect x="14" y="14" width="7" height="7"></rect>
+                                    <rect x="3" y="14" width="7" height="7"></rect>
+                                </svg>
+                            </button>
+                        </div>
+                        <button class="btn-add">+ Thêm mới</button>
+                    </div>
+                </div>
+
+                <!-- TABLE VIEW -->
+                <div id="tableView">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th style="width: 60px;">STT</th>
+                                <th>Mã cảm biến</th>
+                                <th>Tên cảm biến</th>
+                                <th>Khu vực</th>
+                                <th>Trạng thái</th>
+                                <th style="width: 140px; text-align: center;">Hành động</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>N01</td>
+                                <td>Cảm biến nhiệt 01</td>
+                                <td>Trạm 110kV Nam Phú Quốc</td>
+                                <td><span style="color:var(--success)">Đang bật</span></td>
+                                <td style="text-align: center;"><button
+                                        class="action-btn-circle btn-edit-round">✎</button><button
+                                        class="action-btn-circle btn-delete-round">🗑</button></td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>MT-01</td>
+                                <td>Nhiệt độ môi trường</td>
+                                <td>Trạm 110kV Nam Phú Quốc</td>
+                                <td><span style="color:var(--success)">Đang bật</span></td>
+                                <td style="text-align: center;"><button
+                                        class="action-btn-circle btn-edit-round">✎</button><button
+                                        class="action-btn-circle btn-delete-round">🗑</button></td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>MBA-PQ-01</td>
+                                <td>Nhiệt độ MBA T1</td>
+                                <td>Trạm 110kV Nam Phú Quốc</td>
+                                <td><span style="color:var(--danger)">Lỗi</span></td>
+                                <td style="text-align: center;"><button
+                                        class="action-btn-circle btn-edit-round">✎</button><button
+                                        class="action-btn-circle btn-delete-round">🗑</button></td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>LT-CB-01</td>
+                                <td>Cảm biến nhiệt trạm Liên Trì</td>
+                                <td>Trạm 110kV Liên Trì</td>
+                                <td><span style="color:var(--text-sub)">Đang tắt</span></td>
+                                <td style="text-align: center;"><button
+                                        class="action-btn-circle btn-edit-round">✎</button><button
+                                        class="action-btn-circle btn-delete-round">🗑</button></td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td>MBA-PQ-02</td>
+                                <td>Nhiệt độ MBA T2</td>
+                                <td>Trạm 110kV Nam Phú Quốc</td>
+                                <td><span style="color:var(--success)">Đang bật</span></td>
+                                <td style="text-align: center;"><button
+                                        class="action-btn-circle btn-edit-round">✎</button><button
+                                        class="action-btn-circle btn-delete-round">🗑</button></td>
+                            </tr>
+                            <tr>
+                                <td>6</td>
+                                <td>HUM-01</td>
+                                <td>Độ ẩm môi trường</td>
+                                <td>Trạm 110kV Liên Trì</td>
+                                <td><span style="color:var(--success)">Đang bật</span></td>
+                                <td style="text-align: center;"><button
+                                        class="action-btn-circle btn-edit-round">✎</button><button
+                                        class="action-btn-circle btn-delete-round">🗑</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- CARD VIEW -->
+                <div id="cardView" class="card-view-grid hidden-view">
+                    <div class="sensor-card-item">
+                        <div class="sc-header"><span class="sc-id">N01</span><span
+                                style="color:var(--success); font-size:12px">● Online</span></div>
+                        <div class="sc-name">Cảm biến nhiệt 01</div>
+                        <div class="sc-info">
+                            <div class="sc-info-item">
+                                <svg style="width:14px; height:14px; margin-right:4px; vertical-align:middle"
+                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                    <circle cx="12" cy="10" r="3"></circle>
+                                </svg>
+                                Nam Phú Quốc
+                            </div>
+                            <div class="sc-info-item">
+                                <svg style="width:14px; height:14px; margin-right:4px; vertical-align:middle"
+                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"></path>
+                                </svg>
+                                32.5°C
+                            </div>
+                        </div>
+                        <div class="sc-actions"><button class="action-btn-circle btn-edit-round">✎</button><button
+                                class="action-btn-circle btn-delete-round">🗑</button></div>
+                    </div>
+                    <div class="sensor-card-item">
+                        <div class="sc-header"><span class="sc-id">MT-01</span><span
+                                style="color:var(--success); font-size:12px">● Online</span></div>
+                        <div class="sc-name">Nhiệt độ môi trường</div>
+                        <div class="sc-info">
+                            <div class="sc-info-item">
+                                <svg style="width:14px; height:14px; margin-right:4px; vertical-align:middle"
+                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                    <circle cx="12" cy="10" r="3"></circle>
+                                </svg>
+                                Nam Phú Quốc
+                            </div>
+                            <div class="sc-info-item">
+                                <svg style="width:14px; height:14px; margin-right:4px; vertical-align:middle"
+                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"></path>
+                                </svg>
+                                31.0°C
+                            </div>
+                        </div>
+                        <div class="sc-actions"><button class="action-btn-circle btn-edit-round">✎</button><button
+                                class="action-btn-circle btn-delete-round">🗑</button></div>
+                    </div>
+                    <div class="sensor-card-item">
+                        <div class="sc-header"><span class="sc-id">MBA-PQ-01</span><span
+                                style="color:var(--danger); font-size:12px">● Error</span></div>
+                        <div class="sc-name">Nhiệt độ MBA T1</div>
+                        <div class="sc-info">
+                            <div class="sc-info-item">
+                                <svg style="width:14px; height:14px; margin-right:4px; vertical-align:middle"
+                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                    <circle cx="12" cy="10" r="3"></circle>
+                                </svg>
+                                Nam Phú Quốc
+                            </div>
+                            <div class="sc-info-item">
+                                <svg style="width:14px; height:14px; margin-right:4px; vertical-align:middle"
+                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"></path>
+                                </svg>
+                                --°C
+                            </div>
+                        </div>
+                        <div class="sc-actions"><button class="action-btn-circle btn-edit-round">✎</button><button
+                                class="action-btn-circle btn-delete-round">🗑</button></div>
+                    </div>
+                    <div class="sensor-card-item">
+                        <div class="sc-header"><span class="sc-id">LT-CB-01</span><span
+                                style="color:var(--text-sub); font-size:12px">● Offline</span></div>
+                        <div class="sc-name">Cảm biến nhiệt trạm Liên Trì</div>
+                        <div class="sc-info">
+                            <div class="sc-info-item">
+                                <svg style="width:14px; height:14px; margin-right:4px; vertical-align:middle"
+                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                    <circle cx="12" cy="10" r="3"></circle>
+                                </svg>
+                                Liên Trì
+                            </div>
+                            <div class="sc-info-item">
+                                <svg style="width:14px; height:14px; margin-right:4px; vertical-align:middle"
+                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"></path>
+                                </svg>
+                                --°C
+                            </div>
+                        </div>
+                        <div class="sc-actions"><button class="action-btn-circle btn-edit-round">✎</button><button
+                                class="action-btn-circle btn-delete-round">🗑</button></div>
+                    </div>
+                    <div class="sensor-card-item">
+                        <div class="sc-header"><span class="sc-id">MBA-PQ-02</span><span
+                                style="color:var(--success); font-size:12px">● Online</span></div>
+                        <div class="sc-name">Nhiệt độ MBA T2</div>
+                        <div class="sc-info">
+                            <div class="sc-info-item">
+                                <svg style="width:14px; height:14px; margin-right:4px; vertical-align:middle"
+                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                    <circle cx="12" cy="10" r="3"></circle>
+                                </svg>
+                                Nam Phú Quốc
+                            </div>
+                            <div class="sc-info-item">
+                                <svg style="width:14px; height:14px; margin-right:4px; vertical-align:middle"
+                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"></path>
+                                </svg>
+                                45.2°C
+                            </div>
+                        </div>
+                        <div class="sc-actions"><button class="action-btn-circle btn-edit-round">✎</button><button
+                                class="action-btn-circle btn-delete-round">🗑</button></div>
+                    </div>
+                    <div class="sensor-card-item">
+                        <div class="sc-header"><span class="sc-id">HUM-01</span><span
+                                style="color:var(--success); font-size:12px">● Online</span></div>
+                        <div class="sc-name">Độ ẩm môi trường</div>
+                        <div class="sc-info">
+                            <div class="sc-info-item">
+                                <svg style="width:14px; height:14px; margin-right:4px; vertical-align:middle"
+                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                    <circle cx="12" cy="10" r="3"></circle>
+                                </svg>
+                                Liên Trì
+                            </div>
+                            <div class="sc-info-item">
+                                <svg style="width:14px; height:14px; margin-right:4px; vertical-align:middle"
+                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path>
+                                </svg>
+                                65%
+                            </div>
+                        </div>
+                        <div class="sc-actions"><button class="action-btn-circle btn-edit-round">✎</button><button
+                                class="action-btn-circle btn-delete-round">🗑</button></div>
+                    </div>
+                </div>
+
+                <div class="page-info-bar">
+                    <div>Hiển thị từ 1 đến 6 trong tổng số 6</div>
+                    <div class="pagination-group">
+                        <select class="select-page-size">
+                            <option>10/trang</option>
+                            <option>20/trang</option>
+                        </select>
+                        <button class="btn-page active">1</button>
+                        <div style="font-size: 11px; margin: 0 5px;">Nhảy tới</div>
+                        <input type="text" class="filter-input"
+                            style="width: 40px; height: 32px; padding: 0 5px; text-align: center;" value="1">
+                        <button class="btn-page">➜</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script>
+        function switchView(view) {
+            const tableView = document.getElementById('tableView');
+            const cardView = document.getElementById('cardView');
+            const btns = document.querySelectorAll('.view-btn');
+
+            if (view === 'table') {
+                tableView.classList.remove('hidden-view');
+                cardView.classList.add('hidden-view');
+                if (btns[0]) btns[0].classList.add('active');
+                if (btns[1]) btns[1].classList.remove('active');
+            } else {
+                tableView.classList.add('hidden-view');
+                cardView.classList.remove('hidden-view');
+                if (btns[1]) btns[1].classList.add('active');
+                if (btns[0]) btns[0].classList.remove('active');
+            }
+        }
+    </script>
+</body>
+
+</html>

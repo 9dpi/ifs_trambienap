@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="vi" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IFS - AI | Nhật ký nhiệt độ</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .status-badge {
+            padding: 4px 8px;
+            border-radius: 4px;
+            color: white;
+            font-size: 11px;
+            font-weight: 700;
+            text-align: center;
+            display: inline-block;
+            min-width: 80px;
+        }
+
+        .status-good {
+            background: var(--success);
+        }
+
+        .status-fair {
+            background: var(--primary);
+        }
+
+        .status-medium {
+            background: var(--warning);
+        }
+
+        .status-bad {
+            background: var(--danger);
+        }
+
+        .data-table th {
+            text-align: center;
+            vertical-align: middle;
+            border: 1px solid var(--border);
+        }
+
+        .data-table td {
+            text-align: center;
+            vertical-align: middle;
+            border: 1px solid var(--border);
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <div style="display:flex; align-items:center">
+            <button class="mobile-btn" onclick="toggleMobileMenu()">
+                <svg width="24" height="24" viewBox="0 0 24 24">
+                    <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" />
+                </svg>
+            </button>
+            <a href="dashboard.html" class="brand" style="text-decoration:none">
+                <div class="logo-box">I</div> IFS - AI
+            </a>
+        </div>
+
+        <div class="nav-menu" id="mainMenu">
+            <div class="nav-wrapper"><a href="dashboard.html" class="nav-link">TRANG CHỦ</a></div>
+            <div class="nav-wrapper"><a href="giamsattructiep.html" class="nav-link">GIÁM SÁT TRỰC TIẾP</a></div>
+            <div class="nav-wrapper">
+                <div class="nav-link active-link">THEO DÕI ĐIỂM ĐO <svg class="nav-arrow" width="10"
+                        viewBox="0 0 24 24">
+                        <path d="M7 10l5 5 5-5z" />
+                    </svg></div>
+                <div class="dropdown-menu">
+                    <a href="theodoidiemdo_canhbaoai.html" class="menu-link">Cảnh báo AI</a>
+                    <a href="theodoidiemdo_canhbao.html" class="menu-link">Nhiệt độ vượt ngưỡng</a>
+                    <a href="theodoidiemdo_nhatkynhietdo.html" class="menu-link active-link">Nhật ký nhiệt độ</a>
+                    <a href="#" class="menu-link">Tổng hợp phân tích</a>
+                </div>
+            </div>
+            <div class="nav-wrapper">
+                <div class="nav-link">QUẢN TRỊ HỆ THỐNG <svg class="nav-arrow" width="10" viewBox="0 0 24 24">
+                        <path d="M7 10l5 5 5-5z" />
+                    </svg></div>
+                <div class="dropdown-menu mega-menu">
+                    <div class="mega-col">
+                        <div class="col-header">HẠ TẦNG & THIẾT BỊ</div>
+                        <a href="quantrihethong_khuvuc.html" class="menu-link">Khu vực</a>
+                        <a href="quantrihethong_camera.html" class="menu-link">Camera</a>
+                        <a href="quantrihethong_cambien.html" class="menu-link">Cảm biến</a>
+                        <a href="quantrihethong_loaithietbi.html" class="menu-link">Loại Thiết bị</a>
+                        <a href="quantrihethong_thietbi.html" class="menu-link">Thiết bị</a>
+                    </div>
+                    <div class="mega-col">
+                        <div class="col-header">THIẾT LẬP CẢNH BÁO</div>
+                        <a href="thietlapcanhbao_kenhcanhbao.html" class="menu-link">Kênh Cảnh báo</a>
+                        <a href="theodoidiemdo_bocanhbao.html" class="menu-link">Bộ cảnh báo</a>
+                        <a href="#" class="menu-link">Lịch sử</a>
+                    </div>
+                    <div class="mega-col">
+                        <div class="col-header">QUẢN LÝ NGƯỜI DÙNG</div>
+                        <a href="quantrihethong_nguoidung.html" class="menu-link">Người dùng</a>
+                        <a href="#" class="menu-link">Thêm người dùng mới</a>
+                        <a href="#" class="menu-link">Hướng dẫn sử dụng</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="header-actions">
+            <div class="theme-switch" onclick="toggleTheme()">
+                <div class="switch-knob"></div>
+            </div>
+            <div
+                style="width:32px; height:32px; background:#E5E7EB; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:700; color:#4B5563">
+                A</div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="bread-crumb">Theo dõi điểm đo / <span>Nhật ký nhiệt độ</span></div>
+
+        <div class="grid">
+            <!-- Filter Section -->
+            <div class="card filter-card">
+                <div class="filter-row">
+                    <div class="filter-item">
+                        <div class="filter-label">Thời gian từ</div>
+                        <input type="datetime-local" class="filter-input" value="2026-01-22T00:00">
+                    </div>
+                    <div class="filter-item">
+                        <div class="filter-label">Thời gian đến</div>
+                        <input type="datetime-local" class="filter-input" value="2026-01-24T11:52">
+                    </div>
+                    <div class="filter-item">
+                        <div class="filter-label">Khu vực</div>
+                        <select class="filter-input">
+                            <option>Chọn khu vực</option>
+                            <option>Trạm 110kV Nam Phú Quốc</option>
+                        </select>
+                    </div>
+                    <div class="filter-item">
+                        <div class="filter-label">Kiểu so sánh</div>
+                        <select class="filter-input">
+                            <option>Chọn kiểu</option>
+                        </select>
+                    </div>
+                    <div class="filter-item">
+                        <div class="filter-label">Từ</div>
+                        <input type="number" class="filter-input">
+                    </div>
+                    <div class="filter-item">
+                        <div class="filter-label">Đến</div>
+                        <input type="number" class="filter-input">
+                    </div>
+                    <div class="filter-item">
+                        <div class="filter-label">Đánh giá</div>
+                        <select class="filter-input">
+                            <option>Chọn mức</option>
+                        </select>
+                    </div>
+                    <button class="btn-search">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        </svg>
+                        Tìm kiếm
+                    </button>
+                    <button class="btn-search" style="background: var(--success); border: none;">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" style="margin-right: 5px;">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                            <polyline points="7 10 12 15 17 10"></polyline>
+                            <line x1="12" y1="15" x2="12" y2="3"></line>
+                        </svg>
+                        Xuất file
+                    </button>
+                </div>
+            </div>
+
+            <!-- Table Section -->
+            <div class="card table-container-full">
+                <div
+                    style="padding: 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border)">
+                    <div style="font-size: 15px; font-weight: 700; color: var(--primary); text-transform: uppercase;">
+                        Danh sách nhật ký nhiệt độ</div>
+                    <div style="display: flex; align-items: center; gap: 15px;">
+                        <div class="view-switcher">
+                            <button class="view-btn active" onclick="switchView('table')">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <line x1="8" y1="6" x2="21" y2="6"></line>
+                                    <line x1="8" y1="12" x2="21" y2="12"></line>
+                                    <line x1="8" y1="18" x2="21" y2="18"></line>
+                                    <line x1="3" y1="6" x2="3.01" y2="6"></line>
+                                    <line x1="3" y1="12" x2="3.01" y2="12"></line>
+                                    <line x1="3" y1="18" x2="3.01" y2="18"></line>
+                                </svg>
+                            </button>
+                            <button class="view-btn" onclick="switchView('card')">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <rect x="3" y="3" width="7" height="7"></rect>
+                                    <rect x="14" y="3" width="7" height="7"></rect>
+                                    <rect x="14" y="14" width="7" height="7"></rect>
+                                    <rect x="3" y="14" width="7" height="7"></rect>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TABLE VIEW -->
+                <div id="tableView" style="overflow-x: auto;">
+                    <table class="data-table" style="min-width: 1400px; border-collapse: collapse;">
+                        <thead>
+                            <tr>
+                                <th rowspan="2">Ngày</th>
+                                <th rowspan="2">Giờ</th>
+                                <th rowspan="2">Khu vực</th>
+                                <th rowspan="2">Thiết bị</th>
+                                <th rowspan="2">Bộ phận</th>
+                                <th rowspan="2">Điểm nhiệt</th>
+                                <th rowspan="2">Nhiệt độ °C</th>
+                                <th colspan="3">So với môi trường</th>
+                                <th colspan="4">So với pha min</th>
+                                <th colspan="4">So với pha min toàn trạm</th>
+                            </tr>
+                            <tr>
+                                <th>°C</th>
+                                <th>Chênh lệch</th>
+                                <th>Trạng thái</th>
+                                <th>°C</th>
+                                <th>Chênh lệch</th>
+                                <th>Đ.lượng SS</th>
+                                <th>Trạng thái</th>
+                                <th>°C</th>
+                                <th>Chênh lệch</th>
+                                <th>Đ.lượng SS</th>
+                                <th>Trạng thái</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Group 1 -->
+                            <tr>
+                                <td rowspan="9">2026-01-24</td>
+                                <td rowspan="9">11:48:11</td>
+                                <td rowspan="10">Trạm 110kV Nam Phú Quốc</td>
+                                <td rowspan="3">172</td>
+                                <td>172_AO</td>
+                                <td>172-AO</td>
+                                <td>35.6</td>
+                                <td>32.4</td>
+                                <td>3.2</td>
+                                <td><span class="status-badge status-good">Tốt</span></td>
+                                <td>34.9</td>
+                                <td>0.7</td>
+                                <td>172_BO</td>
+                                <td><span class="status-badge status-good">Tốt</span></td>
+                                <td>34.9</td>
+                                <td>0.7</td>
+                                <td>172_BO</td>
+                                <td><span class="status-badge status-good">Tốt</span></td>
+                            </tr>
+                            <tr>
+                                <td>172_BO</td>
+                                <td>172-BO</td>
+                                <td>34.9</td>
+                                <td>32.4</td>
+                                <td>2.5</td>
+                                <td><span class="status-badge status-good">Tốt</span></td>
+                                <td>34.9</td>
+                                <td>0</td>
+                                <td>172_BO</td>
+                                <td><span class="status-badge status-good">Tốt</span></td>
+                                <td>34.9</td>
+                                <td>0</td>
+                                <td>172_BO</td>
+                                <td><span class="status-badge status-good">Tốt</span></td>
+                            </tr>
+                            <tr>
+                                <td>172_CO</td>
+                                <td>172-CO</td>
+                                <td>43.7</td>
+                                <td>32.4</td>
+                                <td>11.3</td>
+                                <td><span class="status-badge status-fair">Khá</span></td>
+                                <td>34.9</td>
+                                <td>8.8</td>
+                                <td>172_BO</td>
+                                <td><span class="status-badge status-fair">Khá</span></td>
+                                <td>34.9</td>
+                                <td>8.8</td>
+                                <td>172_BO</td>
+                                <td><span class="status-badge status-fair">Khá</span></td>
+                            </tr>
+                            <!-- Sub Group 1.2 -->
+                            <tr>
+                                <td rowspan="3">172-7</td>
+                                <td>172-7-A</td>
+                                <td>172-7-A</td>
+                                <td>36.4</td>
+                                <td>32.4</td>
+                                <td>4.0</td>
+                                <td><span class="status-badge status-good">Tốt</span></td>
+                                <td>34.6</td>
+                                <td>1.8</td>
+                                <td>172-7-B</td>
+                                <td><span class="status-badge status-good">Tốt</span></td>
+                                <td>34.6</td>
+                                <td>1.8</td>
+                                <td>172-7-B</td>
+                                <td><span class="status-badge status-good">Tốt</span></td>
+                            </tr>
+                            <tr>
+                                <td>172-7-B</td>
+                                <td>172-7-B</td>
+                                <td>34.6</td>
+                                <td>32.4</td>
+                                <td>2.2</td>
+                                <td><span class="status-badge status-good">Tốt</span></td>
+                                <td>34.6</td>
+                                <td>0</td>
+                                <td>172-7-B</td>
+                                <td><span class="status-badge status-good">Tốt</span></td>
+                                <td>34.6</td>
+                                <td>0</td>
+                                <td>172-7-B</td>
+                                <td><span class="status-badge status-good">Tốt</span></td>
+                            </tr>
+                            <tr>
+                                <td>172-7-C</td>
+                                <td>172-7-C</td>
+                                <td>35.2</td>
+                                <td>32.4</td>
+                                <td>2.8</td>
+                                <td><span class="status-badge status-good">Tốt</span></td>
+                                <td>34.6</td>
+                                <td>0.6</td>
+                                <td>172-7-B</td>
+                                <td><span class="status-badge status-good">Tốt</span></td>
+                                <td>34.6</td>
+                                <td>0.6</td>
+                                <td>172-7-B</td>
+                                <td><span class="status-badge status-good">Tốt</span></td>
+                            </tr>
+                            <!-- Sub Group 1.3 -->
+                            <tr>
+                                <td rowspan="3">T1172</td>
+                                <td>T1172_A</td>
+                                <td>T1172-A</td>
+                                <td>52.4</td>
+                                <td>32.4</td>
+                                <td>20.0</td>
+                                <td><span class="status-badge status-medium">Trung bình</span></td>
+                                <td>38.1</td>
+                                <td>14.3</td>
+                                <td>T1172_C</td>
+                                <td><span class="status-badge status-medium">Trung bình</span></td>
+                                <td>38.1</td>
+                                <td>14.3</td>
+                                <td>T1172_C</td>
+                                <td><span class="status-badge status-medium">Trung bình</span></td>
+                            </tr>
+                            <tr>
+                                <td>T1172_B</td>
+                                <td>T1172-B</td>
+                                <td>38.6</td>
+                                <td>32.4</td>
+                                <td>6.2</td>
+                                <td><span class="status-badge status-good">Tốt</span></td>
+                                <td>38.1</td>
+                                <td>0.5</td>
+                                <td>T1172_C</td>
+                                <td><span class="status-badge status-good">Tốt</span></td>
+                                <td>38.1</td>
+                                <td>0.5</td>
+                                <td>T1172_C</td>
+                                <td><span class="status-badge status-good">Tốt</span></td>
+                            </tr>
+                            <tr>
+                                <td>T1172_C</td>
+                                <td>T1172-C</td>
+                                <td>38.1</td>
+                                <td>32.4</td>
+                                <td>5.7</td>
+                                <td><span class="status-badge status-good">Tốt</span></td>
+                                <td>38.1</td>
+                                <td>0</td>
+                                <td>T1172_C</td>
+                                <td><span class="status-badge status-good">Tốt</span></td>
+                                <td>38.1</td>
+                                <td>0</td>
+                                <td>T1172_C</td>
+                                <td><span class="status-badge status-good">Tốt</span></td>
+                            </tr>
+                            <!-- New Time Entry -->
+                            <tr>
+                                <td>2026-01-24</td>
+                                <td>11:46:41</td>
+                                <td>TUC12</td>
+                                <td>TUC12_A</td>
+                                <td>TUC12-A</td>
+                                <td>45.6</td>
+                                <td>33.3</td>
+                                <td>12.3</td>
+                                <td><span class="status-badge status-fair">Khá</span></td>
+                                <td>42.8</td>
+                                <td>2.8</td>
+                                <td>TUC12_B</td>
+                                <td><span class="status-badge status-good">Tốt</span></td>
+                                <td>42.8</td>
+                                <td>2.8</td>
+                                <td>TUC12_B</td>
+                                <td><span class="status-badge status-good">Tốt</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- CARD VIEW -->
+                <div id="cardView" class="card-view-grid hidden-view">
+                    <!-- Sample Card 1 -->
+                    <div class="sensor-card-item">
+                        <div class="sc-header">
+                            <span class="sc-id">2026-01-24 11:48:11</span>
+                            <span class="status-badge status-good">Tốt</span>
+                        </div>
+                        <div class="sc-name">172_AO - 172-AO</div>
+                        <div class="sc-info">
+                            <div class="sc-info-item">
+                                <svg style="width:14px; height:14px; margin-right:4px; vertical-align:middle"
+                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect>
+                                    <line x1="12" y1="18" x2="12.01" y2="18"></line>
+                                </svg>
+                                172 / Trạm 110kV Nam Phú Quốc
+                            </div>
+                            <div class="sc-info-item">
+                                <svg style="width:14px; height:14px; margin-right:4px; vertical-align:middle"
+                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"></path>
+                                </svg>
+                                Nhiệt độ: <strong style="color:var(--primary); font-size:16px">35.6°C</strong>
+                            </div>
+
+                            <div style="margin-top: 15px; border-top: 1px solid var(--border); padding-top: 12px;">
+                                <div
+                                    style="font-size: 11px; font-weight: 700; color: var(--text-sub); margin-bottom: 8px; text-transform: uppercase;">
+                                    So sánh chi tiết</div>
+
+                                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; font-size: 12px;">
+                                    <div
+                                        style="background: rgba(255,255,255,0.02); padding: 8px; border-radius: 4px; display: flex; flex-direction: column;">
+                                        <div style="color: var(--text-sub); font-size: 10px;">Môi trường</div>
+                                        <div style="font-weight: 600;">32.4°C (+3.2)</div>
+                                        <div style="font-size: 10px; margin-top: 2px; visibility: hidden;">SS:
+                                            Placeholder</div>
+                                        <div class="status-badge status-good"
+                                            style="min-width: unset; width: 100%; border-radius: 2px; margin-top: auto; font-size: 9px; padding: 2px 0;">
+                                            Tốt</div>
+                                    </div>
+                                    <div
+                                        style="background: rgba(255,255,255,0.02); padding: 8px; border-radius: 4px; display: flex; flex-direction: column;">
+                                        <div style="color: var(--text-sub); font-size: 10px;">Pha min</div>
+                                        <div style="font-weight: 600;">34.9°C (+0.7)</div>
+                                        <div style="font-size: 10px; color: var(--primary); margin-top: 2px;">SS: 172_BO
+                                        </div>
+                                        <div class="status-badge status-good"
+                                            style="min-width: unset; width: 100%; border-radius: 2px; margin-top: auto; font-size: 9px; padding: 2px 0;">
+                                            Tốt</div>
+                                    </div>
+                                    <div
+                                        style="background: rgba(255,255,255,0.02); padding: 8px; border-radius: 4px; grid-column: span 2; display: flex; flex-direction: column;">
+                                        <div style="color: var(--text-sub); font-size: 10px;">Pha min toàn trạm</div>
+                                        <div style="font-weight: 600;">34.9°C (+0.7)</div>
+                                        <div style="font-size: 10px; color: var(--primary); margin-top: 2px;">SS: 172_BO
+                                        </div>
+                                        <div class="status-badge status-good"
+                                            style="min-width: unset; width: 100%; border-radius: 2px; margin-top: auto; font-size: 9px; padding: 2px 0;">
+                                            Tốt</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sample Card 2 -->
+                    <div class="sensor-card-item">
+                        <div class="sc-header">
+                            <span class="sc-id">2026-01-24 11:48:11</span>
+                            <span class="status-badge status-fair">Khá</span>
+                        </div>
+                        <div class="sc-name">172_CO - 172-CO</div>
+                        <div class="sc-info">
+                            <div class="sc-info-item">
+                                <svg style="width:14px; height:14px; margin-right:4px; vertical-align:middle"
+                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect>
+                                    <line x1="12" y1="18" x2="12.01" y2="18"></line>
+                                </svg>
+                                172 / Trạm 110kV Nam Phú Quốc
+                            </div>
+                            <div class="sc-info-item">
+                                <svg style="width:14px; height:14px; margin-right:4px; vertical-align:middle"
+                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"></path>
+                                </svg>
+                                Nhiệt độ: <strong style="color:var(--primary); font-size:16px">43.7°C</strong>
+                            </div>
+
+                            <div style="margin-top: 15px; border-top: 1px solid var(--border); padding-top: 12px;">
+                                <div
+                                    style="font-size: 11px; font-weight: 700; color: var(--text-sub); margin-bottom: 8px; text-transform: uppercase;">
+                                    So sánh chi tiết</div>
+
+                                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; font-size: 12px;">
+                                    <div
+                                        style="background: rgba(255,255,255,0.02); padding: 8px; border-radius: 4px; display: flex; flex-direction: column;">
+                                        <div style="color: var(--text-sub); font-size: 10px;">Môi trường</div>
+                                        <div style="font-weight: 600;">32.4°C (+11.3)</div>
+                                        <div style="font-size: 10px; margin-top: 2px; visibility: hidden;">SS:
+                                            Placeholder</div>
+                                        <div class="status-badge status-fair"
+                                            style="min-width: unset; width: 100%; border-radius: 2px; margin-top: auto; font-size: 9px; padding: 2px 0;">
+                                            Khá</div>
+                                    </div>
+                                    <div
+                                        style="background: rgba(255,255,255,0.02); padding: 8px; border-radius: 4px; display: flex; flex-direction: column;">
+                                        <div style="color: var(--text-sub); font-size: 10px;">Pha min</div>
+                                        <div style="font-weight: 600;">34.9°C (+8.8)</div>
+                                        <div style="font-size: 10px; color: var(--primary); margin-top: 2px;">SS: 172_BO
+                                        </div>
+                                        <div class="status-badge status-fair"
+                                            style="min-width: unset; width: 100%; border-radius: 2px; margin-top: auto; font-size: 9px; padding: 2px 0;">
+                                            Khá</div>
+                                    </div>
+                                    <div
+                                        style="background: rgba(255,255,255,0.02); padding: 8px; border-radius: 4px; grid-column: span 2; display: flex; flex-direction: column;">
+                                        <div style="color: var(--text-sub); font-size: 10px;">Pha min toàn trạm</div>
+                                        <div style="font-weight: 600;">34.9°C (+8.8)</div>
+                                        <div style="font-size: 10px; color: var(--primary); margin-top: 2px;">SS: 172_BO
+                                        </div>
+                                        <div class="status-badge status-fair"
+                                            style="min-width: unset; width: 100%; border-radius: 2px; margin-top: auto; font-size: 9px; padding: 2px 0;">
+                                            Khá</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sample Card 3 -->
+                    <div class="sensor-card-item">
+                        <div class="sc-header">
+                            <span class="sc-id">2026-01-24 11:48:11</span>
+                            <span class="status-badge status-medium">Cảnh báo</span>
+                        </div>
+                        <div class="sc-name">T1172_A - T1172-A</div>
+                        <div class="sc-info">
+                            <div class="sc-info-item">
+                                <svg style="width:14px; height:14px; margin-right:4px; vertical-align:middle"
+                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect>
+                                    <line x1="12" y1="18" x2="12.01" y2="18"></line>
+                                </svg>
+                                T1172 / Trạm 110kV Nam Phú Quốc
+                            </div>
+                            <div class="sc-info-item">
+                                <svg style="width:14px; height:14px; margin-right:4px; vertical-align:middle"
+                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"></path>
+                                </svg>
+                                Nhiệt độ: <strong style="color:var(--warning); font-size:16px">52.4°C</strong>
+                            </div>
+
+                            <div style="margin-top: 15px; border-top: 1px solid var(--border); padding-top: 12px;">
+                                <div
+                                    style="font-size: 11px; font-weight: 700; color: var(--text-sub); margin-bottom: 8px; text-transform: uppercase;">
+                                    So sánh chi tiết</div>
+
+                                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; font-size: 12px;">
+                                    <div
+                                        style="background: rgba(255,255,255,0.02); padding: 8px; border-radius: 4px; display: flex; flex-direction: column;">
+                                        <div style="color: var(--text-sub); font-size: 10px;">Môi trường</div>
+                                        <div style="font-weight: 600;">32.4°C (+20.0)</div>
+                                        <div style="font-size: 10px; margin-top: 2px; visibility: hidden;">SS:
+                                            Placeholder</div>
+                                        <div class="status-badge status-medium"
+                                            style="min-width: unset; width: 100%; border-radius: 2px; margin-top: auto; font-size: 9px; padding: 2px 0;">
+                                            Trung bình</div>
+                                    </div>
+                                    <div
+                                        style="background: rgba(255,255,255,0.02); padding: 8px; border-radius: 4px; display: flex; flex-direction: column;">
+                                        <div style="color: var(--text-sub); font-size: 10px;">Pha min</div>
+                                        <div style="font-weight: 600;">38.1°C (+14.3)</div>
+                                        <div style="font-size: 10px; color: var(--primary); margin-top: 2px;">SS:
+                                            T1172_C</div>
+                                        <div class="status-badge status-medium"
+                                            style="min-width: unset; width: 100%; border-radius: 2px; margin-top: auto; font-size: 9px; padding: 2px 0;">
+                                            Trung bình</div>
+                                    </div>
+                                    <div
+                                        style="background: rgba(255,255,255,0.02); padding: 8px; border-radius: 4px; grid-column: span 2; display: flex; flex-direction: column;">
+                                        <div style="color: var(--text-sub); font-size: 10px;">Pha min toàn trạm</div>
+                                        <div style="font-weight: 600;">38.1°C (+14.3)</div>
+                                        <div style="font-size: 10px; color: var(--primary); margin-top: 2px;">SS:
+                                            T1172_C</div>
+                                        <div class="status-badge status-medium"
+                                            style="min-width: unset; width: 100%; border-radius: 2px; margin-top: auto; font-size: 9px; padding: 2px 0;">
+                                            Trung bình</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="page-info-bar">
+                    <div>Hiển thị từ 1 đến 10 trong tổng số 16497</div>
+                    <div class="pagination-group">
+                        <select class="select-page-size">
+                            <option>10/trang</option>
+                            <option>20/trang</option>
+                        </select>
+                        <button class="btn-page active">1</button>
+                        <button class="btn-page">2</button>
+                        <button class="btn-page">3</button>
+                        <button class="btn-page">4</button>
+                        <button class="btn-page">5</button>
+                        <button class="btn-page">6</button>
+                        <div style="font-size: 11px; margin: 0 5px;">Nhảy tới</div>
+                        <input type="text" class="filter-input"
+                            style="width: 40px; height: 32px; padding: 0 5px; text-align: center;" value="1">
+                        <button class="btn-page">➜</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script>
+        function switchView(view) {
+            const tableView = document.getElementById('tableView');
+            const cardView = document.getElementById('cardView');
+            const btns = document.querySelectorAll('.view-btn');
+
+            if (view === 'table') {
+                tableView.classList.remove('hidden-view');
+                cardView.classList.add('hidden-view');
+                if (btns[0]) btns[0].classList.add('active');
+                if (btns[1]) btns[1].classList.remove('active');
+            } else {
+                tableView.classList.add('hidden-view');
+                cardView.classList.remove('hidden-view');
+                if (btns[1]) btns[1].classList.add('active');
+                if (btns[0]) btns[0].classList.remove('active');
+            }
+        }
+    </script>
+</body>
+
+</html>

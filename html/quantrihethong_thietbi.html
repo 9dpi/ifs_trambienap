@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="vi" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IFS - AI | Quản trị Thiết bị</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <div style="display:flex; align-items:center">
+            <button class="mobile-btn" onclick="toggleMobileMenu()">
+                <svg width="24" height="24" viewBox="0 0 24 24">
+                    <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" />
+                </svg>
+            </button>
+            <a href="dashboard.html" class="brand" style="text-decoration:none">
+                <div class="logo-box">I</div> IFS - AI
+            </a>
+        </div>
+
+        <div class="nav-menu" id="mainMenu">
+            <div class="nav-wrapper"><a href="dashboard.html" class="nav-link">TRANG CHỦ</a></div>
+            <div class="nav-wrapper"><a href="giamsattructiep.html" class="nav-link">GIÁM SÁT TRỰC TIẾP</a></div>
+            <div class="nav-wrapper">
+                <div class="nav-link">THEO DÕI ĐIỂM ĐO <svg class="nav-arrow" width="10" viewBox="0 0 24 24">
+                        <path d="M7 10l5 5 5-5z" />
+                    </svg></div>
+                <div class="dropdown-menu">
+                    <a href="theodoidiemdo_canhbaoai.html" class="menu-link">Cảnh báo AI</a>
+                    <a href="theodoidiemdo_canhbao.html" class="menu-link">Nhiệt độ vượt ngưỡng</a>
+                    <a href="theodoidiemdo_nhatkynhietdo.html" class="menu-link">Nhật ký nhiệt độ</a>
+                    <a href="#" class="menu-link">Tổng hợp phân tích</a>
+                </div>
+            </div>
+            <div class="nav-wrapper">
+                <div class="nav-link active-link">QUẢN TRỊ HỆ THỐNG <svg class="nav-arrow" width="10"
+                        viewBox="0 0 24 24">
+                        <path d="M7 10l5 5 5-5z" />
+                    </svg></div>
+                <div class="dropdown-menu mega-menu">
+                    <div class="mega-col">
+                        <div class="col-header">HẠ TẦNG & THIẾT BỊ</div>
+                        <a href="quantrihethong_khuvuc.html" class="menu-link">Khu vực</a>
+                        <a href="quantrihethong_camera.html" class="menu-link">Camera</a>
+                        <a href="quantrihethong_cambien.html" class="menu-link">Cảm biến</a>
+                        <a href="quantrihethong_loaithietbi.html" class="menu-link">Loại Thiết bị</a>
+                        <a href="quantrihethong_thietbi.html" class="menu-link active-link">Thiết bị</a>
+                    </div>
+                    <div class="mega-col">
+                        <div class="col-header">THIẾT LẬP CẢNH BÁO</div>
+                        <a href="thietlapcanhbao_kenhcanhbao.html" class="menu-link">Kênh Cảnh báo</a>
+                        <a href="theodoidiemdo_bocanhbao.html" class="menu-link">Bộ cảnh báo</a>
+                        <a href="#" class="menu-link">Lịch sử</a>
+                    </div>
+                    <div class="mega-col">
+                        <div class="col-header">QUẢN LÝ NGƯỜI DÙNG</div>
+                        <a href="quantrihethong_nguoidung.html" class="menu-link">Người dùng</a>
+                        <a href="#" class="menu-link">Thêm người dùng mới</a>
+                        <a href="#" class="menu-link">Hướng dẫn sử dụng</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="header-actions">
+            <div class="theme-switch" onclick="toggleTheme()">
+                <div class="switch-knob"></div>
+            </div>
+            <div
+                style="width:32px; height:32px; background:#E5E7EB; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:700; color:#4B5563">
+                A</div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="bread-crumb">Quản trị hệ thống / <span>Thiết bị</span></div>
+
+        <div class="grid">
+            <!-- Filter Section -->
+            <div class="card filter-card">
+                <div class="filter-row">
+                    <div class="filter-item">
+                        <div class="filter-label">Thiết bị</div>
+                        <input type="text" class="filter-input" placeholder="Nhập tên thiết bị...">
+                    </div>
+                    <div class="filter-item">
+                        <div class="filter-label">Khu vực</div>
+                        <select class="filter-input">
+                            <option>Chọn khu vực</option>
+                            <option>Công ty</option>
+                            <option>Trạm 110kV Nam Phú Quốc</option>
+                            <option>SD1S_Liên Trì</option>
+                        </select>
+                    </div>
+                    <div class="filter-item">
+                        <div class="filter-label">Loại thiết bị</div>
+                        <select class="filter-input">
+                            <option>Chọn loại thiết bị</option>
+                            <option>Tủ</option>
+                            <option>Chống sét</option>
+                            <option>Dao cách ly</option>
+                            <option>Máy biến áp lực (Full)</option>
+                        </select>
+                    </div>
+                    <button class="btn-search">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        </svg>
+                        Tìm kiếm
+                    </button>
+                    <button class="btn-search" style="background: var(--success); border: none;">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" style="margin-right: 5px;">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                            <polyline points="7 10 12 15 17 10"></polyline>
+                            <line x1="12" y1="15" x2="12" y2="3"></line>
+                        </svg>
+                        Xuất file
+                    </button>
+                </div>
+            </div>
+
+            <!-- Table/Card Section -->
+            <div class="card table-container-full">
+                <div
+                    style="padding: 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border)">
+                    <div style="font-size: 15px; font-weight: 700; color: var(--primary); text-transform: uppercase;">
+                        Danh sách thiết bị</div>
+                    <div style="display: flex; align-items: center; gap: 15px;">
+                        <div class="view-switcher">
+                            <button class="view-btn active" onclick="switchView('table')">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <line x1="8" y1="6" x2="21" y2="6"></line>
+                                    <line x1="8" y1="12" x2="21" y2="12"></line>
+                                    <line x1="8" y1="18" x2="21" y2="18"></line>
+                                    <line x1="3" y1="6" x2="3.01" y2="6"></line>
+                                    <line x1="3" y1="12" x2="3.01" y2="12"></line>
+                                    <line x1="3" y1="18" x2="3.01" y2="18"></line>
+                                </svg>
+                            </button>
+                            <button class="view-btn" onclick="switchView('card')">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <rect x="3" y="3" width="7" height="7"></rect>
+                                    <rect x="14" y="3" width="7" height="7"></rect>
+                                    <rect x="14" y="14" width="7" height="7"></rect>
+                                    <rect x="3" y="14" width="7" height="7"></rect>
+                                </svg>
+                            </button>
+                        </div>
+                        <button class="btn-add">+ Thêm</button>
+                    </div>
+                </div>
+
+                <!-- TABLE VIEW -->
+                <div id="tableView">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th style="width: 50px;">STT</th>
+                                <th>Khu vực</th>
+                                <th>Loại thiết bị</th>
+                                <th>Tên thiết bị</th>
+                                <th>Mã thiết bị</th>
+                                <th>Trạng thái</th>
+                                <th style="width: 120px; text-align: center;">Hành động</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Công ty</td>
+                                <td>Tủ</td>
+                                <td>T.U1</td>
+                                <td>Tủ</td>
+                                <td><span style="color:var(--success)">Hoạt động</span></td>
+                                <td style="text-align: center;"><button
+                                        class="action-btn-circle btn-edit-round">✎</button><button
+                                        class="action-btn-circle btn-delete-round">🗑</button></td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>Trạm 110kV Nam Phú Quốc</td>
+                                <td>Chống sét</td>
+                                <td>CS1T1</td>
+                                <td>CS1T1</td>
+                                <td><span style="color:var(--success)">Hoạt động</span></td>
+                                <td style="text-align: center;"><button
+                                        class="action-btn-circle btn-edit-round">✎</button><button
+                                        class="action-btn-circle btn-delete-round">🗑</button></td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>Trạm 110kV Nam Phú Quốc</td>
+                                <td>Chống sét</td>
+                                <td>CS1T2</td>
+                                <td>CS1T2</td>
+                                <td><span style="color:var(--success)">Hoạt động</span></td>
+                                <td style="text-align: center;"><button
+                                        class="action-btn-circle btn-edit-round">✎</button><button
+                                        class="action-btn-circle btn-delete-round">🗑</button></td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>Trạm 110kV Nam Phú Quốc</td>
+                                <td>Dao cách ly</td>
+                                <td>112-1</td>
+                                <td>112-1</td>
+                                <td><span style="color:var(--success)">Hoạt động</span></td>
+                                <td style="text-align: center;"><button
+                                        class="action-btn-circle btn-edit-round">✎</button><button
+                                        class="action-btn-circle btn-delete-round">🗑</button></td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td>Trạm 110kV Nam Phú Quốc</td>
+                                <td>Dao cách ly</td>
+                                <td>112-2</td>
+                                <td>112-2</td>
+                                <td><span style="color:var(--success)">Hoạt động</span></td>
+                                <td style="text-align: center;"><button
+                                        class="action-btn-circle btn-edit-round">✎</button><button
+                                        class="action-btn-circle btn-delete-round">🗑</button></td>
+                            </tr>
+                            <tr>
+                                <td>6</td>
+                                <td>Trạm 110kV Nam Phú Quốc</td>
+                                <td>Dao cách ly</td>
+                                <td>131-1</td>
+                                <td>131-1</td>
+                                <td><span style="color:var(--success)">Hoạt động</span></td>
+                                <td style="text-align: center;"><button
+                                        class="action-btn-circle btn-edit-round">✎</button><button
+                                        class="action-btn-circle btn-delete-round">🗑</button></td>
+                            </tr>
+                            <tr>
+                                <td>7</td>
+                                <td>Trạm 110kV Nam Phú Quốc</td>
+                                <td>Dao cách ly</td>
+                                <td>132-2</td>
+                                <td>132-2</td>
+                                <td><span style="color:var(--success)">Hoạt động</span></td>
+                                <td style="text-align: center;"><button
+                                        class="action-btn-circle btn-edit-round">✎</button><button
+                                        class="action-btn-circle btn-delete-round">🗑</button></td>
+                            </tr>
+                            <tr>
+                                <td>8</td>
+                                <td>Trạm 110kV Nam Phú Quốc</td>
+                                <td>Dao cách ly</td>
+                                <td>172-2</td>
+                                <td>172-2</td>
+                                <td><span style="color:var(--success)">Hoạt động</span></td>
+                                <td style="text-align: center;"><button
+                                        class="action-btn-circle btn-edit-round">✎</button><button
+                                        class="action-btn-circle btn-delete-round">🗑</button></td>
+                            </tr>
+                            <tr>
+                                <td>9</td>
+                                <td>Trạm 110kV Nam Phú Quốc</td>
+                                <td>Dao cách ly</td>
+                                <td>172-7</td>
+                                <td>172-7</td>
+                                <td><span style="color:var(--success)">Hoạt động</span></td>
+                                <td style="text-align: center;"><button
+                                        class="action-btn-circle btn-edit-round">✎</button><button
+                                        class="action-btn-circle btn-delete-round">🗑</button></td>
+                            </tr>
+                            <tr>
+                                <td>10</td>
+                                <td>Trạm 110kV Nam Phú Quốc</td>
+                                <td>Máy biến áp lực (Full)</td>
+                                <td>T1</td>
+                                <td>MBAT1</td>
+                                <td><span style="color:var(--success)">Hoạt động</span></td>
+                                <td style="text-align: center;"><button
+                                        class="action-btn-circle btn-edit-round">✎</button><button
+                                        class="action-btn-circle btn-delete-round">🗑</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- CARD VIEW -->
+                <div id="cardView" class="card-view-grid hidden-view">
+                    <div class="sensor-card-item">
+                        <div class="sc-header"><span class="sc-id">T.U1</span><span
+                                style="color:var(--success); font-size:12px">● Active</span></div>
+                        <div class="sc-name">Tủ điện T.U1</div>
+                        <div class="sc-info">
+                            <div class="sc-info-item">📍 Công ty</div>
+                            <div class="sc-info-item">📦 Loại: Tủ</div>
+                        </div>
+                        <div class="sc-actions"><button class="action-btn-circle btn-edit-round">✎</button><button
+                                class="action-btn-circle btn-delete-round">🗑</button></div>
+                    </div>
+                </div>
+
+                <div class="page-info-bar">
+                    <div>Hiển thị từ 1 đến 10 trong tổng số 20</div>
+                    <div class="pagination-group">
+                        <select class="select-page-size">
+                            <option>10/trang</option>
+                            <option>20/trang</option>
+                        </select>
+                        <button class="btn-page active">1</button>
+                        <button class="btn-page">2</button>
+                        <div style="font-size: 11px; margin: 0 5px;">Nhảy tới</div>
+                        <input type="text" class="filter-input"
+                            style="width: 40px; height: 32px; padding: 0 5px; text-align: center;" value="1">
+                        <button class="btn-page">➜</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script>
+        function switchView(view) {
+            const tableView = document.getElementById('tableView');
+            const cardView = document.getElementById('cardView');
+            const btns = document.querySelectorAll('.view-btn');
+
+            if (view === 'table') {
+                tableView.classList.remove('hidden-view');
+                cardView.classList.add('hidden-view');
+                if (btns[0]) btns[0].classList.add('active');
+                if (btns[1]) btns[1].classList.remove('active');
+            } else {
+                tableView.classList.add('hidden-view');
+                cardView.classList.remove('hidden-view');
+                if (btns[1]) btns[1].classList.add('active');
+                if (btns[0]) btns[0].classList.remove('active');
+            }
+        }
+    </script>
+</body>
+
+</html>
