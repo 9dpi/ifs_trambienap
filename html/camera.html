@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Camera Live View</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg-body: #0F172A;
+            --bg-panel: #1E293B;
+            --border: #334155;
+            --text-main: #F8FAFC;
+            --text-sub: #94A3B8;
+            --primary: #3B82F6;
+            --danger: #EF4444;
+            --success: #10B981;
+            --warning: #F59E0B;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        /* HEADER */
+        .live-header {
+            height: 50px;
+            background: var(--bg-panel);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            flex-shrink: 0;
+        }
+
+        .cam-title {
+            font-weight: 600;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .live-badge {
+            background: var(--danger);
+            color: white;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            animation: blink 2s infinite;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .live-badge::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: white;
+            border-radius: 50%;
+        }
+
+        @keyframes blink {
+            50% {
+                opacity: 0.7;
+            }
+        }
+
+        /* MAIN LAYOUT */
+        .live-container {
+            display: grid;
+            grid-template-columns: 1fr 320px;
+            /* Video | Controls */
+            flex: 1;
+            height: calc(100vh - 50px);
+        }
+
+        /* --- VIDEO AREA --- */
+        .video-wrapper {
+            position: relative;
+            background: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .video-feed {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.9;
+            /* Giả lập video */
+        }
+
+        /* HUD Overlay (Lớp phủ thông tin) */
+        .hud-overlay {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+        }
+
+        /* Bounding Box thông minh */
+        .hud-box {
+            position: absolute;
+            border: 2px solid rgba(59, 130, 246, 0.6);
+            background: rgba(59, 130, 246, 0.05);
+            cursor: pointer;
+            pointer-events: auto;
+            transition: 0.2s;
+        }
+
+        .hud-box:hover {
+            border-color: var(--warning);
+            background: rgba(245, 158, 11, 0.1);
+            z-index: 10;
+        }
+
+        /* Label chỉ hiện khi hover hoặc mode chi tiết */
+        .hud-label {
+            position: absolute;
+            bottom: 100%;
+            left: -2px;
+            background: rgba(15, 23, 42, 0.9);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 4px 8px;
+            font-size: 11px;
+            white-space: nowrap;
+            border-radius: 4px 4px 4px 0;
+            font-family: 'JetBrains Mono';
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            opacity: 0;
+            transition: 0.2s;
+            pointer-events: none;
+        }
+
+        .hud-box:hover .hud-label,
+        .hud-box.alert .hud-label {
+            opacity: 1;
+        }
+
+        .hud-val {
+            font-weight: 700;
+            color: var(--success);
+        }
+
+        .hud-box.alert {
+            border-color: var(--danger);
+            box-shadow: 0 0 15px rgba(239, 68, 68, 0.4);
+            animation: pulseBorder 2s infinite;
+        }
+
+        .hud-box.alert .hud-val {
+            color: var(--danger);
+        }
+
+        @keyframes pulseBorder {
+            50% {
+                border-color: rgba(239, 68, 68, 0.3);
+            }
+        }
+
+        /* Video Controls (Bottom Bar floating) */
+        .video-controls {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(15, 23, 42, 0.85);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 8px 12px;
+            border-radius: 12px;
+            display: flex;
+            gap: 10px;
+            backdrop-filter: blur(8px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .v-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-main);
+            cursor: pointer;
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.2s;
+        }
+
+        .v-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--primary);
+        }
+
+        .v-btn.active {
+            background: rgba(239, 68, 68, 0.2);
+            color: var(--danger);
+        }
+
+        /* --- SIDEBAR CONTROLS --- */
+        .sidebar {
+            background: var(--bg-panel);
+            border-left: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            z-index: 2;
+        }
+
+        /* 1. PTZ Controller (Joystick Modern) */
+        .ptz-section {
+            padding: 24px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.02) 0%, transparent 100%);
+        }
+
+        .ptz-wrapper {
+            position: relative;
+            width: 140px;
+            height: 140px;
+            margin-bottom: 20px;
+        }
+
+        .ptz-ring {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 1px solid var(--border);
+            position: absolute;
+            top: 0;
+            left: 0;
+            box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .ptz-btn {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            color: var(--text-sub);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.2s;
+        }
+
+        .ptz-btn:hover {
+            color: var(--primary);
+            transform: scale(1.1);
+        }
+
+        .ptz-up {
+            top: 5px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .ptz-down {
+            bottom: 5px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .ptz-left {
+            left: 5px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .ptz-right {
+            right: 5px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .ptz-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: #334155;
+            color: white;
+            font-weight: 700;
+            font-size: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            cursor: pointer;
+        }
+
+        .ptz-center:active {
+            transform: translate(-50%, -50%) scale(0.95);
+            background: var(--primary);
+        }
+
+        /* Zoom/Focus Bars */
+        .slider-group {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+
+        .slider-icon {
+            color: var(--text-sub);
+            width: 20px;
+        }
+
+        .slider-track {
+            flex: 1;
+            height: 4px;
+            background: #334155;
+            border-radius: 2px;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .slider-fill {
+            width: 40%;
+            height: 100%;
+            background: var(--primary);
+            border-radius: 2px;
+        }
+
+        .slider-thumb {
+            position: absolute;
+            left: 40%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 12px;
+            height: 12px;
+            background: white;
+            border-radius: 50%;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+        }
+
+        /* 2. Real-time Data List */
+        .list-section {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .list-header {
+            padding: 12px 15px;
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--text-sub);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            background: rgba(0, 0, 0, 0.2);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .data-list {
+            overflow-y: auto;
+            padding: 0;
+        }
+
+        .data-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .data-item:hover {
+            background: rgba(255, 255, 255, 0.05);
+            padding-left: 20px;
+        }
+
+        .data-item.active {
+            background: rgba(59, 130, 246, 0.1);
+            border-left: 3px solid var(--primary);
+        }
+
+        .item-name {
+            font-size: 13px;
+            font-weight: 500;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .item-sub {
+            font-size: 11px;
+            color: var(--text-sub);
+            margin-top: 2px;
+        }
+
+        .item-val {
+            font-family: 'JetBrains Mono';
+            font-weight: 700;
+            font-size: 13px;
+            color: var(--success);
+        }
+
+        .item-val.hot {
+            color: var(--danger);
+        }
+
+        /* SVG */
+        svg {
+            fill: currentColor;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="live-header">
+        <div class="cam-title">
+            <svg width="20" height="20" viewBox="0 0 24 24" style="color:var(--primary)">
+                <path
+                    d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4z" />
+            </svg>
+            <div>
+                <div style="line-height:1.2">CAM_THERMAL_01</div>
+                <div style="font-size:11px; color:var(--text-sub); font-weight:400">Trạm 110kV Nam Phú Quốc • Khu vực
+                    MBA T2</div>
+            </div>
+        </div>
+        <div style="display:flex; gap:15px; align-items:center">
+            <div class="live-badge">LIVE FEED</div>
+            <div style="font-family:'JetBrains Mono'; font-size:13px; color:#94A3B8">2025-12-11 16:28:45</div>
+        </div>
+    </header>
+
+    <div class="live-container">
+
+        <div class="video-wrapper">
+            <img src="./images/cam-live.png" class="video-feed">
+
+            <div class="hud-box alert" style="top: 35%; left: 42%; width: 90px; height: 140px;">
+                <div class="hud-label">
+                    <span>MBA T2 (Sứ A)</span>
+                    <span class="hud-val">58.2°C</span>
+                </div>
+            </div>
+            <div class="hud-box" style="top: 30%; left: 68%; width: 50px; height: 70px;">
+                <div class="hud-label">
+                    <span>Sứ B</span>
+                    <span class="hud-val">42.5°C</span>
+                </div>
+            </div>
+
+            <div class="video-controls">
+                <button class="v-btn" title="Chụp ảnh"><svg width="20" height="20" viewBox="0 0 24 24">
+                        <path
+                            d="M9 2L7.17 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2h-3.17L15 2H9zm3 15c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5z" />
+                    </svg></button>
+                <button class="v-btn active" title="Đang Ghi hình"><svg width="20" height="20" viewBox="0 0 24 24">
+                        <path
+                            d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8 8zm4-8c0 2.21-1.79 4-4 4s-4-1.79-4-4 1.79-4 4-4 4 1.79 4 4z" />
+                    </svg></button>
+                <button class="v-btn" title="Micro (Đàm thoại)"><svg width="20" height="20" viewBox="0 0 24 24">
+                        <path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z" />
+                        <path
+                            d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z" />
+                    </svg></button>
+                <div style="width:1px; height:20px; background:rgba(255,255,255,0.2)"></div>
+                <button class="v-btn" title="Cài đặt hiển thị"><svg width="20" height="20" viewBox="0 0 24 24">
+                        <path
+                            d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z" />
+                    </svg></button>
+                <button class="v-btn" title="Toàn màn hình"><svg width="20" height="20" viewBox="0 0 24 24">
+                        <path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z" />
+                    </svg></button>
+            </div>
+        </div>
+
+        <div class="sidebar">
+
+            <div class="ptz-section">
+                <div class="ptz-wrapper">
+                    <div class="ptz-ring"></div>
+                    <button class="ptz-btn ptz-up"><svg width="24" height="24" viewBox="0 0 24 24">
+                            <path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" />
+                        </svg></button>
+                    <button class="ptz-btn ptz-down"><svg width="24" height="24" viewBox="0 0 24 24">
+                            <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6z" />
+                        </svg></button>
+                    <button class="ptz-btn ptz-left"><svg width="24" height="24" viewBox="0 0 24 24">
+                            <path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6z" />
+                        </svg></button>
+                    <button class="ptz-btn ptz-right"><svg width="24" height="24" viewBox="0 0 24 24">
+                            <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z" />
+                        </svg></button>
+                    <button class="ptz-center">RESET</button>
+                </div>
+
+                <div class="slider-group">
+                    <svg class="slider-icon" viewBox="0 0 24 24">
+                        <path
+                            d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" />
+                    </svg>
+                    <div class="slider-track">
+                        <div class="slider-fill"></div>
+                        <div class="slider-thumb"></div>
+                    </div>
+                    <svg class="slider-icon" viewBox="0 0 24 24">
+                        <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" />
+                    </svg>
+                </div>
+            </div>
+
+            <div class="list-section">
+                <div class="list-header">
+                    <span>Điểm đo thời gian thực</span>
+                    <span>Nhiệt độ</span>
+                </div>
+                <div class="data-list">
+                    <div class="data-item active">
+                        <div class="item-name">MBA T2 (Sứ A) <span class="item-sub">CS1T2-A</span></div>
+                        <div class="item-val hot">58.2 °C</div>
+                    </div>
+                    <div class="data-item">
+                        <div class="item-name">MBA T2 (Sứ B) <span class="item-sub">CS1T2-B</span></div>
+                        <div class="item-val">42.5 °C</div>
+                    </div>
+                    <div class="data-item">
+                        <div class="item-name">MBA T2 (Sứ C) <span class="item-sub">CS1T2-C</span></div>
+                        <div class="item-val">41.8 °C</div>
+                    </div>
+                    <div class="data-item">
+                        <div class="item-name">Khu vực Tủ ĐK <span class="item-sub">Area0</span></div>
+                        <div class="item-val">35.0 °C</div>
+                    </div>
+                    <div class="data-item">
+                        <div class="item-name">Môi trường <span class="item-sub">Env-Sensor</span></div>
+                        <div class="item-val" style="color:#3B82F6">32.0 °C</div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="padding:15px; border-top:1px solid var(--border)">
+                <div style="font-size:11px; color:var(--text-sub); margin-bottom:8px">PRESETS (GÓC MÁY NHANH)</div>
+                <div style="display:grid; grid-template-columns: 1fr 1fr; gap:8px">
+                    <button
+                        style="padding:8px; background:#334155; border:none; color:#fff; border-radius:4px; cursor:pointer; font-size:12px">Toàn
+                        cảnh</button>
+                    <button
+                        style="padding:8px; background:#334155; border:none; color:#fff; border-radius:4px; cursor:pointer; font-size:12px">Cổng
+                        chính</button>
+                    <button
+                        style="padding:8px; background:var(--primary); border:none; color:#fff; border-radius:4px; cursor:pointer; font-size:12px">MBA
+                        T2</button>
+                    <button
+                        style="padding:8px; background:#334155; border:none; color:#fff; border-radius:4px; cursor:pointer; font-size:12px">Hàng
+                        rào</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+
+</html>
