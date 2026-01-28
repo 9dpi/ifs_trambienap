@@ -25,7 +25,12 @@
                 </svg>
             </button>
             <a href="dashboard.html" class="brand" style="text-decoration:none">
-                <div class="logo-box">I</div> IFS - AI
+                <div class="logo-box">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"></path>
+                    </svg>
+                </div> IFS - AI
             </a>
         </div>
 
@@ -62,7 +67,7 @@
                         </svg>
                         Nhật ký nhiệt độ
                     </a>
-                    <a href="#" class="menu-link">
+                    <a href="theodoidiemdo_tonghopphantich.html" class="menu-link">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
                             <polyline points="14 2 14 8 20 8"></polyline>
@@ -208,7 +213,7 @@
             </div>
             <div class="card kpi-card">
                 <div>
-                    <div class="kpi-lbl">Số trạm (Sites)</div>
+                    <div class="kpi-lbl">Địa điểm giám sát</div>
                     <div class="kpi-val">2</div>
                 </div>
                 <div class="kpi-icon bg-purple">
@@ -232,7 +237,7 @@
             </div>
             <div class="card kpi-card">
                 <div>
-                    <div class="kpi-lbl">Nhiệt độ TB</div>
+                    <div class="kpi-lbl">Nhiệt độ Môi trường</div>
                     <div class="kpi-val" style="color:var(--success)">32°C</div>
                 </div>
                 <div class="kpi-icon bg-green">
@@ -317,48 +322,6 @@
                     </div>
                 </div>
             </div>
-
-            <div class="card chart-section">
-                <div class="card-header"><span class="card-title">Xu hướng Nhiệt độ</span></div>
-                <div id="tempChart" style="height:100%"></div>
-            </div>
-
-            <div class="card table-section">
-                <div class="card-header"><span class="card-title">Trạng thái Thiết bị</span></div>
-                <div style="overflow:auto">
-                    <table class="data-table">
-                        <thead>
-                            <tr>
-                                <th>Thiết bị</th>
-                                <th>Loại</th>
-                                <th>Ping</th>
-                                <th>Trạng thái</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Core Server 01</td>
-                                <td>Server</td>
-                                <td>2ms</td>
-                                <td style="color:var(--success)">● Online</td>
-                            </tr>
-                            <tr>
-                                <td>Cam-PTZ-PQ-03</td>
-                                <td>Camera</td>
-                                <td>--</td>
-                                <td style="color:var(--danger)">● Mất kết nối</td>
-                            </tr>
-                            <tr>
-                                <td>Gateway PQ</td>
-                                <td>Gateway</td>
-                                <td>120ms</td>
-                                <td style="color:var(--warning)">● Chậm</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
         </div>
     </div>
 

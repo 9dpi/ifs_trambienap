@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="vi" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IFS - AI | Tổng hợp phân tích</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <style>
+        .tabs-container {
+            margin-bottom: 20px;
+            display: flex;
+            gap: 10px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 1px;
+        }
+
+        .tab-item {
+            padding: 12px 24px;
+            cursor: pointer;
+            color: var(--text-sub);
+            font-weight: 600;
+            font-size: 14px;
+            transition: 0.3s;
+            border-bottom: 3px solid transparent;
+            position: relative;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 8px 8px 0 0;
+        }
+
+        .tab-item:hover {
+            color: var(--primary);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .tab-item.active {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+            background: rgba(59, 130, 246, 0.1);
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .chart-box {
+            padding: 24px;
+            min-height: 480px;
+            background: rgba(255, 255, 255, 0.01);
+            border-radius: 12px;
+            margin-top: 10px;
+        }
+
+        /* NEW HORIZONTAL FILTER STYLE */
+        .filter-section-modern {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 24px;
+            margin-bottom: 25px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .filter-row-inline {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: flex-end;
+            gap: 16px;
+        }
+
+        .filter-group-inline {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 6px;
+            flex: unset;
+        }
+
+        .filter-group-inline label {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--text-sub);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+        }
+
+        /* Multi-select box looking like an input */
+        .multi-select-box {
+            background: var(--bg-body);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 4px 8px;
+            min-height: 38px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+            cursor: pointer;
+            transition: 0.2s;
+            min-width: 150px;
+        }
+
+        .multi-select-box:hover {
+            border-color: var(--primary);
+        }
+
+        .tags-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .tag-pill {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border);
+            color: var(--text-main);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-weight: 500;
+        }
+
+        .tag-pill i {
+            color: var(--text-sub);
+            cursor: pointer;
+            font-style: normal;
+            font-size: 16px;
+            line-height: 1;
+            margin-top: -1px;
+        }
+
+        .tag-pill i:hover {
+            color: var(--danger);
+        }
+
+        .select-single-modern {
+            background: var(--bg-body);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 8px 12px;
+            font-size: 14px;
+            color: var(--text-main);
+            outline: none;
+            cursor: pointer;
+            min-height: 38px;
+        }
+
+        .date-range-box {
+            display: flex;
+            align-items: center;
+            background: var(--bg-body);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 0 12px;
+            height: 38px;
+            gap: 10px;
+        }
+
+        .date-range-box svg {
+            color: var(--text-sub);
+            flex-shrink: 0;
+        }
+
+        .date-range-box input {
+            background: transparent;
+            border: none;
+            color: var(--text-main);
+            font-size: 14px;
+            width: 165px;
+            outline: none;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .btn-search-primary {
+            background: #3B82F6;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 0 24px;
+            height: 38px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: 0.2s;
+            box-shadow: 0 4px 10px rgba(59, 130, 246, 0.2);
+        }
+
+        .btn-search-primary:hover {
+            background: #2563EB;
+            transform: translateY(-1px);
+        }
+
+        .btn-icon-square {
+            width: 38px;
+            height: 38px;
+            border: 1px solid var(--border);
+            background: var(--bg-body);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-sub);
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .btn-icon-square:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .summary-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .summary-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .status-badge {
+            padding: 5px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .status-unprocessed {
+            background: rgba(239, 68, 68, 0.1);
+            color: #EF4444;
+            border: 1px solid rgba(239, 68, 68, 0.2);
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <div style="display:flex; align-items:center">
+            <button class="mobile-btn" onclick="toggleMobileMenu()">
+                <svg width="24" height="24" viewBox="0 0 24 24">
+                    <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" />
+                </svg>
+            </button>
+            <a href="dashboard.html" class="brand" style="text-decoration:none">
+                <div class="logo-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"></path></svg></div> IFS - AI
+            </a>
+        </div>
+
+        <div class="nav-menu" id="mainMenu">
+            <div class="nav-wrapper"><a href="dashboard.html" class="nav-link">TRANG CHỦ</a></div>
+            <div class="nav-wrapper"><a href="giamsattructiep.html" class="nav-link">GIÁM SÁT TRỰC TIẾP</a></div>
+            <div class="nav-wrapper">
+                <div class="nav-link active-link">THEO DÕI ĐIỂM ĐO <svg class="nav-arrow" width="10"
+                        viewBox="0 0 24 24">
+                        <path d="M7 10l5 5 5-5z" />
+                    </svg></div>
+                <div class="dropdown-menu">
+                    <a href="theodoidiemdo_canhbaoai.html" class="menu-link">Cảnh báo AI</a>
+                    <a href="theodoidiemdo_canhbao.html" class="menu-link">Nhiệt độ vượt ngưỡng</a>
+                    <a href="theodoidiemdo_nhatkynhietdo.html" class="menu-link">Nhật ký nhiệt độ</a>
+                    <a href="theodoidiemdo_tonghopphantich.html" class="menu-link active-link">Tổng hợp phân tích</a>
+                </div>
+            </div>
+            <div class="nav-wrapper">
+                <div class="nav-link">QUẢN TRỊ HỆ THỐNG <svg class="nav-arrow" width="10" viewBox="0 0 24 24">
+                        <path d="M7 10l5 5 5-5z" />
+                    </svg></div>
+                <div class="dropdown-menu mega-menu">
+                    <div class="mega-col">
+                        <div class="col-header">HẠ TẦNG & THIẾT BỊ</div>
+                        <a href="quantrihethong_khuvuc.html" class="menu-link">Khu vực</a>
+                        <a href="quantrihethong_camera.html" class="menu-link">Camera</a>
+                        <a href="quantrihethong_cambien.html" class="menu-link">Cảm biến</a>
+                        <a href="quantrihethong_loaithietbi.html" class="menu-link">Loại Thiết bị</a>
+                        <a href="quantrihethong_thietbi.html" class="menu-link">Thiết bị</a>
+                    </div>
+                    <div class="mega-col">
+                        <div class="col-header">THIẾT LẬP CẢNH BÁO</div>
+                        <a href="thietlapcanhbao_kenhcanhbao.html" class="menu-link">Kênh Cảnh báo</a>
+                        <a href="theodoidiemdo_bocanhbao.html" class="menu-link">Bộ cảnh báo</a>
+                        <a href="#" class="menu-link">Lịch sử</a>
+                    </div>
+                    <div class="mega-col">
+                        <div class="col-header">QUẢN LÝ NGƯỜI DÙNG</div>
+                        <a href="quantrihethong_nguoidung.html" class="menu-link">Người dùng</a>
+                        <a href="#" class="menu-link">Thêm người dùng mới</a>
+                        <a href="#" class="menu-link">Hướng dẫn sử dụng</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="header-actions">
+            <div class="theme-switch" onclick="toggleTheme()">
+                <div class="switch-knob"></div>
+            </div>
+            <div
+                style="width:32px; height:32px; background:#E5E7EB; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:700; color:#4B5563">
+                A</div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="bread-crumb">Theo dõi điểm đo / <span>Tổng hợp phân tích</span></div>
+
+        <div class="tabs-container">
+            <div class="tab-item active" onclick="switchTab(0)">Nhật ký nhiệt độ theo điểm đo</div>
+            <div class="tab-item" onclick="switchTab(1)">10 cảnh báo vượt ngưỡng gần nhất</div>
+            <div class="tab-item" onclick="switchTab(2)">Tổng số cảnh báo vượt ngưỡng</div>
+        </div>
+
+        <!-- TAB 1: NHẬT KÝ NHIỆT ĐỘ -->
+        <div id="tabContent0" class="tab-content active">
+            <div class="card" style="padding: 20px;">
+                <div class="summary-header">
+                    <div class="summary-title">Nhật ký nhiệt độ theo điểm đo</div>
+                </div>
+
+                <div class="filter-section-modern">
+                    <div class="filter-row-inline">
+                        <div class="filter-group-inline">
+                            <label>Khu vực</label>
+                            <select class="select-single-modern" style="width: 180px;">
+                                <option>Trạm 110kV Nam Phú Quốc</option>
+                            </select>
+                        </div>
+                        <div class="filter-group-inline">
+                            <label>Thiết bị</label>
+                            <div class="multi-select-box" style="width: 120px;">
+                                <div class="tags-list">
+                                    <div class="tag-pill">112 <i>&times;</i></div>
+                                </div>
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <path d="M6 9l6 6 6-6" />
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="filter-group-inline">
+                            <label>Bộ phận</label>
+                            <div style="display: flex; gap: 8px; align-items: center;">
+                                <div class="multi-select-box" style="width: 320px;">
+                                    <div class="tags-list">
+                                        <div class="tag-pill">MC112 - AI <i>&times;</i></div>
+                                        <div class="tag-pill">MC112 - BI <i>&times;</i></div>
+                                        <div class="tag-pill">MC112 - CI <i>&times;</i></div>
+                                    </div>
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <path d="M6 9l6 6 6-6" />
+                                    </svg>
+                                </div>
+                                <div class="btn-icon-square" title="Cấu hình danh sách">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <circle cx="12" cy="12" r="3"></circle>
+                                        <path
+                                            d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z">
+                                        </path>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="filter-group-inline">
+                            <label>Khoảng thời gian</label>
+                            <div style="display: flex; gap: 8px;">
+                                <select class="select-single-modern" style="width: 120px;">
+                                    <option>Tùy chọn</option>
+                                    <option>Hôm nay</option>
+                                    <option>Hôm qua</option>
+                                </select>
+                                <div class="date-range-box">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <circle cx="12" cy="12" r="10"></circle>
+                                        <polyline points="12 6 12 12 16 14"></polyline>
+                                    </svg>
+                                    <input type="text" value="2026-01-26 00:00:00"
+                                        style="width: 130px; font-size: 12px;">
+                                    <span style="color:var(--text-sub)">-</span>
+                                    <input type="text" value="2026-01-28 10:33:10"
+                                        style="width: 130px; font-size: 12px;">
+                                </div>
+                            </div>
+                        </div>
+                        <button class="btn-search-primary" style="margin-bottom: 0;">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <circle cx="11" cy="11" r="8"></circle>
+                                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                            </svg>
+                            TÌM KIẾM
+                        </button>
+                    </div>
+                </div>
+
+                <div class="chart-box">
+                    <div id="temperatureChart"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 2: 10 CẢNH BÁO GẦN NHẤT -->
+        <div id="tabContent1" class="tab-content">
+            <div class="card" style="padding: 20px;">
+                <div class="summary-header">
+                    <div class="summary-title">10 cảnh báo vượt ngưỡng gần nhất</div>
+                </div>
+
+                <div style="overflow-x: auto;">
+                    <table class="data-table" style="width: 100%;">
+                        <thead>
+                            <tr style="background: rgba(59, 130, 246, 0.05);">
+                                <th>STT</th>
+                                <th>Ngày</th>
+                                <th>Thời gian</th>
+                                <th>Khu vực</th>
+                                <th>Bộ phận</th>
+                                <th>Nhiệt độ °C</th>
+                                <th>Loại so sánh</th>
+                                <th>Giá trị so sánh</th>
+                                <th>Độ lệch</th>
+                                <th>Trạng thái</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>2026-01-28</td>
+                                <td>01:46:04</td>
+                                <td>Trạm 110kV Nam Phú Quốc</td>
+                                <td>172_CI</td>
+                                <td style="font-weight: 700;">48.4</td>
+                                <td>So với pha min toàn trạm</td>
+                                <td>23.4</td>
+                                <td style="color: var(--danger);">25</td>
+                                <td><span class="status-badge status-unprocessed">Chưa xử lý</span></td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>2026-01-28</td>
+                                <td>01:46:04</td>
+                                <td>Trạm 110kV Nam Phú Quốc</td>
+                                <td>172_BI</td>
+                                <td style="font-weight: 700;">48.3</td>
+                                <td>So với pha min toàn trạm</td>
+                                <td>23.4</td>
+                                <td style="color: var(--danger);">24.9</td>
+                                <td><span class="status-badge status-unprocessed">Chưa xử lý</span></td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>2026-01-28</td>
+                                <td>01:46:04</td>
+                                <td>Trạm 110kV Nam Phú Quốc</td>
+                                <td>172_AI</td>
+                                <td style="font-weight: 700; color: var(--danger);">52.1</td>
+                                <td>So với pha min toàn trạm</td>
+                                <td>23.4</td>
+                                <td style="color: var(--danger);">28.7</td>
+                                <td><span class="status-badge status-unprocessed">Chưa xử lý</span></td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>2026-01-27</td>
+                                <td>17:16:59</td>
+                                <td>Trạm 110kV Nam Phú Quốc</td>
+                                <td>131-1_A</td>
+                                <td style="font-weight: 700;">48.1</td>
+                                <td>So với pha min toàn trạm</td>
+                                <td>32.6</td>
+                                <td style="color: var(--danger);">15.5</td>
+                                <td><span class="status-badge status-unprocessed">Chưa xử lý</span></td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td>2026-01-27</td>
+                                <td>16:55:29</td>
+                                <td>Trạm 110kV Nam Phú Quốc</td>
+                                <td>TI131_A</td>
+                                <td style="font-weight: 700;">50</td>
+                                <td>So với pha min</td>
+                                <td>33.7</td>
+                                <td style="color: var(--danger);">16.3</td>
+                                <td><span class="status-badge status-unprocessed">Chưa xử lý</span></td>
+                            </tr>
+                            <tr>
+                                <td>6</td>
+                                <td>2026-01-27</td>
+                                <td>16:55:29</td>
+                                <td>Trạm 110kV Nam Phú Quốc</td>
+                                <td>TI131_A</td>
+                                <td style="font-weight: 700;">50</td>
+                                <td>So với pha min toàn trạm</td>
+                                <td>33</td>
+                                <td style="color: var(--danger);">17</td>
+                                <td><span class="status-badge status-unprocessed">Chưa xử lý</span></td>
+                            </tr>
+                            <tr>
+                                <td>7</td>
+                                <td>2026-01-27</td>
+                                <td>16:43:59</td>
+                                <td>Trạm 110kV Nam Phú Quốc</td>
+                                <td>131-1_A</td>
+                                <td style="font-weight: 700; color: var(--danger);">53</td>
+                                <td>So với pha min toàn trạm</td>
+                                <td>36.9</td>
+                                <td style="color: var(--danger);">16.1</td>
+                                <td><span class="status-badge status-unprocessed">Chưa xử lý</span></td>
+                            </tr>
+                            <tr>
+                                <td>8</td>
+                                <td>2026-01-27</td>
+                                <td>16:43:59</td>
+                                <td>Trạm 110kV Nam Phú Quốc</td>
+                                <td>131-1_A</td>
+                                <td style="font-weight: 700; color: var(--danger);">53</td>
+                                <td>So với pha min</td>
+                                <td>36.9</td>
+                                <td style="color: var(--danger);">16.1</td>
+                                <td><span class="status-badge status-unprocessed">Chưa xử lý</span></td>
+                            </tr>
+                            <tr>
+                                <td>9</td>
+                                <td>2026-01-27</td>
+                                <td>16:33:59</td>
+                                <td>Trạm 110kV Nam Phú Quốc</td>
+                                <td>TI131_A</td>
+                                <td style="font-weight: 700;">51.8</td>
+                                <td>So với pha min toàn trạm</td>
+                                <td>35</td>
+                                <td style="color: var(--danger);">16.8</td>
+                                <td><span class="status-badge status-unprocessed">Chưa xử lý</span></td>
+                            </tr>
+                            <tr>
+                                <td>10</td>
+                                <td>2026-01-27</td>
+                                <td>16:33:59</td>
+                                <td>Trạm 110kV Nam Phú Quốc</td>
+                                <td>TI131_A</td>
+                                <td style="font-weight: 700;">51.8</td>
+                                <td>So với pha min</td>
+                                <td>35</td>
+                                <td style="color: var(--danger);">16.8</td>
+                                <td><span class="status-badge status-unprocessed">Chưa xử lý</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="page-info-bar">
+                    <div>Hiển thị từ 1 đến 10 trong tổng số 281</div>
+                    <div class="pagination-group">
+                        <select class="select-page-size">
+                            <option>10/trang</option>
+                            <option>20/trang</option>
+                        </select>
+                        <button class="btn-page active">1</button>
+                        <button class="btn-page">2</button>
+                        <button class="btn-page">3</button>
+                        <button class="btn-page">4</button>
+                        <button class="btn-page">5</button>
+                        <button class="btn-page">6</button>
+                        <div style="font-size: 11px; margin: 0 5px;">Nhảy tới</div>
+                        <input type="text" class="filter-input"
+                            style="width: 40px; height: 32px; padding: 0 5px; text-align: center;" value="1">
+                        <button class="btn-page">➜</button>
+                        <button class="btn-page" title="Cấu hình hiển thị" style="margin-left: 10px;">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <circle cx="12" cy="12" r="3"></circle>
+                                <path
+                                    d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z">
+                                </path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 3: TỔNG SỐ CẢNH BÁO -->
+        <div id="tabContent2" class="tab-content">
+            <div class="card" style="padding: 20px;">
+                <div class="summary-header">
+                    <div class="summary-title">Tổng số cảnh báo vượt ngưỡng</div>
+                </div>
+
+                <div class="filter-section-modern">
+                    <div class="filter-row-inline">
+                        <div class="filter-group-inline">
+                            <label>Khu vực</label>
+                            <select class="select-single-modern" style="width: 250px;">
+                                <option>Trạm 110kV Nam Phú Quốc</option>
+                            </select>
+                        </div>
+                        <div class="filter-group-inline">
+                            <label>Khoảng thời gian thống kê</label>
+                            <div style="display: flex; gap: 8px;">
+                                <select class="select-single-modern" style="width: 140px;">
+                                    <option>Tùy chọn</option>
+                                    <option>Hôm nay</option>
+                                    <option selected>7 ngày qua</option>
+                                </select>
+                                <div class="date-range-box">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                        <line x1="16" y1="2" x2="16" y2="6"></line>
+                                        <line x1="8" y1="2" x2="8" y2="6"></line>
+                                        <line x1="3" y1="10" x2="21" y2="10"></line>
+                                    </svg>
+                                    <input type="date" value="2026-01-22" style="width: 130px;">
+                                    <span style="color:var(--text-sub)">to</span>
+                                    <input type="date" value="2026-01-28" style="width: 130px;">
+                                </div>
+                            </div>
+                        </div>
+                        <button class="btn-search-primary" style="margin-bottom: 0;">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <circle cx="11" cy="11" r="8"></circle>
+                                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                            </svg>
+                            TÌM KIẾM
+                        </button>
+                    </div>
+                </div>
+
+                <div class="chart-box">
+                    <div id="warningBarChart"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script>
+        function switchTab(index) {
+            // Update tabs UI
+            const tabs = document.querySelectorAll('.tab-item');
+            tabs.forEach((tab, i) => {
+                if (i === index) tab.classList.add('active');
+                else tab.classList.remove('active');
+            });
+
+            // Update contents UI
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach((content, i) => {
+                if (i === index) content.classList.add('active');
+                else content.classList.remove('active');
+            });
+
+            // Resize charts to fit container
+            window.dispatchEvent(new Event('resize'));
+        }
+
+        // CHART 1: LINE CHART (Temperature)
+        var lineOptions = {
+            series: [
+                { name: 'Phha A (112_AI)', data: [26, 27, 26, 28, 38, 42, 45, 41, 40, 31, 28, 27, 26, 27, 25, 27, 26, 28, 37, 46, 43, 38, 29, 27, 26, 27, 26, 32] },
+                { name: 'Pha B (112_BI)', data: [26, 26, 27, 27, 34, 39, 41, 38, 39, 29, 26, 26, 27, 26, 25, 26, 28, 33, 41, 44, 42, 36, 28, 26, 26, 26, 27, 34] },
+                { name: 'Pha C (112_CI)', data: [25, 25, 26, 26, 31, 36, 38, 36, 37, 27, 25, 25, 26, 25, 24, 25, 26, 30, 38, 40, 39, 34, 27, 25, 25, 25, 26, 35] },
+                { name: 'Nhiệt độ Môi trường', data: [24, 24, 25, 24, 28, 29, 28, 27, 26, 24, 24, 24, 25, 24, 23, 24, 25, 26, 27, 27, 25, 25, 24, 23, 24, 24, 25, 30] }
+            ],
+            chart: {
+                height: 450,
+                type: 'area',
+                background: 'transparent',
+                toolbar: { show: true, tools: { download: true, selection: true, zoom: true, zoonin: true, zoomout: true, pan: true } },
+                animations: { enabled: true, easing: 'easeinout', speed: 800 }
+            },
+            colors: ['#3B82F6', '#10B981', '#F59E0B', '#EF4444'],
+            stroke: { curve: 'smooth', width: 3 },
+            fill: {
+                type: 'gradient',
+                gradient: { shadeIntensity: 1, opacityFrom: 0.4, opacityTo: 0.05, stops: [0, 90, 100] }
+            },
+            markers: { size: 0, hover: { size: 5 } },
+            xaxis: {
+                categories: ['00:00', '01:00', '02:00', '03:00', '08:00', '10:00', '12:00', '14:00', '16:00', '18:00', '20:00', '22:00', '00:00', '02:00', '04:00', '06:00', '08:00', '10:00', '12:00', '14:00', '16:00', '18:00', '20:00', '22:00', '00:00', '02:00', '04:00', '09:00'],
+                labels: { style: { colors: '#94A3B8', fontSize: '12px' } },
+                axisBorder: { show: false },
+                axisTicks: { show: false }
+            },
+            yaxis: {
+                labels: {
+                    style: { colors: '#94A3B8', fontSize: '12px' },
+                    formatter: (v) => v.toFixed(1) + "°C"
+                },
+                title: { text: 'Nhiệt độ (°C)', style: { color: '#94A3B8', fontWeight: 600 } }
+            },
+            grid: { borderColor: 'rgba(255,255,255,0.05)', strokeDashArray: 4 },
+            legend: {
+                position: 'top',
+                horizontalAlign: 'right',
+                offsetY: -10,
+                labels: { colors: '#94A3B8' },
+                markers: { radius: 12 }
+            },
+            theme: { mode: 'dark' },
+            tooltip: { x: { show: true }, theme: 'dark' }
+        };
+
+        var lineChart = new ApexCharts(document.querySelector("#temperatureChart"), lineOptions);
+        lineChart.render();
+
+        // CHART 2: BAR CHART (Warnings)
+        var barOptions = {
+            series: [{
+                name: 'Số cảnh báo',
+                data: [12, 58, 62, 55, 48, 52, 8]
+            }],
+            chart: {
+                height: 400,
+                type: 'bar',
+                background: 'transparent',
+                toolbar: { show: false }
+            },
+            colors: ['#3B82F6'],
+            plotOptions: {
+                bar: {
+                    borderRadius: 8,
+                    columnWidth: '40%',
+                    dataLabels: { position: 'top' },
+                    distributed: false
+                }
+            },
+            dataLabels: {
+                enabled: true,
+                offsetY: -25,
+                style: { fontSize: '13px', colors: ["#3B82F6"], fontWeight: 700 }
+            },
+            xaxis: {
+                categories: ['Thứ 5, 22/01', 'Thứ 6, 23/01', 'Thứ 7, 24/01', 'Chủ nhật, 25/01', 'Thứ 2, 26/01', 'Thứ 3, 27/01', 'Hôm nay'],
+                labels: { style: { colors: '#94A3B8', fontSize: '11px' } },
+                axisBorder: { show: false },
+                axisTicks: { show: false }
+            },
+            yaxis: {
+                labels: { style: { colors: '#94A3B8' } },
+                title: { text: 'Số lượng cảnh báo', style: { color: '#94A3B8' } }
+            },
+            grid: { borderColor: 'rgba(255,255,255,0.05)', strokeDashArray: 4 },
+            theme: { mode: 'dark' },
+            tooltip: { theme: 'dark' }
+        };
+
+        var barChart = new ApexCharts(document.querySelector("#warningBarChart"), barOptions);
+        barChart.render();
+
+        // DEMO INTERACTION FOR MULTI-SELECT
+        document.querySelectorAll('.multi-select-box').forEach(box => {
+            box.addEventListener('click', function (e) {
+                if (e.target.closest('i')) {
+                    // Handle remove tag
+                    e.target.closest('.tag-pill').remove();
+                    return;
+                }
+                // Toggle a mock dropdown (for demo purposes)
+                alert('Mở danh sách chọn nhiều (Multi-select dropdown)');
+            });
+        });
+    </script>
+</body>
+
+</html>

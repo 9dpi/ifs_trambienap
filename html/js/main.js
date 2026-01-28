@@ -44,7 +44,8 @@ function setMapMode(mode) {
 
 let chart;
 function initChart() {
-    if (typeof ApexCharts === 'undefined') return;
+    const chartEl = document.querySelector("#tempChart");
+    if (typeof ApexCharts === 'undefined' || !chartEl) return;
 
     const options = {
         series: [{ name: 'Nhiệt độ', data: [30, 40, 35, 50, 49, 60, 70, 91, 125] }],
@@ -55,7 +56,7 @@ function initChart() {
         grid: { borderColor: '#334155' },
         theme: { mode: 'dark' }
     };
-    chart = new ApexCharts(document.querySelector("#tempChart"), options);
+    chart = new ApexCharts(chartEl, options);
     chart.render();
 }
 

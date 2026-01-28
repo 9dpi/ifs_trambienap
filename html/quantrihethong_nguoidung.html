@@ -21,7 +21,7 @@
                 </svg>
             </button>
             <a href="dashboard.html" class="brand" style="text-decoration:none">
-                <div class="logo-box">I</div> IFS - AI
+                <div class="logo-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"></path></svg></div> IFS - AI
             </a>
         </div>
 
@@ -150,7 +150,7 @@
                                 </svg>
                             </button>
                         </div>
-                        <button class="btn-add">+ Thêm</button>
+                        <button class="btn-add" onclick="openDrawer()">+ Thêm</button>
                     </div>
                 </div>
 
@@ -328,14 +328,109 @@
                         <input type="text" class="filter-input"
                             style="width: 40px; height: 32px; padding: 0 5px; text-align: center;" value="1">
                         <button class="btn-page">➜</button>
+                        <button class="btn-page" title="Cấu hình hiển thị" style="margin-left: 10px;">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <circle cx="12" cy="12" r="3"></circle>
+                                <path
+                                    d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z">
+                                </path>
+                            </svg>
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- ADD USER DRAWER -->
+    <div class="drawer-overlay" id="drawerOverlay" onclick="if(event.target === this) closeDrawer()">
+        <div class="drawer drawer-md">
+            <div class="drawer-header">
+                <h3>Thêm người dùng mới</h3>
+                <button class="close-drawer" onclick="closeDrawer()">&times;</button>
+            </div>
+            <div class="drawer-body">
+                <div class="form-group">
+                    <label class="form-label">Tên đăng nhập <span class="required">*</span></label>
+                    <input type="text" class="filter-input" placeholder="Nhập tên đăng nhập...">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Mật khẩu <span class="required">*</span></label>
+                    <input type="password" class="filter-input" placeholder="••••••">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Tên</label>
+                    <input type="text" class="filter-input" placeholder="Nhập tên...">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Họ và tên đệm</label>
+                    <input type="text" class="filter-input" placeholder="Nhập họ và tên đệm...">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Email <span class="required">*</span></label>
+                    <input type="email" class="filter-input" placeholder="example@gmail.com">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Số điện thoại</label>
+                    <input type="text" class="filter-input" placeholder="Nhập số điện thoại...">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Telegram User</label>
+                    <input type="text" class="filter-input" value="thangdv">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Quyền</label>
+                    <select class="filter-input">
+                        <option>Chọn</option>
+                        <option>Admin</option>
+                        <option>Quản trị viên</option>
+                        <option>Người vận hành</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Khu vực</label>
+                    <select class="filter-input">
+                        <option>Chọn</option>
+                        <option>Tất cả</option>
+                        <option>Trạm 110kV Nam Phú Quốc</option>
+                        <option>Trạm 110kV Liên Trì</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Trạng thái <span class="required">*</span></label>
+                    <select class="filter-input">
+                        <option selected>Hoạt động</option>
+                        <option>Không hoạt động</option>
+                    </select>
+                </div>
+            </div>
+            <div class="drawer-footer">
+                <button class="btn-secondary-full" onclick="closeDrawer()">✕ Hủy</button>
+                <button class="btn-primary-full">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
+                        <polyline points="17 21 17 13 7 13 7 21"></polyline>
+                        <polyline points="7 3 7 8 15 8"></polyline>
+                    </svg>
+                    Lưu
+                </button>
+            </div>
+        </div>
+    </div>
+
     <script src="js/main.js"></script>
     <script>
+        function openDrawer() {
+            document.getElementById('drawerOverlay').classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeDrawer() {
+            document.getElementById('drawerOverlay').classList.remove('open');
+            document.body.style.overflow = '';
+        }
+
         function switchView(view) {
             const tableView = document.getElementById('tableView');
             const cardView = document.getElementById('cardView');

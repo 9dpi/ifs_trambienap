@@ -9,6 +9,46 @@
         href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
+    <style>
+        .expand-toggle {
+            cursor: pointer;
+            width: 20px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 5px;
+            transition: transform 0.2s;
+            color: var(--text-sub);
+        }
+
+        .expand-toggle.expanded {
+            transform: rotate(90deg);
+        }
+
+        .row-level-1 td:first-child {
+            padding-left: 15px;
+        }
+
+        .row-level-2 td:first-child {
+            padding-left: 40px;
+        }
+
+        .row-level-3 td:first-child {
+            padding-left: 65px;
+        }
+
+        .hidden-row {
+            display: none !important;
+        }
+
+        .data-table tr.child-row {
+            background-color: rgba(0, 0, 0, 0.02);
+        }
+
+        [data-theme="dark"] .data-table tr.child-row {
+            background-color: rgba(255, 255, 255, 0.02);
+        }
+    </style>
 </head>
 
 <body>
@@ -21,7 +61,7 @@
                 </svg>
             </button>
             <a href="dashboard.html" class="brand" style="text-decoration:none">
-                <div class="logo-box">I</div> IFS - AI
+                <div class="logo-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"></path></svg></div> IFS - AI
             </a>
         </div>
 
@@ -155,46 +195,100 @@
                                 <th style="width: 120px; text-align: center;">Hành động</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
+                        <tbody id="areaTableBody">
+                            <tr class="row-level-1">
                                 <td>BIENDAO</td>
                                 <td>Biển đảo</td>
                                 <td>Bản đồ</td>
                                 <td></td>
                                 <td><span style="color:var(--success)">Hoạt động</span></td>
-                                <td style="text-align: center;"><button
-                                        class="action-btn-circle btn-edit-round">✎</button><button
-                                        class="action-btn-circle btn-delete-round">🗑</button></td>
+                                <td style="text-align: center;">
+                                    <button class="action-btn-circle btn-edit-round">✎</button>
+                                    <button class="action-btn-circle btn-delete-round">🗑</button>
+                                </td>
                             </tr>
-                            <tr>
+                            <tr class="row-level-1">
                                 <td>CTY</td>
                                 <td>Công ty</td>
                                 <td>Bản đồ</td>
                                 <td>Camera nhiệt lắp tại văn phòng</td>
                                 <td><span style="color:var(--success)">Hoạt động</span></td>
-                                <td style="text-align: center;"><button
-                                        class="action-btn-circle btn-edit-round">✎</button><button
-                                        class="action-btn-circle btn-delete-round">🗑</button></td>
+                                <td style="text-align: center;">
+                                    <button class="action-btn-circle btn-edit-round">✎</button>
+                                    <button class="action-btn-circle btn-delete-round">🗑</button>
+                                </td>
                             </tr>
-                            <tr>
-                                <td>KV_02</td>
+                            <!-- Level 1: KV_02 -->
+                            <tr class="row-level-1" data-id="KV_02">
+                                <td>
+                                    <span class="expand-toggle expanded" onclick="toggleRow('KV_02')">
+                                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none"
+                                            stroke="currentColor" stroke-width="3">
+                                            <polyline points="9 18 15 12 9 6"></polyline>
+                                        </svg>
+                                    </span>
+                                    KV_02
+                                </td>
                                 <td>Khu Vực Miền Trung</td>
                                 <td>Bản đồ</td>
                                 <td></td>
                                 <td><span style="color:var(--text-sub)">Không hoạt động</span></td>
-                                <td style="text-align: center;"><button
-                                        class="action-btn-circle btn-edit-round">✎</button><button
-                                        class="action-btn-circle btn-delete-round">🗑</button></td>
+                                <td style="text-align: center;">
+                                    <button class="action-btn-circle btn-edit-round">✎</button>
+                                    <button class="action-btn-circle btn-delete-round">🗑</button>
+                                </td>
                             </tr>
-                            <tr>
-                                <td>PQU</td>
+                            <!-- Level 2: Child of KV_02 -->
+                            <tr class="row-level-2 child-row" data-id="110LV_LT" data-parent="KV_02">
+                                <td>
+                                    <span class="expand-toggle expanded" onclick="toggleRow('110LV_LT')">
+                                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none"
+                                            stroke="currentColor" stroke-width="3">
+                                            <polyline points="9 18 15 12 9 6"></polyline>
+                                        </svg>
+                                    </span>
+                                    110LV_LT
+                                </td>
+                                <td>Trạm 110kV Liên Trì</td>
+                                <td>Bản đồ</td>
+                                <td></td>
+                                <td><span style="color:var(--success)">Hoạt động</span></td>
+                                <td style="text-align: center;">
+                                    <button class="action-btn-circle btn-edit-round">✎</button>
+                                    <button class="action-btn-circle btn-delete-round">🗑</button>
+                                </td>
+                            </tr>
+                            <!-- Level 3: Child of 110LV_LT -->
+                            <tr class="row-level-3 child-row" data-parent="110LV_LT">
+                                <td>SD1S</td>
+                                <td>SD1S_Liên Trì</td>
+                                <td>Hình ảnh</td>
+                                <td></td>
+                                <td><span style="color:var(--success)">Hoạt động</span></td>
+                                <td style="text-align: center;">
+                                    <button class="action-btn-circle btn-edit-round">✎</button>
+                                    <button class="action-btn-circle btn-delete-round">🗑</button>
+                                </td>
+                            </tr>
+                            <!-- Level 1: PQU -->
+                            <tr class="row-level-1" data-id="PQU">
+                                <td>
+                                    <span class="expand-toggle" onclick="toggleRow('PQU')">
+                                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none"
+                                            stroke="currentColor" stroke-width="3">
+                                            <polyline points="9 18 15 12 9 6"></polyline>
+                                        </svg>
+                                    </span>
+                                    PQU
+                                </td>
                                 <td>Phú Quốc</td>
                                 <td>Bản đồ</td>
                                 <td></td>
                                 <td><span style="color:var(--success)">Hoạt động</span></td>
-                                <td style="text-align: center;"><button
-                                        class="action-btn-circle btn-edit-round">✎</button><button
-                                        class="action-btn-circle btn-delete-round">🗑</button></td>
+                                <td style="text-align: center;">
+                                    <button class="action-btn-circle btn-edit-round">✎</button>
+                                    <button class="action-btn-circle btn-delete-round">🗑</button>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
@@ -239,6 +333,15 @@
                         <input type="text" class="filter-input"
                             style="width: 40px; height: 32px; padding: 0 5px; text-align: center;" value="1">
                         <button class="btn-page">➜</button>
+                        <button class="btn-page" title="Cấu hình hiển thị" style="margin-left: 10px;">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <circle cx="12" cy="12" r="3"></circle>
+                                <path
+                                    d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z">
+                                </path>
+                            </svg>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -263,6 +366,42 @@
                 if (btns[1]) btns[1].classList.add('active');
                 if (btns[0]) btns[0].classList.remove('active');
             }
+        }
+
+        function toggleRow(id) {
+            const toggleBtn = event.currentTarget;
+            const isExpanded = toggleBtn.classList.contains('expanded');
+
+            // Toggle icon state
+            if (isExpanded) {
+                toggleBtn.classList.remove('expanded');
+                hideChildren(id);
+            } else {
+                toggleBtn.classList.add('expanded');
+                showChildren(id);
+            }
+        }
+
+        function hideChildren(parentId) {
+            const children = document.querySelectorAll(`tr[data-parent="${parentId}"]`);
+            children.forEach(child => {
+                child.classList.add('hidden-row');
+                const childId = child.getAttribute('data-id');
+                if (childId) {
+                    const childToggle = child.querySelector('.expand-toggle');
+                    if (childToggle) childToggle.classList.remove('expanded');
+                    hideChildren(childId);
+                }
+            });
+        }
+
+        function showChildren(parentId) {
+            const children = document.querySelectorAll(`tr[data-parent="${parentId}"]`);
+            children.forEach(child => {
+                child.classList.remove('hidden-row');
+                // We only show one level deep. Further levels only show if their parent was already expanded?
+                // Actually, let's just show immediate children.
+            });
         }
     </script>
 </body>

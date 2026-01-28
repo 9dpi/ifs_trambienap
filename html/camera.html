@@ -456,7 +456,7 @@
                 </svg>
             </button>
             <a href="dashboard.html" class="brand" style="text-decoration:none">
-                <div class="logo-box">I</div> IFS - AI
+                <div class="logo-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"></path></svg></div> IFS - AI
             </a>
         </div>
 
@@ -516,20 +516,28 @@
 
 
     <header class="live-header">
-        <div class="cam-title">
-            <svg width="20" height="20" viewBox="0 0 24 24" style="color:var(--primary)">
-                <path
-                    d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4z" />
-            </svg>
-            <div>
-                <div style="line-height:1.2">CAM_THERMAL_01</div>
-                <div style="font-size:11px; color:var(--text-sub); font-weight:400">Trạm 110kV Nam Phú Quốc • Khu vực
-                    MBA T2</div>
+        <div style="display:flex; align-items:center; gap:15px">
+            <a href="giamsattructiep.html" class="v-btn" title="Thu nhỏ / Quay lại"
+                style="text-decoration:none; background:rgba(255,255,255,0.05)">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M15 18l-6-6 6-6" />
+                </svg>
+            </a>
+            <div class="cam-title">
+                <svg width="20" height="20" viewBox="0 0 24 24" style="color:var(--primary)">
+                    <path
+                        d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4z" />
+                </svg>
+                <div>
+                    <div style="line-height:1.2">CAM149</div>
+                    <div style="font-size:11px; color:var(--text-sub); font-weight:400">Trạm 110kV Nam Phú Quốc • Khu
+                        vực MBA T2</div>
+                </div>
             </div>
         </div>
         <div style="display:flex; gap:15px; align-items:center">
             <div class="live-badge">LIVE FEED</div>
-            <div style="font-family:'JetBrains Mono'; font-size:13px; color:#94A3B8">2025-12-11 16:28:45</div>
+            <div style="font-family:'JetBrains Mono'; font-size:13px; color:#94A3B8">2026-01-28 09:58:39</div>
         </div>
     </header>
 
@@ -611,52 +619,44 @@
                 </div>
             </div>
 
-            <div class="list-section">
-                <div class="list-header">
-                    <span>Điểm đo thời gian thực</span>
-                    <span>Nhiệt độ</span>
-                </div>
-                <div class="data-list">
-                    <div class="data-item active">
-                        <div class="item-name">MBA T2 (Sứ A) <span class="item-sub">CS1T2-A</span></div>
-                        <div class="item-val hot">58.2 °C</div>
-                    </div>
-                    <div class="data-item">
-                        <div class="item-name">MBA T2 (Sứ B) <span class="item-sub">CS1T2-B</span></div>
-                        <div class="item-val">42.5 °C</div>
-                    </div>
-                    <div class="data-item">
-                        <div class="item-name">MBA T2 (Sứ C) <span class="item-sub">CS1T2-C</span></div>
-                        <div class="item-val">41.8 °C</div>
-                    </div>
-                    <div class="data-item">
-                        <div class="item-name">Khu vực Tủ ĐK <span class="item-sub">Area0</span></div>
-                        <div class="item-val">35.0 °C</div>
-                    </div>
-                    <div class="data-item">
-                        <div class="item-name">Môi trường <span class="item-sub">Env-Sensor</span></div>
-                        <div class="item-val" style="color:#3B82F6">32.0 °C</div>
-                    </div>
-                </div>
-            </div>
-
-            <div style="padding:15px; border-top:1px solid var(--border)">
-                <div style="font-size:11px; color:var(--text-sub); margin-bottom:8px">PRESETS (GÓC MÁY NHANH)</div>
-                <div style="display:grid; grid-template-columns: 1fr 1fr; gap:8px">
+            <!-- 
+            <div class="list-section" style="padding: 20px;">
+                <div
+                    style="font-size:11px; color:var(--text-sub); margin-bottom:12px; font-weight:700; text-transform:uppercase; letter-spacing:1px">
+                    Presets (Góc máy nhanh)</div>
+                <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px">
                     <button
-                        style="padding:8px; background:#334155; border:none; color:#fff; border-radius:4px; cursor:pointer; font-size:12px">Toàn
+                        style="padding:10px; background:#334155; border:1px solid var(--border); color:#fff; border-radius:6px; cursor:pointer; font-size:12px; transition:0.2s">Toàn
                         cảnh</button>
                     <button
-                        style="padding:8px; background:#334155; border:none; color:#fff; border-radius:4px; cursor:pointer; font-size:12px">Cổng
+                        style="padding:10px; background:#334155; border:1px solid var(--border); color:#fff; border-radius:6px; cursor:pointer; font-size:12px; transition:0.2s">Cổng
                         chính</button>
                     <button
-                        style="padding:8px; background:var(--primary); border:none; color:#fff; border-radius:4px; cursor:pointer; font-size:12px">MBA
+                        style="padding:10px; background:var(--primary); border:none; color:#fff; border-radius:6px; cursor:pointer; font-size:12px; transition:0.2s; box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3)">MBA
                         T2</button>
                     <button
-                        style="padding:8px; background:#334155; border:none; color:#fff; border-radius:4px; cursor:pointer; font-size:12px">Hàng
+                        style="padding:10px; background:#334155; border:1px solid var(--border); color:#fff; border-radius:6px; cursor:pointer; font-size:12px; transition:0.2s">Hàng
                         rào</button>
+                    <button
+                        style="padding:10px; background:#334155; border:1px solid var(--border); color:#fff; border-radius:6px; cursor:pointer; font-size:12px; transition:0.2s">Sứ
+                        Cao Áp</button>
+                    <button
+                        style="padding:10px; background:#334155; border:1px solid var(--border); color:#fff; border-radius:6px; cursor:pointer; font-size:12px; transition:0.2s">Tủ
+                        Điều Khiển</button>
+                </div>
+
+                <div style="margin-top:30px; padding-top:20px; border-top:1px solid var(--border)">
+                    <div
+                        style="font-size:11px; color:var(--text-sub); margin-bottom:12px; font-weight:700; text-transform:uppercase; letter-spacing:1px">
+                        Cấu hình luồng video</div>
+                    <select
+                        style="width:100%; padding:10px; background:var(--bg-body); border:1px solid var(--border); color:#fff; border-radius:6px; font-size:13px; outline:none">
+                        <option>Main Stream (HD 1080p)</option>
+                        <option>Sub Stream (D1 480p)</option>
+                    </select>
                 </div>
             </div>
+            -->
 
         </div>
     </div>

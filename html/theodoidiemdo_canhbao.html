@@ -15,23 +15,92 @@
             font-weight: 700;
         }
 
-        .status-badge {
-            padding: 4px 8px;
-            border-radius: 4px;
-            color: white;
-            font-size: 11px;
-            font-weight: 700;
-            text-align: center;
-            display: inline-block;
+        /* NEW TABLE STYLES */
+        .col-action {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            justify-content: center;
             min-width: 80px;
         }
 
-        .status-warning {
-            background: var(--warning);
+        .thumb-cell img {
+            width: 80px;
+            height: 50px;
+            object-fit: cover;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: 0.2s;
+            border: 1px solid var(--border);
         }
 
-        .status-danger {
-            background: var(--danger);
+        .thumb-cell img:hover {
+            transform: scale(1.1);
+            z-index: 10;
+        }
+
+        /* COL CONFIG STYLES */
+        .col-config-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .col-config-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 15px;
+            background: var(--bg-body);
+            border-radius: 6px;
+            border: 1px solid var(--border);
+            font-size: 13px;
+        }
+
+        /* TOGGLE SWITCH */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 36px;
+            height: 20px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #475569;
+            transition: .3s;
+            border-radius: 20px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 14px;
+            width: 14px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: .3s;
+            border-radius: 50%;
+        }
+
+        input:checked+.slider {
+            background-color: var(--primary);
+        }
+
+        input:checked+.slider:before {
+            transform: translateX(16px);
         }
     </style>
 </head>
@@ -46,7 +115,12 @@
                 </svg>
             </button>
             <a href="dashboard.html" class="brand" style="text-decoration:none">
-                <div class="logo-box">I</div> IFS - AI
+                <div class="logo-box">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"></path>
+                    </svg>
+                </div> IFS - AI
             </a>
         </div>
 
@@ -62,7 +136,7 @@
                     <a href="theodoidiemdo_canhbaoai.html" class="menu-link">Cảnh báo AI</a>
                     <a href="theodoidiemdo_canhbao.html" class="menu-link active-link">Nhiệt độ vượt ngưỡng</a>
                     <a href="theodoidiemdo_nhatkynhietdo.html" class="menu-link">Nhật ký nhiệt độ</a>
-                    <a href="#" class="menu-link">Tổng hợp phân tích</a>
+                    <a href="theodoidiemdo_tonghopphantich.html" class="menu-link">Tổng hợp phân tích</a>
                 </div>
             </div>
             <div class="nav-wrapper">
@@ -191,54 +265,124 @@
                     <table class="data-table">
                         <thead>
                             <tr>
+                                <th style="width: 100px;"></th>
+                                <th>Hình ảnh</th>
                                 <th>Ngày</th>
                                 <th>Giờ</th>
                                 <th>Khu vực</th>
                                 <th>Thiết bị</th>
                                 <th>Bộ phận</th>
                                 <th>Điểm nhiệt</th>
-                                <th>Nhiệt độ °C</th>
-                                <th>Ngưỡng °C</th>
-                                <th>Chênh lệch</th>
-                                <th>Trạng thái</th>
+                                <th>Nhiệt độ</th>
+                                <th>Kiểu cảnh báo</th>
+                                <th>Loại cảnh báo</th>
+                                <th>Đối tượng so sánh</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td style="font-family: 'JetBrains Mono'">2026-01-24</td>
-                                <td style="font-family: 'JetBrains Mono'">11:48:11</td>
-                                <td>Nam Phú Quốc</td>
-                                <td>T1172</td>
-                                <td>T1172_A</td>
-                                <td>T1172-A</td>
-                                <td class="temp-alert">52.4</td>
-                                <td>45.0</td>
-                                <td style="color:var(--danger)">+7.4</td>
-                                <td><span class="status-badge status-danger">Nguy hiểm</span></td>
-                            </tr>
-                            <tr>
-                                <td style="font-family: 'JetBrains Mono'">2026-01-24</td>
-                                <td style="font-family: 'JetBrains Mono'">11:46:52</td>
-                                <td>Nam Phú Quốc</td>
+                                <td>
+                                    <div class="col-action">
+                                        <button class="btn-check-icon"><svg width="14" height="14" viewBox="0 0 24 24"
+                                                fill="none" stroke="currentColor" stroke-width="3">
+                                                <polyline points="20 6 9 17 4 12"></polyline>
+                                            </svg></button>
+                                        <button class="btn-view-icon" onclick="openDrawer()"><svg width="14" height="14"
+                                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                                <circle cx="12" cy="12" r="3"></circle>
+                                            </svg></button>
+                                    </div>
+                                </td>
+                                <td class="thumb-cell"><img src="images/cam-live.png" alt="thumbnail"></td>
+                                <td style="font-family: 'JetBrains Mono'">2026-01-28</td>
+                                <td style="font-family: 'JetBrains Mono'">01:46:04</td>
+                                <td>Trạm 110kV Nam Phú Quốc</td>
                                 <td>172</td>
-                                <td>172_CO</td>
-                                <td>172-CO</td>
-                                <td class="temp-alert">43.7</td>
-                                <td>40.0</td>
-                                <td style="color:var(--warning)">+3.7</td>
-                                <td><span class="status-badge status-warning">Cảnh báo</span></td>
+                                <td>172_CI</td>
+                                <td>172-CI</td>
+                                <td class="temp-alert">48.4</td>
+                                <td>So với pha min toàn trạm</td>
+                                <td>Quá nhiệt</td>
+                                <td>MC131_...</td>
                             </tr>
                             <tr>
-                                <td style="font-family: 'JetBrains Mono'">2026-01-24</td>
-                                <td style="font-family: 'JetBrains Mono'">11:45:44</td>
-                                <td>Liên Trì</td>
-                                <td>MC-LT-01</td>
-                                <td>Pha A</td>
-                                <td>Tiếp điểm A1</td>
-                                <td class="temp-alert">61.2</td>
-                                <td>50.0</td>
-                                <td style="color:var(--danger)">+11.2</td>
-                                <td><span class="status-badge status-danger">Nguy hiểm</span></td>
+                                <td>
+                                    <div class="col-action">
+                                        <button class="btn-check-icon"><svg width="14" height="14" viewBox="0 0 24 24"
+                                                fill="none" stroke="currentColor" stroke-width="3">
+                                                <polyline points="20 6 9 17 4 12"></polyline>
+                                            </svg></button>
+                                        <button class="btn-view-icon" onclick="openDrawer()"><svg width="14" height="14"
+                                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                                <circle cx="12" cy="12" r="3"></circle>
+                                            </svg></button>
+                                    </div>
+                                </td>
+                                <td class="thumb-cell"><img src="images/cam-live.png" alt="thumbnail"></td>
+                                <td style="font-family: 'JetBrains Mono'">2026-01-28</td>
+                                <td style="font-family: 'JetBrains Mono'">01:46:04</td>
+                                <td>Trạm 110kV Nam Phú Quốc</td>
+                                <td>172</td>
+                                <td>172_BI</td>
+                                <td>172-BI</td>
+                                <td class="temp-alert">48.3</td>
+                                <td>So với pha min toàn trạm</td>
+                                <td>Quá nhiệt</td>
+                                <td>MC131_...</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="col-action">
+                                        <button class="btn-check-icon"><svg width="14" height="14" viewBox="0 0 24 24"
+                                                fill="none" stroke="currentColor" stroke-width="3">
+                                                <polyline points="20 6 9 17 4 12"></polyline>
+                                            </svg></button>
+                                        <button class="btn-view-icon" onclick="openDrawer()"><svg width="14" height="14"
+                                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                                <circle cx="12" cy="12" r="3"></circle>
+                                            </svg></button>
+                                    </div>
+                                </td>
+                                <td class="thumb-cell"><img src="images/cam-live.png" alt="thumbnail"></td>
+                                <td style="font-family: 'JetBrains Mono'">2026-01-28</td>
+                                <td style="font-family: 'JetBrains Mono'">01:46:04</td>
+                                <td>Trạm 110kV Nam Phú Quốc</td>
+                                <td>172</td>
+                                <td>172_AI</td>
+                                <td>172-AI</td>
+                                <td class="temp-alert">52.1</td>
+                                <td>So với pha min toàn trạm</td>
+                                <td>Quá nhiệt</td>
+                                <td>MC131_...</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="col-action">
+                                        <button class="btn-check-icon"><svg width="14" height="14" viewBox="0 0 24 24"
+                                                fill="none" stroke="currentColor" stroke-width="3">
+                                                <polyline points="20 6 9 17 4 12"></polyline>
+                                            </svg></button>
+                                        <button class="btn-view-icon" onclick="openDrawer()"><svg width="14" height="14"
+                                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                                <circle cx="12" cy="12" r="3"></circle>
+                                            </svg></button>
+                                    </div>
+                                </td>
+                                <td class="thumb-cell"><img src="images/cam-live.png" alt="thumbnail"></td>
+                                <td style="font-family: 'JetBrains Mono'">2026-01-27</td>
+                                <td style="font-family: 'JetBrains Mono'">17:16:59</td>
+                                <td>Trạm 110kV Nam Phú Quốc</td>
+                                <td>131-1</td>
+                                <td>131-1_A</td>
+                                <td>131-1-A</td>
+                                <td class="temp-alert">48.1</td>
+                                <td>So với pha min toàn trạm</td>
+                                <td>Quá nhiệt</td>
+                                <td>112_2_C</td>
                             </tr>
                         </tbody>
                     </table>
@@ -337,7 +481,7 @@
                 </div>
 
                 <div class="page-info-bar">
-                    <div>Hiển thị từ 1 đến 3 trong tổng số 162</div>
+                    <div>Hiển thị từ 1 đến 10 trong tổng số 281</div>
                     <div class="pagination-group">
                         <select class="select-page-size">
                             <option>10/trang</option>
@@ -345,15 +489,187 @@
                         </select>
                         <button class="btn-page active">1</button>
                         <button class="btn-page">2</button>
+                        <button class="btn-page">3</button>
+                        <button class="btn-page">4</button>
+                        <button class="btn-page">5</button>
+                        <button class="btn-page">6</button>
+                        <div style="font-size: 11px; margin: 0 5px;">Nhảy tới</div>
+                        <input type="text" class="filter-input"
+                            style="width: 40px; height: 32px; padding: 0 5px; text-align: center;" value="1">
                         <button class="btn-page">➜</button>
+                        <button class="btn-page" onclick="openConfigDrawer()" title="Cấu hình hiển thị cột"
+                            style="margin-left: 10px;">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <circle cx="12" cy="12" r="3"></circle>
+                                <path
+                                    d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z">
+                                </path>
+                            </svg>
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
+    <div id="sideDrawer" class="drawer-overlay" onclick="if(event.target === this) closeDrawer()">
+        <div class="drawer drawer-lg">
+            <div class="drawer-header">
+                <h3>CHI TIẾT BẢN TIN CẢNH BÁO</h3>
+                <button class="close-drawer" onclick="closeDrawer()">&times;</button>
+            </div>
+            <div class="drawer-body">
+                <div class="info-row">
+                    <div class="info-field">
+                        <div class="info-label">Thời gian</div>
+                        <div class="info-value">2026/01/28 01:46:04</div>
+                    </div>
+                    <div class="info-field">
+                        <div class="info-label">Khu vực</div>
+                        <div class="info-value">Trạm 110kV Nam Phú Quốc</div>
+                    </div>
+                </div>
+                <div class="info-row">
+                    <div class="info-field">
+                        <div class="info-label">Thiết bị</div>
+                        <div class="info-value">172</div>
+                    </div>
+                    <div class="info-field">
+                        <div class="info-label">Bộ phận</div>
+                        <div class="info-value">172_CI</div>
+                    </div>
+                </div>
+                <div class="info-row">
+                    <div class="info-field">
+                        <div class="info-label">Điểm giám sát</div>
+                        <div class="info-value">172-CI</div>
+                    </div>
+                    <div class="info-field">
+                        <div class="info-label">Nhiệt độ</div>
+                        <div class="info-value" style="color:var(--danger); font-weight:700">48.4 °C</div>
+                    </div>
+                </div>
+                <div class="info-row">
+                    <div class="info-field">
+                        <div class="info-label">Cảnh báo</div>
+                        <div class="info-value" style="color:var(--danger)">Quá nhiệt</div>
+                    </div>
+                    <div class="info-field">
+                        <div class="info-label">Đánh giá</div>
+                        <div class="info-value" style="color:var(--danger)">Xấu</div>
+                    </div>
+                </div>
+                <div class="info-row" style="grid-template-columns: 1fr;">
+                    <div class="info-field">
+                        <div class="info-label">Loại cấu hình</div>
+                        <div class="info-value">So với pha min toàn trạm</div>
+                    </div>
+                </div>
+                <div class="info-row">
+                    <div class="info-field">
+                        <div class="info-label">Đối tượng so sánh</div>
+                        <div class="info-value">MC131_CI</div>
+                    </div>
+                    <div class="info-field">
+                        <div class="info-label">Giá trị so sánh</div>
+                        <div class="info-value">23.4 °C</div>
+                    </div>
+                </div>
+                <div class="info-row">
+                    <div class="info-field">
+                        <div class="info-label">Lệch nhiệt độ</div>
+                        <div class="info-value">25.0 °C</div>
+                    </div>
+                    <div class="info-field">
+                        <div class="info-label">Trạng thái</div>
+                        <div class="info-value">Chưa xử lý</div>
+                    </div>
+                </div>
+
+                <div class="info-field" style="margin-top: 10px;">
+                    <div class="info-label">Hình ảnh nhiệt thực tế</div>
+                    <img src="images/cam-live.png"
+                        style="width: 100%; border-radius: 12px; border: 1px solid var(--border); margin-top: 8px;">
+                </div>
+            </div>
+            <div class="drawer-footer">
+                <button class="btn-primary-full" style="width: 100%;">CẬP NHẬT TRẠNG THÁI XỬ LÝ</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONFIG COLUMNS DRAWER -->
+    <div id="configDrawer" class="drawer-overlay" onclick="if(event.target === this) closeConfigDrawer()">
+        <div class="drawer drawer-md">
+            <div class="drawer-header" style="justify-content: center; position: relative;">
+                <h3>Danh sách cột</h3>
+                <button class="close-drawer" onclick="closeConfigDrawer()"
+                    style="position: absolute; right: 20px; top: 15px;">&times;</button>
+            </div>
+            <div class="drawer-body">
+                <div class="col-config-grid">
+                    <div class="col-config-item"><span>Ngày</span><label class="switch"><input type="checkbox"
+                                checked><span class="slider"></span></label></div>
+                    <div class="col-config-item"><span>Giờ</span><label class="switch"><input type="checkbox"
+                                checked><span class="slider"></span></label></div>
+                    <div class="col-config-item"><span>Khu vực</span><label class="switch"><input type="checkbox"
+                                checked><span class="slider"></span></label></div>
+                    <div class="col-config-item"><span>Thiết bị</span><label class="switch"><input type="checkbox"
+                                checked><span class="slider"></span></label></div>
+                    <div class="col-config-item"><span>Bộ phận</span><label class="switch"><input type="checkbox"
+                                checked><span class="slider"></span></label></div>
+                    <div class="col-config-item"><span>Điểm nhiệt</span><label class="switch"><input type="checkbox"
+                                checked><span class="slider"></span></label></div>
+                    <div class="col-config-item"><span>Nhiệt độ</span><label class="switch"><input type="checkbox"
+                                checked><span class="slider"></span></label></div>
+                    <div class="col-config-item"><span>Kiểu cảnh báo</span><label class="switch"><input type="checkbox"
+                                checked><span class="slider"></span></label></div>
+                    <div class="col-config-item"><span>Loại cảnh báo</span><label class="switch"><input type="checkbox"
+                                checked><span class="slider"></span></label></div>
+                    <div class="col-config-item"><span>Đối tượng so sánh</span><label class="switch"><input
+                                type="checkbox" checked><span class="slider"></span></label></div>
+                    <div class="col-config-item"><span>Nhiệt độ so sánh</span><label class="switch"><input
+                                type="checkbox" checked><span class="slider"></span></label></div>
+                    <div class="col-config-item"><span>Chênh lệch</span><label class="switch"><input type="checkbox"
+                                checked><span class="slider"></span></label></div>
+                    <div class="col-config-item"><span>Đánh giá</span><label class="switch"><input type="checkbox"
+                                checked><span class="slider"></span></label></div>
+                    <div class="col-config-item"><span>Trạng thái</span><label class="switch"><input type="checkbox"
+                                checked><span class="slider"></span></label></div>
+                    <div class="col-config-item"><span>Thời gian xử lý</span><label class="switch"><input
+                                type="checkbox" checked><span class="slider"></span></label></div>
+                </div>
+            </div>
+            <div class="drawer-footer" style="display: flex; gap: 12px;">
+                <button class="btn-secondary-full" style="flex: 1;" onclick="closeConfigDrawer()">HỦY BỎ</button>
+                <button class="btn-primary-full" style="flex: 2;" onclick="closeConfigDrawer()">LƯU CẤU HÌNH</button>
+            </div>
+        </div>
+    </div>
+
     <script src="js/main.js"></script>
     <script>
+        function openConfigDrawer() {
+            document.getElementById('configDrawer').classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeConfigDrawer() {
+            document.getElementById('configDrawer').classList.remove('open');
+            document.body.style.overflow = 'auto';
+        }
+
+        function openDrawer() {
+            document.getElementById('sideDrawer').classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeDrawer() {
+            document.getElementById('sideDrawer').classList.remove('open');
+            document.body.style.overflow = 'auto';
+        }
+
         function switchView(view) {
             const tableView = document.getElementById('tableView');
             const cardView = document.getElementById('cardView');
