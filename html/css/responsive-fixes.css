@@ -1,0 +1,458 @@
+/* ========================================
+   RESPONSIVE FIXES & IMPROVEMENTS
+   File: responsive-fixes.css
+   Purpose: Additional responsive enhancements
+   ======================================== */
+
+/* ===== TABLET IMPROVEMENTS (max-width: 1024px) ===== */
+@media (max-width: 1024px) {
+    /* Reduce mega menu width */
+    .mega-menu {
+        width: 100%;
+        left: 0 !important;
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    /* Adjust filter row */
+    .filter-row {
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+
+    .filter-item {
+        min-width: 200px;
+        flex: 1 1 calc(50% - 12px);
+    }
+
+    /* Table horizontal scroll */
+    .data-table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    /* Action buttons spacing */
+    .action-group {
+        flex-wrap: wrap;
+        gap: 6px;
+    }
+}
+
+/* ===== MOBILE IMPROVEMENTS (max-width: 768px) ===== */
+@media (max-width: 768px) {
+    
+    /* === NAVIGATION === */
+    .navbar {
+        height: 56px;
+        padding: 0 12px;
+    }
+
+    .brand {
+        font-size: 16px;
+    }
+
+    .logo-box {
+        width: 28px;
+        height: 28px;
+    }
+
+    .header-actions {
+        gap: 10px;
+    }
+
+    /* === CONTAINER & GRID === */
+    .container {
+        padding: 16px;
+    }
+
+    .grid {
+        gap: 16px;
+    }
+
+    /* === FILTER SECTION === */
+    .filter-card {
+        padding: 16px;
+    }
+
+    .filter-row {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .filter-item {
+        width: 100%;
+        min-width: 100%;
+        flex: 1 1 100%;
+    }
+
+    .btn-search {
+        width: 100%;
+        justify-content: center;
+    }
+
+    /* === TABLES === */
+    .table-container-full {
+        overflow-x: auto;
+    }
+
+    .data-table {
+        font-size: 12px;
+        min-width: 800px; /* Force horizontal scroll */
+    }
+
+    .data-table th,
+    .data-table td {
+        padding: 8px 10px;
+    }
+
+    /* === ACTION BUTTONS === */
+    .action-group {
+        gap: 4px;
+        flex-wrap: nowrap; /* Keep in one line, allow scroll */
+    }
+
+    .action-btn-circle {
+        width: 32px;
+        height: 32px;
+        flex-shrink: 0;
+    }
+
+    /* === CARD VIEW (Preferred on mobile) === */
+    .card-view-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+        padding: 16px;
+    }
+
+    .sensor-card-item {
+        padding: 16px;
+    }
+
+    /* === GIÁM SÁT TRỰC TIẾP PAGE === */
+    
+    /* Hide sidebar on mobile, show toggle button instead */
+    .live-container {
+        flex-direction: column;
+    }
+
+    .tree-sidebar {
+        position: fixed;
+        left: -100%;
+        top: 56px;
+        width: 280px;
+        height: calc(100vh - 56px);
+        z-index: 1999;
+        transition: left 0.3s ease;
+        box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .tree-sidebar.open {
+        left: 0;
+    }
+
+    /* Add overlay for sidebar */
+    .sidebar-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 1998;
+        display: none;
+    }
+
+    .sidebar-overlay.active {
+        display: block;
+    }
+
+    /* Camera grid adjustments */
+    .cam-grid {
+        grid-template-columns: 1fr !important;
+        grid-template-rows: auto !important;
+        gap: 12px;
+        padding: 12px;
+    }
+
+    .cam-cell {
+        min-height: 250px;
+    }
+
+    .monitor-top-bar {
+        flex-direction: column;
+        gap: 12px;
+        align-items: flex-start;
+    }
+
+    .ctrl-group {
+        width: 100%;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+
+    .grid-btn-group {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .grid-btn {
+        flex: 1;
+    }
+
+    /* === DASHBOARD === */
+    .kpi-card {
+        padding: 16px;
+    }
+
+    .kpi-val {
+        font-size: 24px;
+    }
+
+    .kpi-icon {
+        width: 40px;
+        height: 40px;
+    }
+
+    .map-section,
+    .alert-section {
+        height: 400px;
+        min-height: 300px;
+    }
+
+    /* === DRAWER === */
+    .drawer,
+    .drawer-md,
+    .drawer-lg {
+        width: 100% !important;
+        right: -100% !important;
+    }
+
+    .drawer-overlay.open .drawer {
+        right: 0 !important;
+    }
+
+    .form-group {
+        grid-template-columns: 1fr;
+        gap: 8px;
+    }
+
+    .form-label {
+        margin-bottom: 0;
+    }
+
+    /* === PAGINATION === */
+    .page-info-bar {
+        flex-direction: column;
+        gap: 12px;
+        align-items: flex-start;
+    }
+
+    .pagination-group {
+        width: 100%;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    /* === BREADCRUMB === */
+    .bread-crumb {
+        font-size: 12px;
+        margin-bottom: 12px;
+    }
+
+    /* === CARD HEADERS === */
+    .card-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .view-switcher {
+        margin-right: 0;
+    }
+
+    /* === MAP CONTROLS === */
+    .map-toolbar {
+        flex-direction: column;
+        gap: 10px;
+        align-items: flex-start;
+    }
+
+    .map-toggle-group {
+        width: 100%;
+    }
+
+    .map-btn {
+        flex: 1;
+    }
+}
+
+/* ===== SMALL MOBILE (max-width: 480px) ===== */
+@media (max-width: 480px) {
+    .navbar {
+        height: 52px;
+    }
+
+    .brand {
+        font-size: 14px;
+    }
+
+    .container {
+        padding: 12px;
+    }
+
+    .card {
+        padding: 12px;
+        border-radius: 8px;
+    }
+
+    .kpi-val {
+        font-size: 20px;
+    }
+
+    .kpi-lbl {
+        font-size: 11px;
+    }
+
+    .filter-card {
+        padding: 12px;
+    }
+
+    .btn-search,
+    .btn-add {
+        font-size: 12px;
+        padding: 8px 16px;
+    }
+
+    /* Smaller action buttons */
+    .action-btn-circle {
+        width: 28px;
+        height: 28px;
+    }
+
+    .action-btn-circle svg {
+        width: 12px;
+        height: 12px;
+    }
+
+    /* Tree sidebar narrower */
+    .tree-sidebar {
+        width: 260px;
+    }
+
+    /* Camera cells */
+    .cam-cell {
+        min-height: 200px;
+    }
+
+    .cam-header {
+        font-size: 10px;
+        padding: 8px;
+    }
+
+    .cam-footer {
+        padding: 8px;
+        gap: 8px;
+    }
+
+    .cam-action-btn svg {
+        width: 16px;
+        height: 16px;
+    }
+}
+
+/* ===== LANDSCAPE MOBILE (max-height: 500px) ===== */
+@media (max-height: 500px) and (orientation: landscape) {
+    .navbar {
+        height: 48px;
+    }
+
+    .nav-menu {
+        top: 48px;
+        height: calc(100vh - 48px);
+    }
+
+    .tree-sidebar {
+        top: 48px;
+        height: calc(100vh - 48px);
+    }
+
+    .map-section,
+    .alert-section {
+        height: 300px;
+        min-height: 250px;
+    }
+
+    .cam-grid {
+        grid-template-columns: 1fr 1fr !important;
+    }
+}
+
+/* ===== UTILITY CLASSES ===== */
+
+/* Mobile-only visibility */
+.mobile-only {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .mobile-only {
+        display: block;
+    }
+
+    .desktop-only {
+        display: none;
+    }
+}
+
+/* Responsive text sizes */
+@media (max-width: 768px) {
+    .responsive-text-sm {
+        font-size: 12px;
+    }
+
+    .responsive-text-md {
+        font-size: 14px;
+    }
+
+    .responsive-text-lg {
+        font-size: 16px;
+    }
+}
+
+/* Touch-friendly buttons */
+@media (hover: none) and (pointer: coarse) {
+    .action-btn-circle,
+    .btn-search,
+    .btn-add,
+    .nav-link,
+    .menu-link {
+        min-height: 44px; /* iOS recommended touch target */
+        min-width: 44px;
+    }
+
+    .cam-action-btn {
+        padding: 8px;
+    }
+}
+
+/* Print styles */
+@media print {
+    .navbar,
+    .mobile-btn,
+    .header-actions,
+    .filter-card,
+    .action-group,
+    .cam-footer {
+        display: none !important;
+    }
+
+    .container {
+        max-width: 100%;
+        padding: 0;
+    }
+
+    .card {
+        break-inside: avoid;
+        box-shadow: none;
+        border: 1px solid #ddd;
+    }
+}
