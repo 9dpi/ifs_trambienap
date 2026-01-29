@@ -68,6 +68,7 @@
     }
 
     .grid {
+        grid-template-columns: 1fr !important;
         gap: 16px;
     }
 
@@ -373,6 +374,39 @@
     .map-btn {
         flex: 1;
     }
+
+    /* === SPLIT VIEW (Monitoring pages) === */
+    .split-container {
+        grid-template-columns: 1fr !important;
+        height: auto !important;
+        display: flex !important;
+        flex-direction: column !important;
+    }
+
+    .table-panel {
+        height: 400px !important;
+        /* Fixed height for table list on mobile */
+        margin-bottom: 20px;
+    }
+
+    .detail-panel {
+        height: auto !important;
+        overflow-y: visible !important;
+    }
+
+    .detail-form {
+        grid-template-columns: 1fr !important;
+    }
+
+    .video-placeholder {
+        aspect-ratio: 16/9;
+        margin-bottom: 12px !important;
+    }
+
+    .thumb-item {
+        width: 70px !important;
+        height: 44px !important;
+    }
 }
 
 /* ===== SMALL MOBILE (max-width: 480px) ===== */
@@ -446,6 +480,19 @@
     .cam-action-btn svg {
         width: 16px;
         height: 16px;
+    }
+
+    /* Compact form items stacking on very small screens */
+    .detail-form.compact .form-group {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 4px !important;
+    }
+
+    .detail-form.compact .form-value {
+        text-align: left !important;
+        width: 100%;
+        color: var(--primary) !important;
     }
 }
 
