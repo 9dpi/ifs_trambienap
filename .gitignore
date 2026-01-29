@@ -3,3 +3,11 @@ temp_check/
 Thumbs.db
 *.log
 layout/
+
+# Documentation and test files
+html/docs/
+html/test-pages/
+*.md
+html/filter-pagination-test.html
+html/responsive-test.html
+html/responsive-test-index.html

@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="vi" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IFS - AI | Responsive Checker</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-body: #0F172A;
+            --bg-card: #1E293B;
+            --border: #334155;
+            --text-main: #F1F5F9;
+            --text-sub: #94A3B8;
+            --primary: #3B82F6;
+            --success: #10B981;
+            --warning: #F59E0B;
+            --danger: #EF4444;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-body);
+            color: var(--text-main);
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: var(--text-sub);
+            font-size: 14px;
+        }
+
+        .controls {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .control-row {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .control-row:last-child {
+            margin-bottom: 0;
+        }
+
+        .control-label {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-main);
+            min-width: 120px;
+        }
+
+        .page-select {
+            flex: 1;
+            min-width: 300px;
+            padding: 10px 15px;
+            background: var(--bg-body);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text-main);
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .page-select:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .device-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .device-btn {
+            padding: 8px 16px;
+            background: var(--bg-body);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text-main);
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .device-btn:hover {
+            border-color: var(--primary);
+            background: rgba(59, 130, 246, 0.1);
+        }
+
+        .device-btn.active {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: white;
+        }
+
+        .custom-size {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .size-input {
+            width: 100px;
+            padding: 8px 12px;
+            background: var(--bg-body);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text-main);
+            font-size: 13px;
+            text-align: center;
+        }
+
+        .size-input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .apply-btn {
+            padding: 8px 20px;
+            background: var(--primary);
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .apply-btn:hover {
+            background: #2563EB;
+        }
+
+        .preview-container {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            min-height: 600px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .preview-info {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .preview-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .preview-size {
+            font-size: 13px;
+            color: var(--text-sub);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .iframe-wrapper {
+            width: 100%;
+            background: #fff;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+
+        .iframe-wrapper iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            display: block;
+        }
+
+        .status-indicator {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-left: 10px;
+        }
+
+        .status-loading {
+            background: rgba(251, 191, 36, 0.2);
+            color: #F59E0B;
+        }
+
+        .status-ready {
+            background: rgba(16, 185, 129, 0.2);
+            color: #10B981;
+        }
+
+        .status-error {
+            background: rgba(239, 68, 68, 0.2);
+            color: #EF4444;
+        }
+
+        .page-list {
+            margin-top: 30px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+        }
+
+        .page-list h2 {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .page-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 10px;
+        }
+
+        .page-item {
+            padding: 12px 16px;
+            background: var(--bg-body);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 13px;
+            color: var(--text-main);
+        }
+
+        .page-item:hover {
+            border-color: var(--primary);
+            background: rgba(59, 130, 246, 0.1);
+        }
+
+        .page-item.has-table::before {
+            content: "📊 ";
+        }
+
+        .page-item.has-cardview::before {
+            content: "🃏 ";
+        }
+
+        .legend {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid var(--border);
+            display: flex;
+            gap: 20px;
+            font-size: 12px;
+            color: var(--text-sub);
+        }
+
+        .legend-item::before {
+            margin-right: 5px;
+        }
+
+        .rotate-btn {
+            padding: 8px 16px;
+            background: var(--bg-body);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text-main);
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .rotate-btn:hover {
+            border-color: var(--primary);
+            background: rgba(59, 130, 246, 0.1);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <h1>📱 Responsive Checker</h1>
+        <p>Kiểm tra responsive của tất cả các trang HTML - Tables tự động chuyển thành Cards trên Mobile</p>
+    </div>
+
+    <div class="controls">
+        <div class="control-row">
+            <div class="control-label">Chọn trang:</div>
+            <select class="page-select" id="pageSelect">
+                <option value="">-- Chọn trang để kiểm tra --</option>
+                <optgroup label="IFS Trạm Biến Áp">
+                    <option value="camera.html">📹 Camera</option>
+                    <option value="dashboard.html">🏠 Dashboard</option>
+                    <option value="giamsattructiep.html">👁️ Giám Sát Trực Tiếp</option>
+                    <option value="quantrihethong_cambien.html">🌡️ Quản Trị - Cảm Biến</option>
+                    <option value="quantrihethong_camera.html">📹 Quản Trị - Camera</option>
+                    <option value="quantrihethong_khuvuc.html">📍 Quản Trị - Khu Vực</option>
+                    <option value="quantrihethong_loaithietbi.html">🔧 Quản Trị - Loại Thiết Bị</option>
+                    <option value="quantrihethong_nguoidung.html">👤 Quản Trị - Người Dùng</option>
+                    <option value="quantrihethong_thietbi.html">⚙️ Quản Trị - Thiết Bị</option>
+                    <option value="theodoidiemdo_bocanhbao.html">🔔 Theo Dõi - Bộ Cảnh Báo</option>
+                    <option value="theodoidiemdo_canhbao.html">⚠️ Theo Dõi - Cảnh Báo</option>
+                    <option value="theodoidiemdo_canhbaoai.html">🤖 Theo Dõi - Cảnh Báo AI</option>
+                    <option value="theodoidiemdo_nhatkynhietdo.html">📝 Theo Dõi - Nhật Ký Nhiệt Độ</option>
+                    <option value="theodoidiemdo_tonghopphantich.html">📊 Theo Dõi - Tổng Hợp Phân Tích</option>
+                    <option value="thietlapcanhbao_kenhcanhbao.html">📢 Thiết Lập - Kênh Cảnh Báo</option>
+                </optgroup>
+                <optgroup label="IFS Đường Dây">
+                    <option value="../../../ifs_duongday/dashboard.html">🏠 Dashboard (Đường Dây)</option>
+                    <option value="../../../ifs_duongday/giamsattructiep.html">👁️ Giám Sát Trực Tiếp (Đường Dây)</option>
+                    <option value="../../../ifs_duongday/giamsatsuco.html">🚨 Giám Sát Sự Cố</option>
+                    <option value="../../../ifs_duongday/danh_sach_su_co.html">📋 Danh Sách Sự Cố</option>
+                    <option value="../../../ifs_duongday/quan_ly_su_co_do_nghieng.html">⚖️ Quản Lý Sự Cố - Độ Nghiêng</option>
+                    <option value="../../../ifs_duongday/quan_ly_su_co_chieu_cao_an_toan.html">📏 Quản Lý Sự Cố - Chiều Cao An Toàn</option>
+                    <option value="../../../ifs_duongday/quan_ly_su_co_vat_the_la.html">🔍 Quản Lý Sự Cố - Vật Thể Lạ</option>
+                    <option value="../../../ifs_duongday/quan_ly_su_co_den_bao_hieu.html">💡 Quản Lý Sự Cố - Đèn Báo Hiệu</option>
+                    <option value="../../../ifs_duongday/quantrihethong_cambien.html">🌡️ Quản Trị - Cảm Biến (Đường Dây)</option>
+                    <option value="../../../ifs_duongday/quantrihethong_camera.html">📹 Quản Trị - Camera (Đường Dây)</option>
+                    <option value="../../../ifs_duongday/quantrihethong_khuvuc.html">📍 Quản Trị - Khu Vực (Đường Dây)</option>
+                    <option value="../../../ifs_duongday/quantrihethong_loaithietbi.html">🔧 Quản Trị - Loại Thiết Bị (Đường Dây)</option>
+                    <option value="../../../ifs_duongday/quantrihethong_nguoidung.html">👤 Quản Trị - Người Dùng (Đường Dây)</option>
+                    <option value="../../../ifs_duongday/quantrihethong_thietbi.html">⚙️ Quản Trị - Thiết Bị (Đường Dây)</option>
+                </optgroup>
+            </select>
+        </div>
+
+        <div class="control-row">
+            <div class="control-label">Thiết bị:</div>
+            <div class="device-buttons">
+                <button class="device-btn" data-width="375" data-height="667">iPhone SE</button>
+                <button class="device-btn" data-width="390" data-height="844">iPhone 12 Pro</button>
+                <button class="device-btn" data-width="414" data-height="896">iPhone 14 Pro Max</button>
+                <button class="device-btn" data-width="768" data-height="1024">iPad</button>
+                <button class="device-btn" data-width="1024" data-height="768">iPad Landscape</button>
+                <button class="device-btn" data-width="1366" data-height="768">Laptop</button>
+                <button class="device-btn active" data-width="1920" data-height="1080">Desktop</button>
+                <button class="rotate-btn" onclick="rotateDevice()">🔄 Xoay</button>
+            </div>
+        </div>
+
+        <div class="control-row">
+            <div class="control-label">Tùy chỉnh:</div>
+            <div class="custom-size">
+                <input type="number" class="size-input" id="customWidth" placeholder="Width" value="1920">
+                <span style="color: var(--text-sub);">×</span>
+                <input type="number" class="size-input" id="customHeight" placeholder="Height" value="1080">
+                <button class="apply-btn" onclick="applyCustomSize()">Áp dụng</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="preview-container">
+        <div class="preview-info">
+            <div>
+                <span class="preview-title" id="previewTitle">Chưa chọn trang</span>
+                <span class="status-indicator status-loading" id="statusIndicator" style="display: none;">Loading...</span>
+            </div>
+            <div class="preview-size" id="previewSize">1920 × 1080</div>
+        </div>
+        <div class="iframe-wrapper" id="iframeWrapper" style="width: 1920px; height: 1080px;">
+            <div style="display: flex; align-items: center; justify-content: center; height: 100%; color: #94A3B8; font-size: 14px;">
+                Chọn một trang từ dropdown phía trên để bắt đầu kiểm tra responsive
+            </div>
+        </div>
+    </div>
+
+    <div class="page-list">
+        <h2>📋 Danh Sách Tất Cả Các Trang</h2>
+        <div class="page-grid" id="pageGrid"></div>
+        <div class="legend">
+            <div class="legend-item">📊 = Có bảng dữ liệu</div>
+            <div class="legend-item">🃏 = Có chế độ Card View</div>
+        </div>
+    </div>
+
+    <script>
+        // All pages configuration
+        const pages = [
+            // IFS Trạm Biến Áp
+            { name: 'Camera', file: 'camera.html', hasTable: true, hasCardView: false },
+            { name: 'Dashboard', file: 'dashboard.html', hasTable: false, hasCardView: false },
+            { name: 'Giám Sát Trực Tiếp', file: 'giamsattructiep.html', hasTable: false, hasCardView: false },
+            { name: 'QT - Cảm Biến', file: 'quantrihethong_cambien.html', hasTable: true, hasCardView: true },
+            { name: 'QT - Camera', file: 'quantrihethong_camera.html', hasTable: true, hasCardView: true },
+            { name: 'QT - Khu Vực', file: 'quantrihethong_khuvuc.html', hasTable: true, hasCardView: true },
+            { name: 'QT - Loại Thiết Bị', file: 'quantrihethong_loaithietbi.html', hasTable: true, hasCardView: false },
+            { name: 'QT - Người Dùng', file: 'quantrihethong_nguoidung.html', hasTable: true, hasCardView: true },
+            { name: 'QT - Thiết Bị', file: 'quantrihethong_thietbi.html', hasTable: true, hasCardView: true },
+            { name: 'TD - Bộ Cảnh Báo', file: 'theodoidiemdo_bocanhbao.html', hasTable: true, hasCardView: true },
+            { name: 'TD - Cảnh Báo', file: 'theodoidiemdo_canhbao.html', hasTable: true, hasCardView: true },
+            { name: 'TD - Cảnh Báo AI', file: 'theodoidiemdo_canhbaoai.html', hasTable: true, hasCardView: true },
+            { name: 'TD - Nhật Ký Nhiệt Độ', file: 'theodoidiemdo_nhatkynhietdo.html', hasTable: true, hasCardView: true },
+            { name: 'TD - Tổng Hợp Phân Tích', file: 'theodoidiemdo_tonghopphantich.html', hasTable: true, hasCardView: true },
+            { name: 'TL - Kênh Cảnh Báo', file: 'thietlapcanhbao_kenhcanhbao.html', hasTable: true, hasCardView: true },
+        ];
+
+        // Populate page grid
+        const pageGrid = document.getElementById('pageGrid');
+        pages.forEach(page => {
+            const item = document.createElement('div');
+            item.className = 'page-item';
+            if (page.hasTable) item.classList.add('has-table');
+            if (page.hasCardView) item.classList.add('has-cardview');
+            item.textContent = page.name;
+            item.onclick = () => loadPage(page.file);
+            pageGrid.appendChild(item);
+        });
+
+        // Device button handlers
+        document.querySelectorAll('.device-btn').forEach(btn => {
+            btn.addEventListener('click', function () {
+                document.querySelectorAll('.device-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+
+                const width = this.dataset.width;
+                const height = this.dataset.height;
+
+                document.getElementById('customWidth').value = width;
+                document.getElementById('customHeight').value = height;
+
+                updatePreviewSize(width, height);
+            });
+        });
+
+        // Page select handler
+        document.getElementById('pageSelect').addEventListener('change', function () {
+            if (this.value) {
+                loadPage(this.value);
+            }
+        });
+
+        // Load page function
+        function loadPage(pageFile) {
+            const wrapper = document.getElementById('iframeWrapper');
+            const title = document.getElementById('previewTitle');
+            const status = document.getElementById('statusIndicator');
+
+            // Show loading
+            status.style.display = 'inline-block';
+            status.className = 'status-indicator status-loading';
+            status.textContent = 'Loading...';
+
+            // Update title
+            const pageName = pages.find(p => p.file === pageFile)?.name || pageFile;
+            title.textContent = pageName;
+
+            // Create iframe
+            wrapper.innerHTML = `<iframe src="${pageFile}" onload="onIframeLoad()" onerror="onIframeError()"></iframe>`;
+
+            // Update select
+            document.getElementById('pageSelect').value = pageFile;
+        }
+
+        // Iframe load handlers
+        window.onIframeLoad = function () {
+            const status = document.getElementById('statusIndicator');
+            status.className = 'status-indicator status-ready';
+            status.textContent = 'Ready';
+            setTimeout(() => {
+                status.style.display = 'none';
+            }, 2000);
+        };
+
+        window.onIframeError = function () {
+            const status = document.getElementById('statusIndicator');
+            status.className = 'status-indicator status-error';
+            status.textContent = 'Error';
+        };
+
+        // Update preview size
+        function updatePreviewSize(width, height) {
+            const wrapper = document.getElementById('iframeWrapper');
+            const sizeDisplay = document.getElementById('previewSize');
+
+            wrapper.style.width = width + 'px';
+            wrapper.style.height = height + 'px';
+            sizeDisplay.textContent = `${width} × ${height}`;
+        }
+
+        // Apply custom size
+        function applyCustomSize() {
+            const width = document.getElementById('customWidth').value;
+            const height = document.getElementById('customHeight').value;
+
+            if (width && height) {
+                document.querySelectorAll('.device-btn').forEach(b => b.classList.remove('active'));
+                updatePreviewSize(width, height);
+            }
+        }
+
+        // Rotate device
+        function rotateDevice() {
+            const widthInput = document.getElementById('customWidth');
+            const heightInput = document.getElementById('customHeight');
+
+            const temp = widthInput.value;
+            widthInput.value = heightInput.value;
+            heightInput.value = temp;
+
+            applyCustomSize();
+        }
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', function (e) {
+            // R = Rotate
+            if (e.key === 'r' || e.key === 'R') {
+                rotateDevice();
+            }
+        });
+    </script>
+</body>
+
+</html>
