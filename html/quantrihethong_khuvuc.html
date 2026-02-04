@@ -8,6 +8,8 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap"
         rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/responsive-fixes.css">
     <style>
@@ -49,6 +51,155 @@
         [data-theme="dark"] .data-table tr.child-row {
             background-color: rgba(255, 255, 255, 0.02);
         }
+
+        /* Tag Styles for Popup */
+        .tag-input-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            padding: 6px 12px;
+            background: var(--bg-body);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            min-height: 38px;
+            align-items: center;
+        }
+
+        .tag-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(59, 130, 246, 0.1);
+            color: var(--primary);
+            padding: 2px 10px;
+            border-radius: 4px;
+            font-size: 13px;
+            font-weight: 500;
+            border: 1px solid rgba(59, 130, 246, 0.2);
+        }
+
+        .tag-close {
+            cursor: pointer;
+            font-weight: 700;
+            opacity: 0.6;
+        }
+
+        .tag-close:hover {
+            opacity: 1;
+        }
+
+        .time-range-group {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex: 1;
+        }
+
+        .time-input-styled {
+            flex: 1;
+            text-align: center;
+            font-family: 'JetBrains Mono', monospace;
+            letter-spacing: 1px;
+        }
+
+        /* Map Picker Styles */
+        .map-picker-modal {
+            position: fixed;
+            inset: 0;
+            background: white;
+            z-index: 3000;
+            display: none;
+            flex-direction: column;
+        }
+
+        .map-picker-modal.open {
+            display: flex;
+        }
+
+        #mapPickerContainer {
+            flex: 1;
+            width: 100%;
+            height: 100%;
+        }
+
+        .map-info-box {
+            position: absolute;
+            bottom: 30px;
+            left: 30px;
+            background: white;
+            padding: 20px;
+            border-radius: 4px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            z-index: 3001;
+            width: 250px;
+            color: #333;
+        }
+
+        .map-info-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #666;
+        }
+
+        .map-info-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .map-info-item label {
+            font-size: 13px;
+            font-weight: 700;
+            color: #333;
+        }
+
+        .map-info-item input {
+            width: 130px;
+            padding: 5px 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 13px;
+            color: #333;
+        }
+
+        .map-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .btn-map-save {
+            background: #6ab04c;
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .btn-map-cancel {
+            background: #f1f2f6;
+            color: #333;
+            border: 1px solid #ddd;
+            padding: 8px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .close-map-picker {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            z-index: 3002;
+            background: transparent;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #666;
+        }
     </style>
 </head>
 
@@ -62,7 +213,12 @@
                 </svg>
             </button>
             <a href="dashboard.html" class="brand" style="text-decoration:none">
-                <div class="logo-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"></path></svg></div> IFS - AI
+                <div class="logo-box">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"></path>
+                    </svg>
+                </div> IFS - TRẠM BIẾN ÁP
             </a>
         </div>
 
@@ -98,12 +254,10 @@
                         <div class="col-header">THIẾT LẬP CẢNH BÁO</div>
                         <a href="thietlapcanhbao_kenhcanhbao.html" class="menu-link">Kênh Cảnh báo</a>
                         <a href="theodoidiemdo_bocanhbao.html" class="menu-link">Bộ cảnh báo</a>
-                        <a href="#" class="menu-link">Lịch sử</a>
                     </div>
                     <div class="mega-col">
                         <div class="col-header">QUẢN LÝ NGƯỜI DÙNG</div>
                         <a href="quantrihethong_nguoidung.html" class="menu-link">Người dùng</a>
-                        <a href="#" class="menu-link">Thêm người dùng mới</a>
                         <a href="#" class="menu-link">Hướng dẫn sử dụng</a>
                     </div>
                 </div>
@@ -179,7 +333,7 @@
                                 </svg>
                             </button>
                         </div>
-                        <button class="btn-add">+ Thêm</button>
+                        <button class="btn-add" onclick="openDrawer()">+ Thêm</button>
                     </div>
                 </div>
 
@@ -349,10 +503,203 @@
         </div>
     </div>
 
+    <!-- ADD AREA DRAWER -->
+    <div class="drawer-overlay" id="drawerOverlay" onclick="if(event.target === this) closeDrawer()">
+        <div class="drawer drawer-md" style="width: 700px;">
+            <div class="drawer-header">
+                <h3>Thêm bộ cảnh báo</h3>
+                <button class="close-drawer" onclick="closeDrawer()">&times;</button>
+            </div>
+            <div class="drawer-body">
+                <div class="form-group">
+                    <label class="form-label">Bộ cảnh báo <span class="required">*</span></label>
+                    <input type="text" class="filter-input" value="BO01">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Mã cảnh báo <span class="required">*</span></label>
+                    <input type="text" class="filter-input" value="BO01">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Kênh cảnh báo <span class="required">*</span></label>
+                    <div class="tag-input-wrapper">
+                        <div class="tag-item">Nội bộ <span class="tag-close">&times;</span></div>
+                        <div style="flex:1; display:flex; justify-content:flex-end; opacity:0.5">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M6 9l6 6 6-6" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Sự kiện <span class="required">*</span></label>
+                    <div class="tag-input-wrapper">
+                        <div class="tag-item">Quá nhiệt <span class="tag-close">&times;</span></div>
+                        <div class="tag-item">Phát hiện người <span class="tag-close">&times;</span></div>
+                        <div class="tag-item">Phát hiện ô tô <span class="tag-close">&times;</span></div>
+                        <div style="flex:1; display:flex; justify-content:flex-end; opacity:0.5">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M6 9l6 6 6-6" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Thời gian cảnh báo <span class="required">*</span></label>
+                    <div class="tag-input-wrapper">
+                        <div style="margin-right:10px; opacity:0.5">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <polyline points="12 6 12 12 16 14"></polyline>
+                            </svg>
+                        </div>
+                        <div class="time-range-group">
+                            <input type="text" class="filter-input time-input-styled"
+                                style="border:none; background:transparent" value="00:52">
+                            <span style="opacity:0.5">-</span>
+                            <input type="text" class="filter-input time-input-styled"
+                                style="border:none; background:transparent" value="22:51">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Khu vực</label>
+                    <select class="filter-input">
+                        <option>Trạm 110kV Nam Phú Quốc</option>
+                        <option>Biển đảo</option>
+                        <option>Liên Trì</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Tọa độ</label>
+                    <div style="display:flex; gap:10px; flex:1">
+                        <input type="text" class="filter-input" id="inp-lat" placeholder="Vĩ độ" value="10.16694">
+                        <input type="text" class="filter-input" id="inp-lng" placeholder="Kinh độ" value="104.0625">
+                        <button class="btn-search"
+                            style="height:38px; padding:0 15px; font-size:12px; white-space:nowrap"
+                            onclick="openMapPicker()">
+                            📍 Chọn từ bản đồ
+                        </button>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Trạng thái</label>
+                    <select class="filter-input">
+                        <option>Hoạt động</option>
+                        <option>Không hoạt động</option>
+                    </select>
+                </div>
+            </div>
+            <div class="drawer-footer">
+                <button class="btn-secondary-full"
+                    style="background:#8a8f9c; color:white; border:none; display:flex; align-items:center; gap:8px"
+                    onclick="closeDrawer()">
+                    <span style="font-size:18px">&times;</span> Hủy
+                </button>
+                <button class="btn-primary-full"
+                    style="background:var(--primary); color:white; border:none; display:flex; align-items:center; gap:8px">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2.5">
+                        <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
+                        <polyline points="17 21 17 13 7 13 7 21"></polyline>
+                        <polyline points="7 3 7 8 15 8"></polyline>
+                    </svg>
+                    Lưu
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAP PICKER MODAL -->
+    <div class="map-picker-modal" id="mapPickerModal">
+        <button class="close-map-picker" onclick="closeMapPicker()">&times;</button>
+        <div id="mapPickerContainer"></div>
+
+        <div class="map-info-box">
+            <div class="map-info-title">Tọa độ</div>
+            <div class="map-info-item">
+                <label>Kinh độ</label>
+                <input type="text" id="map-lng" value="104.0625">
+            </div>
+            <div class="map-info-item">
+                <label>Vĩ độ</label>
+                <input type="text" id="map-lat" value="10.16694">
+            </div>
+            <div class="map-info-item">
+                <label>Zoom</label>
+                <input type="text" id="map-zoom" value="6">
+            </div>
+            <div class="map-actions">
+                <button class="btn-map-cancel" onclick="closeMapPicker()">Ẩn</button>
+                <button class="btn-map-save" onclick="saveMapSelection()">Lưu</button>
+            </div>
+        </div>
+    </div>
+
     <script src="js/main.js"></script>
     <script src="js/responsive-helpers.js"></script>
     <script>
+        let pickerMap, pickerMarker;
+
+        function openMapPicker() {
+            document.getElementById('mapPickerModal').classList.add('open');
+            setTimeout(initPickerMap, 100);
+        }
+
+        function closeMapPicker() {
+            document.getElementById('mapPickerModal').classList.remove('open');
+        }
+
+        function initPickerMap() {
+            if (pickerMap) return;
+
+            pickerMap = L.map('mapPickerContainer').setView([10.16694, 104.0625], 6);
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 19,
+            }).addTo(pickerMap);
+
+            pickerMarker = L.marker([10.16694, 104.0625], { draggable: true }).addTo(pickerMap);
+
+            pickerMarker.on('dragend', function (e) {
+                const pos = pickerMarker.getLatLng();
+                updateMapInfo(pos.lat, pos.lng);
+            });
+
+            pickerMap.on('click', function (e) {
+                pickerMarker.setLatLng(e.latlng);
+                updateMapInfo(e.latlng.lat, e.latlng.lng);
+            });
+
+            pickerMap.on('zoomend', function () {
+                document.getElementById('map-zoom').value = pickerMap.getZoom();
+            });
+        }
+
+        function updateMapInfo(lat, lng) {
+            document.getElementById('map-lat').value = lat.toFixed(5);
+            document.getElementById('map-lng').value = lng.toFixed(5);
+        }
+
+        function saveMapSelection() {
+            document.getElementById('inp-lat').value = document.getElementById('map-lat').value;
+            document.getElementById('inp-lng').value = document.getElementById('map-lng').value;
+            closeMapPicker();
+        }
+
+        function openDrawer() {
+            document.getElementById('drawerOverlay').classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeDrawer() {
+            document.getElementById('drawerOverlay').classList.remove('open');
+            document.body.style.overflow = '';
+        }
+
         function switchView(view) {
+            // ... existing switchView code ...
             const tableView = document.getElementById('tableView');
             const cardView = document.getElementById('cardView');
             const btns = document.querySelectorAll('.view-btn');

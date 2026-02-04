@@ -14,6 +14,735 @@
 
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/responsive-fixes.css">
+    <style>
+        .region-temp-list {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            margin-top: 5px;
+        }
+
+        .region-temp-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 13px;
+            color: var(--text-sub);
+            padding: 4px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+        }
+
+        .region-temp-item span {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .region-temp-item span::before {
+            content: '';
+            width: 4px;
+            height: 4px;
+            background: var(--primary);
+            border-radius: 50%;
+            opacity: 0.6;
+        }
+
+        .region-temp-item b {
+            font-size: 14px;
+            color: var(--success);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .main-container {
+            padding: 20px 24px;
+        }
+
+        @media (max-width: 768px) {
+            .main-container {
+                padding: 12px 16px;
+            }
+        }
+
+        /* Fixed Full-Height Dashboard Layout */
+        .grid {
+            grid-template-columns: 1fr 340px;
+            grid-template-rows: auto 1fr;
+            height: calc(100vh - 100px);
+            overflow: hidden;
+            gap: 20px;
+            display: grid;
+        }
+
+        @media (max-width: 1200px) {
+            .grid {
+                grid-template-columns: 1fr 300px;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .grid {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto auto auto;
+                height: auto;
+                overflow: visible;
+            }
+
+            .kpi-row {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .tree-card,
+            .map-section {
+                height: 500px !important;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .kpi-row {
+                grid-template-columns: 1fr;
+            }
+
+            .grid {
+                gap: 16px;
+                padding: 16px !important;
+            }
+
+            .map-toolbar {
+                flex-direction: column;
+                gap: 10px;
+                align-items: flex-start;
+            }
+
+            .tree-card,
+            .map-section {
+                height: 400px !important;
+            }
+        }
+
+        .status-badge {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-left: auto;
+        }
+
+        .alert-count {
+            font-size: 11px;
+            font-weight: 700;
+            padding: 1px 6px;
+            border-radius: 10px;
+            min-width: 18px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .alert-count.red {
+            background: var(--danger);
+            color: white;
+            border: none;
+        }
+
+        .alert-count.yellow {
+            background: var(--warning);
+            color: black;
+            border: none;
+        }
+
+        .alert-count.green {
+            color: var(--success);
+            opacity: 0.8;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .status-dot.red {
+            background: var(--danger);
+            box-shadow: 0 0 8px var(--danger);
+        }
+
+        .status-dot.yellow {
+            background: var(--warning);
+            box-shadow: 0 0 8px var(--warning);
+        }
+
+        .status-dot.green {
+            background: var(--success);
+        }
+
+        .kpi-row {
+            grid-column: 1 / -1;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .kpi-icon {
+            background: transparent !important;
+            padding: 0 !important;
+            width: 32px !important;
+            height: 32px !important;
+        }
+
+        .kpi-icon svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        .kpi-card {
+            height: 100px !important;
+            padding: 16px 20px !important;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .kpi-card .kpi-label-group {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .region-temp-list-compact {
+            display: flex;
+            gap: 12px;
+            margin-top: 4px;
+        }
+
+        .temp-item-compact {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .temp-item-compact label {
+            font-size: 10px;
+            color: var(--text-sub);
+            text-transform: uppercase;
+        }
+
+        .temp-item-compact b {
+            font-size: 13px;
+            color: var(--success);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .tree-card {
+            grid-column: 2 / 3;
+            height: 100%;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .map-section {
+            grid-column: 1 / 2 !important;
+            height: 100%;
+        }
+
+
+
+        .tree-nav {
+            padding-left: 0 !important;
+            position: relative;
+        }
+
+        .tree-node {
+            position: relative;
+        }
+
+        .tree-node-item {
+            display: flex;
+            align-items: center;
+            padding: 10px 12px;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: all 0.2s;
+            font-size: 14px;
+            gap: 10px;
+            color: var(--text-main);
+            position: relative;
+            z-index: 2;
+            font-weight: 500;
+        }
+
+        .tree-node-item:hover {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--primary);
+        }
+
+        .tree-node-item .arrow {
+            width: 14px;
+            height: 14px;
+            transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 0.6;
+            flex-shrink: 0;
+        }
+
+        .tree-node.expanded>.tree-node-item .arrow {
+            transform: rotate(90deg);
+        }
+
+        .tree-node .sub-nodes {
+            padding-left: 28px;
+            display: none;
+            position: relative;
+        }
+
+        /* The vertical line */
+        .tree-node .sub-nodes::before {
+            content: '';
+            position: absolute;
+            left: 18px;
+            top: -10px;
+            bottom: 20px;
+            width: 1.5px;
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .tree-node.expanded>.sub-nodes {
+            display: block;
+        }
+
+        .leaf-node-item {
+            padding: 8px 12px;
+            font-size: 13px;
+            color: var(--text-sub);
+            cursor: pointer;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+            transition: 0.2s;
+            margin-bottom: 2px;
+        }
+
+        /* The horizontal line */
+        .leaf-node-item::before {
+            content: '';
+            position: absolute;
+            left: -10px;
+            top: 50%;
+            width: 10px;
+            height: 1.5px;
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .leaf-node-item:hover {
+            background: rgba(59, 130, 246, 0.08);
+            color: var(--primary);
+            padding-left: 16px;
+        }
+
+        .tree-item-active {
+            background: rgba(59, 130, 246, 0.12) !important;
+            color: var(--primary) !important;
+            font-weight: 600;
+            box-shadow: inset 0 0 0 1px rgba(59, 130, 246, 0.2);
+        }
+
+        .tree-search-box {
+            width: 100%;
+            padding: 10px 12px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text-main);
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .tree-search-box:focus {
+            border-color: var(--primary);
+        }
+
+        /* View Switching Logic */
+        .sld-view {
+            display: none;
+            height: 100%;
+            background: #000;
+            padding: 0;
+            overflow: auto;
+            position: relative;
+        }
+
+        .sld-diagram-wrapper {
+            position: relative;
+            min-width: 1200px;
+            min-height: 800px;
+            background-image: url('images/sodo-1day.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        .sld-node {
+            position: absolute;
+            width: 32px;
+            height: 32px;
+            cursor: pointer;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s;
+        }
+
+        .sld-node:hover {
+            transform: scale(1.2);
+        }
+
+        .thermometer-icon {
+            width: 24px;
+            height: 24px;
+            color: #10B981;
+            filter: drop-shadow(0 0 5px rgba(16, 185, 129, 0.5));
+        }
+
+        .node-label-small {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 10px;
+            white-space: nowrap;
+            pointer-events: none;
+            opacity: 0;
+            transition: 0.2s;
+        }
+
+        .sld-node:hover .node-label-small {
+            opacity: 1;
+        }
+
+        /* Popup Grid Layout */
+        .node-popup-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+
+        .analysis-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+
+        /* Popup Tabs */
+        .popup-tabs {
+            display: flex;
+            border-bottom: 1px solid #f3f4f6;
+            background: #f9fafb;
+        }
+
+        .popup-tab {
+            flex: 1;
+            padding: 12px;
+            text-align: center;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            color: #6b7280;
+            transition: 0.2s;
+        }
+
+        .popup-tab.active {
+            color: var(--primary);
+            background: #fff;
+            border-bottom: 2px solid var(--primary);
+        }
+
+        .popup-content {
+            display: none;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .popup-content.active {
+            display: block;
+        }
+
+        /* Analysis Card Style */
+        .analysis-card {
+            background: #f8fafc;
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .analysis-card:last-child {
+            margin-bottom: 0;
+        }
+
+        .analysis-title {
+            font-weight: 800;
+            color: var(--primary);
+            font-size: 15px;
+            margin-bottom: 8px;
+            border-bottom: 1px dashed #cbd5e1;
+            padding-bottom: 4px;
+        }
+
+        .analysis-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .analysis-row:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .analysis-label {
+            color: #475569;
+            font-weight: 600;
+        }
+
+        .analysis-val {
+            color: #0f172a;
+            font-weight: 700;
+        }
+
+        .analysis-status {
+            color: #10b981;
+            font-weight: 800;
+        }
+
+        .chart-box-sld {
+            display: none;
+            /* Removed as requested */
+        }
+
+        .node-popup-body {
+            padding: 15px;
+            background: #fff;
+        }
+
+        .mini-chart-container {
+            height: 200px;
+            width: 100%;
+        }
+
+        .filter-section-modern {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .filter-row-inline {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: flex-end;
+            gap: 16px;
+        }
+
+        .filter-group-inline {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 6px;
+        }
+
+        .filter-group-inline label {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--text-sub);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .select-single-modern {
+            background: var(--bg-body);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 8px 12px;
+            font-size: 14px;
+            color: var(--text-main);
+            outline: none;
+            cursor: pointer;
+            min-height: 38px;
+        }
+
+        .btn-search-primary {
+            background: #3B82F6;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 0 24px;
+            height: 38px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: 0.2s;
+            box-shadow: 0 4px 10px rgba(59, 130, 246, 0.2);
+        }
+
+        .date-range-box {
+            display: flex;
+            align-items: center;
+            background: var(--bg-body);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 0 12px;
+            height: 38px;
+            gap: 10px;
+        }
+
+        /* Interactive Node Popup */
+        .node-popup {
+            position: absolute;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+            width: 340px;
+            z-index: 10000;
+            padding: 0;
+            overflow: hidden;
+            color: #1f2937;
+            display: none;
+            font-family: 'Inter', sans-serif;
+            pointer-events: auto;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            animation: popupFadeIn 0.2s ease-out;
+        }
+
+        @keyframes popupFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px) scale(0.95);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .node-popup-header {
+            background: #f9fafb;
+            padding: 14px 20px;
+            font-weight: 700;
+            text-align: center;
+            border-bottom: 1px solid #f3f4f6;
+            font-size: 16px;
+            color: #111827;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .node-popup-close {
+            position: absolute;
+            right: 12px;
+            top: 14px;
+            cursor: pointer;
+            color: #9ca3af;
+            font-size: 18px;
+            transition: color 0.2s;
+        }
+
+        .node-popup-close:hover {
+            color: #ef4444;
+        }
+
+        .node-popup-body {
+            padding: 20px;
+        }
+
+        .node-popup-item {
+            margin-bottom: 20px;
+        }
+
+        .node-popup-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .node-popup-item-title {
+            font-weight: 800;
+            font-size: 18px;
+            margin-bottom: 6px;
+            color: #111827;
+            display: block;
+        }
+
+        .node-popup-item-data {
+            font-size: 13.5px;
+            color: #4b5563;
+            line-height: 1.5;
+            letter-spacing: -0.01em;
+        }
+
+        .node-popup-item-data b {
+            color: #000;
+            font-weight: 700;
+        }
+
+        /* Triangle pointer for popup */
+        .node-popup::after {
+            content: '';
+            position: absolute;
+            left: -10px;
+            top: 50%;
+            transform: translateY(-50%);
+            border-width: 10px 10px 10px 0;
+            border-style: solid;
+            border-color: transparent white transparent transparent;
+            display: block;
+        }
+
+        .date-range-box input {
+            background: transparent;
+            border: none;
+            color: var(--text-main);
+            font-size: 13px;
+            width: 150px;
+            outline: none;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .mode-sld .sld-view {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .mode-sld #mapContainer {
+            display: none !important;
+        }
+
+        .sld-placeholder {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 40px;
+        }
+    </style>
 </head>
 
 <body>
@@ -31,7 +760,7 @@
                         stroke-linejoin="round">
                         <path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"></path>
                     </svg>
-                </div> IFS - AI
+                </div> IFS - TRẠM BIẾN ÁP
             </a>
         </div>
 
@@ -43,94 +772,25 @@
                         <path d="M7 10l5 5 5-5z" />
                     </svg></div>
                 <div class="dropdown-menu">
-                    <a href="theodoidiemdo_canhbaoai.html" class="menu-link">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <polygon
-                                points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
-                            </polygon>
-                        </svg>
-                        Cảnh báo AI
-                    </a>
-                    <a href="theodoidiemdo_canhbao.html" class="menu-link">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <circle cx="12" cy="12" r="10"></circle>
-                            <line x1="12" y1="8" x2="12" y2="12"></line>
-                            <line x1="12" y1="16" x2="12.01" y2="16"></line>
-                        </svg>
-                        Nhiệt độ vượt ngưỡng
-                    </a>
-                    <a href="theodoidiemdo_nhatkynhietdo.html" class="menu-link">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-                            <line x1="16" y1="2" x2="16" y2="6"></line>
-                            <line x1="8" y1="2" x2="8" y2="6"></line>
-                            <line x1="3" y1="10" x2="21" y2="10"></line>
-                        </svg>
-                        Nhật ký nhiệt độ
-                    </a>
-                    <a href="theodoidiemdo_tonghopphantich.html" class="menu-link">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-                            <polyline points="14 2 14 8 20 8"></polyline>
-                            <line x1="16" y1="13" x2="8" y2="13"></line>
-                            <line x1="16" y1="17" x2="8" y2="17"></line>
-                            <polyline points="10 9 9 9 8 9"></polyline>
-                        </svg>
-                        Tổng hợp phân tích
-                    </a>
+                    <a href="theodoidiemdo_canhbaoai.html" class="menu-link">Cảnh báo AI</a>
+                    <a href="theodoidiemdo_canhbao.html" class="menu-link">Nhiệt độ vượt ngưỡng</a>
+                    <a href="theodoidiemdo_nhatkynhietdo.html" class="menu-link">Nhật ký nhiệt độ</a>
+                    <a href="theodoidiemdo_tonghopphantich.html" class="menu-link">Tổng hợp phân tích</a>
                 </div>
             </div>
+
             <div class="nav-wrapper">
-                <div class="nav-link active-link">QUẢN TRỊ HỆ THỐNG <svg class="nav-arrow" width="10"
-                        viewBox="0 0 24 24">
+                <div class="nav-link">QUẢN TRỊ HỆ THỐNG <svg class="nav-arrow" width="10" viewBox="0 0 24 24">
                         <path d="M7 10l5 5 5-5z" />
                     </svg></div>
                 <div class="dropdown-menu mega-menu">
                     <div class="mega-col">
                         <div class="col-header">HẠ TẦNG & THIẾT BỊ</div>
-                        <a href="quantrihethong_khuvuc.html" class="menu-link menu-item-with-bg">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                                <circle cx="12" cy="10" r="3"></circle>
-                            </svg>
-                            Khu vực
-                        </a>
-                        <a href="quantrihethong_camera.html" class="menu-link menu-item-with-bg">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M23 7l-7 5 7 5V7z"></path>
-                                <rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect>
-                            </svg>
-                            Camera
-                        </a>
-                        <a href="quantrihethong_cambien.html" class="menu-link menu-item-with-bg">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                                <circle cx="12" cy="12" r="3"></circle>
-                            </svg>
-                            Cảm biến
-                        </a>
-                        <a href="quantrihethong_loaithietbi.html" class="menu-link menu-item-with-bg">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <polyline points="21 8 21 21 3 21 3 8"></polyline>
-                                <rect x="1" y="3" width="22" height="5"></rect>
-                                <line x1="10" y1="12" x2="14" y2="12"></line>
-                            </svg>
-                            Loại Thiết bị
-                        </a>
-                        <a href="quantrihethong_thietbi.html" class="menu-link menu-item-with-bg">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <circle cx="12" cy="12" r="5"></circle>
-                                <line x1="12" y1="1" x2="12" y2="3"></line>
-                                <line x1="12" y1="21" x2="12" y2="23"></line>
-                                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-                                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-                                <line x1="1" y1="12" x2="3" y2="12"></line>
-                                <line x1="21" y1="12" x2="23" y2="12"></line>
-                                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-                                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-                            </svg>
-                            Thiết bị
-                        </a>
+                        <a href="quantrihethong_khuvuc.html" class="menu-link">Khu vực</a>
+                        <a href="quantrihethong_camera.html" class="menu-link">Camera</a>
+                        <a href="quantrihethong_cambien.html" class="menu-link">Cảm biến</a>
+                        <a href="quantrihethong_loaithietbi.html" class="menu-link">Loại Thiết bị</a>
+                        <a href="quantrihethong_thietbi.html" class="menu-link">Thiết bị</a>
                     </div>
                     <div class="mega-col">
                         <div class="col-header">THIẾT LẬP CẢNH BÁO</div>
@@ -149,13 +809,6 @@
                             </svg>
                             Bộ cảnh báo
                         </a>
-                        <a href="#" class="menu-link menu-item-with-bg">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <circle cx="12" cy="12" r="10"></circle>
-                                <polyline points="12 6 12 12 16 14"></polyline>
-                            </svg>
-                            Lịch sử
-                        </a>
                     </div>
                     <div class="mega-col">
                         <div class="col-header">QUẢN LÝ NGƯỜI DÙNG</div>
@@ -165,15 +818,6 @@
                                 <circle cx="12" cy="7" r="4"></circle>
                             </svg>
                             Người dùng
-                        </a>
-                        <a href="#" class="menu-link menu-item-with-bg">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-                                <circle cx="8.5" cy="7" r="4"></circle>
-                                <line x1="20" y1="8" x2="20" y2="14"></line>
-                                <line x1="23" y1="11" x2="17" y2="11"></line>
-                            </svg>
-                            Thêm người dùng mới
                         </a>
                         <a href="#" class="menu-link menu-item-with-bg">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -197,137 +841,412 @@
         </div>
     </nav>
 
-    <div class="container">
+    <div class="container main-container">
         <div class="grid">
+            <!-- Top KPI Row -->
+            <div class="kpi-row">
+                <div class="card kpi-card">
+                    <div class="kpi-label-group">
+                        <div class="kpi-lbl">Tổng Camera</div>
+                        <div class="kpi-val">48</div>
+                    </div>
+                    <div class="kpi-icon bg-blue">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M23 7l-7 5 7 5V7z" />
+                            <rect x="1" y="5" width="15" height="14" rx="2" ry="2" />
+                        </svg>
+                    </div>
+                </div>
+                <div class="card kpi-card">
+                    <div class="kpi-label-group">
+                        <div class="kpi-lbl">Địa điểm giám sát</div>
+                        <div class="kpi-val">2</div>
+                    </div>
+                    <div class="kpi-icon bg-purple">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                            <circle cx="12" cy="10" r="3" />
+                        </svg>
+                    </div>
+                </div>
+                <div class="card kpi-card">
+                    <div class="kpi-label-group">
+                        <div class="kpi-lbl">Cảnh báo Mới</div>
+                        <div class="kpi-val" style="color:var(--danger)">5</div>
+                    </div>
+                    <div class="kpi-icon bg-red">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
+                            <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+                        </svg>
+                    </div>
+                </div>
+                <div class="card kpi-card">
+                    <div style="flex: 1;">
+                        <div class="kpi-lbl">Nhiệt độ Môi trường</div>
+                        <div class="region-temp-list-compact">
+                            <div class="temp-item-compact"><label>Bắc</label><b>22°C</b></div>
+                            <div class="temp-item-compact"><label>Trung</label><b>28°C</b></div>
+                            <div class="temp-item-compact"><label>Nam</label><b>34°C</b></div>
+                        </div>
+                    </div>
+                    <div class="kpi-icon bg-green">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
 
-            <div class="card kpi-card">
-                <div>
-                    <div class="kpi-lbl">Tổng Camera</div>
-                    <div class="kpi-val">48</div>
-                </div>
-                <div class="kpi-icon bg-blue">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M23 7l-7 5 7 5V7z"></path>
-                        <rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect>
-                    </svg>
-                </div>
-            </div>
-            <div class="card kpi-card">
-                <div>
-                    <div class="kpi-lbl">Địa điểm giám sát</div>
-                    <div class="kpi-val">2</div>
-                </div>
-                <div class="kpi-icon bg-purple">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                        <circle cx="12" cy="10" r="3"></circle>
-                    </svg>
-                </div>
-            </div>
-            <div class="card kpi-card">
-                <div>
-                    <div class="kpi-lbl">Cảnh báo Mới</div>
-                    <div class="kpi-val" style="color:var(--danger)">5</div>
-                </div>
-                <div class="kpi-icon bg-red">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
-                        <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
-                    </svg>
-                </div>
-            </div>
-            <div class="card kpi-card">
-                <div>
-                    <div class="kpi-lbl">Nhiệt độ Môi trường</div>
-                    <div class="kpi-val" style="color:var(--success)">32°C</div>
-                </div>
-                <div class="kpi-icon bg-green">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"></path>
-                    </svg>
-                </div>
-            </div>
-
-            <div class="card map-section">
+            <!-- Main Display Area -->
+            <div class="card map-section" id="mainDisplayCard">
                 <div class="map-toolbar">
-                    <span class="card-title">Bản đồ Giám sát</span>
+                    <span class="card-title" id="displayTitle">Bản đồ Giám sát</span>
                     <div class="map-toggle-group">
-                        <button class="map-btn active" id="btnSingle" onclick="setMapMode('single')">Single</button>
-                        <button class="map-btn" id="btnSplit" onclick="setMapMode('split')">Split</button>
+                        <button class="map-btn active" id="btnMap" onclick="switchView('map')">Bản đồ</button>
+                        <button class="map-btn" id="btnSLD" onclick="switchView('sld')">Sơ đồ 1 sợi</button>
+                        <button class="map-btn" id="btnBIM"
+                            onclick="alert('Tính năng Mô hình BIM 3D đang được phát triển')">Mô hình BIM 3D</button>
                     </div>
                 </div>
                 <div class="map-view-container mode-single" id="mapContainer">
                     <div class="map-pane">
-                        <div class="map-label">Trạm Liên Trì</div>
+                        <div class="map-label">Trạm Nam Phú Quốc</div>
                         <div id="map1" style="width:100%;height:100%"></div>
                     </div>
-                    <div class="map-pane">
-                        <div class="map-label">Trạm Phú Quốc</div>
-                        <div id="map2" style="width:100%;height:100%"></div>
+                    <!-- map2 div for JS compatibility -->
+                    <div id="map2" style="display:none"></div>
+                </div>
+                <div class="sld-view" id="sldContainer">
+                    <div class="sld-diagram-wrapper" id="sldDiagram"
+                        style="background-image: url('images/sodo-1day.png');">
+                        <!-- 8 nodes as requested -->
+                        <div class="sld-node" style="top: 32%; left: 35%;" onclick="showNodePopup(event, '131-1')">
+                            <svg class="thermometer-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z" />
+                            </svg>
+                            <span class="node-label-small">131-1</span>
+                        </div>
+
+                        <div class="sld-node" style="top: 25%; left: 78%;" onclick="showNodePopup(event, '172-7')">
+                            <svg class="thermometer-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z" />
+                            </svg>
+                            <span class="node-label-small">172-7</span>
+                        </div>
+
+                        <div class="sld-node" style="top: 15%; left: 20%;" onclick="showNodePopup(event, '112-2')">
+                            <svg class="thermometer-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z" />
+                            </svg>
+                            <span class="node-label-small">112-2</span>
+                        </div>
+
+                        <div class="sld-node" style="top: 18%; left: 55%;" onclick="showNodePopup(event, '172-76')">
+                            <svg class="thermometer-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z" />
+                            </svg>
+                            <span class="node-label-small">172-76</span>
+                        </div>
+
+                        <div class="sld-node" style="top: 45%; left: 10%;" onclick="showNodePopup(event, 'TUC11')">
+                            <svg class="thermometer-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z" />
+                            </svg>
+                            <span class="node-label-small">TUC11</span>
+                        </div>
+
+                        <div class="sld-node" style="top: 55%; left: 45%;" onclick="showNodePopup(event, 'T1')">
+                            <svg class="thermometer-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z" />
+                            </svg>
+                            <span class="node-label-small">T1</span>
+                        </div>
+
+                        <div class="sld-node" style="top: 45%; left: 88%;" onclick="showNodePopup(event, 'TUC12')">
+                            <svg class="thermometer-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z" />
+                            </svg>
+                            <span class="node-label-small">TUC12</span>
+                        </div>
+
+                        <div class="sld-node" style="top: 75%; left: 70%;" onclick="showNodePopup(event, 'CS472')">
+                            <svg class="thermometer-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z" />
+                            </svg>
+                            <span class="node-label-small">CS472</span>
+                        </div>
                     </div>
                 </div>
             </div>
+            <!-- Sidebar Area Tree -->
+            <div class="card tree-card">
+                <div class="card-header" style="margin-bottom: 20px;">
+                    <div class="card-title">Danh sách khu vực</div>
+                </div>
 
-            <div class="card alert-section">
-                <div class="alert-header">Cảnh báo AI <a href="#" style="font-size:12px;color:var(--primary)">Xem tất
-                        cả</a></div>
-                <div class="alert-list">
-                    <div class="alert-item">
-                        <span class="al-badge" style="background:var(--danger)">
-                            <svg style="width:12px; height:12px; margin-right:4px; vertical-align:middle"
-                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path
-                                    d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3 1.07.53 2 1.27 2 3.5 0 2.21-1.79 4-4 4s-4-1.79-4-4c0-2.5 2-4.5 2-4.5.5 1 1 1.62 1 3a2.5 2.5 0 0 0 2.5 2.5z">
-                                </path>
-                            </svg>
-                            LỬA
-                        </span>
-                        <span class="al-msg">Phát hiện đốm lửa MBA T2</span>
-                        <div class="al-loc">14:30 • Trạm Nam Phú Quốc</div>
+                <div style="padding: 0 4px 16px;">
+                    <input type="text" class="tree-search-box" placeholder="Tìm theo khu vực">
+                </div>
+
+                <div class="tree-nav" style="flex: 1; overflow-y: auto; padding: 0 4px;">
+                    <!-- Biển đảo -->
+                    <div class="tree-node">
+                        <div class="tree-node-item" onclick="selectArea('biendao', this)">
+                            <div style="width:14px"></div>
+                            Biển đảo
+                            <div class="status-badge">
+                                <span class="alert-count green">0</span>
+                                <span class="status-dot green"></span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="alert-item">
-                        <span class="al-badge" style="background:var(--purple)">
-                            <svg style="width:12px; height:12px; margin-right:4px; vertical-align:middle"
-                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                                <circle cx="12" cy="7" r="4"></circle>
-                            </svg>
-                            NGƯỜI
-                        </span>
-                        <span class="al-msg">Xâm nhập vùng cấm cổng sau</span>
-                        <div class="al-loc">14:15 • Trạm Liên Trì</div>
+
+                    <!-- Công ty -->
+                    <div class="tree-node">
+                        <div class="tree-node-item" onclick="selectArea('congty', this)">
+                            <div style="width:14px"></div>
+                            Công ty
+                            <div class="status-badge">
+                                <span class="alert-count green">0</span>
+                                <span class="status-dot green"></span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="alert-item">
-                        <span class="al-badge" style="background:var(--warning); color:black">
-                            <svg style="width:12px; height:12px; margin-right:4px; vertical-align:middle"
-                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"></path>
+
+                    <!-- Phú Quốc -->
+                    <div class="tree-node expanded">
+                        <div class="tree-node-item" onclick="toggleTreeNode(this); selectArea('phuquoc', this)">
+                            <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                                <path d="M9 18l6-6-6-6" />
                             </svg>
-                            QUÁ NHIỆT
-                        </span>
-                        <span class="al-msg">Nhiệt độ Sứ A tăng cao (85°C)</span>
-                        <div class="al-loc">13:00 • Trạm Nam Phú Quốc</div>
+                            Phú Quốc
+                            <div class="status-badge">
+                                <span class="alert-count red">2</span>
+                                <span class="status-dot red"></span>
+                            </div>
+                        </div>
+                        <div class="sub-nodes">
+                            <div class="leaf-node-item" onclick="selectSubstation('tram_pq', this)">
+                                Trạm 110kV Nam Phú Quốc
+                                <div class="status-badge">
+                                    <span class="alert-count red">2</span>
+                                    <span class="status-dot red"></span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="alert-item">
-                        <span class="al-badge" style="background:#0EA5E9">
-                            <svg style="width:12px; height:12px; margin-right:4px; vertical-align:middle"
-                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path
-                                    d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9L18.7 7.8c-.5-1.1-1.6-1.8-2.8-1.8H8.1c-1.2 0-2.3.7-2.8 1.8l-2.8 3.3C1.7 11.3 1 12.1 1 13v3c0 .6.4 1 1 1h2m3 0a2 2 0 1 0 4 0 2 2 0 1 0-4 0m10 0a2 2 0 1 0 4 0 2 2 0 1 0-4 0M4 12l2.5-3h11l2.5 3">
-                                </path>
+
+                    <!-- Liên Trì -->
+                    <div class="tree-node expanded">
+                        <div class="tree-node-item" onclick="toggleTreeNode(this); selectArea('lientri', this)">
+                            <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                                <path d="M9 18l6-6-6-6" />
                             </svg>
-                            XE
-                        </span>
-                        <span class="al-msg">Xe lạ đỗ quá 5 phút</span>
-                        <div class="al-loc">10:00 • Kho vật tư</div>
+                            Trạm 110kV Liên Trì
+                            <div class="status-badge">
+                                <span class="alert-count yellow">1</span>
+                                <span class="status-dot yellow"></span>
+                            </div>
+                        </div>
+                        <div class="sub-nodes">
+                            <div class="leaf-node-item" onclick="selectSubstation('sd1s_lientri', this)">
+                                SĐ1S_Liên Trì
+                                <div class="status-badge">
+                                    <span class="alert-count yellow">1</span>
+                                    <span class="status-dot yellow"></span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
+    <div id="deviceNodePopup" class="node-popup" style="width: 800px;">
+        <div class="node-popup-header">
+            Thiết bị: <span id="popupDeviceTitle">131-1</span>
+            <span class="node-popup-close" onclick="hideNodePopup()">&times;</span>
+        </div>
+        <div class="node-popup-body">
+            <!-- Content will be populated by JS -->
+            <div id="popupContentArea"></div>
+        </div>
+    </div>
+
     <script src="js/main.js"></script>
     <script src="js/responsive-helpers.js"></script>
+    <script>
+        function switchView(mode, name) {
+            const card = document.getElementById('mainDisplayCard');
+            const title = document.getElementById('displayTitle');
+            const btnMap = document.getElementById('btnMap');
+            const btnSLD = document.getElementById('btnSLD');
+            const sldName = document.getElementById('sldTrạmName');
+
+            btnMap.classList.remove('active');
+            btnSLD.classList.remove('active');
+
+            if (mode === 'map') {
+                card.classList.remove('mode-sld');
+                btnMap.classList.add('active');
+                title.innerText = 'Bản đồ Giám sát';
+                setTimeout(() => { if (window.map1) map1.invalidateSize(); }, 200);
+            } else {
+                card.classList.add('mode-sld');
+                btnSLD.classList.add('active');
+                title.innerText = 'Sơ đồ 1 sợi';
+                if (name) sldName.innerText = name.toUpperCase();
+
+                // Initialize chart if not already done
+                initSldChart();
+            }
+        }
+
+        let sldChart;
+        function initSldChart() {
+            if (sldChart) return;
+            const chartEl = document.querySelector("#sldTemperatureChart");
+            if (!chartEl || typeof ApexCharts === 'undefined') return;
+
+            const options = {
+                series: [
+                    { name: 'Pha A', data: [26, 27, 26, 28, 38, 42, 45, 41, 40, 31, 28, 27, 26, 27, 25, 27, 26, 28, 37, 46, 43, 38, 29, 27, 26, 27, 26, 32] },
+                    { name: 'Pha B', data: [26, 26, 27, 27, 34, 39, 41, 38, 39, 29, 26, 26, 27, 26, 25, 26, 28, 33, 41, 44, 42, 36, 28, 26, 26, 26, 27, 34] },
+                    { name: 'Pha C', data: [25, 25, 26, 26, 31, 36, 38, 36, 37, 27, 25, 25, 26, 25, 24, 25, 26, 30, 38, 40, 39, 34, 27, 25, 25, 25, 26, 35] }
+                ],
+                chart: {
+                    height: 450,
+                    type: 'area',
+                    background: 'transparent',
+                    toolbar: { show: false },
+                    animations: { enabled: true },
+                    events: {
+                        dataPointSelection: function (event, chartContext, config) {
+                            // Show popup at mouse position
+                            showNodePopup(event.clientX, event.clientY, "131-1");
+                        }
+                    }
+                },
+                colors: ['#3B82F6', '#10B981', '#F59E0B'],
+                stroke: { curve: 'smooth', width: 3 },
+                fill: {
+                    type: 'gradient',
+                    gradient: { shadeIntensity: 1, opacityFrom: 0.4, opacityTo: 0.05, stops: [0, 90, 100] }
+                },
+                xaxis: {
+                    categories: ['00:00', '01:00', '02:00', '03:00', '04:00', '05:00', '06:00', '07:00', '08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00'],
+                    labels: { style: { colors: '#94A3B8' } }
+                },
+                yaxis: {
+                    labels: { style: { colors: '#94A3B8' } },
+                    title: { text: 'Nhiệt độ (°C)', style: { color: '#94A3B8' } }
+                },
+                grid: { borderColor: 'rgba(255,255,255,0.05)' },
+                theme: { mode: 'dark' }
+            };
+
+            sldChart = new ApexCharts(chartEl, options);
+            sldChart.render();
+        }
+
+
+
+        let miniChart;
+
+        function showNodePopup(event, deviceName) {
+            const x = event.clientX;
+            const y = event.clientY;
+            const popup = document.getElementById('deviceNodePopup');
+            const contentArea = document.getElementById('popupContentArea');
+            document.getElementById('popupDeviceTitle').innerText = deviceName;
+
+            // Mock 8 items with combined Summary and Analysis info
+            let itemsHTML = '<div class="node-popup-grid" style="grid-template-columns: repeat(2, 1fr); gap: 15px;">';
+            for (let i = 1; i <= 8; i++) {
+                const suffix = String.fromCharCode(64 + (i % 3 || 3));
+                itemsHTML += `
+                    <div class="analysis-card" style="margin-bottom:0">
+                        <div class="analysis-title" style="display:flex; justify-content:space-between">
+                            <span>${deviceName}_${suffix}${i}</span>
+                            <span style="font-size:10px; color:#64748b">ID: DEV-0${i}</span>
+                        </div>
+                        <div style="font-size:11px; color:#1e293b; margin-bottom:8px; background:white; padding:4px; border-radius:4px">
+                            Min: <b>${(25 + Math.random() * 5).toFixed(1)}°C</b> | Max: <b>${(30 + Math.random() * 5).toFixed(1)}°C</b>
+                        </div>
+                        <div class="analysis-row">
+                            <div class="analysis-label">So với pha min</div>
+                            <div class="analysis-val">29 / <span class="analysis-status">Tốt</span></div>
+                        </div>
+                        <div class="analysis-row">
+                            <div class="analysis-label">So với môi trường</div>
+                            <div class="analysis-val">26.6 / <span class="analysis-status">Tốt</span></div>
+                        </div>
+                    </div>
+                `;
+            }
+            itemsHTML += '</div>';
+
+            contentArea.innerHTML = itemsHTML;
+
+            // Show popup
+            popup.style.display = 'block';
+
+            // Re-calculate position after setting content
+            let targetLeft = x + 20;
+            let targetTop = y - popup.offsetHeight / 2;
+
+            // Boundary checks for large popup
+            if (targetLeft + 800 > window.innerWidth) targetLeft = x - 820;
+            if (targetTop < 10) targetTop = 10;
+            if (targetTop + popup.offsetHeight > window.innerHeight) targetTop = window.innerHeight - popup.offsetHeight - 10;
+
+            popup.style.left = targetLeft + 'px';
+            popup.style.top = targetTop + 'px';
+        }
+
+        function hideNodePopup() {
+            document.getElementById('deviceNodePopup').style.display = 'none';
+        }
+
+        // Hide popup on click outside
+        document.addEventListener('mousedown', (e) => {
+            const popup = document.getElementById('deviceNodePopup');
+            if (popup.style.display === 'block' && !popup.contains(e.target)) {
+                hideNodePopup();
+            }
+        });
+
+        function toggleTreeNode(el) {
+            const node = el.parentElement;
+            node.classList.toggle('expanded');
+            event.stopPropagation();
+        }
+
+        function selectArea(id, el) {
+            document.querySelectorAll('.tree-node-item, .leaf-node-item').forEach(item => item.classList.remove('tree-item-active'));
+            el.classList.add('tree-item-active');
+            switchView('map');
+        }
+
+        function selectSubstation(id, el) {
+            document.querySelectorAll('.tree-node-item, .leaf-node-item').forEach(item => item.classList.remove('tree-item-active'));
+            el.classList.add('tree-item-active');
+
+            let name = el.innerText;
+            if (id === 'sd1s_lientri') name = "Trạm 110kV Liên Trì";
+            switchView('sld', name);
+        }
+    </script>
 </body>
 
 </html>

@@ -22,7 +22,12 @@
                 </svg>
             </button>
             <a href="dashboard.html" class="brand" style="text-decoration:none">
-                <div class="logo-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"></path></svg></div> IFS - AI
+                <div class="logo-box">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"></path>
+                    </svg>
+                </div> IFS - TRẠM BIẾN ÁP
             </a>
         </div>
 
@@ -58,12 +63,10 @@
                         <div class="col-header">THIẾT LẬP CẢNH BÁO</div>
                         <a href="thietlapcanhbao_kenhcanhbao.html" class="menu-link">Kênh Cảnh báo</a>
                         <a href="theodoidiemdo_bocanhbao.html" class="menu-link">Bộ cảnh báo</a>
-                        <a href="#" class="menu-link">Lịch sử</a>
                     </div>
                     <div class="mega-col">
                         <div class="col-header">QUẢN LÝ NGƯỜI DÙNG</div>
                         <a href="quantrihethong_nguoidung.html" class="menu-link">Người dùng</a>
-                        <a href="#" class="menu-link">Thêm người dùng mới</a>
                         <a href="#" class="menu-link">Hướng dẫn sử dụng</a>
                     </div>
                 </div>
@@ -262,13 +265,23 @@
                 style="grid-column: 2 / 5; grid-row: span 3; padding: 0; overflow: hidden; height: calc(100vh - 120px); display: flex; flex-direction: column;">
                 <div class="monitor-top-bar" style="border-radius: 12px 12px 0 0;">
                     <div class="ctrl-group">
-                        <span class="ctrl-label">Thiết lập màn hình</span>
+                        <span class="ctrl-label">Chọn bố cục</span>
                         <div class="grid-btn-group">
                             <button class="grid-btn" onclick="changeGrid(1, this)">1</button>
                             <button class="grid-btn active" onclick="changeGrid(4, this)">4</button>
                             <button class="grid-btn" onclick="changeGrid(9, this)">9</button>
                             <button class="grid-btn" onclick="changeGrid(16, this)">16</button>
                         </div>
+                        <button class="btn-save-layout"
+                            style="margin-left: 15px; padding: 6px 16px; font-size: 12px; font-weight: 700; border-radius: 4px; background: var(--primary); color: white; border: none; cursor: pointer; display: flex; align-items: center; gap: 6px; text-transform: uppercase; letter-spacing: 0.5px;">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.5">
+                                <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
+                                <polyline points="17 21 17 13 7 13 7 21"></polyline>
+                                <polyline points="7 3 7 8 15 8"></polyline>
+                            </svg>
+                            Lưu
+                        </button>
                     </div>
                     <div class="env-temp">Nhiệt độ môi trường: 32.5</div>
                 </div>

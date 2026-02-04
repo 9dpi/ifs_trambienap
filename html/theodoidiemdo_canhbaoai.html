@@ -25,6 +25,73 @@
             transform: scale(1.2);
             z-index: 10;
         }
+
+        /* Filter Refinement */
+        .filter-grid-ai {
+            display: grid;
+            grid-template-columns: 1.2fr 1.2fr 1fr;
+            gap: 20px 40px;
+            align-items: center;
+        }
+
+        .filter-group-ai {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .filter-group-ai label {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--text-main);
+            white-space: nowrap;
+            min-width: 90px;
+        }
+
+        .input-icon-wrapper {
+            position: relative;
+            flex: 1;
+        }
+
+        .input-icon-wrapper .filter-input {
+            padding-left: 35px !important;
+            height: 38px;
+        }
+
+        .input-icon-wrapper .input-icon {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-sub);
+            opacity: 0.7;
+            pointer-events: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .btn-search-ai {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0 24px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            height: 38px;
+            transition: 0.2s;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-search-ai:hover {
+            opacity: 0.9;
+            transform: translateY(-1px);
+        }
     </style>
 </head>
 
@@ -38,7 +105,12 @@
                 </svg>
             </button>
             <a href="dashboard.html" class="brand" style="text-decoration:none">
-                <div class="logo-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"></path></svg></div> IFS - AI
+                <div class="logo-box">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"></path>
+                    </svg>
+                </div> IFS - TRẠM BIẾN ÁP
             </a>
         </div>
 
@@ -74,12 +146,10 @@
                         <div class="col-header">THIẾT LẬP CẢNH BÁO</div>
                         <a href="thietlapcanhbao_kenhcanhbao.html" class="menu-link">Kênh Cảnh báo</a>
                         <a href="theodoidiemdo_bocanhbao.html" class="menu-link">Bộ cảnh báo</a>
-                        <a href="#" class="menu-link">Lịch sử</a>
                     </div>
                     <div class="mega-col">
                         <div class="col-header">QUẢN LÝ NGƯỜI DÙNG</div>
                         <a href="quantrihethong_nguoidung.html" class="menu-link">Người dùng</a>
-                        <a href="#" class="menu-link">Thêm người dùng mới</a>
                         <a href="#" class="menu-link">Hướng dẫn sử dụng</a>
                     </div>
                 </div>
@@ -102,41 +172,77 @@
         <div class="grid">
             <!-- Filter Section -->
             <div class="card filter-card">
-                <div class="filter-row">
-                    <div class="filter-item">
-                        <div class="filter-label">Thời gian từ</div>
-                        <input type="datetime-local" class="filter-input" value="2026-01-17T00:00">
+                <div class="filter-grid-ai">
+                    <!-- Row 1 -->
+                    <div class="filter-group-ai">
+                        <label>Thời gian từ</label>
+                        <div class="input-icon-wrapper">
+                            <div class="input-icon">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <polyline points="12 6 12 12 16 14"></polyline>
+                                </svg>
+                            </div>
+                            <input type="text" class="filter-input" value="2026-01-21 00:00:00">
+                        </div>
                     </div>
-                    <div class="filter-item">
-                        <div class="filter-label">Thời gian đến</div>
-                        <input type="datetime-local" class="filter-input">
+                    <div class="filter-group-ai">
+                        <label>Thời gian đến</label>
+                        <div class="input-icon-wrapper">
+                            <div class="input-icon">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <polyline points="12 6 12 12 16 14"></polyline>
+                                </svg>
+                            </div>
+                            <input type="text" class="filter-input" placeholder="Thời gian kết thúc">
+                        </div>
                     </div>
-                    <div class="filter-item">
-                        <div class="filter-label">Khu vực</div>
+                    <div class="filter-group-ai">
+                        <label>Khu vực</label>
                         <select class="filter-input">
-                            <option>Chọn khu vực</option>
-                            <option>Biển đảo</option>
                             <option>Phú Quốc</option>
+                            <option>Biển đảo</option>
                             <option>Liên Trì</option>
                         </select>
                     </div>
-                    <div class="filter-item">
-                        <div class="filter-label">Loại cảnh báo</div>
+
+                    <!-- Row 2 -->
+                    <div class="filter-group-ai">
+                        <label>Camera</label>
                         <select class="filter-input">
-                            <option>Chọn loại cảnh báo</option>
-                            <option>Phát hiện tàu thuyền</option>
-                            <option>Xâm nhập vùng cấm</option>
-                            <option>Không đội mũ bảo hiểm</option>
+                            <option selected disabled>Chọn</option>
+                            <option>CAM01</option>
+                            <option>CAM02</option>
+                            <option>CAM03</option>
                         </select>
                     </div>
-                    <button class="btn-search">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2">
-                            <circle cx="11" cy="11" r="8"></circle>
-                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                        </svg>
-                        Tìm kiếm
-                    </button>
+                    <div class="filter-group-ai">
+                        <label>Loại cảnh báo</label>
+                        <select class="filter-input">
+                            <option selected disabled>Chọn</option>
+                            <option>Khói</option>
+                            <option>Lửa</option>
+                            <option>Phát hiện người</option>
+                            <option>Phát hiện ô tô</option>
+                            <option>Phát hiện tàu thuyền</option>
+                            <option>Phát hiện xe đạp</option>
+                            <option>Phát hiện xe máy</option>
+                            <option>Phát hiện xe tải</option>
+                        </select>
+                    </div>
+                    <div class="filter-group-ai" style="justify-content: flex-end;">
+                        <button class="btn-search-ai">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <circle cx="11" cy="11" r="8"></circle>
+                                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                            </svg>
+                            Tìm kiếm
+                        </button>
+                    </div>
                 </div>
             </div>
 

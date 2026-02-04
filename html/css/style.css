@@ -654,7 +654,7 @@ body {
 
 /* --- 4. LAYOUT & GRID --- */
 .container {
-    max-width: 1600px;
+    max-width: 100%;
     margin: 0 auto;
     padding: 24px;
     width: 100%;
