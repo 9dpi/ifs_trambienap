@@ -53,6 +53,17 @@
             cursor: pointer;
         }
 
+        .action-group {
+            display: grid;
+            grid-template-columns: repeat(6, 32px);
+            gap: 4px;
+            justify-content: start;
+        }
+
+        .action-btn-circle {
+            margin: 0 !important;
+        }
+
         .action-group button {
             pointer-events: auto;
         }
@@ -303,7 +314,7 @@
                                 <th>Khu vực</th>
                                 <th>Chức năng camera</th>
                                 <th>Trạng thái</th>
-                                <th style="width: 220px; text-align: center;">Hành động</th>
+                                <th style="width: 220px; text-align: left;">Hành động</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -314,7 +325,7 @@
                                 <td>SD1S_Liên Trì</td>
                                 <td>Camera mắt nhiệt</td>
                                 <td><span style="color:var(--success)">Đang bật</span></td>
-                                <td style="text-align: center;">
+                                <td style="text-align: left;">
                                     <div class="action-group">
                                         <button class="action-btn-circle btn-gray-outline" title="Đồng bộ">
                                             <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
@@ -337,6 +348,7 @@
                                                 <line x1="12" y1="2" x2="12" y2="22"></line>
                                             </svg>
                                         </button>
+                                        <div></div>
                                         <button class="action-btn-circle btn-gray-outline" title="Cấu hình ROI">
                                             <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
                                                 stroke="currentColor" stroke-width="2">
@@ -375,7 +387,7 @@
                                 <td>SD1S_Liên Trì</td>
                                 <td>Camera giám sát tổng quát</td>
                                 <td><span style="color:var(--success)">Đang bật</span></td>
-                                <td style="text-align: center;">
+                                <td style="text-align: left;">
                                     <div class="action-group">
                                         <button class="action-btn-circle btn-gray-outline" title="Đồng bộ">
                                             <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
@@ -398,6 +410,7 @@
                                                 <line x1="12" y1="2" x2="12" y2="22"></line>
                                             </svg>
                                         </button>
+                                        <div></div>
                                         <button class="action-btn-circle btn-gray-outline" title="Cấu hình ROI">
                                             <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
                                                 stroke="currentColor" stroke-width="2">
@@ -436,7 +449,7 @@
                                 <td>Trạm 110kV Nam Phú Quốc</td>
                                 <td>Camera mắt nhiệt</td>
                                 <td><span style="color:var(--success)">Đang bật</span></td>
-                                <td style="text-align: center;">
+                                <td style="text-align: left;">
                                     <div class="action-group">
                                         <button class="action-btn-circle btn-gray-outline" title="Đồng bộ">
                                             <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
@@ -459,6 +472,7 @@
                                                 <line x1="12" y1="2" x2="12" y2="22"></line>
                                             </svg>
                                         </button>
+                                        <div></div>
                                         <button class="action-btn-circle btn-gray-outline" title="Cấu hình ROI">
                                             <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
                                                 stroke="currentColor" stroke-width="2">
@@ -497,7 +511,7 @@
                                 <td>Trạm 110kV Nam Phú Quốc</td>
                                 <td>Camera mắt nhiệt</td>
                                 <td><span style="color:var(--success)">Đang bật</span></td>
-                                <td style="text-align: center;">
+                                <td style="text-align: left;">
                                     <div class="action-group">
                                         <button class="action-btn-circle btn-gray-outline" title="Đồng bộ">
                                             <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
@@ -569,7 +583,7 @@
                                 <td>Trạm 110kV Nam Phú Quốc</td>
                                 <td>Camera giám sát tổng quát</td>
                                 <td><span style="color:var(--success)">Đang bật</span></td>
-                                <td style="text-align: center;">
+                                <td style="text-align: left;">
                                     <div class="action-group">
                                         <button class="action-btn-circle btn-gray-outline" title="Đồng bộ">
                                             <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
@@ -592,6 +606,7 @@
                                                 <line x1="12" y1="2" x2="12" y2="22"></line>
                                             </svg>
                                         </button>
+                                        <div></div> <!-- Placeholder for Tiêu điểm -->
                                         <button class="action-btn-circle btn-gray-outline" title="Cấu hình ROI">
                                             <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
                                                 stroke="currentColor" stroke-width="2">
