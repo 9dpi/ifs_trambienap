@@ -399,9 +399,13 @@
     <div class="container">
         <div class="bread-crumb">Theo dõi điểm đo / <span>Tổng hợp phân tích</span></div>
 
+        <div class="tabs-container">
+            <div class="tab-item active" onclick="switchMainTab(0)">Nhật ký nhiệt độ theo điểm đo</div>
+            <div class="tab-item" onclick="switchMainTab(1)">Thống kê số lượng cảnh báo</div>
+        </div>
 
-
-        <div id="mainContent" class="tab-content active">
+        <!-- TAB 1: NHẬT KÝ NHIỆT ĐỘ -->
+        <div id="tabDiary" class="tab-content active">
             <div class="card" style="padding: 20px;">
                 <div class="summary-header">
                     <div class="summary-title">Nhật ký nhiệt độ theo điểm đo</div>
@@ -521,6 +525,47 @@
             </div>
         </div>
 
+        <!-- TAB 2: THỐNG KÊ CẢNH BÁO -->
+        <div id="tabStats" class="tab-content">
+            <div class="card" style="padding: 20px;">
+                <div class="summary-header">
+                    <div class="summary-title">Thống kê số lượng cảnh báo</div>
+                </div>
+
+                <div class="filter-section-modern">
+                    <div class="filter-row-inline">
+                        <div class="filter-group-inline">
+                            <label>Khu vực</label>
+                            <select class="select-single-modern" style="width: 220px;">
+                                <option>Tất cả khu vực</option>
+                                <option>Trạm 110kV Nam Phú Quốc</option>
+                            </select>
+                        </div>
+                        <div class="filter-group-inline">
+                            <label>Thời gian</label>
+                            <select class="select-single-modern" style="width: 150px;">
+                                <option>7 ngày qua</option>
+                                <option>30 ngày qua</option>
+                                <option>Tháng này</option>
+                            </select>
+                        </div>
+                        <button class="btn-search-primary">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <circle cx="11" cy="11" r="8"></circle>
+                                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                            </svg>
+                            TÌM KIẾM
+                        </button>
+                    </div>
+                </div>
+
+                <div class="chart-box">
+                    <div id="alertStatsChart"></div>
+                </div>
+            </div>
+        </div>
+
 
 
     </div>
@@ -580,7 +625,64 @@
         var lineChart = new ApexCharts(document.querySelector("#temperatureChart"), lineOptions);
         lineChart.render();
 
+        // CHART 2: BAR CHART (Alert Stats)
+        var barOptions = {
+            series: [{
+                name: 'Số lượng cảnh báo',
+                data: [44, 55, 41, 67, 22, 43, 21, 33, 45, 13, 27, 33]
+            }],
+            chart: {
+                type: 'bar',
+                height: 450,
+                background: 'transparent',
+                toolbar: { show: false }
+            },
+            plotOptions: {
+                bar: {
+                    borderRadius: 4,
+                    columnWidth: '45%',
+                    distributed: true,
+                    dataLabels: { position: 'top' }
+                }
+            },
+            dataLabels: {
+                enabled: true,
+                formatter: function (val) { return val; },
+                offsetY: -20,
+                style: { fontSize: '12px', colors: ["#94A3B8"] }
+            },
+            colors: ['#3B82F6', '#10B981', '#F59E0B', '#EF4444', '#8B5CF6', '#EC4899', '#06B6D4', '#F43F5E', '#14B8A6', '#F97316', '#6366F1', '#D946EF'],
+            legend: { show: false },
+            xaxis: {
+                categories: ["MC112", "MC131", "T172", "T132", "MBA T1", "MBA T2", "DCL 171-1", "DCL 172-2", "TuC11", "TuC12", "T63", "C41"],
+                labels: { style: { colors: '#94A3B8', fontSize: '12px' } },
+                axisBorder: { show: false },
+                axisTicks: { show: false }
+            },
+            yaxis: {
+                labels: { style: { colors: '#94A3B8' } },
+                title: { text: 'Số lượng (Lần)', style: { color: '#94A3B8', fontWeight: 600 } }
+            },
+            grid: { borderColor: 'rgba(255,255,255,0.05)', strokeDashArray: 4 },
+            tooltip: { theme: 'dark' }
+        };
 
+        var barChart = new ApexCharts(document.querySelector("#alertStatsChart"), barOptions);
+        barChart.render();
+
+        function switchMainTab(index) {
+            const contents = document.querySelectorAll('.tab-content');
+            const items = document.querySelectorAll('.tab-item');
+
+            contents.forEach(c => c.classList.remove('active'));
+            items.forEach(i => i.classList.remove('active'));
+
+            contents[index].classList.add('active');
+            items[index].classList.add('active');
+
+            // Trigger resize to fix chart drawing issues in hidden tabs
+            window.dispatchEvent(new Event('resize'));
+        }
 
         function toggleDropdown(id) {
             document.getElementById(id).classList.toggle('visible');
