@@ -193,7 +193,7 @@
         }
 
         .date-range-box svg {
-            color: var(--text-sub);
+            color: var(--primary);
             flex-shrink: 0;
         }
 
@@ -205,6 +205,12 @@
             width: 165px;
             outline: none;
             font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* Style datetime-local calendar icon */
+        input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+            filter: invert(1) brightness(0.9);
+            cursor: pointer;
         }
 
         .btn-search-primary {
@@ -321,6 +327,70 @@
         .dropdown-item-check input {
             cursor: pointer;
             accent-color: var(--primary);
+        }
+
+        /* Export Dropdown */
+        .export-dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .btn-export {
+            background: var(--success);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 0 16px;
+            height: 38px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: 0.2s;
+            box-shadow: 0 4px 10px rgba(16, 185, 129, 0.2);
+        }
+
+        .btn-export:hover {
+            opacity: 0.9;
+            transform: translateY(-1px);
+        }
+
+        .export-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 8px 0;
+            min-width: 180px;
+            z-index: 1001;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+            margin-top: 8px;
+            animation: fadeIn 0.2s ease;
+        }
+
+        .export-dropdown.open .export-menu {
+            display: block;
+        }
+
+        .export-item {
+            padding: 10px 16px;
+            color: var(--text-main);
+            font-size: 13px;
+            cursor: pointer;
+            transition: 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .export-item:hover {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--primary);
         }
     </style>
 </head>
@@ -542,12 +612,12 @@
                             </select>
                         </div>
                         <div class="filter-group-inline">
-                            <label>Thời gian</label>
-                            <select class="select-single-modern" style="width: 150px;">
-                                <option>7 ngày qua</option>
-                                <option>30 ngày qua</option>
-                                <option>Tháng này</option>
-                            </select>
+                            <label>Từ ngày</label>
+                            <input type="datetime-local" class="select-single-modern" value="2026-01-30T00:00">
+                        </div>
+                        <div class="filter-group-inline">
+                            <label>Đến ngày</label>
+                            <input type="datetime-local" class="select-single-modern" value="2026-02-06T09:54">
                         </div>
                         <button class="btn-search-primary">
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -557,6 +627,23 @@
                             </svg>
                             TÌM KIẾM
                         </button>
+
+                        <div class="export-dropdown" id="exportDropdown">
+                            <button class="btn-export" onclick="toggleExport()">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                    <polyline points="7 10 12 15 17 10"></polyline>
+                                    <line x1="12" y1="15" x2="12" y2="3"></line>
+                                </svg>
+                                Download
+                            </button>
+                            <div class="export-menu">
+                                <div class="export-item">Download SVG</div>
+                                <div class="export-item">Download PDF</div>
+                                <div class="export-item">Download CSV</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -689,10 +776,18 @@
             event.stopPropagation();
         }
 
+        function toggleExport() {
+            document.getElementById('exportDropdown').classList.toggle('open');
+            event.stopPropagation();
+        }
+
         // Close dropdowns when clicking outside
         window.onclick = function (event) {
             if (!event.target.closest('.dropdown-check-list')) {
                 document.querySelectorAll('.dropdown-check-list').forEach(d => d.classList.remove('visible'));
+            }
+            if (!event.target.closest('.export-dropdown')) {
+                document.querySelectorAll('.export-dropdown').forEach(d => d.classList.remove('open'));
             }
         }
 
