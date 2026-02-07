@@ -332,6 +332,101 @@
 
     <script src="js/main.js"></script>
     <script src="js/responsive-helpers.js"></script>
+    <script>
+        function openDrawer() {
+            document.getElementById('partDrawer').classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeDrawer() {
+            document.getElementById('partDrawer').classList.remove('open');
+            document.body.style.overflow = '';
+        }
+
+        // Attach to main add button
+        document.querySelector('.btn-add').addEventListener('click', openDrawer);
+
+        // Attach to all edit buttons
+        document.querySelectorAll('.btn-edit-round').forEach(btn => {
+            btn.addEventListener('click', openDrawer);
+        });
+    </script>
+
+    <!-- DRAWER FOR ADD/EDIT PART -->
+    <div class="drawer-overlay" id="partDrawer">
+        <div class="drawer" style="width: 450px; right: -450px;">
+            <div class="drawer-header">
+                <h3 style="color: #3b82f6;">THÊM BỘ PHẬN</h3>
+                <button class="close-drawer" onclick="closeDrawer()">&times;</button>
+            </div>
+            <div class="drawer-body">
+                <style>
+                    .form-item-vertical {
+                        display: flex;
+                        flex-direction: column;
+                        gap: 8px;
+                        margin-bottom: 24px;
+                    }
+
+                    .form-item-vertical label {
+                        font-size: 13px;
+                        font-weight: 600;
+                        color: var(--text-main);
+                    }
+
+                    .form-item-vertical label .required {
+                        color: var(--danger);
+                        margin-left: 3px;
+                    }
+
+                    .form-item-vertical .filter-input {
+                        width: 100%;
+                        margin: 0;
+                    }
+                </style>
+
+                <div class="form-item-vertical">
+                    <label>Tên bộ phận <span class="required">*</span></label>
+                    <input type="text" class="filter-input" placeholder="Nhập tên bộ phận...">
+                </div>
+
+                <div class="form-item-vertical">
+                    <label>Mã bộ phận <span class="required">*</span></label>
+                    <input type="text" class="filter-input" placeholder="Nhập mã bộ phận...">
+                </div>
+
+                <div class="form-item-vertical">
+                    <label>Bộ phận cha</label>
+                    <select class="filter-input">
+                        <option>-- Không có (Bộ phận gốc) --</option>
+                        <option>Sứ đầu vào (HV)</option>
+                        <option>Sứ đầu ra (MV)</option>
+                        <option>Bộ điều áp (OLTC)</option>
+                        <option>Thân máy</option>
+                    </select>
+                </div>
+
+                <div class="form-item-vertical">
+                    <label>Trạng thái</label>
+                    <select class="filter-input">
+                        <option>Hoạt động</option>
+                        <option>Tạm dừng</option>
+                        <option>Bảo trì</option>
+                    </select>
+                </div>
+            </div>
+            <div class="drawer-footer" style="padding: 20px; background: var(--bg-card);">
+                <button class="btn-cancel" onclick="closeDrawer()"
+                    style="background: transparent; border: 1px solid var(--border); color: var(--text-main); padding: 10px 32px; border-radius: 6px; font-weight: 600; cursor: pointer;">
+                    Hủy
+                </button>
+                <button class="btn-save" onclick="closeDrawer()"
+                    style="background: #3b82f6; color: white; border: none; padding: 10px 32px; border-radius: 6px; font-weight: 600; cursor: pointer;">
+                    Lưu
+                </button>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>
