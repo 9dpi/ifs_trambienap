@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="vi" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IFS - AI | Quản trị Bộ phận Thiết bị</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive-fixes.css">
+    <style>
+        .table-container-full {
+            overflow: visible;
+        }
+
+        .data-table th {
+            text-transform: uppercase;
+            font-size: 11px;
+            letter-spacing: 0.5px;
+        }
+
+        .sub-row {
+            background-color: rgba(255, 255, 255, 0.02);
+        }
+
+        .sub-row td:first-child {
+            padding-left: 30px;
+            color: var(--text-sub);
+        }
+
+        .toggle-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            margin-right: 8px;
+            transition: transform 0.2s;
+        }
+
+        .toggle-icon.collapsed {
+            transform: rotate(-90deg);
+        }
+
+        .part-name-cell {
+            display: flex;
+            align-items: center;
+        }
+
+        .btn-back {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--text-main);
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: 0.2s;
+            text-decoration: none;
+        }
+
+        .btn-back:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--text-sub);
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <div style="display:flex; align-items:center">
+            <button class="mobile-btn" onclick="toggleMobileMenu()">
+                <svg width="24" height="24" viewBox="0 0 24 24">
+                    <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" />
+                </svg>
+            </button>
+            <a href="dashboard.html" class="brand" style="text-decoration:none">
+                <div class="logo-box">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"></path>
+                    </svg>
+                </div> IFS - TRẠM BIẾN ÁP
+            </a>
+        </div>
+
+        <div class="nav-menu" id="mainMenu">
+            <div class="nav-wrapper"><a href="dashboard.html" class="nav-link">TRANG CHỦ</a></div>
+            <div class="nav-wrapper"><a href="giamsattructiep.html" class="nav-link">GIÁM SÁT TRỰC TIẾP</a></div>
+            <div class="nav-wrapper">
+                <div class="nav-link">THEO DÕI ĐIỂM ĐO <svg class="nav-arrow" width="10" viewBox="0 0 24 24">
+                        <path d="M7 10l5 5 5-5z" />
+                    </svg></div>
+                <div class="dropdown-menu">
+                    <a href="theodoidiemdo_canhbaoai.html" class="menu-link">Cảnh báo AI</a>
+                    <a href="theodoidiemdo_canhbao.html" class="menu-link">Nhiệt độ vượt ngưỡng</a>
+                    <a href="theodoidiemdo_nhatkynhietdo.html" class="menu-link">Nhật ký nhiệt độ</a>
+                    <a href="#" class="menu-link">Tổng hợp phân tích</a>
+                </div>
+            </div>
+            <div class="nav-wrapper">
+                <div class="nav-link active-link">QUẢN TRỊ HỆ THỐNG <svg class="nav-arrow" width="10"
+                        viewBox="0 0 24 24">
+                        <path d="M7 10l5 5 5-5z" />
+                    </svg></div>
+                <div class="dropdown-menu mega-menu">
+                    <div class="mega-col">
+                        <div class="col-header">HẠ TẦNG & THIẾT BỊ</div>
+                        <a href="quantrihethong_khuvuc.html" class="menu-link">Khu vực</a>
+                        <a href="quantrihethong_camera.html" class="menu-link">Camera</a>
+                        <a href="quantrihethong_cambien.html" class="menu-link">Cảm biến</a>
+                        <a href="quantrihethong_loaithietbi.html" class="menu-link active-link">Loại Thiết bị</a>
+                        <a href="quantrihethong_thietbi.html" class="menu-link">Thiết bị</a>
+                    </div>
+                    <div class="mega-col">
+                        <div class="col-header">THIẾT LẬP CẢNH BÁO</div>
+                        <a href="thietlapcanhbao_kenhcanhbao.html" class="menu-link">Kênh Cảnh báo</a>
+                        <a href="theodoidiemdo_bocanhbao.html" class="menu-link">Bộ cảnh báo</a>
+                    </div>
+                    <div class="mega-col">
+                        <div class="col-header">QUẢN LÝ NGƯỜI DÙNG</div>
+                        <a href="quantrihethong_nguoidung.html" class="menu-link">Người dùng</a>
+                        <a href="#" class="menu-link">Hướng dẫn sử dụng</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="header-actions">
+            <div class="theme-switch" onclick="toggleTheme()">
+                <div class="switch-knob"></div>
+            </div>
+            <div
+                style="width:32px; height:32px; background:#E5E7EB; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:700; color:#4B5563">
+                A</div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="bread-crumb">Quản trị hệ thống / Loại thiết bị / <span>Bộ phận</span></div>
+
+        <div class="grid">
+            <!-- Table Section -->
+            <div class="card table-container-full">
+                <div
+                    style="padding: 24px; display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 1px solid var(--border)">
+                    <div>
+                        <div
+                            style="font-size: 16px; font-weight: 700; color: var(--primary); text-transform: uppercase; margin-bottom: 4px;">
+                            Danh sách bộ phận</div>
+                        <div style="font-size: 12px; color: var(--text-sub);">Loại thiết bị: <span
+                                style="font-weight: 600; color: var(--text-main);">Máy biến áp lực (Full)</span></div>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <a href="quantrihethong_loaithietbi.html" class="btn-back">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <line x1="19" y1="12" x2="5" y2="12"></line>
+                                <polyline points="12 19 5 12 12 5"></polyline>
+                            </svg>
+                            Quay lại
+                        </a>
+                        <button class="btn-add" style="margin: 0;">+ Thêm bộ phận</button>
+                    </div>
+                </div>
+
+                <div id="tableView">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th style="width: 60px;">STT</th>
+                                <th>Tên bộ phận</th>
+                                <th>Mã bộ phận</th>
+                                <th>Trạng thái</th>
+                                <th style="width: 120px; text-align: center;">Hành động</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Main Part 1 -->
+                            <tr>
+                                <td>1</td>
+                                <td>
+                                    <div class="part-name-cell">
+                                        <div class="toggle-icon">
+                                            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+                                                <path d="M7 10l5 5 5-5z" />
+                                            </svg>
+                                        </div>
+                                        Sứ đầu vào (HV)
+                                    </div>
+                                </td>
+                                <td>HV_BUSHING</td>
+                                <td><span style="color:var(--success)">Hoạt động</span></td>
+                                <td style="text-align: center;">
+                                    <div class="action-group">
+                                        <button class="action-btn-circle btn-edit-round" title="Sửa">✎</button>
+                                        <button class="action-btn-circle btn-delete-round" title="Xóa">🗑</button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <!-- Sub Parts for 1 -->
+                            <tr class="sub-row">
+                                <td>1.1</td>
+                                <td>Pha A</td>
+                                <td>HV_A</td>
+                                <td><span style="color:var(--success)">Hoạt động</span></td>
+                                <td style="text-align: center;">
+                                    <div class="action-group">
+                                        <button class="action-btn-circle btn-edit-round" title="Sửa">✎</button>
+                                        <button class="action-btn-circle btn-delete-round" title="Xóa">🗑</button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr class="sub-row">
+                                <td>1.2</td>
+                                <td>Pha B</td>
+                                <td>HV_B</td>
+                                <td><span style="color:var(--success)">Hoạt động</span></td>
+                                <td style="text-align: center;">
+                                    <div class="action-group">
+                                        <button class="action-btn-circle btn-edit-round" title="Sửa">✎</button>
+                                        <button class="action-btn-circle btn-delete-round" title="Xóa">🗑</button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr class="sub-row">
+                                <td>1.3</td>
+                                <td>Pha C</td>
+                                <td>HV_C</td>
+                                <td><span style="color:var(--success)">Hoạt động</span></td>
+                                <td style="text-align: center;">
+                                    <div class="action-group">
+                                        <button class="action-btn-circle btn-edit-round" title="Sửa">✎</button>
+                                        <button class="action-btn-circle btn-delete-round" title="Xóa">🗑</button>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <!-- Main Part 2 -->
+                            <tr>
+                                <td>2</td>
+                                <td>
+                                    <div class="part-name-cell">
+                                        <div class="toggle-icon collapsed">
+                                            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+                                                <path d="M7 10l5 5 5-5z" />
+                                            </svg>
+                                        </div>
+                                        Sứ đầu ra (MV)
+                                    </div>
+                                </td>
+                                <td>MV_BUSHING</td>
+                                <td><span style="color:var(--success)">Hoạt động</span></td>
+                                <td style="text-align: center;">
+                                    <div class="action-group">
+                                        <button class="action-btn-circle btn-edit-round" title="Sửa">✎</button>
+                                        <button class="action-btn-circle btn-delete-round" title="Xóa">🗑</button>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <!-- Main Part 3 -->
+                            <tr>
+                                <td>3</td>
+                                <td>
+                                    <div class="part-name-cell">
+                                        <div class="toggle-icon collapsed">
+                                            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+                                                <path d="M7 10l5 5 5-5z" />
+                                            </svg>
+                                        </div>
+                                        Bộ điều áp (OLTC)
+                                    </div>
+                                </td>
+                                <td>OLTC</td>
+                                <td><span style="color:var(--success)">Hoạt động</span></td>
+                                <td style="text-align: center;">
+                                    <div class="action-group">
+                                        <button class="action-btn-circle btn-edit-round" title="Sửa">✎</button>
+                                        <button class="action-btn-circle btn-delete-round" title="Xóa">🗑</button>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <!-- Main Part 4 -->
+                            <tr>
+                                <td>4</td>
+                                <td>Thân máy</td>
+                                <td>BODY</td>
+                                <td><span style="color:var(--success)">Hoạt động</span></td>
+                                <td style="text-align: center;">
+                                    <div class="action-group">
+                                        <button class="action-btn-circle btn-edit-round" title="Sửa">✎</button>
+                                        <button class="action-btn-circle btn-delete-round" title="Xóa">🗑</button>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <!-- Main Part 5 -->
+                            <tr>
+                                <td>5</td>
+                                <td>Bình dầu phụ</td>
+                                <td>OIL_TANK</td>
+                                <td><span style="color:var(--success)">Hoạt động</span></td>
+                                <td style="text-align: center;">
+                                    <div class="action-group">
+                                        <button class="action-btn-circle btn-edit-round" title="Sửa">✎</button>
+                                        <button class="action-btn-circle btn-delete-round" title="Xóa">🗑</button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div
+                    style="padding: 16px 24px; border-top: 1px solid var(--border); font-size: 12px; color: var(--text-sub);">
+                    Tổng cộng: <span style="font-weight: 600; color: var(--text-main);">5</span> bộ phận chính, <span
+                        style="font-weight: 600; color: var(--text-main);">6</span> bộ phận con
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script src="js/responsive-helpers.js"></script>
+</body>
+
+</html>
