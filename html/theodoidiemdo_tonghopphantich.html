@@ -555,7 +555,7 @@
             display: block;
         }
 
-        /* Filter Drawer Styles - Large & Refined */
+        /* Filter Drawer Styles - Final Refined */
         .drawer-overlay {
             position: fixed;
             top: 0;
@@ -573,7 +573,7 @@
         }
 
         .drawer {
-            width: 480px;
+            width: 500px;
             height: 100%;
             background: #111827;
             box-shadow: -15px 0 50px rgba(0, 0, 0, 0.7);
@@ -611,24 +611,16 @@
         }
 
         .close-drawer {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--border);
+            background: transparent;
+            border: none;
             color: var(--text-sub);
-            width: 36px;
-            height: 36px;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            font-size: 28px;
             cursor: pointer;
-            transition: 0.2s;
-            font-size: 24px;
+            line-height: 1;
         }
 
         .close-drawer:hover {
-            background: rgba(239, 68, 68, 0.1);
             color: #ef4444;
-            border-color: rgba(239, 68, 68, 0.2);
         }
 
         .drawer-body {
@@ -645,16 +637,16 @@
 
         .drawer-body::-webkit-scrollbar-thumb,
         .filter-list::-webkit-scrollbar-thumb {
-            background: var(--border);
+            background: rgba(255, 255, 255, 0.1);
             border-radius: 10px;
         }
 
         .filter-group {
-            margin-bottom: 8px;
+            margin-bottom: 4px;
         }
 
         .filter-group-header {
-            padding: 20px 30px;
+            padding: 20px 30px 12px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -665,46 +657,45 @@
             display: flex;
             align-items: center;
             gap: 14px;
-            font-size: 15px;
+            font-size: 18px;
             font-weight: 800;
             text-transform: uppercase;
             color: white;
-            letter-spacing: 0.8px;
+            letter-spacing: 0.5px;
         }
 
         .section-badge {
             background: #3b82f6;
             color: white;
-            width: 24px;
-            height: 24px;
+            width: 26px;
+            height: 26px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 12px;
+            font-size: 13px;
             font-weight: 700;
         }
 
         .filter-group-content {
-            padding: 0 20px 24px;
+            padding: 0 20px 16px;
         }
 
         .filter-list {
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 4px;
         }
 
         .filter-item {
             display: flex;
             align-items: center;
-            gap: 16px;
-            padding: 14px 20px;
-            border-radius: 10px;
+            gap: 18px;
+            padding: 14px 24px;
+            border-radius: 12px;
             cursor: pointer;
-            transition: 0.2s;
+            transition: 0.15s;
             background: transparent;
-            border: 1px solid transparent;
         }
 
         .filter-item:hover {
@@ -712,8 +703,7 @@
         }
 
         .filter-item.active {
-            background: rgba(30, 41, 59, 0.8);
-            border-color: rgba(59, 130, 246, 0.2);
+            background: rgba(30, 48, 77, 0.6);
         }
 
         .custom-checkbox {
@@ -726,7 +716,7 @@
             justify-content: center;
             transition: 0.2s;
             flex-shrink: 0;
-            background: rgba(255, 255, 255, 0.1);
+            background: transparent;
         }
 
         .filter-item.active .custom-checkbox {
@@ -746,25 +736,25 @@
         }
 
         .filter-label {
-            font-size: 15px;
+            font-size: 16px;
             color: rgba(255, 255, 255, 0.9);
             font-weight: 600;
             user-select: none;
         }
 
         .drawer-footer {
-            padding: 30px;
+            padding: 24px 30px;
             border-top: 1px solid var(--border);
             display: flex;
-            gap: 20px;
+            gap: 16px;
             background: #111827;
         }
 
         .btn-reset {
             flex: 1;
-            background: rgba(255, 255, 255, 0.04);
-            color: var(--text-main);
-            border: 1px solid var(--border);
+            background: #64748b;
+            color: white;
+            border: none;
             border-radius: 12px;
             padding: 14px;
             font-weight: 600;
@@ -774,16 +764,10 @@
             align-items: center;
             justify-content: center;
             gap: 10px;
-            transition: 0.2s;
-        }
-
-        .btn-reset:hover {
-            background: rgba(255, 255, 255, 0.08);
-            border-color: var(--text-sub);
         }
 
         .btn-apply-drawer {
-            flex: 1.8;
+            flex: 2.5;
             background: #3b82f6;
             color: white;
             border: none;
@@ -796,7 +780,6 @@
             align-items: center;
             justify-content: center;
             gap: 10px;
-            transition: 0.2s;
             box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
         }
 
@@ -1282,7 +1265,8 @@
         <div class="drawer">
             <div class="drawer-header">
                 <h3>
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2.5"
+                        style="margin-right: 2px;">
                         <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
                     </svg>
                     Bộ lọc dữ liệu
@@ -1297,7 +1281,7 @@
                             KHU VỰC <span class="section-badge">1</span>
                         </div>
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2">
+                            stroke-width="2.5">
                             <path d="M6 9l6 6 6-6" />
                         </svg>
                     </div>
@@ -1305,28 +1289,28 @@
                         <div class="filter-list">
                             <div class="filter-item active">
                                 <div class="custom-checkbox"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                        stroke-width="3">
+                                        stroke-width="3.5">
                                         <polyline points="20 6 9 17 4 12"></polyline>
                                     </svg></div>
                                 <span class="filter-label">Trạm 110kV Nam Phú Quốc</span>
                             </div>
                             <div class="filter-item">
                                 <div class="custom-checkbox"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                        stroke-width="3">
+                                        stroke-width="3.5">
                                         <polyline points="20 6 9 17 4 12"></polyline>
                                     </svg></div>
                                 <span class="filter-label">Trạm 110kV Liên Trì</span>
                             </div>
                             <div class="filter-item">
                                 <div class="custom-checkbox"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                        stroke-width="3">
+                                        stroke-width="3.5">
                                         <polyline points="20 6 9 17 4 12"></polyline>
                                     </svg></div>
                                 <span class="filter-label">Biển đảo</span>
                             </div>
                             <div class="filter-item">
                                 <div class="custom-checkbox"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                        stroke-width="3">
+                                        stroke-width="3.5">
                                         <polyline points="20 6 9 17 4 12"></polyline>
                                     </svg></div>
                                 <span class="filter-label">Công ty Điện lực</span>
@@ -1342,36 +1326,36 @@
                             THIẾT BỊ <span class="section-badge">1</span>
                         </div>
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2">
+                            stroke-width="2.5">
                             <path d="M6 9l6 6 6-6" />
                         </svg>
                     </div>
                     <div class="filter-group-content">
-                        <div class="filter-list">
+                        <div class="filter-list" style="max-height: 220px; overflow-y: auto; padding-right: 4px;">
                             <div class="filter-item active">
                                 <div class="custom-checkbox"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                        stroke-width="3">
+                                        stroke-width="3.5">
                                         <polyline points="20 6 9 17 4 12"></polyline>
                                     </svg></div>
                                 <span class="filter-label">112 - Máy cắt</span>
                             </div>
                             <div class="filter-item">
                                 <div class="custom-checkbox"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                        stroke-width="3">
+                                        stroke-width="3.5">
                                         <polyline points="20 6 9 17 4 12"></polyline>
                                     </svg></div>
                                 <span class="filter-label">131 - Thanh cái</span>
                             </div>
                             <div class="filter-item">
                                 <div class="custom-checkbox"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                        stroke-width="3">
+                                        stroke-width="3.5">
                                         <polyline points="20 6 9 17 4 12"></polyline>
                                     </svg></div>
                                 <span class="filter-label">171 - Đường dây</span>
                             </div>
                             <div class="filter-item">
                                 <div class="custom-checkbox"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                        stroke-width="3">
+                                        stroke-width="3.5">
                                         <polyline points="20 6 9 17 4 12"></polyline>
                                     </svg></div>
                                 <span class="filter-label">MBA T1</span>
@@ -1387,7 +1371,7 @@
                             BỘ PHẬN <span class="section-badge">4</span>
                         </div>
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2">
+                            stroke-width="2.5">
                             <path d="M6 9l6 6 6-6" />
                         </svg>
                     </div>
@@ -1395,28 +1379,28 @@
                         <div class="filter-list">
                             <div class="filter-item active">
                                 <div class="custom-checkbox"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                        stroke-width="3">
+                                        stroke-width="3.5">
                                         <polyline points="20 6 9 17 4 12"></polyline>
                                     </svg></div>
                                 <span class="filter-label">MC112 - Pha A (AI)</span>
                             </div>
                             <div class="filter-item active">
                                 <div class="custom-checkbox"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                        stroke-width="3">
+                                        stroke-width="3.5">
                                         <polyline points="20 6 9 17 4 12"></polyline>
                                     </svg></div>
                                 <span class="filter-label">MC112 - Pha B (BI)</span>
                             </div>
                             <div class="filter-item active">
                                 <div class="custom-checkbox"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                        stroke-width="3">
+                                        stroke-width="3.5">
                                         <polyline points="20 6 9 17 4 12"></polyline>
                                     </svg></div>
                                 <span class="filter-label">MC112 - Pha C (CI)</span>
                             </div>
                             <div class="filter-item active">
                                 <div class="custom-checkbox"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                        stroke-width="3">
+                                        stroke-width="3.5">
                                         <polyline points="20 6 9 17 4 12"></polyline>
                                     </svg></div>
                                 <span class="filter-label">MC112 - Nhiệt độ môi trường</span>
@@ -1427,14 +1411,15 @@
             </div>
             <div class="drawer-footer">
                 <button class="btn-reset" onclick="resetFilters()">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2.5">
                         <path d="M23 4v6h-6"></path>
                         <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
                     </svg>
                     Đặt lại
                 </button>
                 <button class="btn-apply-drawer" onclick="closeFilterDrawer()">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
                         <circle cx="11" cy="11" r="8"></circle>
                         <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
                     </svg>
