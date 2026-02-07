@@ -392,6 +392,72 @@
             background: rgba(255, 255, 255, 0.05);
             color: var(--primary);
         }
+
+        /* AVG and Filter styles */
+        .header-tools {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .avg-dropdown {
+            background: #111827;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            padding: 2px 8px;
+            gap: 8px;
+            height: 34px;
+        }
+
+        .avg-tag {
+            background: rgba(16, 185, 129, 0.1);
+            color: #10B981;
+            font-size: 10px;
+            font-weight: 800;
+            padding: 2px 4px;
+            border-radius: 4px;
+        }
+
+        .avg-select {
+            background: transparent;
+            border: none;
+            color: var(--text-main);
+            font-size: 13px;
+            font-weight: 600;
+            outline: none;
+            cursor: pointer;
+            padding-right: 4px;
+        }
+
+        .filter-badge-simple {
+            background: #111827;
+            border: 1px solid var(--border);
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-main);
+            cursor: pointer;
+            height: 34px;
+            font-weight: 600;
+        }
+
+        .badge-count {
+            background: #3B82F6;
+            color: white;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            font-weight: 700;
+        }
     </style>
 </head>
 
@@ -479,6 +545,23 @@
             <div class="card" style="padding: 20px;">
                 <div class="summary-header">
                     <div class="summary-title">Nhật ký nhiệt độ theo điểm đo</div>
+                    <div class="header-tools">
+                        <div class="avg-dropdown">
+                            <span class="avg-tag">AVG</span>
+                            <select class="avg-select">
+                                <option>Trung bình</option>
+                                <option>Lớn nhất</option>
+                                <option>Nhỏ nhất</option>
+                            </select>
+                        </div>
+                        <div class="filter-badge-simple">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.5">
+                                <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
+                            </svg>
+                            Bộ lọc <span class="badge-count">4</span>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="filter-section-modern">
