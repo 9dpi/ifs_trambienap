@@ -385,6 +385,21 @@
         function closeThresholdDrawer() {
             document.getElementById('thresholdDrawer').classList.remove('open');
         }
+
+        function toggleFilterDropdown(event) {
+            event.stopPropagation();
+            const dropdown = document.getElementById('filterDropdown');
+            dropdown.classList.toggle('show');
+        }
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function (event) {
+            const dropdown = document.getElementById('filterDropdown');
+            const badge = document.querySelector('.filter-badge');
+            if (dropdown && !dropdown.contains(event.target) && !badge.contains(event.target)) {
+                dropdown.classList.remove('show');
+            }
+        });
     </script>
 
     <!-- DRAWER FOR ADD/EDIT DEVICE -->
@@ -890,6 +905,93 @@
                         position: absolute;
                         right: 0;
                         top: 4px;
+                        z-index: 10;
+                    }
+
+                    /* Filter Dropdown Styles */
+                    .filter-dropdown {
+                        position: absolute;
+                        top: calc(100% + 8px);
+                        right: 0;
+                        width: 300px;
+                        background: #1a202c;
+                        border: 1px solid var(--border);
+                        border-radius: 12px;
+                        padding: 16px;
+                        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+                        display: none;
+                        flex-direction: column;
+                        gap: 12px;
+                        z-index: 100;
+                    }
+
+                    .filter-dropdown.show {
+                        display: flex;
+                    }
+
+                    .fd-title {
+                        font-size: 14px;
+                        font-weight: 700;
+                        color: var(--text-main);
+                        padding-bottom: 12px;
+                        border-bottom: 1px solid var(--border);
+                        margin-bottom: 4px;
+                    }
+
+                    .fd-item {
+                        display: flex;
+                        align-items: center;
+                        gap: 12px;
+                        padding: 8px 0;
+                        cursor: pointer;
+                    }
+
+                    .fd-checkbox {
+                        width: 18px;
+                        height: 18px;
+                        border: 1.5px solid #3b82f6;
+                        border-radius: 4px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        transition: 0.2s;
+                    }
+
+                    .fd-checkbox.checked {
+                        background: #3b82f6;
+                    }
+
+                    .fd-checkbox svg {
+                        width: 12px;
+                        height: 12px;
+                        color: white;
+                        display: none;
+                    }
+
+                    .fd-checkbox.checked svg {
+                        display: block;
+                    }
+
+                    .fd-label {
+                        font-size: 13px;
+                        color: var(--text-main);
+                    }
+
+                    .btn-apply-filter {
+                        background: #3b82f6;
+                        color: white;
+                        border: none;
+                        padding: 12px;
+                        border-radius: 8px;
+                        font-weight: 600;
+                        font-size: 13px;
+                        cursor: pointer;
+                        margin-top: 8px;
+                        transition: 0.2s;
+                    }
+
+                    .btn-apply-filter:hover {
+                        background: #2563eb;
                     }
 
                     .level-block {
@@ -1062,13 +1164,48 @@
                     <div class="th-tab active">So với môi trường</div>
                     <div class="th-tab">So với ngưỡng nhiệt</div>
                     <div class="th-tab">So với pha min</div>
-                    <div class="filter-badge">
+                    <div class="filter-badge" onclick="toggleFilterDropdown(event)">
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="2">
                             <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
                         </svg>
                         Lọc <span
                             style="background: #3b82f6; color: white; border-radius: 10px; padding: 0 6px; font-size: 10px;">3</span>
+
+                        <div class="filter-dropdown" id="filterDropdown">
+                            <div class="fd-title">Chọn loại ngưỡng hiển thị</div>
+                            <div class="fd-item"
+                                onclick="this.querySelector('.fd-checkbox').classList.toggle('checked')">
+                                <div class="fd-checkbox checked">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
+                                        stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg>
+                                </div>
+                                <span class="fd-label">So với môi trường</span>
+                            </div>
+                            <div class="fd-item"
+                                onclick="this.querySelector('.fd-checkbox').classList.toggle('checked')">
+                                <div class="fd-checkbox checked">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
+                                        stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg>
+                                </div>
+                                <span class="fd-label">So với ngưỡng nhiệt</span>
+                            </div>
+                            <div class="fd-item"
+                                onclick="this.querySelector('.fd-checkbox').classList.toggle('checked')">
+                                <div class="fd-checkbox checked">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
+                                        stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg>
+                                </div>
+                                <span class="fd-label">So với pha min</span>
+                            </div>
+                            <button class="btn-apply-filter" onclick="toggleFilterDropdown(event)">Áp dụng</button>
+                        </div>
                     </div>
                 </div>
 
