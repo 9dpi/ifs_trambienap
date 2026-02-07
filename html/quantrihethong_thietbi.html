@@ -369,6 +369,14 @@
             document.getElementById('deviceDrawer').classList.remove('open');
             document.body.style.overflow = '';
         }
+
+        function openPointDrawer() {
+            document.getElementById('pointDrawer').classList.add('open');
+        }
+
+        function closePointDrawer() {
+            document.getElementById('pointDrawer').classList.remove('open');
+        }
     </script>
 
     <!-- DRAWER FOR ADD/EDIT DEVICE -->
@@ -573,7 +581,7 @@
                         <div style="display: flex; gap: 8px;">
                             <span class="point-tag point-tag-solid">CS1T1</span>
                         </div>
-                        <button class="btn-action-sm">
+                        <button class="btn-action-sm" onclick="openPointDrawer()">
                             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                 stroke-width="2">
                                 <circle cx="12" cy="12" r="5"></circle>
@@ -596,7 +604,7 @@
                             <span class="point-tag point-tag-solid">CS1T1-A</span>
                             <span class="point-tag point-tag-outline">CS1T1_A</span>
                         </div>
-                        <button class="btn-action-sm">
+                        <button class="btn-action-sm" onclick="openPointDrawer()">
                             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                 stroke-width="2">
                                 <circle cx="12" cy="12" r="5"></circle>
@@ -619,7 +627,7 @@
                             <span class="point-tag point-tag-solid">CS1T1-B</span>
                             <span class="point-tag point-tag-outline">CS1T1_B</span>
                         </div>
-                        <button class="btn-action-sm">
+                        <button class="btn-action-sm" onclick="openPointDrawer()">
                             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                 stroke-width="2">
                                 <circle cx="12" cy="12" r="5"></circle>
@@ -642,7 +650,7 @@
                             <span class="point-tag point-tag-solid">CS1T1-C</span>
                             <span class="point-tag point-tag-outline">CS1T1_C</span>
                         </div>
-                        <button class="btn-action-sm">
+                        <button class="btn-action-sm" onclick="openPointDrawer()">
                             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                 stroke-width="2">
                                 <circle cx="12" cy="12" r="5"></circle>
@@ -668,6 +676,118 @@
                     Hủy
                 </button>
                 <button class="btn-save" onclick="closeDrawer()">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
+                        <polyline points="17 21 17 13 7 13 7 21"></polyline>
+                        <polyline points="7 3 7 8 15 8"></polyline>
+                    </svg>
+                    Lưu
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="drawer-overlay" id="pointDrawer" style="z-index: 2000;">
+        <div class="drawer drawer-lg" style="width: 700px; right: -700px;">
+            <div class="drawer-header">
+                <div style="display: flex; gap: 10px;">
+                    <style>
+                        .tab-btn {
+                            padding: 6px 12px;
+                            border-radius: 6px;
+                            border: 1px solid var(--border);
+                            background: transparent;
+                            color: var(--text-main);
+                            font-size: 13px;
+                            font-weight: 600;
+                            cursor: pointer;
+                            display: flex;
+                            align-items: center;
+                            gap: 8px;
+                        }
+
+                        .tab-btn.active {
+                            border-color: #3b82f6;
+                            color: #3b82f6;
+                            background: rgba(59, 130, 246, 0.05);
+                        }
+
+                        .btn-orange-full {
+                            background: #F59E0B;
+                            color: white;
+                            border: none;
+                            padding: 10px 20px;
+                            border-radius: 6px;
+                            font-weight: 600;
+                            cursor: pointer;
+                            transition: 0.2s;
+                        }
+
+                        .btn-orange-full:hover {
+                            background: #D97706;
+                        }
+
+                        .form-item-v {
+                            display: flex;
+                            flex-direction: column;
+                            gap: 8px;
+                            margin-bottom: 20px;
+                        }
+
+                        .form-item-v label {
+                            font-size: 13px;
+                            font-weight: 600;
+                            color: var(--text-main);
+                        }
+                    </style>
+                    <button class="tab-btn">+ Thêm</button>
+                    <button class="tab-btn active">CS1T1 <span style="margin-left:5px">&times;</span></button>
+                </div>
+                <button class="close-drawer" onclick="closePointDrawer()">&times;</button>
+            </div>
+            <div class="drawer-body">
+                <div class="form-grid" style="margin-top: 10px;">
+                    <div class="form-item-v">
+                        <label>Tên</label>
+                        <input type="text" class="filter-input" value="CS1T1">
+                    </div>
+                    <div class="form-item-v">
+                        <label>Tọa độ</label>
+                        <button class="btn-coord">Chọn tọa độ trên ảnh</button>
+                    </div>
+                </div>
+
+                <div class="form-item-v">
+                    <label>Bộ phận cha</label>
+                    <select class="filter-input">
+                        <option>Chọn bộ phận cha</option>
+                    </select>
+                </div>
+
+                <div class="form-grid">
+                    <div class="form-item-v">
+                        <label>Camera</label>
+                        <select class="filter-input">
+                            <option>Chọn</option>
+                        </select>
+                    </div>
+                    <div class="form-item-v">
+                        <label>Sensor</label>
+                        <select class="filter-input">
+                            <option>Chọn</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="drawer-footer">
+                <button class="btn-cancel" onclick="closePointDrawer()">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                    Hủy
+                </button>
+                <button class="btn-orange-full">Thiết lập ngưỡng nhiệt</button>
+                <button class="btn-save" onclick="closePointDrawer()">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
                         <polyline points="17 21 17 13 7 13 7 21"></polyline>
