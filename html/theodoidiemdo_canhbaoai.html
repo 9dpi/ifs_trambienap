@@ -28,16 +28,17 @@
 
         /* Filter Refinement */
         .filter-grid-ai {
-            display: grid;
-            grid-template-columns: 1.2fr 1.2fr 1fr;
-            gap: 20px 40px;
+            display: flex;
             align-items: center;
+            gap: 15px;
+            flex-wrap: nowrap;
         }
 
         .filter-group-ai {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 10px;
+            flex: 1;
         }
 
         .filter-group-ai label {
@@ -45,7 +46,7 @@
             font-weight: 700;
             color: var(--text-main);
             white-space: nowrap;
-            min-width: 90px;
+            /* Removed min-width to save space in single row layout */
         }
 
         .input-icon-wrapper {
