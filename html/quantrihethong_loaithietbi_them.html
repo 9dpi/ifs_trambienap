@@ -354,59 +354,81 @@
 
     <!-- DRAWER FOR ADD/EDIT PART -->
     <div class="drawer-overlay" id="partDrawer">
-        <div class="drawer" style="width: 450px; right: -450px;">
+        <div class="drawer" style="width: 500px; right: -500px;">
             <div class="drawer-header">
-                <h3 style="color: #3b82f6;">THÊM BỘ PHẬN</h3>
+                <h3 style="color: #3b82f6; font-size: 18px; text-transform: uppercase;">SỬA BỘ PHẬN</h3>
                 <button class="close-drawer" onclick="closeDrawer()">&times;</button>
             </div>
             <div class="drawer-body">
                 <style>
-                    .form-item-vertical {
-                        display: flex;
-                        flex-direction: column;
-                        gap: 8px;
-                        margin-bottom: 24px;
+                    .form-item-horizontal {
+                        display: grid;
+                        grid-template-columns: 140px 1fr;
+                        align-items: center;
+                        gap: 15px;
+                        margin-bottom: 20px;
                     }
 
-                    .form-item-vertical label {
-                        font-size: 13px;
+                    .form-item-horizontal label {
+                        font-size: 14px;
                         font-weight: 600;
                         color: var(--text-main);
                     }
 
-                    .form-item-vertical label .required {
+                    .form-item-horizontal label .required {
                         color: var(--danger);
                         margin-left: 3px;
                     }
 
-                    .form-item-vertical .filter-input {
+                    .form-item-horizontal .filter-input {
                         width: 100%;
                         margin: 0;
+                        background: #111827;
+                        border-radius: 6px;
+                    }
+
+                    .btn-amber {
+                        background: #FBBF24;
+                        color: #000;
+                        border: none;
+                        padding: 10px 20px;
+                        border-radius: 8px;
+                        font-weight: 700;
+                        font-size: 14px;
+                        cursor: pointer;
+                        display: flex;
+                        align-items: center;
+                        gap: 8px;
+                        transition: 0.2s;
+                    }
+
+                    .btn-amber:hover {
+                        background: #F59E0B;
                     }
                 </style>
 
-                <div class="form-item-vertical">
+                <div class="form-item-horizontal">
                     <label>Tên bộ phận <span class="required">*</span></label>
-                    <input type="text" class="filter-input" placeholder="Nhập tên bộ phận...">
+                    <input type="text" class="filter-input" placeholder="Nhập tên bộ phận..." value="Pha A">
                 </div>
 
-                <div class="form-item-vertical">
+                <div class="form-item-horizontal">
                     <label>Mã bộ phận <span class="required">*</span></label>
-                    <input type="text" class="filter-input" placeholder="Nhập mã bộ phận...">
+                    <input type="text" class="filter-input" placeholder="Nhập mã bộ phận..." value="HV_A">
                 </div>
 
-                <div class="form-item-vertical">
+                <div class="form-item-horizontal">
                     <label>Bộ phận cha</label>
                     <select class="filter-input">
-                        <option>-- Không có (Bộ phận gốc) --</option>
                         <option>Sứ đầu vào (HV)</option>
+                        <option>-- Không có (Bộ phận gốc) --</option>
                         <option>Sứ đầu ra (MV)</option>
                         <option>Bộ điều áp (OLTC)</option>
                         <option>Thân máy</option>
                     </select>
                 </div>
 
-                <div class="form-item-vertical">
+                <div class="form-item-horizontal">
                     <label>Trạng thái</label>
                     <select class="filter-input">
                         <option>Hoạt động</option>
@@ -415,9 +437,18 @@
                     </select>
                 </div>
             </div>
-            <div class="drawer-footer">
-                <button class="btn-cancel" onclick="closeDrawer()">Hủy</button>
-                <button class="btn-save" onclick="closeDrawer()">Lưu</button>
+            <div class="drawer-footer" style="justify-content: space-between;">
+                <button class="btn-amber">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2.5">
+                        <path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"></path>
+                    </svg>
+                    Thiết lập ngưỡng nhiệt
+                </button>
+                <div style="display: flex; gap: 12px;">
+                    <button class="btn-cancel" onclick="closeDrawer()">Hủy</button>
+                    <button class="btn-save" onclick="closeDrawer()">Lưu</button>
+                </div>
             </div>
         </div>
     </div>
