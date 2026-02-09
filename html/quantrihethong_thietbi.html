@@ -710,22 +710,24 @@
         </div>
     </div>
     <div class="drawer-overlay" id="pointDrawer" style="z-index: 2000;">
-        <div class="drawer drawer-lg" style="width: 700px; right: -700px;">
+        <div class="drawer drawer-lg" style="width: 900px; right: -900px;">
             <div class="drawer-header">
                 <div style="display: flex; gap: 10px;">
                     <style>
                         .tab-btn {
-                            padding: 6px 12px;
+                            padding: 6px 16px;
                             border-radius: 6px;
                             border: 1px solid var(--border);
                             background: transparent;
                             color: var(--text-main);
-                            font-size: 13px;
+                            font-size: 14px;
                             font-weight: 600;
                             cursor: pointer;
                             display: flex;
                             align-items: center;
-                            gap: 8px;
+                            gap: 12px;
+                            min-width: 120px;
+                            justify-content: space-between;
                         }
 
                         .tab-btn.active {
@@ -738,7 +740,7 @@
                             background: #F59E0B;
                             color: white;
                             border: none;
-                            padding: 10px 20px;
+                            padding: 10px 24px;
                             border-radius: 6px;
                             font-weight: 600;
                             cursor: pointer;
@@ -749,11 +751,29 @@
                             background: #D97706;
                         }
 
+                        .point-tag-item {
+                            background: rgba(255, 255, 255, 0.05);
+                            border: 1px solid var(--border);
+                            padding: 6px 14px;
+                            border-radius: 6px;
+                            font-size: 13px;
+                            display: flex;
+                            align-items: center;
+                            gap: 10px;
+                            width: fit-content;
+                        }
+
+                        .point-tag-item .remove-tag {
+                            color: var(--text-sub);
+                            cursor: pointer;
+                            font-size: 16px;
+                        }
+
                         .form-item-v {
                             display: flex;
                             flex-direction: column;
                             gap: 8px;
-                            margin-bottom: 20px;
+                            margin-bottom: 16px;
                         }
 
                         .form-item-v label {
@@ -762,27 +782,29 @@
                             color: var(--text-main);
                         }
                     </style>
-                    <button class="tab-btn">+ Thêm</button>
-                    <button class="tab-btn active">CS1T1 <span style="margin-left:5px">&times;</span></button>
+                    <button class="tab-btn active">CS1T1-A <span style="font-size: 18px;">&times;</span></button>
+                    <button class="tab-btn" style="min-width: 50px; justify-content: center;">+</button>
                 </div>
                 <button class="close-drawer" onclick="closePointDrawer()">&times;</button>
             </div>
             <div class="drawer-body">
-                <div class="form-grid" style="margin-top: 10px;">
+                <div class="form-grid">
                     <div class="form-item-v">
                         <label>Tên</label>
-                        <input type="text" class="filter-input" value="CS1T1">
+                        <input type="text" class="filter-input" value="CS1T1-A">
                     </div>
                     <div class="form-item-v">
                         <label>Tọa độ</label>
-                        <button class="btn-coord">Chọn tọa độ trên ảnh</button>
+                        <button class="btn-coord"
+                            style="background: #FBBF24; color: #000; border: none; height: 38px;">Chọn tọa độ trên
+                            ảnh</button>
                     </div>
                 </div>
 
                 <div class="form-item-v">
                     <label>Bộ phận cha</label>
                     <select class="filter-input">
-                        <option>Chọn bộ phận cha</option>
+                        <option>CS1T1</option>
                     </select>
                 </div>
 
@@ -790,32 +812,53 @@
                     <div class="form-item-v">
                         <label>Camera</label>
                         <select class="filter-input">
-                            <option>Chọn</option>
+                            <option>Cam nhiệt cố định</option>
                         </select>
                     </div>
                     <div class="form-item-v">
                         <label>Sensor</label>
                         <select class="filter-input">
-                            <option>Chọn</option>
+                            <option>Nhiệt độ môi trường</option>
                         </select>
+                    </div>
+                </div>
+
+                <div class="form-item-v">
+                    <label>Điểm giám sát của camera được chọn</label>
+                    <div style="position: relative;">
+                        <select class="filter-input" style="padding-left: 45px;">
+                            <option></option>
+                        </select>
+                        <div
+                            style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); background: transparent; border: 1px solid var(--border); border-radius: 4px; padding: 0 8px; font-size: 16px; color: var(--text-sub); line-height: 20px;">
+                            &times;
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-item-v">
+                    <label>Điểm giám sát của Sensor được chọn</label>
+                    <select class="filter-input">
+                        <option value="">Chọn điểm giám sát</option>
+                    </select>
+                </div>
+
+                <div class="form-item-v">
+                    <label>Danh sách điểm giám sát của camera</label>
+                    <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 5px;">
+                        <div class="point-tag-item">
+                            CS1T1_A <span class="remove-tag">&times;</span>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="drawer-footer">
                 <button class="btn-cancel" onclick="closePointDrawer()">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <line x1="18" y1="6" x2="6" y2="18"></line>
-                        <line x1="6" y1="6" x2="18" y2="18"></line>
-                    </svg>
                     Hủy
                 </button>
-                <button class="btn-orange-full" onclick="openThresholdDrawer()">Thiết lập ngưỡng nhiệt</button>
+                <button class="btn-orange-full" onclick="openThresholdDrawer()" style="margin-right: auto;">Thiết lập
+                    ngưỡng nhiệt</button>
                 <button class="btn-save" onclick="closePointDrawer()">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
-                        <polyline points="17 21 17 13 7 13 7 21"></polyline>
-                        <polyline points="7 3 7 8 15 8"></polyline>
-                    </svg>
                     Lưu
                 </button>
             </div>
@@ -1334,8 +1377,7 @@
             </div>
             <div class="drawer-footer">
                 <button class="btn-cancel" onclick="closeThresholdDrawer()">Hủy</button>
-                <button class="btn-save" onclick="closeThresholdDrawer()"
-                    style="background: #3b82f6; color: white; padding: 10px 32px;">Lưu cấu hình</button>
+                <button class="btn-save" onclick="closeThresholdDrawer()">Lưu cấu hình</button>
             </div>
         </div>
     </div>
