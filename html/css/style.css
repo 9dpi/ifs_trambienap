@@ -739,6 +739,18 @@ body {
     cursor: pointer;
 }
 
+.mobile-btn svg {
+    fill: currentColor;
+}
+
+.mobile-btn svg[fill="none"] {
+    fill: none;
+}
+
+.mobile-btn svg[stroke] {
+    stroke: currentColor;
+}
+
 /* --- 4. LAYOUT & GRID --- */
 .container {
     max-width: 100%;
