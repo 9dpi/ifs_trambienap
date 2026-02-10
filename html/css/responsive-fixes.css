@@ -326,6 +326,12 @@
         z-index: 2000;
     }
 
+    .sidebar-toggle-btn {
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+    }
+
     /* Camera grid adjustments */
     .cam-grid {
         grid-template-columns: 1fr !important;
@@ -771,16 +777,16 @@
 
 /* Mobile-only visibility */
 .mobile-only {
-    display: none;
+    display: none !important;
 }
 
 @media (max-width: 768px) {
     .mobile-only {
-        display: block;
+        display: block !important;
     }
 
     .desktop-only {
-        display: none;
+        display: none !important;
     }
 }
 
