@@ -666,6 +666,50 @@
         white-space: nowrap;
     }
 
+    /* AI Filter Grid Mobile */
+    /* AI Filter Grid Mobile - Matched to filter-row style */
+    .filter-grid-ai {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 12px !important;
+        padding: 0 !important;
+        /* Remove padding to match filter-row container */
+    }
+
+    .filter-group-ai {
+        margin-bottom: 0 !important;
+        width: 100% !important;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    .filter-group-ai label {
+        margin-bottom: 0 !important;
+        font-size: 13px !important;
+        color: var(--text-sub) !important;
+        text-align: left !important;
+        display: block !important;
+        width: 100% !important;
+    }
+
+    .filter-group-ai .input-icon-wrapper,
+    .filter-group-ai select,
+    .filter-group-ai .filter-input,
+    .filter-group-ai input,
+    .filter-group-ai .select-single-modern {
+        width: 100% !important;
+        box-sizing: border-box !important;
+        max-width: 100% !important;
+    }
+
+    .btn-search-ai {
+        width: 100% !important;
+        justify-content: center !important;
+        margin-top: 8px !important;
+        height: 40px !important;
+    }
+
     .drawer-footer>div {
         display: flex !important;
         gap: 8px !important;
