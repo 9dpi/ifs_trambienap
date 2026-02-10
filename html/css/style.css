@@ -299,8 +299,92 @@ body {
     margin-top: auto;
 }
 
+.btn-settings {
+    background: #334155;
+    color: white !important;
+    border: none;
+    border-radius: 4px;
+    padding: 6px 16px;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: 0.2s;
+}
+
+.btn-settings:hover {
+    background: #475569;
+}
+
 .hidden-view {
     display: none !important;
+}
+
+/* Drawer Component Styles */
+.drawer-header h3 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--primary);
+    text-transform: uppercase;
+}
+
+.close-drawer {
+    background: transparent;
+    border: none;
+    color: var(--text-sub);
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.drawer-divider {
+    border: 0;
+    border-top: 1px solid var(--border);
+    margin: 24px -24px;
+}
+
+.layout-picker {
+    display: flex;
+    gap: 12px;
+}
+
+/* Settings Tree Styles */
+.settings-tree {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.st-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    font-size: 14px;
+    color: var(--text-main);
+    transition: 0.2s;
+}
+
+.st-label:hover {
+    color: var(--primary);
+}
+
+.st-label input {
+    width: 16px;
+    height: 16px;
+    accent-color: var(--primary);
+}
+
+.st-children {
+    padding-left: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 8px;
 }
 
 /* --- 9. FORM & TABLE UTILITIES --- */

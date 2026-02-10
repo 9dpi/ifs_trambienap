@@ -87,9 +87,11 @@
         <div class="grid">
 
             <!-- Left Card: Area Tree -->
-            <div class="card"
-                style="grid-column: 1 / 2; grid-row: span 3; padding: 20px; height: calc(100vh - 120px); overflow: hidden; display: flex; flex-direction: column;">
-                <div class="tree-title">Danh sách khu vực</div>
+            <div class="card live-sidebar" id="liveSidebar">
+                <div class="tree-title">
+                    <span>Danh sách khu vực</span>
+                    <button class="close-sidebar mobile-only" onclick="toggleSidebar()">&times;</button>
+                </div>
                 <input type="text" class="tree-search-box" placeholder="Tìm theo khu vực">
 
                 <div class="tree-nav" style="flex: 1; overflow-y: auto;">
@@ -261,9 +263,15 @@
             </div>
 
             <!-- Right Card: Monitoring Area -->
-            <div class="card"
-                style="grid-column: 2 / 5; grid-row: span 3; padding: 0; overflow: hidden; height: calc(100vh - 120px); display: flex; flex-direction: column;">
+            <div class="card live-content">
                 <div class="monitor-top-bar" style="border-radius: 12px 12px 0 0;">
+                    <button class="mobile-only sidebar-toggle-btn" onclick="toggleSidebar()"
+                        style="margin-right: 10px; background: var(--primary); color: white; border: none; padding: 8px; border-radius: 4px; display: flex; align-items: center; justify-content: center;">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
                     <div class="ctrl-group">
                         <span class="ctrl-label">Chọn bố cục</span>
                         <div class="grid-btn-group">
@@ -272,8 +280,7 @@
                             <button class="grid-btn" onclick="changeGrid(9, this)">9</button>
                             <button class="grid-btn" onclick="changeGrid(16, this)">16</button>
                         </div>
-                        <button class="btn-settings" onclick="openDrawer()"
-                            style="margin-left: 15px; padding: 6px 16px; font-size: 12px; font-weight: 700; border-radius: 4px; background: #334155; color: white; border: none; cursor: pointer; display: flex; align-items: center; gap: 6px; text-transform: uppercase; letter-spacing: 0.5px;">
+                        <button class="btn-settings" onclick="openDrawer()">
                             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                 stroke-width="2.5">
                                 <circle cx="12" cy="12" r="3"></circle>
@@ -287,7 +294,7 @@
                     <div class="env-temp">Nhiệt độ môi trường: 32.5</div>
                 </div>
 
-                <div class="cam-grid" id="mainCamGrid" style="padding: 20px;">
+                <div class="cam-grid" id="mainCamGrid">
                     <!-- Cell 1 -->
                     <div class="cam-cell">
                         <div class="cam-header">
@@ -440,20 +447,16 @@
         </div>
     </div>
 
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+
     <!-- Display Settings Drawer -->
-    <div id="drawerOverlay"
-        style="position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 2000; display: none; backdrop-filter: blur(4px);">
-        <div class="drawer drawer-md" id="settingsDrawer"
-            style="right: -600px; transition: right 0.3s ease; position: fixed; top: 0; width: 600px; height: 100%; background: var(--bg-card); display: flex; flex-direction: column; box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5);">
-            <div class="drawer-header"
-                style="padding: 20px 24px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center;">
-                <h3
-                    style="margin: 0; font-size: 16px; font-weight: 700; color: var(--primary); text-transform: uppercase;">
-                    Thiết lập hiển thị</h3>
-                <button class="close-drawer" onclick="closeDrawer()"
-                    style="background: transparent; border: none; color: var(--text-sub); font-size: 24px; cursor: pointer;">&times;</button>
+    <div id="drawerOverlay" class="drawer-overlay">
+        <div class="drawer drawer-md" id="settingsDrawer">
+            <div class="drawer-header">
+                <h3>Thiết lập hiển thị</h3>
+                <button class="close-drawer" onclick="closeDrawer()">&times;</button>
             </div>
-            <div class="drawer-body" style="padding: 24px; overflow-y: auto; flex: 1;">
+            <div class="drawer-body">
                 <div class="settings-section">
                     <div class="settings-title">KHU VỰC</div>
                     <div class="settings-tree">
@@ -517,8 +520,7 @@
                                     <span>Phú Quốc</span>
                                 </label>
                             </div>
-                            <div class="st-children"
-                                style="padding-left: 20px; display: flex; flex-direction: column; gap: 8px; margin-top: 8px;">
+                            <div class="st-children">
                                 <div class="st-group">
                                     <div class="st-item">
                                         <label class="st-label">
@@ -568,11 +570,11 @@
                     </div>
                 </div>
 
-                <hr style="border: 0; border-top: 1px solid var(--border); margin: 24px -24px;">
+                <hr class="drawer-divider">
 
                 <div class="settings-section">
                     <div class="settings-title">KIỂU BỐ CỤC</div>
-                    <div class="layout-picker" style="display: flex; gap: 12px;">
+                    <div class="layout-picker">
                         <div class="layout-option" onclick="changeGrid(1, this)">
                             <div class="grid-icon"
                                 style="width:24px; height:18px; border:1.5px solid currentColor; border-radius:3px; opacity:0.6;">
@@ -737,6 +739,10 @@
     <script src="js/main.js"></script>
     <script src="js/responsive-helpers.js"></script>
     <script>
+        function toggleSidebar() {
+            document.getElementById('liveSidebar').classList.toggle('open');
+            document.getElementById('sidebarOverlay').classList.toggle('active');
+        }
         function toggleNode(el) { el.parentElement.classList.toggle('open'); }
         function openDrawer() {
             const overlay = document.getElementById('drawerOverlay');
