@@ -379,16 +379,27 @@
         min-height: 300px;
     }
 
-    /* === DRAWER === */
     .drawer,
     .drawer-md,
     .drawer-lg {
         width: 100% !important;
-        right: -100% !important;
+        right: -100%;
+        /* Remove !important here */
+    }
+
+    .drawer-overlay.open {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
     }
 
     .drawer-overlay.open .drawer {
         right: 0 !important;
+    }
+
+    .drawer-overlay {
+        z-index: 3000 !important;
+        /* Higher than nav-menu (2005) */
     }
 
     .drawer {

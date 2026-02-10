@@ -645,28 +645,32 @@
                                 stroke-width="2">
                                 <path d="M23 7l-7 5 7 5V7z"></path>
                                 <rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect>
-                            </svg><span>Cam nhiệt cố định</span></div>
+                            </svg><span>Cam nhiệt cố định</span>
+                        </div>
                         <div class="cam-order-item"
                             style="background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 8px; padding: 12px; display: flex; align-items: center; gap: 10px; font-size: 13px; cursor: grab; transition: 0.2s; border: 1px solid var(--border);">
                             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                 stroke-width="2">
                                 <path d="M23 7l-7 5 7 5V7z"></path>
                                 <rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect>
-                            </svg><span>Cam nhiệt quay quét</span></div>
+                            </svg><span>Cam nhiệt quay quét</span>
+                        </div>
                         <div class="cam-order-item"
                             style="background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 8px; padding: 12px; display: flex; align-items: center; gap: 10px; font-size: 13px; cursor: grab; transition: 0.2s; border: 1px solid var(--border);">
                             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                 stroke-width="2">
                                 <path d="M23 7l-7 5 7 5V7z"></path>
                                 <rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect>
-                            </svg><span>Cam thường cố định</span></div>
+                            </svg><span>Cam thường cố định</span>
+                        </div>
                         <div class="cam-order-item"
                             style="background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 8px; padding: 12px; display: flex; align-items: center; gap: 10px; font-size: 13px; cursor: grab; transition: 0.2s; border: 1px solid var(--border);">
                             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                 stroke-width="2">
                                 <path d="M23 7l-7 5 7 5V7z"></path>
                                 <rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect>
-                            </svg><span>Cam thường quay quét</span></div>
+                            </svg><span>Cam thường quay quét</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -736,15 +740,17 @@
         function toggleNode(el) { el.parentElement.classList.toggle('open'); }
         function openDrawer() {
             const overlay = document.getElementById('drawerOverlay');
-            const drawer = document.getElementById('settingsDrawer');
             overlay.style.display = 'block';
-            setTimeout(() => { drawer.style.right = '0'; }, 10);
+            setTimeout(() => { overlay.classList.add('open'); }, 10);
+            document.body.style.overflow = 'hidden';
         }
         function closeDrawer() {
             const overlay = document.getElementById('drawerOverlay');
-            const drawer = document.getElementById('settingsDrawer');
-            drawer.style.right = '-600px';
-            setTimeout(() => { overlay.style.display = 'none'; }, 300);
+            overlay.classList.remove('open');
+            setTimeout(() => {
+                overlay.style.display = 'none';
+                document.body.style.overflow = '';
+            }, 300);
         }
         function changeGrid(cells, btn) {
             // Update active state in toolbar
