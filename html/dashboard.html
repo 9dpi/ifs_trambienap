@@ -246,105 +246,7 @@
 
 
 
-        .tree-nav {
-            padding-left: 0 !important;
-            position: relative;
-        }
 
-        .tree-node {
-            position: relative;
-        }
-
-        .tree-node-item {
-            display: flex;
-            align-items: center;
-            padding: 10px 12px;
-            cursor: pointer;
-            border-radius: 8px;
-            transition: all 0.2s;
-            font-size: 14px;
-            gap: 10px;
-            color: var(--text-main);
-            position: relative;
-            z-index: 2;
-            font-weight: 500;
-        }
-
-        .tree-node-item:hover {
-            background: rgba(255, 255, 255, 0.05);
-            color: var(--primary);
-        }
-
-        .tree-node-item .arrow {
-            width: 14px;
-            height: 14px;
-            transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            opacity: 0.6;
-            flex-shrink: 0;
-        }
-
-        .tree-node.expanded>.tree-node-item .arrow {
-            transform: rotate(90deg);
-        }
-
-        .tree-node .sub-nodes {
-            padding-left: 28px;
-            display: none;
-            position: relative;
-        }
-
-        /* The vertical line */
-        .tree-node .sub-nodes::before {
-            content: '';
-            position: absolute;
-            left: 18px;
-            top: -10px;
-            bottom: 20px;
-            width: 1.5px;
-            background: rgba(255, 255, 255, 0.08);
-        }
-
-        .tree-node.expanded>.sub-nodes {
-            display: block;
-        }
-
-        .leaf-node-item {
-            padding: 8px 12px;
-            font-size: 13px;
-            color: var(--text-sub);
-            cursor: pointer;
-            border-radius: 6px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            position: relative;
-            transition: 0.2s;
-            margin-bottom: 2px;
-        }
-
-        /* The horizontal line */
-        .leaf-node-item::before {
-            content: '';
-            position: absolute;
-            left: -10px;
-            top: 50%;
-            width: 10px;
-            height: 1.5px;
-            background: rgba(255, 255, 255, 0.08);
-        }
-
-        .leaf-node-item:hover {
-            background: rgba(59, 130, 246, 0.08);
-            color: var(--primary);
-            padding-left: 16px;
-        }
-
-        .tree-item-active {
-            background: rgba(59, 130, 246, 0.12) !important;
-            color: var(--primary) !important;
-            font-weight: 600;
-            box-shadow: inset 0 0 0 1px rgba(59, 130, 246, 0.2);
-        }
 
         .tree-search-box {
             width: 100%;
@@ -997,13 +899,13 @@
                     <input type="text" class="tree-search-box" placeholder="Tìm theo khu vực">
                 </div>
 
-                <div class="tree-nav" style="flex: 1; overflow-y: auto; padding: 0 4px;">
+                <div class="area-tree">
                     <!-- Biển đảo -->
-                    <div class="tree-node">
-                        <div class="tree-node-item" onclick="selectArea('biendao', this)">
+                    <div class="at-node">
+                        <div class="at-item" onclick="selectArea('biendao', this)">
                             <div style="width:14px"></div>
                             Biển đảo
-                            <div class="status-badge">
+                            <div class="at-badge">
                                 <span class="alert-count green">0</span>
                                 <span class="status-dot green"></span>
                             </div>
@@ -1011,11 +913,11 @@
                     </div>
 
                     <!-- Công ty -->
-                    <div class="tree-node">
-                        <div class="tree-node-item" onclick="selectArea('congty', this)">
+                    <div class="at-node">
+                        <div class="at-item" onclick="selectArea('congty', this)">
                             <div style="width:14px"></div>
                             Công ty
-                            <div class="status-badge">
+                            <div class="at-badge">
                                 <span class="alert-count green">0</span>
                                 <span class="status-dot green"></span>
                             </div>
@@ -1023,21 +925,22 @@
                     </div>
 
                     <!-- Phú Quốc -->
-                    <div class="tree-node expanded">
-                        <div class="tree-node-item" onclick="toggleTreeNode(this); selectArea('phuquoc', this)">
-                            <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                    <div class="at-node expanded">
+                        <div class="at-item" onclick="toggleAreaNode(this); selectArea('phuquoc', this)">
+                            <svg class="at-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="3">
                                 <path d="M9 18l6-6-6-6" />
                             </svg>
                             Phú Quốc
-                            <div class="status-badge">
+                            <div class="at-badge">
                                 <span class="alert-count red">2</span>
                                 <span class="status-dot red"></span>
                             </div>
                         </div>
-                        <div class="sub-nodes">
-                            <div class="leaf-node-item" onclick="selectSubstation('tram_pq', this)">
+                        <div class="at-children">
+                            <div class="at-leaf" onclick="selectSubstation('tram_pq', this)">
                                 Trạm 110kV Nam Phú Quốc
-                                <div class="status-badge">
+                                <div class="at-badge">
                                     <span class="alert-count red">2</span>
                                     <span class="status-dot red"></span>
                                 </div>
@@ -1046,21 +949,22 @@
                     </div>
 
                     <!-- Liên Trì -->
-                    <div class="tree-node expanded">
-                        <div class="tree-node-item" onclick="toggleTreeNode(this); selectArea('lientri', this)">
-                            <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                    <div class="at-node expanded">
+                        <div class="at-item" onclick="toggleAreaNode(this); selectArea('lientri', this)">
+                            <svg class="at-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="3">
                                 <path d="M9 18l6-6-6-6" />
                             </svg>
                             Trạm 110kV Liên Trì
-                            <div class="status-badge">
+                            <div class="at-badge">
                                 <span class="alert-count yellow">1</span>
                                 <span class="status-dot yellow"></span>
                             </div>
                         </div>
-                        <div class="sub-nodes">
-                            <div class="leaf-node-item" onclick="selectSubstation('sd1s_lientri', this)">
+                        <div class="at-children">
+                            <div class="at-leaf" onclick="selectSubstation('sd1s_lientri', this)">
                                 SĐ1S_Liên Trì
-                                <div class="status-badge">
+                                <div class="at-badge">
                                     <span class="alert-count yellow">1</span>
                                     <span class="status-dot yellow"></span>
                                 </div>
@@ -1226,21 +1130,15 @@
             }
         });
 
-        function toggleTreeNode(el) {
-            const node = el.parentElement;
-            node.classList.toggle('expanded');
-            event.stopPropagation();
-        }
-
         function selectArea(id, el) {
-            document.querySelectorAll('.tree-node-item, .leaf-node-item').forEach(item => item.classList.remove('tree-item-active'));
-            el.classList.add('tree-item-active');
+            document.querySelectorAll('.at-item, .at-leaf').forEach(item => item.classList.remove('at-active'));
+            el.classList.add('at-active');
             switchView('map');
         }
 
         function selectSubstation(id, el) {
-            document.querySelectorAll('.tree-node-item, .leaf-node-item').forEach(item => item.classList.remove('tree-item-active'));
-            el.classList.add('tree-item-active');
+            document.querySelectorAll('.at-item, .at-leaf').forEach(item => item.classList.remove('at-active'));
+            el.classList.add('at-active');
 
             let name = el.innerText;
             if (id === 'sd1s_lientri') name = "Trạm 110kV Liên Trì";

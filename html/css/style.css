@@ -1212,62 +1212,118 @@ body {
     margin-bottom: 20px;
 }
 
-.tree-nav {
+/* --- 8. AREA TREE COMPONENT (Standardized) --- */
+.area-tree {
     flex: 1;
     overflow-y: auto;
+    padding: 0 4px;
 }
 
-.tree-node {
-    margin-bottom: 4px;
+.at-node {
+    position: relative;
+    margin-bottom: 2px;
 }
 
-.tree-label {
+.at-item {
     display: flex;
     align-items: center;
-    gap: 8px;
-    padding: 8px 10px;
-    border-radius: 6px;
+    padding: 10px 12px;
     cursor: pointer;
+    border-radius: 8px;
+    transition: all 0.2s;
     font-size: 14px;
+    gap: 10px;
     color: var(--text-main);
-    transition: 0.2s;
+    position: relative;
+    z-index: 2;
+    font-weight: 500;
 }
 
-.tree-label:hover {
-    background: rgba(59, 130, 246, 0.1);
+.at-item:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--primary);
 }
 
-.tree-label svg {
-    width: 16px;
-    height: 16px;
+.at-arrow {
+    width: 14px !important;
+    height: 14px !important;
+    min-width: 14px;
+    min-height: 14px;
+    transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     opacity: 0.6;
+    flex-shrink: 0;
 }
 
-.tree-sub {
-    padding-left: 24px;
-    display: none;
-}
-
-.tree-node.open>.tree-sub {
-    display: block;
-}
-
-.tree-node.open>.tree-label svg {
+.at-node.expanded>.at-item .at-arrow {
     transform: rotate(90deg);
 }
 
-.leaf-item {
-    padding: 6px 10px;
-    font-size: 13px;
-    color: var(--text-sub);
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    cursor: pointer;
+.at-children {
+    padding-left: 28px;
+    display: none;
+    position: relative;
 }
 
-.leaf-item:hover {
+/* Vertical line for hierarchy */
+.at-children::before {
+    content: '';
+    position: absolute;
+    left: 18px;
+    top: -10px;
+    bottom: 20px;
+    width: 1.5px;
+    background: var(--border);
+    opacity: 0.3;
+}
+
+.at-node.expanded>.at-children {
+    display: block;
+}
+
+.at-leaf {
+    padding: 8px 12px;
+    font-size: 13px;
+    color: var(--text-sub);
+    cursor: pointer;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    transition: 0.2s;
+    margin-bottom: 2px;
+}
+
+/* Horizontal line for hierarchy */
+.at-leaf::before {
+    content: '';
+    position: absolute;
+    left: -10px;
+    top: 50%;
+    width: 10px;
+    height: 1.5px;
+    background: var(--border);
+    opacity: 0.3;
+}
+
+.at-leaf:hover {
+    background: rgba(59, 130, 246, 0.08);
     color: var(--primary);
+    padding-left: 16px;
+}
+
+.at-active {
+    background: rgba(59, 130, 246, 0.12) !important;
+    color: var(--primary) !important;
+    font-weight: 600;
+    box-shadow: inset 0 0 0 1px rgba(59, 130, 246, 0.2);
+}
+
+.at-badge {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-left: auto;
 }
 
 .monitor-main {
