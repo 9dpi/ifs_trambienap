@@ -599,6 +599,59 @@
         align-items: center !important;
     }
 
+    /* Page Info Bar Compact */
+    .page-info-bar {
+        flex-direction: column;
+        gap: 12px;
+        align-items: center;
+        text-align: center;
+    }
+
+    .page-info-bar>div:first-child {
+        font-size: 11px;
+        color: var(--text-sub);
+    }
+
+    .pagination-group {
+        justify-content: center;
+        gap: 6px;
+    }
+
+    .select-page-size {
+        display: none;
+        /* Hide page size select on mobile to save space */
+    }
+
+    /* Filter Toggle Button (Mobile) */
+    .btn-filter-toggle {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        padding: 12px 16px;
+        background: var(--bg-card);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        color: var(--text-main);
+        font-weight: 600;
+        margin-bottom: 12px;
+        cursor: pointer;
+        transition: 0.2s;
+    }
+
+    .btn-filter-toggle:hover {
+        background: rgba(255, 255, 255, 0.05);
+    }
+
+    .btn-filter-toggle .toggle-arrow {
+        transition: transform 0.3s ease;
+    }
+
+    /* Hide filter on mobile when collapsed */
+    .mobile-hidden {
+        display: none !important;
+    }
+
     .drawer-footer button,
     .drawer-footer .btn-save,
     .drawer-footer .btn-cancel,

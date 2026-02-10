@@ -269,10 +269,75 @@ window.addEventListener('orientationchange', function () {
     }, 200);
 });
 
+// Add filter toggle button for mobile
+function addFilterToggle() {
+    if (window.innerWidth <= 768) {
+        const filters = document.querySelectorAll('.filter-section-modern, .filter-section, .filter-card');
+
+        filters.forEach((filter, index) => {
+            // Check if toggle already exists
+            const prev = filter.previousElementSibling;
+            if (prev && prev.classList.contains('btn-filter-toggle')) return;
+
+            // Create toggle button
+            const btn = document.createElement('button');
+            btn.className = 'btn-filter-toggle collapsed'; // Default collapsed
+            btn.innerHTML = `
+                <div style="display:flex; align-items:center; gap:8px">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
+                    </svg>
+                    <span>Bộ lọc tìm kiếm</span>
+                </div>
+                <svg class="toggle-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M6 9l6 6 6-6"/>
+                </svg>
+            `;
+
+            // Insert before filter
+            filter.parentNode.insertBefore(btn, filter);
+
+            // Add ID if needed for aria (optional)
+            const filterId = filter.id || `filter-section-${index}`;
+            filter.id = filterId;
+
+            // Initial state: Collapsed
+            filter.classList.add('mobile-hidden');
+
+            // Click handler
+            btn.onclick = function () {
+                const isHidden = filter.classList.contains('mobile-hidden');
+                if (isHidden) {
+                    filter.classList.remove('mobile-hidden');
+                    this.classList.remove('collapsed');
+                    this.querySelector('.toggle-arrow').style.transform = 'rotate(180deg)';
+                } else {
+                    filter.classList.add('mobile-hidden');
+                    this.classList.add('collapsed');
+                    this.querySelector('.toggle-arrow').style.transform = 'rotate(0deg)';
+                }
+            };
+        });
+    } else {
+        // Desktop: Remove toggles and show filters
+        document.querySelectorAll('.btn-filter-toggle').forEach(btn => btn.remove());
+        document.querySelectorAll('.filter-section-modern, .filter-section, .filter-card').forEach(el => {
+            el.classList.remove('mobile-hidden');
+        });
+
+    }
+}
+
 // Export functions for global use
 window.responsiveHelpers = {
     toggleSidebar,
     addSidebarToggleButton,
     autoSwitchViewOnMobile,
-    makeTablesScrollable
+    makeTablesScrollable,
+    addFilterToggle
 };
+
+// Initialize on load
+document.addEventListener('DOMContentLoaded', addFilterToggle);
+// Re-run on resize
+window.addEventListener('resize', () => setTimeout(addFilterToggle, 250));
