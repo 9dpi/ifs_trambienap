@@ -62,6 +62,88 @@
         gap: 10px;
     }
 
+    /* Hamburger Menu Logic */
+    .mobile-btn {
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        background: transparent;
+        border: none;
+        color: var(--text-main);
+        cursor: pointer;
+        padding: 8px;
+        margin-right: 8px;
+    }
+
+    .nav-menu {
+        position: fixed;
+        left: -100%;
+        top: 56px;
+        width: 280px;
+        height: calc(100vh - 56px);
+        background: var(--bg-menu);
+        flex-direction: column !important;
+        align-items: stretch !important;
+        padding: 20px 0;
+        z-index: 2005;
+        transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 5px 0 25px rgba(0, 0, 0, 0.2);
+        overflow-y: auto;
+        display: flex !important;
+    }
+
+    .nav-menu.open {
+        left: 0;
+    }
+
+    .nav-wrapper {
+        width: 100%;
+        flex-direction: column;
+        height: auto !important;
+    }
+
+    .nav-link {
+        width: 100%;
+        padding: 15px 24px;
+        border-radius: 0;
+        justify-content: space-between;
+        border-bottom: 1px solid var(--border);
+    }
+
+    .dropdown-menu,
+    .mega-menu {
+        position: static !important;
+        width: 100% !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        transform: none !important;
+        box-shadow: none !important;
+        display: none;
+        background: rgba(0, 0, 0, 0.03);
+        padding: 0 !important;
+        grid-template-columns: 1fr !important;
+    }
+
+    .nav-wrapper.active .dropdown-menu,
+    .nav-wrapper.active .mega-menu {
+        display: block;
+    }
+
+    .menu-link {
+        padding: 12px 24px 12px 40px;
+    }
+
+    .mega-col {
+        gap: 0;
+        padding: 0;
+    }
+
+    .col-header {
+        padding: 15px 24px 10px 40px;
+        margin: 0;
+        font-size: 11px;
+    }
+
     /* === CONTAINER & GRID === */
     .container {
         padding: 16px;
@@ -111,20 +193,77 @@
         font-weight: 600;
     }
 
-    /* === TABLES === */
+    /* === TABLES TO CARDS === */
     .table-container-full {
-        overflow-x: auto;
+        overflow-x: visible;
     }
 
     .data-table {
-        font-size: 12px;
-        min-width: 800px;
-        /* Force horizontal scroll */
+        display: block;
+        width: 100%;
+        min-width: 0;
+        border: none;
+        background: transparent;
     }
 
-    .data-table th,
+    .data-table thead {
+        display: none;
+        /* Hide headers on mobile */
+    }
+
+    .data-table tbody {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .data-table tr {
+        display: flex;
+        flex-direction: column;
+        background: var(--bg-card);
+        border-radius: 12px;
+        padding: 16px;
+        border: 1px solid var(--border);
+        box-shadow: var(--shadow);
+        position: relative;
+    }
+
     .data-table td {
-        padding: 8px 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 8px 0 !important;
+        border: none !important;
+        text-align: right;
+        font-size: 13px;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05) !important;
+    }
+
+    .data-table td:last-child {
+        border-bottom: none !important;
+        justify-content: center;
+        padding-top: 15px !important;
+        margin-top: 5px;
+        border-top: 1px solid var(--border) !important;
+    }
+
+    .data-table td::before {
+        content: attr(data-label);
+        font-weight: 700;
+        text-align: left;
+        color: var(--text-sub);
+        font-size: 12px;
+        text-transform: uppercase;
+        margin-right: 15px;
+    }
+
+    .data-table td:only-child {
+        justify-content: center;
+        text-align: center;
+    }
+
+    .data-table td:only-child::before {
+        display: none;
     }
 
     /* === ACTION BUTTONS === */
@@ -250,6 +389,31 @@
 
     .drawer-overlay.open .drawer {
         right: 0 !important;
+    }
+
+    .drawer {
+        top: 0 !important;
+        height: 100% !important;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .drawer-body {
+        padding: 20px !important;
+        overflow-y: auto !important;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .drawer-footer {
+        padding: 16px 20px !important;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .drawer-footer .btn-save,
+    .drawer-footer .btn-cancel {
+        width: 100%;
+        height: 44px;
     }
 
     .form-group {
@@ -573,7 +737,73 @@
     }
 }
 
-/* Print styles */
+/* ===== GIAM SAT TRUC TIEP & SETTINGS DRAWER RESPONSIVE ===== */
+@media (max-width: 768px) {
+
+    /* Toolbar refinement */
+    .header-tools {
+        flex-direction: column;
+        align-items: stretch !important;
+        gap: 12px;
+        padding: 12px 16px !important;
+    }
+
+    .header-tools>div:first-child {
+        display: flex;
+        justify-content: space-between !important;
+        width: 100%;
+        gap: 10px;
+    }
+
+    .grid-controls {
+        flex: 1;
+        justify-content: center;
+    }
+
+    .env-temp {
+        text-align: center;
+        background: rgba(255, 255, 255, 0.05);
+        padding: 6px;
+        border-radius: 4px;
+        font-size: 12px;
+    }
+
+    /* Camera Grid refinement */
+    .cam-grid {
+        grid-template-columns: 1fr !important;
+        /* Force 1 column on mobile */
+        padding: 10px !important;
+        gap: 10px !important;
+    }
+
+    /* Drawer refinement */
+    #settingsDrawer {
+        width: 100% !important;
+    }
+
+    /* Settings content refinement */
+    .cam-order-list {
+        grid-template-columns: 1fr !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .btn-settings {
+        padding: 6px 12px !important;
+        font-size: 0 !important;
+        /* Hide text nodes while keeping icon visible */
+    }
+
+    .btn-settings svg {
+        margin: 0 !important;
+    }
+
+    .grid-controls .grid-btn {
+        padding: 4px 8px !important;
+        min-width: 32px;
+    }
+}
+
 @media print {
 
     .navbar,
