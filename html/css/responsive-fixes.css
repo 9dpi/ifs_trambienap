@@ -552,6 +552,20 @@
         background: transparent;
         border: 1px solid var(--border);
         color: var(--text-main);
+        margin-right: 16px !important;
+        position: relative;
+    }
+
+    /* Vertical separator after location button */
+    .map-btn.location-btn::after {
+        content: '';
+        position: absolute;
+        right: -10px;
+        top: 50%;
+        transform: translateY(-50%);
+        height: 20px;
+        width: 1px;
+        background: rgba(255, 255, 255, 0.2);
     }
 
     .drawer,
@@ -710,6 +724,57 @@
         height: 40px !important;
     }
 
+    /* Compact Filter Badges on Mobile (Icon only) */
+    .filter-badge-simple {
+        padding: 6px 8px !important;
+        /* Reduce padding */
+        gap: 6px !important;
+    }
+
+    /* Hide text labels inside badges on mobile */
+    .filter-badge-simple span:not(.badge-count):not(.avg-tag),
+    .filter-badge-simple .avg-text {
+        display: none !important;
+    }
+
+    /* Ensure icons are visible and centered */
+    .filter-badge-simple svg {
+        margin: 0 !important;
+    }
+
+    /* Force single line for Summary Header on Mobile */
+    /* Force single line for Summary Header on Mobile */
+    .summary-header {
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        gap: 8px !important;
+        flex-wrap: nowrap !important;
+        width: 100% !important;
+    }
+
+    .summary-title {
+        font-size: 14px !important;
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        margin-bottom: 0 !important;
+        flex: 1 !important;
+        min-width: 0 !important;
+        /* Critical for ellipsis in flex */
+        display: block !important;
+    }
+
+    .header-tools {
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        flex-wrap: nowrap !important;
+        gap: 8px !important;
+        flex-shrink: 0 !important;
+    }
+
     .drawer-footer>div {
         display: flex !important;
         gap: 8px !important;
@@ -725,11 +790,114 @@
         width: 100% !important;
     }
 
+    /* Modern Filter Section Responsive (Tab Stats) */
+    .filter-section-modern {
+        background: transparent !important;
+        border: none !important;
+        padding: 0 !important;
+        margin-top: 10px;
+    }
+
+    .filter-row-inline {
+        flex-direction: column !important;
+        gap: 12px !important;
+        align-items: stretch !important;
+    }
+
+    .filter-group-inline {
+        width: 100% !important;
+        margin-right: 0 !important;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    .filter-group-inline label {
+        margin-bottom: 0 !important;
+        color: var(--text-sub);
+        font-size: 13px;
+    }
+
+    .filter-group-inline input,
+    .filter-group-inline select,
+    .select-single-modern {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+
+    .btn-search-primary {
+        width: 100% !important;
+        justify-content: center !important;
+        margin-top: 8px;
+    }
+
+    .export-dropdown,
+    .btn-export {
+        width: 100% !important;
+        margin-left: 0 !important;
+    }
+
+    .btn-export {
+        justify-content: center !important;
+    }
+
     /* Device Drawer (quantrihethong_thietbi.html) fixes */
     .form-grid {
         grid-template-columns: 1fr !important;
         gap: 15px !important;
         margin-bottom: 15px !important;
+    }
+
+    /* Sensor Modal Responsive (quantrihethong_cambien.html) */
+    .modal-content {
+        width: 95% !important;
+        max-height: 90vh !important;
+        /* Ensure it fits vertically */
+        overflow-y: auto !important;
+        padding: 0 !important;
+        /* Let body handle padding */
+    }
+
+    .modal-body-layout,
+    .modal-split-layout {
+        /* Added .modal-split-layout target */
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 20px !important;
+    }
+
+    .modal-left-col,
+    .modal-right-col {
+        width: 100% !important;
+        border-right: none !important;
+        padding-right: 0 !important;
+        min-width: 0 !important;
+    }
+
+    .form-group-modal {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 6px !important;
+    }
+
+    .form-group-modal label {
+        width: 100% !important;
+        margin-bottom: 4px !important;
+        padding-top: 0 !important;
+    }
+
+    .form-group-modal input,
+    .form-group-modal select,
+    .form-group-modal .coord-box {
+        width: 100% !important;
+        flex: none !important;
+    }
+
+    /* Fix for 2-column grid inside modal left col */
+    .modal-left-col .form-grid-2 {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 15px !important;
     }
 
     .form-item {
@@ -752,6 +920,290 @@
         grid-template-columns: 1fr 1fr 40px !important;
         padding: 10px 12px !important;
     }
+
+    /* Modal Table Responsive Fix - Card Layout */
+    .modal-right-col {
+        border-top: 1px solid var(--border);
+        padding-top: 15px;
+        overflow: visible !important;
+    }
+
+    .points-table-modal {
+        min-width: 0 !important;
+        display: block !important;
+    }
+
+    .points-table-modal thead {
+        display: none !important;
+        /* Hide table header */
+    }
+
+    .points-table-modal tbody,
+    .points-table-modal tr,
+    .points-table-modal td {
+        display: block !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+    }
+
+    .points-table-modal tr {
+        margin-bottom: 20px;
+        background: transparent;
+        border: none;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    /* Modal Table Cell - Acts as INPUT BOX */
+    .points-table-modal td {
+        display: block !important;
+        width: 62% !important;
+        margin-left: 38% !important;
+        /* Space for Label */
+        text-align: left !important;
+
+        /* Input box style */
+        background: #0f172a !important;
+        border: 1px solid var(--border) !important;
+        border-radius: 4px !important;
+        padding: 8px 12px !important;
+        font-size: 13px;
+        color: white;
+
+        position: relative;
+        margin-bottom: 0 !important;
+        height: auto;
+        min-height: 36px;
+    }
+
+    /* Label styling - Horizontal Layout (Left side) */
+    .points-table-modal td::before {
+        position: absolute;
+        top: 50%;
+        left: -58%;
+        /* Position in the margin space relative to input width */
+        width: 55%;
+        transform: translateY(-50%);
+        font-size: 13px;
+        color: white;
+        font-weight: normal !important;
+        display: block;
+        margin-bottom: 0;
+        text-align: left;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    /* Specific Labels */
+    .points-table-modal td:nth-child(1)::before {
+        content: "Mã điểm đo";
+    }
+
+    .points-table-modal td:nth-child(2)::before {
+        content: "Tên điểm đo";
+    }
+
+    .points-table-modal td:nth-child(3)::before {
+        content: "Trạng thái";
+    }
+
+    .points-table-modal td:nth-child(4)::before {
+        content: "Hành động";
+    }
+
+    .points-table-modal td:nth-child(2)::before {
+        content: "Tên điểm đo";
+    }
+
+    .points-table-modal td:nth-child(3)::before {
+        content: "Trạng thái";
+    }
+
+    .points-table-modal td:nth-child(4)::before {
+        content: "Hành động";
+    }
+
+    /* Action column styling - remove input look */
+    .points-table-modal td:last-child {
+        background: transparent !important;
+        border: none !important;
+        padding: 0 !important;
+        margin-top: -10px !important;
+        /* Pull up closer */
+        margin-bottom: 10px !important;
+        display: flex !important;
+        justify-content: flex-end !important;
+        align-items: center;
+    }
+
+    .points-table-modal td:last-child::before {
+        display: none;
+    }
+
+    /* Threshold Settings Drawer Fixes */
+    .threshold-tabs {
+        flex-wrap: nowrap !important;
+        /* Force single line */
+        overflow-x: auto !important;
+        white-space: nowrap !important;
+        height: auto !important;
+        gap: 10px !important;
+        align-items: center !important;
+        padding-bottom: 0 !important;
+        /* Ensure border is at bottom */
+        scrollbar-width: none;
+        /* Hide scrollbar Firefox */
+    }
+
+    .threshold-tabs::-webkit-scrollbar {
+        display: none;
+        /* Hide scrollbar Chrome/Safari */
+    }
+
+    .filter-badge {
+        position: static !important;
+        /* In flow */
+        margin-left: auto !important;
+        /* Push to right */
+        margin-top: 0 !important;
+        transform: none !important;
+        flex-shrink: 0 !important;
+        /* Prevent shrinking */
+        z-index: 101 !important;
+        /* Ensure clickability */
+    }
+
+    /* Fix Dropdown - CENTERED MODAL STYLE AS REQUESTED */
+    .filter-dropdown-content {
+        position: fixed !important;
+        top: 50% !important;
+        left: 50% !important;
+        bottom: auto !important;
+        right: auto !important;
+        transform: translate(-50%, -50%) !important;
+        width: 340px !important;
+        max-width: 90vw !important;
+        min-width: 300px !important;
+        max-height: 85vh !important;
+        z-index: 3005 !important;
+        background: #1e293b !important;
+        border: 1px solid var(--border) !important;
+        border-radius: 12px !important;
+        /* Full rounded */
+        /* Full rounded */
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 0 1000px rgba(0, 0, 0, 0.5) !important;
+        white-space: normal !important;
+        overflow-y: auto !important;
+        display: none;
+        /* Default hidden */
+        flex-direction: column !important;
+        animation: fadeIn 0.2s ease-out;
+
+        /* Add Padding for spacious look */
+        padding: 16px !important;
+        gap: 16px !important;
+    }
+
+    /* Remove borders and refine internal spacing within the popup */
+    .filter-dropdown-content .fd-header {
+        padding: 0 !important;
+        border-bottom: none !important;
+        margin-bottom: 0 !important;
+    }
+
+    .filter-dropdown-content .fd-header a {
+        color: #60a5fa !important;
+        /* Bright Blue */
+        text-decoration: none !important;
+        font-size: 13px !important;
+        text-transform: none !important;
+        /* Keep original case */
+    }
+
+    .filter-dropdown-content .fd-list {
+        padding: 0 !important;
+        gap: 8px !important;
+        display: flex !important;
+        flex-direction: column !important;
+    }
+
+    .filter-dropdown-content .fd-footer {
+        padding: 0 !important;
+        border-top: none !important;
+        margin-top: 0 !important;
+        justify-content: flex-start !important;
+        /* Button left aligned or full width */
+    }
+
+    .filter-dropdown-content .fd-item {
+        padding: 8px 0 !important;
+        /* Less side padding since container has padding */
+    }
+
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translate(-50%, -48%);
+        }
+
+        to {
+            opacity: 1;
+            transform: translate(-50%, -50%);
+        }
+    }
+
+
+    .filter-dropdown-content.show {
+        display: flex !important;
+    }
+
+    .fd-item {
+        white-space: normal !important;
+        height: auto !important;
+        min-height: 44px;
+        /* Touch target size */
+        align-items: flex-start !important;
+        /* Handle multi-line text */
+        padding: 12px 16px !important;
+    }
+
+    .fd-item input {
+        margin-top: 3px;
+        /* Align checkbox with first line of text */
+    }
+
+    .drawer-body {
+        padding: 16px !important;
+        /* Reduce padding on mobile */
+    }
+
+    .level-block {
+        flex-direction: column !important;
+        /* Stack vertically */
+        align-items: flex-start !important;
+        gap: 15px !important;
+    }
+
+    .level-info {
+        width: 100%;
+        margin-bottom: 0 !important;
+    }
+
+    .lvl-inputs {
+        width: 100%;
+        justify-content: space-between;
+        gap: 10px !important;
+    }
+
+    .val-box {
+        width: 100px !important;
+    }
+
+    /* Hide label for action button row */
 
     .mt-nested {
         padding-left: 20px !important;
@@ -1311,4 +1763,137 @@
         box-shadow: none;
         border: 1px solid #ddd;
     }
+}
+
+/* =========================================
+   CAMERA LIVE VIEW RESPONSIVE (camera.html)
+   ========================================= */
+@media screen and (max-width: 960px) {
+
+    /* Switch to vertical layout */
+    .live-container {
+        display: flex !important;
+        flex-direction: column !important;
+        height: calc(100vh - 50px) !important;
+        /* Adjust for header */
+        overflow-y: auto !important;
+    }
+
+    /* Video Section */
+    .video-wrapper {
+        width: 100% !important;
+        height: auto !important;
+        aspect-ratio: 16/9 !important;
+        /* Maintain video aspect ratio */
+        flex-shrink: 0 !important;
+        background: #000;
+        position: relative;
+        z-index: 10;
+    }
+
+    .video-feed {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        object-fit: contain !important;
+        /* Ensure video is fully visible */
+    }
+
+    /* Control Sidebar */
+    .sidebar {
+        width: 100% !important;
+        height: auto !important;
+        flex: 1 !important;
+        /* Take remaining space */
+        border-left: none !important;
+        border-top: 1px solid var(--border) !important;
+        overflow-y: visible !important;
+        /* Allow content to flow */
+        padding-bottom: 40px !important;
+        /* Space for bottom nav/scrolling */
+    }
+
+    /* PTZ Controls Centering */
+    .ptz-section {
+        padding: 20px 16px !important;
+    }
+
+    .ptz-wrapper {
+        margin: 0 auto 20px auto !important;
+        /* Center the joystick */
+    }
+
+    /* Header Adjustments */
+    .live-header {
+        padding: 0 12px !important;
+        height: 50px !important;
+    }
+
+    .cam-title {
+        font-size: 13px !important;
+        max-width: 60vw;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        gap: 8px !important;
+    }
+
+    .cam-title svg {
+        width: 16px !important;
+        height: 16px !important;
+    }
+
+    /* Hide detailed text in header if too narrow */
+    .cam-title>div>div:last-child {
+        display: none !important;
+        /* Hide location detail on mobile to save space */
+    }
+
+    .live-header .live-badge+div {
+        display: none !important;
+        /* Hide timestamp on mobile header */
+    }
+
+    /* Floating Video Controls */
+    /* Floating Video Controls - Keep small */
+    .video-controls {
+        bottom: 10px !important;
+        padding: 6px 10px !important;
+        width: auto !important;
+        max-width: 90% !important;
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+        background: rgba(15, 23, 42, 0.9) !important;
+    }
+
+    .video-controls .v-btn {
+        width: 36px !important;
+        height: 36px !important;
+    }
+
+    /* Big Action Buttons for Mobile */
+    .action-btn-primary,
+    .action-btn-danger,
+    .action-btn-secondary {
+        width: 100% !important;
+        height: 50px !important;
+        /* Taller touch target */
+        font-size: 15px !important;
+        border-radius: 10px !important;
+        margin-bottom: 0 !important;
+    }
+
+    /* Ensure icon size scales */
+    .action-btn-primary svg,
+    .action-btn-danger svg,
+    .action-btn-secondary svg {
+        width: 22px !important;
+        height: 22px !important;
+    }
+
+    /* Measurement Tools Container */
+    #measure-start-btn {
+        margin-bottom: 15px !important;
+    }
+}
 }

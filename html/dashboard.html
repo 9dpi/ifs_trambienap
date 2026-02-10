@@ -785,15 +785,18 @@
             <div class="card map-section" id="mainDisplayCard">
                 <div class="map-toolbar">
                     <span class="card-title" id="displayTitle">Bản đồ Giám sát</span>
+
+                    <!-- Location button separated -->
+                    <button class="map-btn visible-mobile-only location-btn" onclick="openAreaDrawer()"
+                        title="Chọn khu vực">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                            <circle cx="12" cy="10" r="3"></circle>
+                        </svg>
+                    </button>
+
                     <div class="map-toggle-group">
-                        <button class="map-btn visible-mobile-only location-btn" onclick="openAreaDrawer()"
-                            title="Chọn khu vực">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2">
-                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                                <circle cx="12" cy="10" r="3"></circle>
-                            </svg>
-                        </button>
                         <button class="map-btn active" id="btnMap" onclick="switchView('map')">Bản đồ</button>
                         <button class="map-btn" id="btnSLD" onclick="switchView('sld')">Sơ đồ 1 sợi</button>
                         <button class="map-btn" id="btnBIM"

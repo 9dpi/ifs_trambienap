@@ -678,14 +678,94 @@
                     .lvl-4 h4 {
                         color: #ef4444;
                     }
+
+                    /* Dropdown Styles */
+                    .filter-dropdown-content {
+                        display: none;
+                        position: absolute;
+                        top: 45px;
+                        right: 0;
+                        width: 320px;
+                        background: #1e293b;
+                        border: 1px solid #334155;
+                        border-radius: 8px;
+                        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+                        z-index: 100;
+                        flex-direction: column;
+                    }
+
+                    .filter-dropdown-content.show {
+                        display: flex;
+                    }
+
+                    .fd-header {
+                        display: flex;
+                        justify-content: space-between;
+                        padding: 12px 16px;
+                        border-bottom: 1px solid #334155;
+                        font-size: 13px;
+                        font-weight: 700;
+                        color: white;
+                    }
+
+                    .fd-header a {
+                        color: #3b82f6;
+                        text-decoration: none;
+                        font-weight: 600;
+                    }
+
+                    .fd-list {
+                        padding: 10px 0;
+                        max-height: 250px;
+                        overflow-y: auto;
+                    }
+
+                    .fd-item {
+                        display: flex;
+                        align-items: center;
+                        gap: 10px;
+                        padding: 8px 16px;
+                        cursor: pointer;
+                        color: #cbd5e1;
+                        font-size: 13px;
+                        transition: 0.2s;
+                    }
+
+                    .fd-item:hover {
+                        background: rgba(255, 255, 255, 0.05);
+                    }
+
+                    .fd-item input[type="checkbox"] {
+                        accent-color: #3b82f6;
+                        width: 16px;
+                        height: 16px;
+                    }
+
+                    .fd-footer {
+                        padding: 12px 16px;
+                        border-top: 1px solid #334155;
+                        display: flex;
+                        justify-content: flex-end;
+                    }
+
+                    .btn-apply-filter {
+                        background: #3b82f6;
+                        color: white;
+                        border: none;
+                        padding: 6px 16px;
+                        border-radius: 4px;
+                        font-weight: 600;
+                        font-size: 13px;
+                        cursor: pointer;
+                    }
                 </style>
 
 
-                <div class="threshold-tabs">
+                <div class="threshold-tabs" style="position: relative;">
                     <div class="th-tab active">So với môi trường</div>
                     <div class="th-tab">So với ngưỡng nhiệt</div>
                     <div class="th-tab">So với pha min</div>
-                    <div class="filter-badge">
+                    <div class="filter-badge" onclick="toggleThresholdFilter()" id="btnFilterThreshold">
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="2">
                             <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
@@ -693,7 +773,57 @@
                         Lọc <span
                             style="background: #3b82f6; color: white; border-radius: 10px; padding: 0 6px; font-size: 10px;">3</span>
                     </div>
+
+                    <!-- Filter Dropdown -->
+                    <div class="filter-dropdown-content" id="thresholdFilterDropdown">
+                        <div class="fd-header">
+                            <span>Chọn loại ngưỡng hiển thị</span>
+                            <a href="#" onclick="toggleAllThresholds(event)">Chọn tất cả</a>
+                        </div>
+                        <div class="fd-list">
+                            <label class="fd-item"><input type="checkbox" checked> So với môi trường</label>
+                            <label class="fd-item"><input type="checkbox" checked> So với ngưỡng nhiệt</label>
+                            <label class="fd-item"><input type="checkbox" checked> So với pha min</label>
+                            <label class="fd-item"><input type="checkbox" checked> So với phần tử cùng loại</label>
+                            <label class="fd-item"><input type="checkbox"> So với pha min toàn trạm</label>
+                            <label class="fd-item"><input type="checkbox"> So với phần tử cùng loại toàn trạm</label>
+                        </div>
+                        <div class="fd-footer">
+                            <button class="btn-apply-filter" onclick="closeThresholdFilter()">Áp dụng</button>
+                        </div>
+                    </div>
                 </div>
+
+                <script>
+                    function toggleThresholdFilter() {
+                        const dropdown = document.getElementById('thresholdFilterDropdown');
+                        // Toggle display
+                        if (dropdown.style.display === 'flex') {
+                            dropdown.style.display = 'none';
+                        } else {
+                            dropdown.style.display = 'flex';
+                        }
+                    }
+
+                    function closeThresholdFilter() {
+                        document.getElementById('thresholdFilterDropdown').style.display = 'none';
+                    }
+
+                    function toggleAllThresholds(e) {
+                        e.preventDefault();
+                        const inputs = document.querySelectorAll('.fd-item input[type="checkbox"]');
+                        inputs.forEach(input => input.checked = true);
+                    }
+
+                    // Close when clicking outside
+                    document.addEventListener('click', function (event) {
+                        const dropdown = document.getElementById('thresholdFilterDropdown');
+                        const btn = document.getElementById('btnFilterThreshold');
+                        if (!dropdown.contains(event.target) && !btn.contains(event.target)) {
+                            dropdown.style.display = 'none';
+                        }
+                    });
+                </script>
 
                 <!-- Level 1 -->
                 <div class="level-block lvl-1">

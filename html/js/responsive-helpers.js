@@ -124,6 +124,9 @@ function autoConvertTableToCards() {
     const tables = document.querySelectorAll('.data-table');
 
     tables.forEach((table, tableIndex) => {
+        // Skip for specific page
+        if (window.location.href.includes('quantrihethong_loaithietbi_them.html')) return;
+
         // Skip if already converted
         if (table.dataset.converted === 'true') return;
 

@@ -661,8 +661,7 @@
 
                     <!-- Start Button -->
                     <div id="measure-start-btn">
-                        <button class="v-btn" onclick="toggleMeasureMode(true)"
-                            style="width:100%; height:44px; border:1px solid rgba(59, 130, 246, 0.4); background:rgba(59, 130, 246, 0.1); color:var(--primary); font-weight:600; font-size:13px; gap:8px">
+                        <button class="v-btn action-btn-primary" onclick="toggleMeasureMode(true)">
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                 stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                                 <polygon points="14 2 18 6 7 17 3 17 3 13 14 2"></polygon>
@@ -671,6 +670,66 @@
                             Vẽ điểm/vùng
                         </button>
                     </div>
+
+                    <style>
+                        /* Action Buttons Modern Style */
+                        .action-btn-primary,
+                        .action-btn-danger,
+                        .action-btn-secondary {
+                            width: 100%;
+                            height: 44px;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            gap: 10px;
+                            border-radius: 8px;
+                            /* Slightly more rounded */
+                            font-weight: 600;
+                            font-size: 13px;
+                            transition: all 0.2s ease;
+                            text-transform: capitalize;
+                            letter-spacing: 0.3px;
+                        }
+
+                        .action-btn-primary {
+                            background: rgba(59, 130, 246, 0.1);
+                            border: 1px solid rgba(59, 130, 246, 0.4);
+                            color: var(--primary);
+                        }
+
+                        .action-btn-primary:hover {
+                            background: rgba(59, 130, 246, 0.2);
+                            border-color: var(--primary);
+                            transform: translateY(-1px);
+                            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
+                        }
+
+                        .action-btn-danger {
+                            background: var(--danger);
+                            color: white;
+                            border: 1px solid var(--danger);
+                            box-shadow: 0 4px 6px rgba(239, 68, 68, 0.25);
+                        }
+
+                        .action-btn-danger:hover {
+                            background: #DC2626;
+                            /* Darker red */
+                            transform: translateY(-1px);
+                            box-shadow: 0 6px 12px rgba(239, 68, 68, 0.35);
+                        }
+
+                        .action-btn-secondary {
+                            background: #334155;
+                            border: 1px solid var(--border);
+                            color: white;
+                        }
+
+                        .action-btn-secondary:hover {
+                            background: #475569;
+                            border-color: #94a3b8;
+                            transform: translateY(-1px);
+                        }
+                    </style>
 
                     <!-- Active Actions (Hidden by default) -->
                     <div id="measure-actions" style="display:none; gap:12px; grid-template-columns: 1.5fr 1fr;">
@@ -736,8 +795,7 @@
                         ĐIỀU KHIỂN</div>
 
                     <div style="display:grid; grid-template-columns: 1fr 1fr; gap:12px;">
-                        <button class="v-btn" title="Nút nguồn"
-                            style="background:var(--danger); color:white; width:100%; height:44px; display:flex; align-items:center; justify-content:center; gap:10px; border-radius:6px; font-weight:600; font-size:13px; box-shadow: 0 4px 6px rgba(239, 68, 68, 0.25);">
+                        <button class="v-btn action-btn-danger" title="Nút nguồn">
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                 stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M18.36 6.64a9 9 0 1 1-12.73 0"></path>
@@ -745,8 +803,7 @@
                             </svg>
                             Nguồn
                         </button>
-                        <button class="v-btn" title="Cài đặt camera"
-                            style="background:#334155; border:1px solid var(--border); color:white; width:100%; height:44px; display:flex; align-items:center; justify-content:center; gap:10px; border-radius:6px; font-weight:600; font-size:13px">
+                        <button class="v-btn action-btn-secondary" title="Cài đặt camera">
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                 stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                                 <circle cx="12" cy="12" r="3"></circle>
