@@ -41,6 +41,10 @@
 }
 
 /* ===== MOBILE IMPROVEMENTS (max-width: 768px) ===== */
+.map-btn.location-btn {
+    display: none;
+}
+
 @media (max-width: 768px) {
 
     /* === NAVIGATION === */
@@ -449,23 +453,105 @@
     }
 
     /* === DASHBOARD === */
+    /* === DASHBOARD === */
+    .kpi-row {
+        grid-template-columns: 1fr 1fr !important;
+        gap: 10px !important;
+    }
+
     .kpi-card {
-        padding: 16px;
+        padding: 12px !important;
+        height: auto !important;
+        min-height: 90px;
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        justify-content: center !important;
+        position: relative;
+    }
+
+    /* Icon absolute top-right for compact look */
+    .kpi-icon {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        width: 28px !important;
+        height: 28px !important;
+        background: transparent !important;
+        /* Ensure bg is transparent if needed or keep original */
+        padding: 0 !important;
+    }
+
+    .kpi-icon svg {
+        width: 24px !important;
+        height: 24px !important;
     }
 
     .kpi-val {
-        font-size: 24px;
+        font-size: 20px !important;
+        margin-top: 4px;
     }
 
-    .kpi-icon {
-        width: 40px;
-        height: 40px;
+    .kpi-lbl {
+        font-size: 11px !important;
+        color: var(--text-sub);
+        max-width: 80%;
+        /* avoid overlapping icon */
+    }
+
+    .region-temp-list-compact {
+        gap: 8px !important;
+        flex-wrap: wrap;
+    }
+
+    .temp-item-compact label {
+        font-size: 9px !important;
+    }
+
+    .temp-item-compact b {
+        font-size: 11px !important;
     }
 
     .map-section,
     .alert-section {
-        height: 400px;
+        height: 350px !important;
+        /* Reduced from 400px */
         min-height: 300px;
+    }
+
+    /* Horizontal Scrollable Toolbar for Map */
+    .map-toolbar {
+        flex-direction: row !important;
+        align-items: center !important;
+        overflow-x: auto;
+        white-space: nowrap;
+        padding-bottom: 4px;
+        /* Space for scrollbar if any */
+        gap: 8px !important;
+        display: flex !important;
+    }
+
+    .map-btn {
+        flex: 0 0 auto;
+        padding: 6px 12px !important;
+        font-size: 12px !important;
+    }
+
+    .tree-card {
+        height: 350px !important;
+        display: none !important;
+        /* Hide on mobile */
+    }
+
+    .map-section {
+        grid-column: 1 / -1 !important;
+        /* Full width */
+    }
+
+    .map-btn.location-btn {
+        display: inline-flex !important;
+        background: transparent;
+        border: 1px solid var(--border);
+        color: var(--text-main);
     }
 
     .drawer,

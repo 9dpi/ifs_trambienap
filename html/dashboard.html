@@ -97,27 +97,7 @@
             }
         }
 
-        @media (max-width: 768px) {
-            .kpi-row {
-                grid-template-columns: 1fr;
-            }
-
-            .grid {
-                gap: 16px;
-                padding: 16px !important;
-            }
-
-            .map-toolbar {
-                flex-direction: column;
-                gap: 10px;
-                align-items: flex-start;
-            }
-
-            .tree-card,
-            .map-section {
-                height: 400px !important;
-            }
-        }
+        /* Removed conflicting media query */
 
         .status-badge {
             display: flex;
@@ -194,7 +174,8 @@
         }
 
         .kpi-card {
-            height: 100px !important;
+            height: 100px;
+            /* Removed !important */
             padding: 16px 20px !important;
             display: flex;
             align-items: center;
@@ -805,6 +786,14 @@
                 <div class="map-toolbar">
                     <span class="card-title" id="displayTitle">Bản đồ Giám sát</span>
                     <div class="map-toggle-group">
+                        <button class="map-btn visible-mobile-only location-btn" onclick="openAreaDrawer()"
+                            title="Chọn khu vực">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                <circle cx="12" cy="10" r="3"></circle>
+                            </svg>
+                        </button>
                         <button class="map-btn active" id="btnMap" onclick="switchView('map')">Bản đồ</button>
                         <button class="map-btn" id="btnSLD" onclick="switchView('sld')">Sơ đồ 1 sợi</button>
                         <button class="map-btn" id="btnBIM"
@@ -987,9 +976,109 @@
         </div>
     </div>
 
+
+    <!-- DRAWER FOR AREA SELECTION (MOBILE) -->
+    <div class="drawer-overlay" id="areaDrawer">
+        <div class="drawer drawer-md">
+            <div class="drawer-header">
+                <h3 style="color: #3b82f6; font-size: 18px; text-transform: uppercase;">DANH SÁCH KHU VỰC</h3>
+                <button class="close-drawer" onclick="closeAreaDrawer()">&times;</button>
+            </div>
+            <div class="drawer-body">
+                <div style="padding-bottom: 16px;">
+                    <input type="text" class="tree-search-box" placeholder="Tìm theo khu vực" style="width: 100%;">
+                </div>
+
+                <div class="area-tree">
+                    <!-- Biển đảo -->
+                    <div class="at-node">
+                        <div class="at-item" onclick="selectArea('biendao', this); closeAreaDrawer()">
+                            <div style="width:14px"></div>
+                            Biển đảo
+                            <div class="at-badge">
+                                <span class="alert-count green">0</span>
+                                <span class="status-dot green"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Công ty -->
+                    <div class="at-node">
+                        <div class="at-item" onclick="selectArea('congty', this); closeAreaDrawer()">
+                            <div style="width:14px"></div>
+                            Công ty
+                            <div class="at-badge">
+                                <span class="alert-count green">0</span>
+                                <span class="status-dot green"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Phú Quốc -->
+                    <div class="at-node expanded">
+                        <div class="at-item" onclick="toggleAreaNode(this); selectArea('phuquoc', this)">
+                            <svg class="at-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="3">
+                                <path d="M9 18l6-6-6-6" />
+                            </svg>
+                            Phú Quốc
+                            <div class="at-badge">
+                                <span class="alert-count red">2</span>
+                                <span class="status-dot red"></span>
+                            </div>
+                        </div>
+                        <div class="at-children">
+                            <div class="at-leaf" onclick="selectSubstation('tram_pq', this); closeAreaDrawer()">
+                                Trạm 110kV Nam Phú Quốc
+                                <div class="at-badge">
+                                    <span class="alert-count red">2</span>
+                                    <span class="status-dot red"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Liên Trì -->
+                    <div class="at-node expanded">
+                        <div class="at-item" onclick="toggleAreaNode(this); selectArea('lientri', this)">
+                            <svg class="at-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="3">
+                                <path d="M9 18l6-6-6-6" />
+                            </svg>
+                            Trạm 110kV Liên Trì
+                            <div class="at-badge">
+                                <span class="alert-count yellow">1</span>
+                                <span class="status-dot yellow"></span>
+                            </div>
+                        </div>
+                        <div class="at-children">
+                            <div class="at-leaf" onclick="selectSubstation('sd1s_lientri', this); closeAreaDrawer()">
+                                SĐ1S_Liên Trì
+                                <div class="at-badge">
+                                    <span class="alert-count yellow">1</span>
+                                    <span class="status-dot yellow"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="js/main.js"></script>
     <script src="js/responsive-helpers.js"></script>
     <script>
+        function openAreaDrawer() {
+            document.getElementById('areaDrawer').classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeAreaDrawer() {
+            document.getElementById('areaDrawer').classList.remove('open');
+            document.body.style.overflow = '';
+        }
+
         function switchView(mode, name) {
             const card = document.getElementById('mainDisplayCard');
             const title = document.getElementById('displayTitle');
