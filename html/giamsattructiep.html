@@ -272,21 +272,22 @@
                             <button class="grid-btn" onclick="changeGrid(9, this)">9</button>
                             <button class="grid-btn" onclick="changeGrid(16, this)">16</button>
                         </div>
-                        <button class="btn-save-layout"
-                            style="margin-left: 15px; padding: 6px 16px; font-size: 12px; font-weight: 700; border-radius: 4px; background: var(--primary); color: white; border: none; cursor: pointer; display: flex; align-items: center; gap: 6px; text-transform: uppercase; letter-spacing: 0.5px;">
+                        <button class="btn-settings" onclick="openDrawer()"
+                            style="margin-left: 15px; padding: 6px 16px; font-size: 12px; font-weight: 700; border-radius: 4px; background: #334155; color: white; border: none; cursor: pointer; display: flex; align-items: center; gap: 6px; text-transform: uppercase; letter-spacing: 0.5px;">
                             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                 stroke-width="2.5">
-                                <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
-                                <polyline points="17 21 17 13 7 13 7 21"></polyline>
-                                <polyline points="7 3 7 8 15 8"></polyline>
+                                <circle cx="12" cy="12" r="3"></circle>
+                                <path
+                                    d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z">
+                                </path>
                             </svg>
-                            Lưu
+                            Thiết lập
                         </button>
                     </div>
                     <div class="env-temp">Nhiệt độ môi trường: 32.5</div>
                 </div>
 
-                <div class="cam-grid" style="padding: 20px;">
+                <div class="cam-grid" id="mainCamGrid" style="padding: 20px;">
                     <!-- Cell 1 -->
                     <div class="cam-cell">
                         <div class="cam-header">
@@ -439,28 +440,329 @@
         </div>
     </div>
 
+    <!-- Display Settings Drawer -->
+    <div id="drawerOverlay"
+        style="position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 2000; display: none; backdrop-filter: blur(4px);">
+        <div class="drawer drawer-md" id="settingsDrawer"
+            style="right: -600px; transition: right 0.3s ease; position: fixed; top: 0; width: 600px; height: 100%; background: var(--bg-card); display: flex; flex-direction: column; box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5);">
+            <div class="drawer-header"
+                style="padding: 20px 24px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center;">
+                <h3
+                    style="margin: 0; font-size: 16px; font-weight: 700; color: var(--primary); text-transform: uppercase;">
+                    Thiết lập hiển thị</h3>
+                <button class="close-drawer" onclick="closeDrawer()"
+                    style="background: transparent; border: none; color: var(--text-sub); font-size: 24px; cursor: pointer;">&times;</button>
+            </div>
+            <div class="drawer-body" style="padding: 24px; overflow-y: auto; flex: 1;">
+                <div class="settings-section">
+                    <div class="settings-title">KHU VỰC</div>
+                    <div class="settings-tree">
+                        <div class="st-item"><label class="st-label"><input type="checkbox" checked><svg width="14"
+                                    height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M23 7l-7 5 7 5V7z"></path>
+                                    <rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect>
+                                </svg><span>Camera cột 149</span></label></div>
+                        <div class="st-item"><label class="st-label"><input type="checkbox" checked><svg width="14"
+                                    height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M23 7l-7 5 7 5V7z"></path>
+                                    <rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect>
+                                </svg><span>Camera cột 145</span></label></div>
+                        <div class="st-group">
+                            <div class="st-item">
+                                <label class="st-label">
+                                    <input type="checkbox" checked>
+                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="3">
+                                        <path d="M6 9l6 6 6-6" />
+                                    </svg>
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <path
+                                            d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z">
+                                        </path>
+                                    </svg>
+                                    <span>Công ty</span>
+                                </label>
+                            </div>
+                            <div class="st-children"
+                                style="padding-left: 20px; display: flex; flex-direction: column; gap: 8px; margin-top: 8px;">
+                                <div class="st-item"><label class="st-label"><input type="checkbox" checked><svg
+                                            width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                            stroke-width="2">
+                                            <path d="M23 7l-7 5 7 5V7z"></path>
+                                            <rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect>
+                                        </svg><span>Dome - Nhiệt - Cty</span></label></div>
+                                <div class="st-item"><label class="st-label"><input type="checkbox" checked><svg
+                                            width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                            stroke-width="2">
+                                            <path d="M23 7l-7 5 7 5V7z"></path>
+                                            <rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect>
+                                        </svg><span>Dome - Thường - Cty</span></label></div>
+                            </div>
+                        </div>
+                        <div class="st-group" style="margin-top: 8px;">
+                            <div class="st-item">
+                                <label class="st-label">
+                                    <input type="checkbox" checked>
+                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="3">
+                                        <path d="M6 9l6 6 6-6" />
+                                    </svg>
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <path
+                                            d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z">
+                                        </path>
+                                    </svg>
+                                    <span>Phú Quốc</span>
+                                </label>
+                            </div>
+                            <div class="st-children"
+                                style="padding-left: 20px; display: flex; flex-direction: column; gap: 8px; margin-top: 8px;">
+                                <div class="st-group">
+                                    <div class="st-item">
+                                        <label class="st-label">
+                                            <input type="checkbox" checked>
+                                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none"
+                                                stroke="currentColor" stroke-width="3">
+                                                <path d="M6 9l6 6 6-6" />
+                                            </svg>
+                                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+                                                stroke="currentColor" stroke-width="2">
+                                                <rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect>
+                                                <line x1="12" y1="18" x2="12.01" y2="18"></line>
+                                            </svg>
+                                            <span>Trạm 110kV Nam Phú Quốc</span>
+                                        </label>
+                                    </div>
+                                    <div class="st-children"
+                                        style="padding-left: 20px; display: flex; flex-direction: column; gap: 8px; margin-top: 8px;">
+                                        <div class="st-item"><label class="st-label"><input type="checkbox" checked><svg
+                                                    width="14" height="14" viewBox="0 0 24 24" fill="none"
+                                                    stroke="currentColor" stroke-width="2">
+                                                    <path d="M23 7l-7 5 7 5V7z"></path>
+                                                    <rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect>
+                                                </svg><span>Cam thường cố định</span></label></div>
+                                        <div class="st-item"><label class="st-label"><input type="checkbox" checked><svg
+                                                    width="14" height="14" viewBox="0 0 24 24" fill="none"
+                                                    stroke="currentColor" stroke-width="2">
+                                                    <path d="M23 7l-7 5 7 5V7z"></path>
+                                                    <rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect>
+                                                </svg><span>Cam nhiệt cố định</span></label></div>
+                                        <div class="st-item"><label class="st-label"><input type="checkbox" checked><svg
+                                                    width="14" height="14" viewBox="0 0 24 24" fill="none"
+                                                    stroke="currentColor" stroke-width="2">
+                                                    <path d="M23 7l-7 5 7 5V7z"></path>
+                                                    <rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect>
+                                                </svg><span>Cam thường quay quét</span></label></div>
+                                        <div class="st-item"><label class="st-label"><input type="checkbox" checked><svg
+                                                    width="14" height="14" viewBox="0 0 24 24" fill="none"
+                                                    stroke="currentColor" stroke-width="2">
+                                                    <path d="M23 7l-7 5 7 5V7z"></path>
+                                                    <rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect>
+                                                </svg><span>Cam nhiệt quay quét</span></label></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <hr style="border: 0; border-top: 1px solid var(--border); margin: 24px -24px;">
+
+                <div class="settings-section">
+                    <div class="settings-title">KIỂU BỐ CỤC</div>
+                    <div class="layout-picker" style="display: flex; gap: 12px;">
+                        <div class="layout-option" onclick="changeGrid(1, this)">
+                            <div class="grid-icon"
+                                style="width:24px; height:18px; border:1.5px solid currentColor; border-radius:3px; opacity:0.6;">
+                            </div>
+                        </div>
+                        <div class="layout-option" onclick="changeGrid(2, this)">
+                            <div class="grid-icon" style="display:flex; gap:3px;">
+                                <div
+                                    style="width:11px; height:18px; border:1.5px solid currentColor; border-radius:2px; opacity:0.6;">
+                                </div>
+                                <div
+                                    style="width:11px; height:18px; border:1.5px solid currentColor; border-radius:2px; opacity:0.6;">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layout-option active" onclick="changeGrid(4, this)">
+                            <div class="grid-icon" style="display:grid; grid-template-columns:1fr 1fr; gap:3px;">
+                                <div
+                                    style="width:11px; height:8px; border:1.5px solid currentColor; border-radius:2px;">
+                                </div>
+                                <div
+                                    style="width:11px; height:8px; border:1.5px solid currentColor; border-radius:2px;">
+                                </div>
+                                <div
+                                    style="width:11px; height:8px; border:1.5px solid currentColor; border-radius:2px;">
+                                </div>
+                                <div
+                                    style="width:11px; height:8px; border:1.5px solid currentColor; border-radius:2px;">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layout-option" onclick="changeGrid(9, this)">
+                            <div class="grid-icon" style="display:grid; grid-template-columns:repeat(3, 1fr); gap:2px;">
+                                <div
+                                    style="width:7px; height:5px; border:1px solid currentColor; border-radius:1px; opacity:0.6;">
+                                </div>
+                                <div
+                                    style="width:7px; height:5px; border:1px solid currentColor; border-radius:1px; opacity:0.6;">
+                                </div>
+                                <div
+                                    style="width:7px; height:5px; border:1px solid currentColor; border-radius:1px; opacity:0.6;">
+                                </div>
+                                <div
+                                    style="width:7px; height:5px; border:1px solid currentColor; border-radius:1px; opacity:0.6;">
+                                </div>
+                                <div
+                                    style="width:7px; height:5px; border:1px solid currentColor; border-radius:1px; opacity:0.6;">
+                                </div>
+                                <div
+                                    style="width:7px; height:5px; border:1px solid currentColor; border-radius:1px; opacity:0.6;">
+                                </div>
+                                <div
+                                    style="width:7px; height:5px; border:1px solid currentColor; border-radius:1px; opacity:0.6;">
+                                </div>
+                                <div
+                                    style="width:7px; height:5px; border:1px solid currentColor; border-radius:1px; opacity:0.6;">
+                                </div>
+                                <div
+                                    style="width:7px; height:5px; border:1px solid currentColor; border-radius:1px; opacity:0.6;">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="settings-title" style="margin-top: 30px;">THỨ TỰ CAMERA (KÉO ĐỂ ĐỔI)</div>
+                    <div class="cam-order-list" style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                        <div class="cam-order-item"
+                            style="background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 8px; padding: 12px; display: flex; align-items: center; gap: 10px; font-size: 13px; cursor: grab; transition: 0.2s; border: 1px solid var(--border);">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M23 7l-7 5 7 5V7z"></path>
+                                <rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect>
+                            </svg><span>Cam nhiệt cố định</span></div>
+                        <div class="cam-order-item"
+                            style="background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 8px; padding: 12px; display: flex; align-items: center; gap: 10px; font-size: 13px; cursor: grab; transition: 0.2s; border: 1px solid var(--border);">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M23 7l-7 5 7 5V7z"></path>
+                                <rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect>
+                            </svg><span>Cam nhiệt quay quét</span></div>
+                        <div class="cam-order-item"
+                            style="background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 8px; padding: 12px; display: flex; align-items: center; gap: 10px; font-size: 13px; cursor: grab; transition: 0.2s; border: 1px solid var(--border);">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M23 7l-7 5 7 5V7z"></path>
+                                <rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect>
+                            </svg><span>Cam thường cố định</span></div>
+                        <div class="cam-order-item"
+                            style="background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 8px; padding: 12px; display: flex; align-items: center; gap: 10px; font-size: 13px; cursor: grab; transition: 0.2s; border: 1px solid var(--border);">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M23 7l-7 5 7 5V7z"></path>
+                                <rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect>
+                            </svg><span>Cam thường quay quét</span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="drawer-footer"
+                style="padding: 20px 24px; border-top: 1px solid var(--border); display: flex; justify-content: flex-end; gap: 12px;">
+                <button class="btn-cancel" onclick="closeDrawer()"
+                    style="padding: 10px 24px; border-radius: 8px; border: 1px solid var(--border); background: transparent; color: var(--text-sub); cursor: pointer; font-weight: 600;">Hủy</button>
+                <button class="btn-save" onclick="applySettings()"
+                    style="padding: 10px 24px; border-radius: 8px; border: none; background: var(--primary); color: white; cursor: pointer; font-weight: 700;">Lưu
+                    thiết lập</button>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .settings-title {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--text-sub);
+            margin-bottom: 12px;
+            text-transform: uppercase;
+        }
+
+        .st-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            font-size: 13px;
+            color: var(--text-main);
+        }
+
+        .st-label input {
+            width: 16px;
+            height: 16px;
+            cursor: pointer;
+            accent-color: var(--primary);
+        }
+
+        .st-label svg {
+            color: var(--text-sub);
+        }
+
+        .layout-option {
+            width: 60px;
+            height: 44px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: 0.2s;
+            color: var(--text-sub);
+        }
+
+        .layout-option.active {
+            border-color: var(--primary);
+            background: rgba(37, 99, 235, 0.1);
+            color: var(--primary);
+        }
+    </style>
+
     <script src="js/main.js"></script>
     <script src="js/responsive-helpers.js"></script>
     <script>
-        function toggleNode(el) {
-            el.parentElement.classList.toggle('open');
+        function toggleNode(el) { el.parentElement.classList.toggle('open'); }
+        function openDrawer() {
+            const overlay = document.getElementById('drawerOverlay');
+            const drawer = document.getElementById('settingsDrawer');
+            overlay.style.display = 'block';
+            setTimeout(() => { drawer.style.right = '0'; }, 10);
         }
-
+        function closeDrawer() {
+            const overlay = document.getElementById('drawerOverlay');
+            const drawer = document.getElementById('settingsDrawer');
+            drawer.style.right = '-600px';
+            setTimeout(() => { overlay.style.display = 'none'; }, 300);
+        }
         function changeGrid(cells, btn) {
-            // Update active button
+            // Update active state in toolbar
             document.querySelectorAll('.grid-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
+            document.querySelectorAll('.grid-btn').forEach(b => { if (b.textContent == cells) b.classList.add('active'); });
 
-            // Update grid layout
-            const grid = document.querySelector('.cam-grid');
+            // Update active state in drawer
+            document.querySelectorAll('.layout-option').forEach(opt => opt.classList.remove('active'));
+            if (btn && btn.classList.contains('layout-option')) btn.classList.add('active');
+
+            // Apply grid
+            const grid = document.getElementById('mainCamGrid');
             const cols = Math.sqrt(cells);
             grid.style.gridTemplateColumns = `repeat(${cols}, 1fr)`;
             grid.style.gridTemplateRows = `repeat(${cols}, 1fr)`;
-
-            // Mock: Re-generate or hide/show cells based on selection
-            // In a real app, you would fetch or adjust the actual camera feeds here
-            console.log(`Switched to ${cells} view grid`);
         }
+        function applySettings() { closeDrawer(); alert('Đã cập nhật thiết lập hiển thị'); }
+        document.getElementById('drawerOverlay').addEventListener('click', function (e) { if (e.target === this) closeDrawer(); });
     </script>
 </body>
 
