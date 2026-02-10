@@ -265,7 +265,7 @@
             <!-- Right Card: Monitoring Area -->
             <div class="card live-content">
                 <div class="monitor-top-bar" style="border-radius: 12px 12px 0 0;">
-                    <button class="mobile-only sidebar-toggle-btn" onclick="toggleSidebar()"
+                    <button id="sidebarToggle" class="mobile-only sidebar-toggle-btn" onclick="toggleSidebar()"
                         style="margin-right: 10px; background: var(--primary); color: white; border: none; padding: 8px; border-radius: 4px; display: flex; align-items: center; justify-content: center;">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="2">
@@ -739,10 +739,6 @@
     <script src="js/main.js"></script>
     <script src="js/responsive-helpers.js"></script>
     <script>
-        function toggleSidebar() {
-            document.getElementById('liveSidebar').classList.toggle('open');
-            document.getElementById('sidebarOverlay').classList.toggle('active');
-        }
         function toggleNode(el) { el.parentElement.classList.toggle('open'); }
         function openDrawer() {
             const overlay = document.getElementById('drawerOverlay');

@@ -5,7 +5,7 @@
 
 // Toggle sidebar on mobile (for giamsattructiep.html)
 function toggleSidebar() {
-    const sidebar = document.querySelector('.tree-sidebar');
+    const sidebar = document.querySelector('.tree-sidebar') || document.querySelector('.live-sidebar');
     const overlay = document.querySelector('.sidebar-overlay');
 
     if (sidebar) {
