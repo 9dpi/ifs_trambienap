@@ -1296,7 +1296,8 @@ body {
     border-radius: 6px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-start;
+    gap: 8px;
     position: relative;
     transition: 0.2s;
 }
@@ -1327,15 +1328,11 @@ body {
     width: 14px;
     height: 14px;
     opacity: 0.6;
-    margin-right: 2px;
-    /* Small space between horizontal line and icon */
     flex-shrink: 0;
 }
 
 .at-leaf span {
-    flex: 1;
-    text-align: right;
-    padding-left: 20px;
+    text-align: left;
 }
 
 .at-folder-icon {
