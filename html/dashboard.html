@@ -97,7 +97,22 @@
             }
         }
 
-        /* Removed conflicting media query */
+        @media (max-width: 540px) {
+            .kpi-row {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+
+            .kpi-card {
+                height: 80px;
+                padding: 12px 16px !important;
+            }
+
+            .tree-card,
+            .map-section {
+                height: 400px !important;
+            }
+        }
 
         .status-badge {
             display: flex;
@@ -283,8 +298,37 @@
         .thermometer-icon {
             width: 24px;
             height: 24px;
-            color: #10B981;
+            color: var(--success);
             filter: drop-shadow(0 0 5px rgba(16, 185, 129, 0.5));
+            transition: 0.2s;
+        }
+
+        @media (max-width: 768px) {
+            .sld-node {
+                width: 44px;
+                height: 44px;
+            }
+
+            .thermometer-icon {
+                width: 32px;
+                height: 32px;
+            }
+
+            .sld-view::after {
+                content: '↔ Vuốt để xem sơ đồ';
+                position: absolute;
+                bottom: 10px;
+                left: 50%;
+                transform: translateX(-50%);
+                background: rgba(0, 0, 0, 0.6);
+                color: white;
+                padding: 4px 12px;
+                border-radius: 20px;
+                font-size: 11px;
+                pointer-events: none;
+                z-index: 1000;
+                border: 1px solid rgba(255, 255, 255, 0.1);
+            }
         }
 
         .node-label-small {
@@ -494,22 +538,24 @@
             gap: 10px;
         }
 
-        /* Interactive Node Popup */
+        /* Interactive Node Popup - Premium Style */
         .node-popup {
             position: absolute;
-            background: white;
+            background: var(--bg-card);
             border-radius: 12px;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
-            width: 340px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            width: 800px;
+            max-width: 95vw;
             z-index: 10000;
             padding: 0;
             overflow: hidden;
-            color: #1f2937;
+            color: var(--text-main);
             display: none;
             font-family: 'Inter', sans-serif;
             pointer-events: auto;
-            border: 1px solid rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--border);
             animation: popupFadeIn 0.2s ease-out;
+            backdrop-filter: blur(10px);
         }
 
         @keyframes popupFadeIn {
@@ -525,76 +571,145 @@
         }
 
         .node-popup-header {
-            background: #f9fafb;
-            padding: 14px 20px;
+            background: var(--bg-body);
+            /* Theme-aware subtle header */
+            padding: 16px 20px;
             font-weight: 700;
             text-align: center;
-            border-bottom: 1px solid #f3f4f6;
-            font-size: 16px;
-            color: #111827;
+            border-bottom: 1px solid var(--border);
+            font-size: 15px;
+            color: var(--primary);
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
             position: relative;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         .node-popup-close {
-            position: absolute;
-            right: 12px;
-            top: 14px;
             cursor: pointer;
-            color: #9ca3af;
-            font-size: 18px;
-            transition: color 0.2s;
+            color: var(--text-sub);
+            font-size: 20px;
+            transition: 0.2s;
+            line-height: 1;
         }
 
         .node-popup-close:hover {
-            color: #ef4444;
+            color: var(--danger);
+            transform: scale(1.1);
         }
 
         .node-popup-body {
             padding: 20px;
+            max-height: 70vh;
+            overflow-y: auto;
+            background: var(--bg-card);
         }
 
-        .node-popup-item {
-            margin-bottom: 20px;
+        /* Analysis Card Style - Premium Unified */
+        .analysis-card {
+            background: var(--bg-body);
+            /* Use body bg for inner cards for contrast */
+            border-radius: 10px;
+            padding: 14px;
+            border: 1px solid var(--border);
+            transition: 0.2s;
         }
 
-        .node-popup-item:last-child {
-            margin-bottom: 0;
+        .analysis-card:hover {
+            border-color: var(--primary);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
 
-        .node-popup-item-title {
-            font-weight: 800;
-            font-size: 18px;
-            margin-bottom: 6px;
-            color: #111827;
-            display: block;
-        }
-
-        .node-popup-item-data {
-            font-size: 13.5px;
-            color: #4b5563;
-            line-height: 1.5;
-            letter-spacing: -0.01em;
-        }
-
-        .node-popup-item-data b {
-            color: #000;
+        .analysis-title {
             font-weight: 700;
+            color: var(--text-main);
+            font-size: 14px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        /* Triangle pointer for popup */
-        .node-popup::after {
-            content: '';
-            position: absolute;
-            left: -10px;
-            top: 50%;
-            transform: translateY(-50%);
-            border-width: 10px 10px 10px 0;
-            border-style: solid;
-            border-color: transparent white transparent transparent;
-            display: block;
+        .analysis-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            margin-bottom: 8px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            color: var(--text-sub);
+        }
+
+        .analysis-row:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .analysis-label {
+            font-weight: 500;
+        }
+
+        .analysis-val {
+            color: var(--text-main);
+            font-weight: 700;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .status-pill {
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 10px;
+            font-weight: 800;
+            text-transform: uppercase;
+        }
+
+        .status-pill.success {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--success);
+        }
+
+        /* Triangle pointer for popup - Desktop only */
+        @media (min-width: 769px) {
+            .node-popup::after {
+                content: '';
+                position: absolute;
+                left: -10px;
+                top: 50%;
+                transform: translateY(-50%);
+                border-width: 10px 10px 10px 0;
+                border-style: solid;
+                border-color: transparent var(--border) transparent transparent;
+                display: block;
+            }
+        }
+
+        /* Mobile specific popup logic */
+        @media (max-width: 768px) {
+            .node-popup {
+                position: fixed !important;
+                top: 50% !important;
+                left: 50% !important;
+                transform: translate(-50%, -50%) !important;
+                width: 90% !important;
+                max-width: 400px !important;
+                max-height: 80vh !important;
+                box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 0 1000px rgba(0, 0, 0, 0.6) !important;
+            }
+
+            .node-popup::after {
+                display: none !important;
+            }
+
+            .node-popup-grid {
+                grid-template-columns: 1fr !important;
+            }
+
+            .node-popup-body {
+                padding: 15px;
+            }
         }
 
         .date-range-box input {
@@ -968,9 +1083,9 @@
         </div>
     </div>
 
-    <div id="deviceNodePopup" class="node-popup" style="width: 800px;">
+    <div id="deviceNodePopup" class="node-popup">
         <div class="node-popup-header">
-            Thiết bị: <span id="popupDeviceTitle">131-1</span>
+            <span>Thiết bị: <span id="popupDeviceTitle">131-1</span></span>
             <span class="node-popup-close" onclick="hideNodePopup()">&times;</span>
         </div>
         <div class="node-popup-body">
@@ -1167,25 +1282,26 @@
             document.getElementById('popupDeviceTitle').innerText = deviceName;
 
             // Mock 8 items with combined Summary and Analysis info
-            let itemsHTML = '<div class="node-popup-grid" style="grid-template-columns: repeat(2, 1fr); gap: 15px;">';
+            let itemsHTML = '<div class="node-popup-grid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px;">';
             for (let i = 1; i <= 8; i++) {
                 const suffix = String.fromCharCode(64 + (i % 3 || 3));
                 itemsHTML += `
-                    <div class="analysis-card" style="margin-bottom:0">
-                        <div class="analysis-title" style="display:flex; justify-content:space-between">
+                    <div class="analysis-card">
+                        <div class="analysis-title">
                             <span>${deviceName}_${suffix}${i}</span>
-                            <span style="font-size:10px; color:#64748b">ID: DEV-0${i}</span>
+                            <span style="font-size:10px; color:var(--text-sub)">ID: DEV-0${i}</span>
                         </div>
-                        <div style="font-size:11px; color:#1e293b; margin-bottom:8px; background:white; padding:4px; border-radius:4px">
-                            Min: <b>${(25 + Math.random() * 5).toFixed(1)}°C</b> | Max: <b>${(30 + Math.random() * 5).toFixed(1)}°C</b>
+                        <div style="font-size:11px; color:var(--text-main); margin-bottom:10px; background:var(--bg-card); padding:6px 10px; border-radius:6px; border: 1px solid var(--border)">
+                            <span style="opacity:0.6">Min:</span> <b style="color:var(--success)">${(25 + Math.random() * 5).toFixed(1)}°C</b> | 
+                            <span style="opacity:0.6">Max:</span> <b style="color:var(--danger)">${(30 + Math.random() * 5).toFixed(1)}°C</b>
                         </div>
                         <div class="analysis-row">
                             <div class="analysis-label">So với pha min</div>
-                            <div class="analysis-val">29 / <span class="analysis-status">Tốt</span></div>
+                            <div class="analysis-val">29 / <span class="status-pill success">Tốt</span></div>
                         </div>
                         <div class="analysis-row">
                             <div class="analysis-label">So với môi trường</div>
-                            <div class="analysis-val">26.6 / <span class="analysis-status">Tốt</span></div>
+                            <div class="analysis-val">26.6 / <span class="status-pill success">Tốt</span></div>
                         </div>
                     </div>
                 `;
@@ -1197,17 +1313,24 @@
             // Show popup
             popup.style.display = 'block';
 
-            // Re-calculate position after setting content
-            let targetLeft = x + 20;
-            let targetTop = y - popup.offsetHeight / 2;
+            // Positioning logic for desktop
+            if (window.innerWidth > 768) {
+                // Re-calculate position after setting content
+                let targetLeft = x + 20;
+                let targetTop = y - popup.offsetHeight / 2;
 
-            // Boundary checks for large popup
-            if (targetLeft + 800 > window.innerWidth) targetLeft = x - 820;
-            if (targetTop < 10) targetTop = 10;
-            if (targetTop + popup.offsetHeight > window.innerHeight) targetTop = window.innerHeight - popup.offsetHeight - 10;
+                // Boundary checks
+                if (targetLeft + popup.offsetWidth > window.innerWidth) targetLeft = x - popup.offsetWidth - 20;
+                if (targetTop < 10) targetTop = 10;
+                if (targetTop + popup.offsetHeight > window.innerHeight) targetTop = window.innerHeight - popup.offsetHeight - 10;
 
-            popup.style.left = targetLeft + 'px';
-            popup.style.top = targetTop + 'px';
+                popup.style.left = targetLeft + 'px';
+                popup.style.top = targetTop + 'px';
+            } else {
+                // Reset inline styles for mobile as it uses fixed centering in CSS
+                popup.style.left = '';
+                popup.style.top = '';
+            }
         }
 
         function hideNodePopup() {

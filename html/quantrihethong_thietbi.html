@@ -1201,21 +1201,34 @@
                             z-index: 10;
                         }
 
-                        /* Filter Dropdown Styles */
+                        /* Filter Dropdown Styles - Premium Enhancement */
                         .filter-dropdown {
                             position: absolute;
-                            top: calc(100% + 8px);
+                            top: calc(100% + 12px);
                             right: 0;
-                            width: 300px;
-                            background: #1a202c;
+                            width: 280px;
+                            background: var(--bg-card);
                             border: 1px solid var(--border);
                             border-radius: 12px;
-                            padding: 16px;
-                            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+                            padding: 20px;
+                            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
                             display: none;
                             flex-direction: column;
-                            gap: 12px;
+                            gap: 16px;
                             z-index: 100;
+                            animation: fdFadeIn 0.2s ease-out;
+                        }
+
+                        @keyframes fdFadeIn {
+                            from {
+                                opacity: 0;
+                                transform: translateY(10px);
+                            }
+
+                            to {
+                                opacity: 1;
+                                transform: translateY(0);
+                            }
                         }
 
                         .filter-dropdown.show {
@@ -1225,48 +1238,87 @@
                         .fd-title {
                             font-size: 14px;
                             font-weight: 700;
-                            color: var(--text-main);
+                            color: var(--primary);
+                            text-transform: uppercase;
+                            letter-spacing: 0.5px;
+                            margin-bottom: 4px;
+                        }
+
+                        .fd-header-actions {
+                            display: flex;
+                            justify-content: space-between;
+                            align-items: center;
                             padding-bottom: 12px;
                             border-bottom: 1px solid var(--border);
-                            margin-bottom: 4px;
+                        }
+
+                        .fd-header-actions a {
+                            color: #3b82f6;
+                            text-decoration: none;
+                            font-size: 12px;
+                            font-weight: 600;
+                        }
+
+                        .fd-header-actions a:hover {
+                            text-decoration: underline;
+                        }
+
+                        .fd-list {
+                            display: flex;
+                            flex-direction: column;
+                            gap: 4px;
                         }
 
                         .fd-item {
                             display: flex;
                             align-items: center;
                             gap: 12px;
-                            padding: 8px 0;
+                            padding: 8px 10px;
                             cursor: pointer;
-                        }
-
-                        .fd-checkbox {
-                            width: 18px;
-                            height: 18px;
-                            border: 1.5px solid #3b82f6;
-                            border-radius: 4px;
-                            display: flex;
-                            align-items: center;
-                            justify-content: center;
+                            border-radius: 6px;
                             transition: 0.2s;
                         }
 
-                        .fd-checkbox.checked {
-                            background: #3b82f6;
+                        .fd-item:hover {
+                            background: rgba(255, 255, 255, 0.03);
                         }
 
-                        .fd-checkbox svg {
-                            width: 12px;
-                            height: 12px;
-                            color: white;
+                        .fd-checkbox-custom {
+                            position: relative;
+                            width: 18px;
+                            height: 18px;
+                            border: 2px solid var(--border);
+                            border-radius: 4px;
+                            transition: 0.2s;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            background: rgba(255, 255, 255, 0.02);
+                        }
+
+                        .fd-item input {
                             display: none;
                         }
 
-                        .fd-checkbox.checked svg {
-                            display: block;
+                        .fd-item input:checked+.fd-checkbox-custom {
+                            background: #3b82f6;
+                            border-color: #3b82f6;
+                        }
+
+                        .fd-item input:checked+.fd-checkbox-custom::after {
+                            content: '';
+                            position: absolute;
+                            width: 10px;
+                            height: 5px;
+                            border-left: 2px solid white;
+                            border-bottom: 2px solid white;
+                            transform: rotate(-45deg);
+                            margin-top: -2px;
                         }
 
                         .fd-label {
                             font-size: 13px;
+                            font-weight: 500;
                             color: var(--text-main);
                         }
 
@@ -1274,17 +1326,19 @@
                             background: #3b82f6;
                             color: white;
                             border: none;
-                            padding: 12px;
+                            padding: 10px;
                             border-radius: 8px;
                             font-weight: 600;
                             font-size: 13px;
                             cursor: pointer;
-                            margin-top: 8px;
+                            margin-top: 4px;
                             transition: 0.2s;
+                            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
                         }
 
                         .btn-apply-filter:hover {
                             background: #2563eb;
+                            transform: translateY(-1px);
                         }
 
                         .level-block {
@@ -1525,20 +1579,44 @@
                                 style="background: #3b82f6; color: white; border-radius: 10px; padding: 0 6px; font-size: 10px;">3</span>
                         </div>
 
-                        <!-- Filter Dropdown (Responsive) -->
-                        <div class="filter-dropdown-content" id="thresholdFilterDropdownDevice">
-                            <div class="fd-header">
-                                <span>Chọn loại ngưỡng hiển thị</span>
+                        <!-- Filter Dropdown (Responsive Enhanced) -->
+                        <div class="filter-dropdown" id="thresholdFilterDropdownDevice">
+                            <div class="fd-title">Thiết lập hiển thị</div>
+                            <div class="fd-header-actions">
+                                <span style="font-size: 11px; color: var(--text-sub);">Chọn loại hiển thị</span>
                                 <a href="#" onclick="toggleAllThresholdsDevice(event)">Chọn tất cả</a>
                             </div>
                             <div class="fd-list">
-                                <label class="fd-item"><input type="checkbox" checked> So với môi trường</label>
-                                <label class="fd-item"><input type="checkbox" checked> So với ngưỡng nhiệt</label>
-                                <label class="fd-item"><input type="checkbox" checked> So với pha min</label>
-                                <label class="fd-item"><input type="checkbox" checked> So với phần tử cùng loại</label>
-                                <label class="fd-item"><input type="checkbox"> So với pha min toàn trạm</label>
-                                <label class="fd-item"><input type="checkbox"> So với phần tử cùng loại toàn
-                                    trạm</label>
+                                <label class="fd-item">
+                                    <input type="checkbox" checked>
+                                    <div class="fd-checkbox-custom"></div>
+                                    <span class="fd-label">So với môi trường</span>
+                                </label>
+                                <label class="fd-item">
+                                    <input type="checkbox" checked>
+                                    <div class="fd-checkbox-custom"></div>
+                                    <span class="fd-label">So với ngưỡng nhiệt</span>
+                                </label>
+                                <label class="fd-item">
+                                    <input type="checkbox" checked>
+                                    <div class="fd-checkbox-custom"></div>
+                                    <span class="fd-label">So với pha min</span>
+                                </label>
+                                <label class="fd-item">
+                                    <input type="checkbox" checked>
+                                    <div class="fd-checkbox-custom"></div>
+                                    <span class="fd-label">So với phần tử cùng loại</span>
+                                </label>
+                                <label class="fd-item">
+                                    <input type="checkbox">
+                                    <div class="fd-checkbox-custom"></div>
+                                    <span class="fd-label">So với pha min toàn trạm</span>
+                                </label>
+                                <label class="fd-item">
+                                    <input type="checkbox">
+                                    <div class="fd-checkbox-custom"></div>
+                                    <span class="fd-label">So với phần tử cùng loại toàn trạm</span>
+                                </label>
                             </div>
                             <div class="fd-footer">
                                 <button class="btn-apply-filter" onclick="closeThresholdFilterDevice()">Áp dụng</button>
@@ -1549,15 +1627,11 @@
                     <script>
                         function toggleThresholdFilterDevice() {
                             const dropdown = document.getElementById('thresholdFilterDropdownDevice');
-                            if (dropdown.style.display === 'flex') {
-                                dropdown.style.display = 'none';
-                            } else {
-                                dropdown.style.display = 'flex';
-                            }
+                            dropdown.classList.toggle('show');
                         }
 
                         function closeThresholdFilterDevice() {
-                            document.getElementById('thresholdFilterDropdownDevice').style.display = 'none';
+                            document.getElementById('thresholdFilterDropdownDevice').classList.remove('show');
                         }
 
                         function toggleAllThresholdsDevice(e) {
@@ -1571,7 +1645,7 @@
                             const dropdown = document.getElementById('thresholdFilterDropdownDevice');
                             const btn = document.getElementById('btnFilterThresholdDevice');
                             if (dropdown && !dropdown.contains(event.target) && !btn.contains(event.target)) {
-                                dropdown.style.display = 'none';
+                                dropdown.classList.remove('show');
                             }
                         });
                     </script>

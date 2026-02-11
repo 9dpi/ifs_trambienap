@@ -1130,7 +1130,8 @@
     }
 
     /* Fix Dropdown - CENTERED MODAL STYLE AS REQUESTED */
-    .filter-dropdown-content {
+    .filter-dropdown-content,
+    .filter-dropdown {
         position: fixed !important;
         top: 50% !important;
         left: 50% !important;
@@ -1142,58 +1143,58 @@
         min-width: 300px !important;
         max-height: 85vh !important;
         z-index: 3005 !important;
-        background: #1e293b !important;
+        background: var(--bg-card) !important;
         border: 1px solid var(--border) !important;
         border-radius: 12px !important;
-        /* Full rounded */
-        /* Full rounded */
         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 0 1000px rgba(0, 0, 0, 0.5) !important;
         white-space: normal !important;
         overflow-y: auto !important;
         display: none;
-        /* Default hidden */
         flex-direction: column !important;
         animation: fadeIn 0.2s ease-out;
-
-        /* Add Padding for spacious look */
         padding: 16px !important;
         gap: 16px !important;
     }
 
+    .filter-dropdown-content.show,
+    .filter-dropdown.show {
+        display: flex !important;
+    }
+
     /* Remove borders and refine internal spacing within the popup */
-    .filter-dropdown-content .fd-header {
+    .filter-dropdown-content .fd-header,
+    .filter-dropdown .fd-header-actions {
         padding: 0 !important;
         border-bottom: none !important;
         margin-bottom: 0 !important;
     }
 
-    .filter-dropdown-content .fd-header a {
+    .filter-dropdown-content .fd-header a,
+    .filter-dropdown .fd-header-actions a {
         color: #60a5fa !important;
-        /* Bright Blue */
         text-decoration: none !important;
         font-size: 13px !important;
-        text-transform: none !important;
-        /* Keep original case */
     }
 
-    .filter-dropdown-content .fd-list {
+    .filter-dropdown-content .fd-list,
+    .filter-dropdown .fd-list {
         padding: 0 !important;
         gap: 8px !important;
         display: flex !important;
         flex-direction: column !important;
     }
 
-    .filter-dropdown-content .fd-footer {
+    .filter-dropdown-content .fd-footer,
+    .filter-dropdown .fd-footer {
         padding: 0 !important;
         border-top: none !important;
         margin-top: 0 !important;
         justify-content: flex-start !important;
-        /* Button left aligned or full width */
     }
 
-    .filter-dropdown-content .fd-item {
+    .filter-dropdown-content .fd-item,
+    .filter-dropdown .fd-item {
         padding: 8px 0 !important;
-        /* Less side padding since container has padding */
     }
 
 
