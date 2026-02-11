@@ -1185,161 +1185,185 @@ body {
     overflow: hidden;
 }
 
-/* --- 8. AREA TREE COMPONENT (Premium Screenshot Style) --- */
+/* --- 8. AREA TREE COMPONENT (Latest Premium Style) --- */
 .tree-sidebar {
-    width: 320px;
-    background: #111827;
-    /* Darker Slate */
+    width: 300px;
+    background: #0f172a;
+    /* Deeper Dark */
     border-right: 1px solid rgba(255, 255, 255, 0.05);
     display: flex;
     flex-direction: column;
-    padding: 24px 20px;
+    padding: 24px 16px;
     flex-shrink: 0;
     z-index: 100;
 }
 
 .tree-title {
-    font-size: 15px;
+    font-size: 16px;
     font-weight: 700;
     color: #f8fafc;
     margin-bottom: 20px;
-    letter-spacing: 0.3px;
+}
+
+/* Search Box with Icon */
+.tree-search-wrapper {
+    position: relative;
+    margin-bottom: 28px;
+}
+
+.tree-search-wrapper svg {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #64748b;
+    pointer-events: none;
 }
 
 .tree-search-box {
     width: 100%;
-    padding: 12px 16px;
-    background: rgba(255, 255, 255, 0.03);
+    padding: 10px 14px 10px 38px;
+    background: rgba(0, 0, 0, 0.2);
     border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 6px;
+    border-radius: 8px;
     font-size: 13px;
     color: #f8fafc;
-    margin-bottom: 24px;
     outline: none;
-    transition: 0.2s;
 }
 
-.tree-search-box:focus {
-    border-color: #3b82f6;
-    background: rgba(255, 255, 255, 0.05);
+.tree-section-header {
+    font-size: 11px;
+    font-weight: 700;
+    color: #64748b;
+    text-transform: uppercase;
+    margin: 24px 0 12px 0;
+    letter-spacing: 0.5px;
 }
 
 .area-tree {
     flex: 1;
     overflow-y: auto;
-    padding-right: 4px;
-}
-
-.at-node {
-    position: relative;
-    margin-bottom: 2px;
 }
 
 .at-item {
     display: flex;
     align-items: center;
-    padding: 8px 10px;
+    padding: 8px 4px;
     cursor: pointer;
-    border-radius: 6px;
-    transition: 0.2s;
-    font-size: 13.5px;
-    gap: 8px;
-    color: #cbd5e1;
-    position: relative;
-    z-index: 2;
+    gap: 12px;
+    color: #f1f5f9;
+    font-weight: 600;
 }
 
-.at-item:hover {
-    background: rgba(255, 255, 255, 0.04);
-    color: #f8fafc;
-}
-
-.at-arrow {
-    width: 12px !important;
-    height: 12px !important;
-    min-width: 12px;
-    transition: 0.2s;
-    opacity: 0.5;
+.at-parent-icon {
+    width: 24px;
+    height: 24px;
+    background: rgba(37, 99, 235, 0.1);
+    border: 1.5px solid #2563eb;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #3b82f6;
     flex-shrink: 0;
 }
 
+.at-parent-icon svg {
+    width: 12px;
+    height: 12px;
+}
+
+.at-arrow {
+    margin-left: auto;
+    width: 14px;
+    height: 14px;
+    opacity: 0.6;
+    transition: 0.2s;
+}
+
 .at-node.expanded>.at-item .at-arrow {
-    transform: rotate(90deg);
+    transform: rotate(180deg);
 }
 
 .at-children {
-    padding-left: 24px;
+    padding-left: 12px;
+    margin-left: 11px;
+    border-left: 1px solid rgba(255, 255, 255, 0.2);
     display: none;
-    position: relative;
+    margin-top: 4px;
+    margin-bottom: 4px;
 }
 
 .at-node.expanded>.at-children {
     display: block;
 }
 
-/* Vertical line for hierarchy */
-.at-children::before {
-    content: '';
-    position: absolute;
-    left: 15px;
-    top: -4px;
-    bottom: 12px;
-    width: 1px;
-    background: rgba(255, 255, 255, 0.1);
-}
-
 .at-leaf {
-    padding: 8px 10px;
-    font-size: 13px;
-    color: #94a3b8;
-    cursor: pointer;
-    border-radius: 6px;
     display: flex;
     align-items: center;
-    justify-content: flex-start;
-    gap: 8px;
-    position: relative;
+    padding: 8px 12px;
+    margin-bottom: 4px;
+    border-radius: 8px;
+    cursor: pointer;
+    gap: 12px;
+    color: #94a3b8;
     transition: 0.2s;
-}
-
-/* Horizontal line for hierarchy */
-.at-leaf::before {
-    content: '';
-    position: absolute;
-    left: -9px;
-    top: 50%;
-    width: 10px;
-    height: 1px;
-    background: rgba(255, 255, 255, 0.1);
+    font-size: 13px;
 }
 
 .at-leaf:hover {
-    background: rgba(255, 255, 255, 0.04);
-    color: #3b82f6;
+    color: #f1f5f9;
+    background: rgba(255, 255, 255, 0.03);
 }
 
 .at-leaf.active {
-    background: rgba(37, 99, 235, 0.1);
-    color: #3b82f6 !important;
-    font-weight: 600;
+    background: #1e293b;
+    color: #f1f5f9;
 }
 
-.at-leaf-icon {
-    width: 14px;
-    height: 14px;
-    opacity: 0.6;
+.at-leaf-icon-box {
+    width: 28px;
+    height: 28px;
+    background: rgba(148, 163, 184, 0.1);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
     flex-shrink: 0;
+    color: #94a3b8;
 }
 
-.at-leaf span {
-    text-align: left;
+.at-leaf.active .at-leaf-icon-box {
+    color: #f1f5f9;
 }
 
-.at-folder-icon {
-    width: 14px;
-    height: 14px;
-    opacity: 0.7;
-    flex-shrink: 0;
+.online-dot {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    width: 4px;
+    height: 4px;
+    background: #10b981;
+    border-radius: 50%;
+}
+
+.at-leaf.thermal {
+    color: #ef4444;
+}
+
+.at-leaf.thermal .at-leaf-icon-box {
+    color: #ef4444;
+    background: rgba(239, 68, 68, 0.1);
+}
+
+.at-leaf.thermal .online-dot {
+    background: #ef4444;
+}
+
+.flag-icon {
+    margin-left: auto;
+    opacity: 0.8;
 }
 
 .at-badge {
