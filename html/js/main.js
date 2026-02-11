@@ -147,7 +147,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 // Standard Tree Toggle Function
 function toggleAreaNode(el) {
-    const node = el.closest('.at-node') || el.closest('.tree-node');
+    const node = el.closest('.at-node') || el.closest('.modern-at-node') || el.closest('.tree-node');
     if (node) {
         node.classList.toggle('expanded');
         node.classList.toggle('open'); // Compatibility with old styles

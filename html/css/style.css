@@ -1185,8 +1185,153 @@ body {
     overflow: hidden;
 }
 
-/* --- 8. AREA TREE COMPONENT (Latest Premium Style) --- */
+/* --- 8. AREA TREE COMPONENT (Standardized - For Dashboard/Other pages) --- */
 .tree-sidebar {
+    width: 320px;
+    background: var(--bg-card);
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    padding: 24px;
+    flex-shrink: 0;
+}
+
+.tree-title {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 16px;
+    color: var(--text-main);
+}
+
+.tree-search-wrapper {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.tree-search-box {
+    width: 100%;
+    padding: 10px 14px;
+    background: var(--bg-body);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 13px;
+    color: var(--text-main);
+    outline: none;
+}
+
+.sidebar-area-list {
+    padding: 0 4px;
+}
+
+.at-node {
+    position: relative;
+    margin-bottom: 2px;
+}
+
+.at-item {
+    display: flex;
+    align-items: center;
+    padding: 10px 12px;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: all 0.2s;
+    font-size: 14px;
+    gap: 10px;
+    color: var(--text-main);
+    position: relative;
+    z-index: 2;
+    font-weight: 500;
+}
+
+.at-item:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--primary);
+}
+
+.at-arrow {
+    width: 14px !important;
+    height: 14px !important;
+    min-width: 14px;
+    min-height: 14px;
+    transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 0.6;
+    flex-shrink: 0;
+}
+
+.at-node.expanded>.at-item .at-arrow {
+    transform: rotate(90deg);
+}
+
+.at-children {
+    padding-left: 28px;
+    display: none;
+    position: relative;
+}
+
+/* Vertical line for hierarchy */
+.at-children::before {
+    content: '';
+    position: absolute;
+    left: 18px;
+    top: -10px;
+    bottom: 20px;
+    width: 1.5px;
+    background: var(--border);
+    opacity: 0.3;
+}
+
+.at-node.expanded>.at-children {
+    display: block;
+}
+
+.at-leaf {
+    padding: 8px 12px;
+    font-size: 13px;
+    color: var(--text-sub);
+    cursor: pointer;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    transition: 0.2s;
+    margin-bottom: 2px;
+}
+
+/* Horizontal line for hierarchy */
+.at-leaf::before {
+    content: '';
+    position: absolute;
+    left: -10px;
+    top: 50%;
+    width: 10px;
+    height: 1.5px;
+    background: var(--border);
+    opacity: 0.3;
+}
+
+.at-leaf:hover {
+    background: rgba(59, 130, 246, 0.08);
+    color: var(--primary);
+    padding-left: 16px;
+}
+
+.at-active {
+    background: rgba(59, 130, 246, 0.12) !important;
+    color: var(--primary) !important;
+    font-weight: 600;
+    box-shadow: inset 0 0 0 1px rgba(59, 130, 246, 0.2);
+}
+
+.at-badge {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-left: auto;
+}
+
+/* --- 8.1 AREA TREE COMPONENT (Latest Premium Style - Prefixed) --- */
+.modern-tree-sidebar {
     width: 300px;
     background: #0f172a;
     /* Deeper Dark */
@@ -1198,7 +1343,7 @@ body {
     z-index: 100;
 }
 
-.tree-title {
+.modern-tree-title {
     font-size: 16px;
     font-weight: 700;
     color: #f8fafc;
@@ -1206,12 +1351,12 @@ body {
 }
 
 /* Search Box with Icon */
-.tree-search-wrapper {
+.modern-tree-search-wrapper {
     position: relative;
     margin-bottom: 28px;
 }
 
-.tree-search-wrapper svg {
+.modern-tree-search-wrapper svg {
     position: absolute;
     left: 12px;
     top: 50%;
@@ -1220,7 +1365,7 @@ body {
     pointer-events: none;
 }
 
-.tree-search-box {
+.modern-tree-search-box {
     width: 100%;
     padding: 10px 14px 10px 38px;
     background: rgba(0, 0, 0, 0.2);
@@ -1231,7 +1376,7 @@ body {
     outline: none;
 }
 
-.tree-section-header {
+.modern-tree-section-header {
     font-size: 11px;
     font-weight: 700;
     color: #64748b;
@@ -1240,12 +1385,12 @@ body {
     letter-spacing: 0.5px;
 }
 
-.area-tree {
+.modern-area-tree {
     flex: 1;
     overflow-y: auto;
 }
 
-.at-item {
+.modern-at-item {
     display: flex;
     align-items: center;
     padding: 8px 4px;
@@ -1255,7 +1400,7 @@ body {
     font-weight: 600;
 }
 
-.at-parent-icon {
+.modern-at-parent-icon {
     width: 24px;
     height: 24px;
     background: rgba(37, 99, 235, 0.1);
@@ -1268,12 +1413,12 @@ body {
     flex-shrink: 0;
 }
 
-.at-parent-icon svg {
+.modern-at-parent-icon svg {
     width: 12px;
     height: 12px;
 }
 
-.at-arrow {
+.modern-at-arrow {
     margin-left: auto;
     width: 14px;
     height: 14px;
@@ -1281,11 +1426,11 @@ body {
     transition: 0.2s;
 }
 
-.at-node.expanded>.at-item .at-arrow {
+.modern-at-node.expanded>.modern-at-item .modern-at-arrow {
     transform: rotate(180deg);
 }
 
-.at-children {
+.modern-at-children {
     padding-left: 12px;
     margin-left: 11px;
     border-left: 1px solid rgba(255, 255, 255, 0.2);
@@ -1294,11 +1439,11 @@ body {
     margin-bottom: 4px;
 }
 
-.at-node.expanded>.at-children {
+.modern-at-node.expanded>.modern-at-children {
     display: block;
 }
 
-.at-leaf {
+.modern-at-leaf {
     display: flex;
     align-items: center;
     padding: 8px 12px;
@@ -1311,17 +1456,17 @@ body {
     font-size: 13px;
 }
 
-.at-leaf:hover {
+.modern-at-leaf:hover {
     color: #f1f5f9;
     background: rgba(255, 255, 255, 0.03);
 }
 
-.at-leaf.active {
+.modern-at-leaf.active {
     background: #1e293b;
     color: #f1f5f9;
 }
 
-.at-leaf-icon-box {
+.modern-at-leaf-icon-box {
     width: 16px;
     height: 16px;
     background: none;
@@ -1333,16 +1478,16 @@ body {
     color: #94a3b8;
 }
 
-.at-leaf-icon-box svg {
+.modern-at-leaf-icon-box svg {
     width: 14px;
     height: 14px;
 }
 
-.at-leaf.active .at-leaf-icon-box {
+.modern-at-leaf.active .modern-at-leaf-icon-box {
     color: #f1f5f9;
 }
 
-.online-dot {
+.modern-online-dot {
     position: absolute;
     top: 0px;
     right: -8px;
@@ -1352,19 +1497,19 @@ body {
     border-radius: 50%;
 }
 
-.at-leaf.thermal {
+.modern-at-leaf.thermal {
     color: #ef4444;
 }
 
-.at-leaf.thermal .at-leaf-icon-box {
+.modern-at-leaf.thermal .modern-at-leaf-icon-box {
     color: #ef4444;
 }
 
-.at-leaf.thermal .online-dot {
+.modern-at-leaf.thermal .modern-online-dot {
     background: #ef4444;
 }
 
-.flag-icon {
+.modern-flag-icon {
     margin-left: auto;
     opacity: 0.8;
 }

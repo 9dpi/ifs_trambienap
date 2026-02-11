@@ -87,56 +87,56 @@
         <div class="grid">
 
             <!-- Left Card: Area Tree -->
-            <div class="card live-sidebar" id="liveSidebar">
-                <div class="tree-title">
+            <div class="card modern-tree-sidebar" id="liveSidebar">
+                <div class="modern-tree-title">
                     <span>Danh sách khu vực</span>
                     <button class="close-sidebar mobile-only" onclick="toggleSidebar()">&times;</button>
                 </div>
-                <div class="tree-search-wrapper">
+                <div class="modern-tree-search-wrapper">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <circle cx="11" cy="11" r="8"></circle>
                         <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
                     </svg>
-                    <input type="text" class="tree-search-box" placeholder="Tìm trạm, camera...">
+                    <input type="text" class="modern-tree-search-box" placeholder="Tìm trạm, camera...">
                 </div>
 
-                <div class="area-tree">
+                <div class="modern-area-tree">
                     <!-- PHU QUOC SECTION -->
-                    <div class="tree-section-header">KHU VỰC PHÚ QUỐC</div>
+                    <div class="modern-tree-section-header">KHU VỰC PHÚ QUỐC</div>
 
-                    <div class="at-node expanded">
-                        <div class="at-item" onclick="toggleAreaNode(this)">
-                            <div class="at-parent-icon">
+                    <div class="modern-at-node expanded">
+                        <div class="modern-at-item" onclick="toggleAreaNode(this)">
+                            <div class="modern-at-parent-icon">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                     <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
                                     <circle cx="12" cy="10" r="3"></circle>
                                 </svg>
                             </div>
                             <span>Trạm 110kV Nam Phú Quốc</span>
-                            <svg class="at-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            <svg class="modern-at-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                 stroke-width="3">
                                 <path d="M6 9l6 6 6-6" />
                             </svg>
                         </div>
-                        <div class="at-children">
-                            <div class="at-leaf active">
-                                <div class="at-leaf-icon-box">
-                                    <div class="online-dot"></div>
+                        <div class="modern-at-children">
+                            <div class="modern-at-leaf active">
+                                <div class="modern-at-leaf-icon-box">
+                                    <div class="modern-online-dot"></div>
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                         <path d="M23 7l-7 5 7 5V7z"></path>
                                         <rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect>
                                     </svg>
                                 </div>
                                 <span>Cam thường cố định</span>
-                                <svg class="flag-icon" width="14" height="14" viewBox="0 0 24 24" fill="none"
+                                <svg class="modern-flag-icon" width="14" height="14" viewBox="0 0 24 24" fill="none"
                                     stroke="currentColor" stroke-width="2">
                                     <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path>
                                     <line x1="4" y1="22" x2="4" y2="15"></line>
                                 </svg>
                             </div>
-                            <div class="at-leaf">
-                                <div class="at-leaf-icon-box">
-                                    <div class="online-dot"></div>
+                            <div class="modern-at-leaf">
+                                <div class="modern-at-leaf-icon-box">
+                                    <div class="modern-online-dot"></div>
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                         <path d="M23 7l-7 5 7 5V7z"></path>
                                         <rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect>
@@ -144,9 +144,9 @@
                                 </div>
                                 <span>Cam thường quay quét</span>
                             </div>
-                            <div class="at-leaf thermal">
-                                <div class="at-leaf-icon-box">
-                                    <div class="online-dot"></div>
+                            <div class="modern-at-leaf thermal">
+                                <div class="modern-at-leaf-icon-box">
+                                    <div class="modern-online-dot"></div>
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                         <path d="M23 7l-7 5 7 5V7z"></path>
                                         <rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect>
@@ -154,9 +154,9 @@
                                 </div>
                                 <span>Cam nhiệt cố định</span>
                             </div>
-                            <div class="at-leaf thermal">
-                                <div class="at-leaf-icon-box">
-                                    <div class="online-dot"></div>
+                            <div class="modern-at-leaf thermal">
+                                <div class="modern-at-leaf-icon-box">
+                                    <div class="modern-online-dot"></div>
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                         <path d="M23 7l-7 5 7 5V7z"></path>
                                         <rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect>
@@ -168,26 +168,26 @@
                     </div>
 
                     <!-- LIEN TRI SECTION -->
-                    <div class="tree-section-header">KHU VỰC LIÊN TRÌ</div>
+                    <div class="modern-tree-section-header">KHU VỰC LIÊN TRÌ</div>
 
-                    <div class="at-node">
-                        <div class="at-item" onclick="toggleAreaNode(this)">
-                            <div class="at-parent-icon">
+                    <div class="modern-at-node">
+                        <div class="modern-at-item" onclick="toggleAreaNode(this)">
+                            <div class="modern-at-parent-icon">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                     <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
                                     <circle cx="12" cy="10" r="3"></circle>
                                 </svg>
                             </div>
                             <span>Trạm 110kV Liên Trì</span>
-                            <svg class="at-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            <svg class="modern-at-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                 stroke-width="3">
                                 <path d="M6 9l6 6 6-6" />
                             </svg>
                         </div>
-                        <div class="at-children">
-                            <div class="at-leaf">
-                                <div class="at-leaf-icon-box">
-                                    <div class="online-dot"></div>
+                        <div class="modern-at-children">
+                            <div class="modern-at-leaf">
+                                <div class="modern-at-leaf-icon-box">
+                                    <div class="modern-online-dot"></div>
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                         <path d="M23 7l-7 5 7 5V7z"></path>
                                         <rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect>
@@ -195,9 +195,9 @@
                                 </div>
                                 <span>PTZ Mắt thường ĐN</span>
                             </div>
-                            <div class="at-leaf">
-                                <div class="at-leaf-icon-box">
-                                    <div class="online-dot"></div>
+                            <div class="modern-at-leaf">
+                                <div class="modern-at-leaf-icon-box">
+                                    <div class="modern-online-dot"></div>
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                         <path d="M23 7l-7 5 7 5V7z"></path>
                                         <rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect>
@@ -205,9 +205,9 @@
                                 </div>
                                 <span>Bullet mắt thường ĐN</span>
                             </div>
-                            <div class="at-leaf thermal">
-                                <div class="at-leaf-icon-box">
-                                    <div class="online-dot"></div>
+                            <div class="modern-at-leaf thermal">
+                                <div class="modern-at-leaf-icon-box">
+                                    <div class="modern-online-dot"></div>
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                         <path d="M23 7l-7 5 7 5V7z"></path>
                                         <rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect>
@@ -215,9 +215,9 @@
                                 </div>
                                 <span>PTZ Mắt nhiệt ĐN</span>
                             </div>
-                            <div class="at-leaf thermal">
-                                <div class="at-leaf-icon-box">
-                                    <div class="online-dot"></div>
+                            <div class="modern-at-leaf thermal">
+                                <div class="modern-at-leaf-icon-box">
+                                    <div class="modern-online-dot"></div>
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                         <path d="M23 7l-7 5 7 5V7z"></path>
                                         <rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect>
