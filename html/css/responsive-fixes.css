@@ -1062,12 +1062,14 @@
         background: transparent !important;
         border: none !important;
         padding: 0 !important;
-        margin-top: -10px !important;
-        /* Pull up closer */
-        margin-bottom: 10px !important;
+        margin-top: 5px !important;
+        margin-bottom: 0 !important;
         display: flex !important;
         justify-content: flex-end !important;
         align-items: center;
+        width: 100% !important;
+        margin-left: 0 !important;
+        min-height: 40px !important;
     }
 
     .points-table-modal td:last-child::before {
