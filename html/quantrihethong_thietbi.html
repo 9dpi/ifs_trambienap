@@ -86,57 +86,50 @@
     <div class="container">
         <div class="bread-crumb">Quản trị hệ thống / <span>Thiết bị</span></div>
 
-        <div class="grid">
-            <!-- Modern Collapsible Filter Section -->
-            <details class="filter-section-modern" open>
-                <summary class="filter-header-modern">
-                    <div style="display: flex; align-items: center; gap: 10px;">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2">
-                            <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
-                        </svg>
-                        <span style="font-weight: 700; font-size: 15px;">Bộ lọc tìm kiếm</span>
-                    </div>
-                    <svg class="chevron-icon" width="20" height="20" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="2">
-                        <polyline points="6 9 12 15 18 9"></polyline>
+        <!-- Modern Collapsible Filter Section -->
+        <details class="filter-section-modern" open>
+            <summary class="filter-header-modern">
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
                     </svg>
-                </summary>
+                    <span style="font-weight: 700; font-size: 15px;">Bộ lọc tìm kiếm</span>
+                </div>
+                <svg class="chevron-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+            </summary>
 
-                <div class="filter-container-modern">
-                    <div class="filter-row-modern">
-                        <div class="filter-group-modern">
-                            <label>THIẾT BỊ</label>
-                            <input type="text" class="input-modern" placeholder="Nhập tên thiết bị...">
-                        </div>
+            <div class="filter-container-modern">
+                <div class="filter-grid-modern">
+                    <div class="filter-group-modern">
+                        <label>THIẾT BỊ</label>
+                        <input type="text" class="input-modern" placeholder="Nhập tên thiết bị...">
                     </div>
 
-                    <div class="filter-row-modern">
-                        <div class="filter-group-modern">
-                            <label>KHU VỰC</label>
-                            <select class="select-modern">
-                                <option>Chọn khu vực</option>
-                                <option>Công ty</option>
-                                <option>Trạm 110kV Nam Phú Quốc</option>
-                                <option>SD1S_Liên Trì</option>
-                            </select>
-                        </div>
+                    <div class="filter-group-modern">
+                        <label>KHU VỰC</label>
+                        <select class="select-modern">
+                            <option>Chọn khu vực</option>
+                            <option>Công ty</option>
+                            <option>Trạm 110kV Nam Phú Quốc</option>
+                            <option>SD1S_Liên Trì</option>
+                        </select>
                     </div>
 
-                    <div class="filter-row-modern">
-                        <div class="filter-group-modern">
-                            <label>LOẠI THIẾT BỊ</label>
-                            <select class="select-modern">
-                                <option>Chọn loại thiết bị</option>
-                                <option>Tủ</option>
-                                <option>Chống sét</option>
-                                <option>Dao cách ly</option>
-                                <option>Máy biến áp lực (Full)</option>
-                            </select>
-                        </div>
+                    <div class="filter-group-modern">
+                        <label>LOẠI THIẾT BỊ</label>
+                        <select class="select-modern">
+                            <option>Chọn loại thiết bị</option>
+                            <option>Tủ</option>
+                            <option>Chống sét</option>
+                            <option>Dao cách ly</option>
+                            <option>Máy biến áp lực (Full)</option>
+                        </select>
                     </div>
 
-                    <div class="filter-actions-modern">
+                    <div class="filter-actions-integrated">
                         <button class="btn-search-modern">
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                 stroke-width="2">
@@ -156,1382 +149,1562 @@
                         </button>
                     </div>
                 </div>
-            </details>
+            </div>
+        </details>
 
-            <style>
-                /* Modern Filter Styles (Embed for standalone support) */
-                .filter-section-modern {
-                    background: #1e293b;
-                    border: 1px solid var(--border);
-                    border-radius: 12px;
-                    margin-bottom: 24px;
-                    overflow: hidden;
+        <style>
+            /* Modern Filter Styles */
+            .filter-section-modern {
+                background: #1e293b;
+                border: 1px solid var(--border);
+                border-radius: 12px;
+                margin-bottom: 24px;
+                overflow: hidden;
+                box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            }
+
+            .filter-header-modern {
+                padding: 16px 20px;
+                background: rgba(255, 255, 255, 0.02);
+                cursor: pointer;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                list-style: none;
+                transition: 0.2s;
+            }
+
+            .filter-header-modern:hover {
+                background: rgba(255, 255, 255, 0.05);
+            }
+
+            .filter-container-modern {
+                padding: 20px;
+                border-top: 1px solid var(--border);
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .filter-grid-modern {
+                display: grid;
+                grid-template-columns: 1fr 1fr 1fr auto;
+                gap: 15px;
+                align-items: flex-end;
+            }
+
+            .filter-group-modern {
+                display: flex;
+                flex-direction: column;
+                gap: 8px;
+                width: 100%;
+            }
+
+            .filter-group-modern label {
+                font-size: 11px;
+                font-weight: 700;
+                color: var(--text-sub);
+                text-transform: uppercase;
+                letter-spacing: 0.05em;
+            }
+
+            .input-modern,
+            .select-modern {
+                background: #0f172a;
+                border: 1px solid var(--border);
+                border-radius: 8px;
+                padding: 10px 14px;
+                color: white;
+                font-size: 14px;
+                width: 100%;
+                outline: none;
+                transition: 0.2s;
+                height: 42px;
+            }
+
+            .input-modern:focus,
+            .select-modern:focus {
+                border-color: #3b82f6;
+                box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+            }
+
+            .filter-actions-integrated {
+                display: flex;
+                gap: 10px;
+            }
+
+            .btn-search-modern,
+            .btn-export-modern {
+                padding: 0 20px;
+                border-radius: 8px;
+                font-weight: 600;
+                font-size: 14px;
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                cursor: pointer;
+                transition: 0.2s;
+                border: none;
+                height: 42px;
+                white-space: nowrap;
+            }
+
+            .btn-search-modern {
+                background: #3b82f6;
+                color: white;
+            }
+
+            .btn-search-modern:hover {
+                background: #2563eb;
+                transform: translateY(-1px);
+            }
+
+            .btn-export-modern {
+                background: #10b981;
+                color: white;
+            }
+
+            .btn-export-modern:hover {
+                background: #059669;
+                transform: translateY(-1px);
+            }
+
+            details>summary {
+                list-style: none;
+            }
+
+            details>summary::-webkit-details-marker {
+                display: none;
+            }
+
+            details[open] .chevron-icon {
+                transform: rotate(180deg);
+            }
+
+            .chevron-icon {
+                transition: transform 0.3s;
+            }
+
+            @media screen and (max-width: 1200px) {
+                .filter-grid-modern {
+                    grid-template-columns: 1fr 1fr 1fr;
                 }
 
-                .filter-header-modern {
-                    padding: 16px 20px;
-                    background: rgba(255, 255, 255, 0.02);
-                    cursor: pointer;
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: center;
-                    list-style: none;
-                    transition: 0.2s;
+                .filter-actions-integrated {
+                    grid-column: 1 / -1;
+                    justify-content: flex-end;
+                }
+            }
+
+            @media screen and (max-width: 900px) {
+                .filter-grid-modern {
+                    grid-template-columns: 1fr 1fr;
+                }
+            }
+
+            @media screen and (max-width: 600px) {
+                .filter-grid-modern {
+                    grid-template-columns: 1fr;
                 }
 
-                .filter-header-modern:hover {
-                    background: rgba(255, 255, 255, 0.05);
-                }
-
-                .filter-container-modern {
-                    padding: 24px;
-                    border-top: 1px solid var(--border);
-                    display: flex;
+                .filter-actions-integrated {
                     flex-direction: column;
-                    gap: 20px;
                 }
 
-                .filter-group-modern {
-                    display: flex;
-                    flex-direction: column;
-                    gap: 8px;
-                    width: 100%;
-                }
-
-                .filter-group-modern label {
-                    font-size: 13px;
-                    font-weight: 700;
-                    color: var(--text-sub);
-                    text-transform: uppercase;
-                }
-
-                .input-modern,
-                .select-modern {
-                    background: #0f172a;
-                    border: 1px solid var(--border);
-                    border-radius: 8px;
-                    padding: 12px 16px;
-                    color: white;
-                    font-size: 14px;
-                    width: 100%;
-                }
-
-                .filter-actions-modern {
-                    display: flex;
-                    flex-direction: column;
-                    gap: 12px;
-                    margin-top: 10px;
-                }
-
-                .btn-search-modern {
-                    background: #3b82f6;
-                    color: white;
-                    border: none;
-                    padding: 12px;
-                    border-radius: 8px;
-                    font-weight: 600;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    gap: 8px;
-                    cursor: pointer;
-                    transition: 0.2s;
-                }
-
+                .btn-search-modern,
                 .btn-export-modern {
-                    background: #10b981;
-                    color: white;
-                    border: none;
-                    padding: 12px;
-                    border-radius: 8px;
-                    font-weight: 600;
-                    display: flex;
+                    width: 100%;
                     justify-content: center;
-                    align-items: center;
-                    gap: 8px;
-                    cursor: pointer;
-                    transition: 0.2s;
                 }
+            }
+        </style>
 
-                details>summary {
-                    list-style: none;
-                }
-
-                details>summary::-webkit-details-marker {
-                    display: none;
-                }
-
-                details[open] .chevron-icon {
-                    transform: rotate(180deg);
-                }
-
-                .chevron-icon {
-                    transition: transform 0.3s;
-                }
-            </style>
-
-            <!-- Table/Card Section -->
-            <div class="card table-container-full">
-                <div
-                    style="padding: 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border)">
-                    <div style="font-size: 15px; font-weight: 700; color: var(--primary); text-transform: uppercase;">
-                        Danh sách thiết bị</div>
-                    <div style="display: flex; align-items: center; gap: 15px;">
-                        <div class="view-switcher">
-                            <button class="view-btn active" onclick="switchView('table')">
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <line x1="8" y1="6" x2="21" y2="6"></line>
-                                    <line x1="8" y1="12" x2="21" y2="12"></line>
-                                    <line x1="8" y1="18" x2="21" y2="18"></line>
-                                    <line x1="3" y1="6" x2="3.01" y2="6"></line>
-                                    <line x1="3" y1="12" x2="3.01" y2="12"></line>
-                                    <line x1="3" y1="18" x2="3.01" y2="18"></line>
-                                </svg>
-                            </button>
-                            <button class="view-btn" onclick="switchView('card')">
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <rect x="3" y="3" width="7" height="7"></rect>
-                                    <rect x="14" y="3" width="7" height="7"></rect>
-                                    <rect x="14" y="14" width="7" height="7"></rect>
-                                    <rect x="3" y="14" width="7" height="7"></rect>
-                                </svg>
-                            </button>
-                        </div>
-                        <button class="btn-add" onclick="openDrawer()">+ Thêm</button>
-                    </div>
-                </div>
-
-                <!-- TABLE VIEW -->
-                <div id="tableView">
-                    <table class="data-table">
-                        <thead>
-                            <tr>
-                                <th style="width: 50px;">STT</th>
-                                <th>Khu vực</th>
-                                <th>Loại thiết bị</th>
-                                <th>Tên thiết bị</th>
-                                <th>Mã thiết bị</th>
-                                <th>Trạng thái</th>
-                                <th style="width: 120px; text-align: center;">Hành động</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Công ty</td>
-                                <td>Tủ</td>
-                                <td>T.U1</td>
-                                <td>Tủ</td>
-                                <td><span style="color:var(--success)">Hoạt động</span></td>
-                                <td style="text-align: center;"><button class="action-btn-circle btn-edit-round"
-                                        onclick="openDrawer()">✎</button><button
-                                        class="action-btn-circle btn-delete-round">🗑</button></td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Trạm 110kV Nam Phú Quốc</td>
-                                <td>Chống sét</td>
-                                <td>CS1T1</td>
-                                <td>CS1T1</td>
-                                <td><span style="color:var(--success)">Hoạt động</span></td>
-                                <td style="text-align: center;"><button class="action-btn-circle btn-edit-round"
-                                        onclick="openDrawer()">✎</button><button
-                                        class="action-btn-circle btn-delete-round">🗑</button></td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>Trạm 110kV Nam Phú Quốc</td>
-                                <td>Chống sét</td>
-                                <td>CS1T2</td>
-                                <td>CS1T2</td>
-                                <td><span style="color:var(--success)">Hoạt động</span></td>
-                                <td style="text-align: center;"><button class="action-btn-circle btn-edit-round"
-                                        onclick="openDrawer()">✎</button><button
-                                        class="action-btn-circle btn-delete-round">🗑</button></td>
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td>Trạm 110kV Nam Phú Quốc</td>
-                                <td>Dao cách ly</td>
-                                <td>112-1</td>
-                                <td>112-1</td>
-                                <td><span style="color:var(--success)">Hoạt động</span></td>
-                                <td style="text-align: center;"><button class="action-btn-circle btn-edit-round"
-                                        onclick="openDrawer()">✎</button><button
-                                        class="action-btn-circle btn-delete-round">🗑</button></td>
-                            </tr>
-                            <tr>
-                                <td>5</td>
-                                <td>Trạm 110kV Nam Phú Quốc</td>
-                                <td>Dao cách ly</td>
-                                <td>112-2</td>
-                                <td>112-2</td>
-                                <td><span style="color:var(--success)">Hoạt động</span></td>
-                                <td style="text-align: center;"><button class="action-btn-circle btn-edit-round"
-                                        onclick="openDrawer()">✎</button><button
-                                        class="action-btn-circle btn-delete-round">🗑</button></td>
-                            </tr>
-                            <tr>
-                                <td>6</td>
-                                <td>Trạm 110kV Nam Phú Quốc</td>
-                                <td>Dao cách ly</td>
-                                <td>131-1</td>
-                                <td>131-1</td>
-                                <td><span style="color:var(--success)">Hoạt động</span></td>
-                                <td style="text-align: center;"><button class="action-btn-circle btn-edit-round"
-                                        onclick="openDrawer()">✎</button><button
-                                        class="action-btn-circle btn-delete-round">🗑</button></td>
-                            </tr>
-                            <tr>
-                                <td>7</td>
-                                <td>Trạm 110kV Nam Phú Quốc</td>
-                                <td>Dao cách ly</td>
-                                <td>132-2</td>
-                                <td>132-2</td>
-                                <td><span style="color:var(--success)">Hoạt động</span></td>
-                                <td style="text-align: center;"><button class="action-btn-circle btn-edit-round"
-                                        onclick="openDrawer()">✎</button><button
-                                        class="action-btn-circle btn-delete-round">🗑</button></td>
-                            </tr>
-                            <tr>
-                                <td>8</td>
-                                <td>Trạm 110kV Nam Phú Quốc</td>
-                                <td>Dao cách ly</td>
-                                <td>172-2</td>
-                                <td>172-2</td>
-                                <td><span style="color:var(--success)">Hoạt động</span></td>
-                                <td style="text-align: center;"><button class="action-btn-circle btn-edit-round"
-                                        onclick="openDrawer()">✎</button><button
-                                        class="action-btn-circle btn-delete-round">🗑</button></td>
-                            </tr>
-                            <tr>
-                                <td>9</td>
-                                <td>Trạm 110kV Nam Phú Quốc</td>
-                                <td>Dao cách ly</td>
-                                <td>172-7</td>
-                                <td>172-7</td>
-                                <td><span style="color:var(--success)">Hoạt động</span></td>
-                                <td style="text-align: center;"><button class="action-btn-circle btn-edit-round"
-                                        onclick="openDrawer()">✎</button><button
-                                        class="action-btn-circle btn-delete-round">🗑</button></td>
-                            </tr>
-                            <tr>
-                                <td>10</td>
-                                <td>Trạm 110kV Nam Phú Quốc</td>
-                                <td>Máy biến áp lực (Full)</td>
-                                <td>T1</td>
-                                <td>MBAT1</td>
-                                <td><span style="color:var(--success)">Hoạt động</span></td>
-                                <td style="text-align: center;"><button class="action-btn-circle btn-edit-round"
-                                        onclick="openDrawer()">✎</button><button
-                                        class="action-btn-circle btn-delete-round">🗑</button></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <!-- CARD VIEW -->
-                <div id="cardView" class="card-view-grid hidden-view">
-                    <div class="sensor-card-item">
-                        <div class="sc-header"><span class="sc-id">T.U1</span><span
-                                style="color:var(--success); font-size:12px">● Active</span></div>
-                        <div class="sc-name">Tủ điện T.U1</div>
-                        <div class="sc-info">
-                            <div class="sc-info-item">📍 Công ty</div>
-                            <div class="sc-info-item">📦 Loại: Tủ</div>
-                        </div>
-                        <div class="sc-actions"><button class="action-btn-circle btn-edit-round"
-                                onclick="openDrawer()">✎</button><button
-                                class="action-btn-circle btn-delete-round">🗑</button></div>
-                    </div>
-                </div>
-
-                <div class="page-info-bar">
-                    <div>Hiển thị từ 1 đến 10 trong tổng số 20</div>
-                    <div class="pagination-group">
-                        <select class="select-page-size">
-                            <option>10/trang</option>
-                            <option>20/trang</option>
-                        </select>
-                        <button class="btn-page active">1</button>
-                        <button class="btn-page">2</button>
-                        <div style="font-size: 11px; margin: 0 5px;">Nhảy tới</div>
-                        <input type="text" class="filter-input"
-                            style="width: 40px; height: 32px; padding: 0 5px; text-align: center;" value="1">
-                        <button class="btn-page">➜</button>
-                        <button class="btn-page" title="Cấu hình hiển thị" style="margin-left: 10px;">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2">
-                                <circle cx="12" cy="12" r="3"></circle>
-                                <path
-                                    d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z">
-                                </path>
+        <!-- Table/Card Section -->
+        <div class="card table-container-full">
+            <div
+                style="padding: 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border)">
+                <div style="font-size: 15px; font-weight: 700; color: var(--primary); text-transform: uppercase;">
+                    Danh sách thiết bị</div>
+                <div style="display: flex; align-items: center; gap: 15px;">
+                    <div class="view-switcher">
+                        <button class="view-btn active" onclick="switchView('table')">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="8" y1="6" x2="21" y2="6"></line>
+                                <line x1="8" y1="12" x2="21" y2="12"></line>
+                                <line x1="8" y1="18" x2="21" y2="18"></line>
+                                <line x1="3" y1="6" x2="3.01" y2="6"></line>
+                                <line x1="3" y1="12" x2="3.01" y2="12"></line>
+                                <line x1="3" y1="18" x2="3.01" y2="18"></line>
+                            </svg>
+                        </button>
+                        <button class="view-btn" onclick="switchView('card')">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="3" width="7" height="7"></rect>
+                                <rect x="14" y="3" width="7" height="7"></rect>
+                                <rect x="14" y="14" width="7" height="7"></rect>
+                                <rect x="3" y="14" width="7" height="7"></rect>
                             </svg>
                         </button>
                     </div>
+                    <button class="btn-add" onclick="openDrawer()">+ Thêm</button>
+                </div>
+            </div>
+
+            <!-- TABLE VIEW -->
+            <div id="tableView">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 50px;">STT</th>
+                            <th>Khu vực</th>
+                            <th>Loại thiết bị</th>
+                            <th>Tên thiết bị</th>
+                            <th>Mã thiết bị</th>
+                            <th>Trạng thái</th>
+                            <th style="width: 120px; text-align: center;">Hành động</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td data-label="STT">1</td>
+                            <td data-label="Khu vực">Công ty</td>
+                            <td data-label="Loại thiết bị">Tủ</td>
+                            <td data-label="Tên thiết bị">T.U1</td>
+                            <td data-label="Mã thiết bị">Tủ</td>
+                            <td data-label="Trạng thái"><span class="status-badge status-success">Hoạt động</span>
+                            </td>
+                            <td data-label="Thao tác" style="text-align: center;">
+                                <div class="action-group">
+                                    <button class="action-btn-circle btn-edit-round" onclick="openDrawer()">✎</button>
+                                    <button class="action-btn-circle btn-delete-round">🗑</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td data-label="STT">2</td>
+                            <td data-label="Khu vực">Trạm 110kV Nam Phú Quốc</td>
+                            <td data-label="Loại thiết bị">Chống sét</td>
+                            <td data-label="Tên thiết bị">CS1T1</td>
+                            <td data-label="Mã thiết bị">CS1T1</td>
+                            <td data-label="Trạng thái"><span class="status-badge status-success">Hoạt động</span>
+                            </td>
+                            <td data-label="Thao tác" style="text-align: center;">
+                                <div class="action-group">
+                                    <button class="action-btn-circle btn-edit-round" onclick="openDrawer()">✎</button>
+                                    <button class="action-btn-circle btn-delete-round">🗑</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td data-label="STT">3</td>
+                            <td data-label="Khu vực">Trạm 110kV Nam Phú Quốc</td>
+                            <td data-label="Loại thiết bị">Chống sét</td>
+                            <td data-label="Tên thiết bị">CS1T2</td>
+                            <td data-label="Mã thiết bị">CS1T2</td>
+                            <td data-label="Trạng thái"><span class="status-badge status-success">Hoạt động</span>
+                            </td>
+                            <td data-label="Thao tác" style="text-align: center;">
+                                <div class="action-group">
+                                    <button class="action-btn-circle btn-edit-round" onclick="openDrawer()">✎</button>
+                                    <button class="action-btn-circle btn-delete-round">🗑</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td data-label="STT">4</td>
+                            <td data-label="Khu vực">Trạm 110kV Nam Phú Quốc</td>
+                            <td data-label="Loại thiết bị">Dao cách ly</td>
+                            <td data-label="Tên thiết bị">112-1</td>
+                            <td data-label="Mã thiết bị">112-1</td>
+                            <td data-label="Trạng thái"><span class="status-badge status-success">Hoạt động</span>
+                            </td>
+                            <td data-label="Thao tác" style="text-align: center;">
+                                <div class="action-group">
+                                    <button class="action-btn-circle btn-edit-round" onclick="openDrawer()">✎</button>
+                                    <button class="action-btn-circle btn-delete-round">🗑</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td data-label="STT">5</td>
+                            <td data-label="Khu vực">Trạm 110kV Nam Phú Quốc</td>
+                            <td data-label="Loại thiết bị">Dao cách ly</td>
+                            <td data-label="Tên thiết bị">112-2</td>
+                            <td data-label="Mã thiết bị">112-2</td>
+                            <td data-label="Trạng thái"><span class="status-badge status-success">Hoạt động</span>
+                            </td>
+                            <td data-label="Thao tác" style="text-align: center;">
+                                <div class="action-group">
+                                    <button class="action-btn-circle btn-edit-round" onclick="openDrawer()">✎</button>
+                                    <button class="action-btn-circle btn-delete-round">🗑</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td data-label="STT">6</td>
+                            <td data-label="Khu vực">Trạm 110kV Nam Phú Quốc</td>
+                            <td data-label="Loại thiết bị">Dao cách ly</td>
+                            <td data-label="Tên thiết bị">131-1</td>
+                            <td data-label="Mã thiết bị">131-1</td>
+                            <td data-label="Trạng thái"><span class="status-badge status-success">Hoạt động</span>
+                            </td>
+                            <td data-label="Thao tác" style="text-align: center;">
+                                <div class="action-group">
+                                    <button class="action-btn-circle btn-edit-round" onclick="openDrawer()">✎</button>
+                                    <button class="action-btn-circle btn-delete-round">🗑</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td data-label="STT">7</td>
+                            <td data-label="Khu vực">Trạm 110kV Nam Phú Quốc</td>
+                            <td data-label="Loại thiết bị">Dao cách ly</td>
+                            <td data-label="Tên thiết bị">132-2</td>
+                            <td data-label="Mã thiết bị">132-2</td>
+                            <td data-label="Trạng thái"><span class="status-badge status-success">Hoạt động</span>
+                            </td>
+                            <td data-label="Thao tác" style="text-align: center;">
+                                <div class="action-group">
+                                    <button class="action-btn-circle btn-edit-round" onclick="openDrawer()">✎</button>
+                                    <button class="action-btn-circle btn-delete-round">🗑</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td data-label="STT">8</td>
+                            <td data-label="Khu vực">Trạm 110kV Nam Phú Quốc</td>
+                            <td data-label="Loại thiết bị">Dao cách ly</td>
+                            <td data-label="Tên thiết bị">172-2</td>
+                            <td data-label="Mã thiết bị">172-2</td>
+                            <td data-label="Trạng thái"><span class="status-badge status-success">Hoạt động</span>
+                            </td>
+                            <td data-label="Thao tác" style="text-align: center;">
+                                <div class="action-group">
+                                    <button class="action-btn-circle btn-edit-round" onclick="openDrawer()">✎</button>
+                                    <button class="action-btn-circle btn-delete-round">🗑</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td data-label="STT">9</td>
+                            <td data-label="Khu vực">Trạm 110kV Nam Phú Quốc</td>
+                            <td data-label="Loại thiết bị">Dao cách ly</td>
+                            <td data-label="Tên thiết bị">172-7</td>
+                            <td data-label="Mã thiết bị">172-7</td>
+                            <td data-label="Trạng thái"><span class="status-badge status-success">Hoạt động</span>
+                            </td>
+                            <td data-label="Thao tác" style="text-align: center;">
+                                <div class="action-group">
+                                    <button class="action-btn-circle btn-edit-round" onclick="openDrawer()">✎</button>
+                                    <button class="action-btn-circle btn-delete-round">🗑</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td data-label="STT">10</td>
+                            <td data-label="Khu vực">Trạm 110kV Nam Phú Quốc</td>
+                            <td data-label="Loại thiết bị">Máy biến áp lực (Full)</td>
+                            <td data-label="Tên thiết bị">T1</td>
+                            <td data-label="Mã thiết bị">MBAT1</td>
+                            <td data-label="Trạng thái"><span class="status-badge status-success">Hoạt động</span>
+                            </td>
+                            <td data-label="Thao tác" style="text-align: center;">
+                                <div class="action-group">
+                                    <button class="action-btn-circle btn-edit-round" onclick="openDrawer()">✎</button>
+                                    <button class="action-btn-circle btn-delete-round">🗑</button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- CARD VIEW -->
+            <div id="cardView" class="card-view-grid hidden-view">
+                <div class="sensor-card-item">
+                    <div class="sc-header"><span class="sc-id">T.U1</span><span
+                            style="color:var(--success); font-size:12px">● Active</span></div>
+                    <div class="sc-name">Tủ điện T.U1</div>
+                    <div class="sc-info">
+                        <div class="sc-info-item">📍 Công ty</div>
+                        <div class="sc-info-item">📦 Loại: Tủ</div>
+                    </div>
+                    <div class="sc-actions"><button class="action-btn-circle btn-edit-round"
+                            onclick="openDrawer()">✎</button><button
+                            class="action-btn-circle btn-delete-round">🗑</button></div>
+                </div>
+            </div>
+
+            <div class="page-info-bar">
+                <div>Hiển thị từ 1 đến 10 trong tổng số 20</div>
+                <div class="pagination-group">
+                    <select class="select-page-size">
+                        <option>10/trang</option>
+                        <option>20/trang</option>
+                    </select>
+                    <button class="btn-page active">1</button>
+                    <button class="btn-page">2</button>
+                    <div style="font-size: 11px; margin: 0 5px;">Nhảy tới</div>
+                    <input type="text" class="filter-input"
+                        style="width: 40px; height: 32px; padding: 0 5px; text-align: center;" value="1">
+                    <button class="btn-page">➜</button>
+                    <button class="btn-page" title="Cấu hình hiển thị" style="margin-left: 10px;">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <circle cx="12" cy="12" r="3"></circle>
+                            <path
+                                d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z">
+                            </path>
+                        </svg>
+                    </button>
                 </div>
             </div>
         </div>
-    </div>
 
-    <script src="js/main.js"></script>
-    <script src="js/responsive-helpers.js"></script>
-    <script>
-        function switchView(view) {
-            const tableView = document.getElementById('tableView');
-            const cardView = document.getElementById('cardView');
-            const btns = document.querySelectorAll('.view-btn');
+        <script src="js/main.js"></script>
+        <script src="js/responsive-helpers.js"></script>
+        <script>
+            function switchView(view) {
+                const tableView = document.getElementById('tableView');
+                const cardView = document.getElementById('cardView');
+                const btns = document.querySelectorAll('.view-btn');
 
-            if (view === 'table') {
-                tableView.classList.remove('hidden-view');
-                cardView.classList.add('hidden-view');
-                if (btns[0]) btns[0].classList.add('active');
-                if (btns[1]) btns[1].classList.remove('active');
-            } else {
-                tableView.classList.add('hidden-view');
-                cardView.classList.remove('hidden-view');
-                if (btns[1]) btns[1].classList.add('active');
-                if (btns[0]) btns[0].classList.remove('active');
+                if (view === 'table') {
+                    tableView.classList.remove('hidden-view');
+                    cardView.classList.add('hidden-view');
+                    if (btns[0]) btns[0].classList.add('active');
+                    if (btns[1]) btns[1].classList.remove('active');
+                } else {
+                    tableView.classList.add('hidden-view');
+                    cardView.classList.remove('hidden-view');
+                    if (btns[1]) btns[1].classList.add('active');
+                    if (btns[0]) btns[0].classList.remove('active');
+                }
             }
-        }
 
-        function openDrawer() {
-            document.getElementById('deviceDrawer').classList.add('open');
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeDrawer() {
-            document.getElementById('deviceDrawer').classList.remove('open');
-            document.body.style.overflow = '';
-        }
-
-        function openPointDrawer() {
-            document.getElementById('pointDrawer').classList.add('open');
-        }
-
-        function closePointDrawer() {
-            document.getElementById('pointDrawer').classList.remove('open');
-        }
-
-        function openThresholdDrawer() {
-            document.getElementById('thresholdDrawer').classList.add('open');
-        }
-
-        function closeThresholdDrawer() {
-            document.getElementById('thresholdDrawer').classList.remove('open');
-        }
-
-        function toggleFilterDropdown(event) {
-            event.stopPropagation();
-            const dropdown = document.getElementById('filterDropdown');
-            dropdown.classList.toggle('show');
-        }
-
-        // Close dropdown when clicking outside
-        document.addEventListener('click', function (event) {
-            const dropdown = document.getElementById('filterDropdown');
-            const badge = document.querySelector('.filter-badge');
-            if (dropdown && !dropdown.contains(event.target) && !badge.contains(event.target)) {
-                dropdown.classList.remove('show');
+            function openDrawer() {
+                document.getElementById('deviceDrawer').classList.add('open');
+                document.body.style.overflow = 'hidden';
             }
-        });
-    </script>
 
-    <!-- DRAWER FOR ADD/EDIT DEVICE -->
-    <div class="drawer-overlay" id="deviceDrawer">
-        <div class="drawer drawer-lg">
-            <div class="drawer-header">
-                <h3>Thông tin thiết bị</h3>
-                <button class="close-drawer" onclick="closeDrawer()">&times;</button>
-            </div>
-            <div class="drawer-body">
-                <style>
-                    .form-grid {
-                        display: grid;
-                        grid-template-columns: 1fr 1fr;
-                        gap: 24px;
-                        margin-bottom: 24px;
-                    }
+            function closeDrawer() {
+                document.getElementById('deviceDrawer').classList.remove('open');
+                document.body.style.overflow = '';
+            }
 
-                    .form-item {
-                        display: grid;
-                        grid-template-columns: 150px 1fr;
-                        align-items: center;
-                        gap: 15px;
-                    }
+            function openPointDrawer() {
+                document.getElementById('pointDrawer').classList.add('open');
+            }
 
-                    .form-item label {
-                        font-size: 13px;
-                        font-weight: 600;
-                        color: var(--text-main);
-                    }
+            function closePointDrawer() {
+                document.getElementById('pointDrawer').classList.remove('open');
+            }
 
-                    .form-item label .required {
-                        color: var(--danger);
-                        margin-left: 3px;
-                    }
+            function openThresholdDrawer() {
+                document.getElementById('thresholdDrawer').classList.add('open');
+            }
 
-                    .btn-coord {
-                        background: #F59E0B;
-                        color: white;
-                        border: none;
-                        padding: 10px 16px;
-                        border-radius: 6px;
-                        font-size: 13px;
-                        font-weight: 600;
-                        cursor: pointer;
-                        text-align: center;
-                        transition: 0.2s;
-                        width: 100%;
-                    }
+            function closeThresholdDrawer() {
+                document.getElementById('thresholdDrawer').classList.remove('open');
+            }
 
-                    .btn-coord:hover {
-                        background: #D97706;
-                        transform: translateY(-1px);
-                    }
+            function toggleFilterDropdown(event) {
+                event.stopPropagation();
+                const dropdown = document.getElementById('filterDropdown');
+                dropdown.classList.toggle('show');
+            }
 
-                    /* New Part - Monitoring Points Styles */
-                    .monitoring-table {
-                        width: 100%;
-                        border: 1px solid var(--border);
-                        border-radius: 8px;
-                        overflow: hidden;
-                        margin-top: 10px;
-                    }
+            // Close dropdown when clicking outside
+            document.addEventListener('click', function (event) {
+                const dropdown = document.getElementById('filterDropdown');
+                const badge = document.querySelector('.filter-badge');
+                if (dropdown && !dropdown.contains(event.target) && !badge.contains(event.target)) {
+                    dropdown.classList.remove('show');
+                }
+            });
+        </script>
 
-                    .mt-header {
-                        display: grid;
-                        grid-template-columns: 1fr 1fr 50px;
-                        background: rgba(255, 255, 255, 0.05);
-                        padding: 12px 20px;
-                        font-size: 13px;
-                        font-weight: 700;
-                        color: var(--text-main);
-                        border-bottom: 1px solid var(--border);
-                    }
-
-                    .mt-row {
-                        display: grid;
-                        grid-template-columns: 1fr 1fr 50px;
-                        padding: 12px 20px;
-                        font-size: 13px;
-                        align-items: center;
-                        border-bottom: 1px solid var(--border);
-                        background: var(--bg-card);
-                    }
-
-                    .mt-row:last-child {
-                        border-bottom: none;
-                    }
-
-                    .mt-nested {
-                        padding-left: 45px;
-                    }
-
-                    .point-tag {
-                        padding: 4px 10px;
-                        border-radius: 4px;
-                        font-size: 12px;
-                        font-weight: 600;
-                    }
-
-                    .point-tag-outline {
-                        background: rgba(59, 130, 246, 0.1);
-                        color: #3b82f6;
-                        border: 1px solid rgba(59, 130, 246, 0.4);
-                    }
-
-                    .point-tag-solid {
-                        background: #1e293b;
-                        color: var(--text-main);
-                        border: 1px solid var(--border);
-                    }
-
-                    .btn-action-sm {
-                        width: 32px;
-                        height: 32px;
-                        border-radius: 6px;
-                        border: 1px solid var(--border);
-                        background: transparent;
-                        color: var(--text-sub);
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                        cursor: pointer;
-                    }
-
-                    .btn-action-sm:hover {
-                        background: rgba(255, 255, 255, 0.05);
-                        color: var(--primary);
-                    }
-                </style>
-
-                <div class="form-grid">
-                    <!-- Column 1 -->
-                    <div style="display: flex; flex-direction: column; gap: 20px;">
-                        <div class="form-item">
-                            <label>Khu vực <span class="required">*</span></label>
-                            <select class="filter-input">
-                                <option>Chọn</option>
-                                <option selected>Công ty</option>
-                                <option>Trạm 110kV Nam Phú Quốc</option>
-                                <option>SD1S_Liên Trì</option>
-                            </select>
-                        </div>
-                        <div class="form-item">
-                            <label>Mã thiết bị <span class="required">*</span></label>
-                            <input type="text" class="filter-input">
-                        </div>
-                        <div class="form-item" style="align-items: flex-start;">
-                            <label style="margin-top: 10px;">Chu kỳ lấy data (phút) <span
-                                    class="required">*</span></label>
-                            <input type="number" class="filter-input">
-                        </div>
-                    </div>
-
-                    <!-- Column 2 -->
-                    <div style="display: flex; flex-direction: column; gap: 20px;">
-                        <div class="form-item">
-                            <label>Tọa độ</label>
-                            <button class="btn-coord">Chọn tọa độ trên ảnh</button>
-                        </div>
-                        <div class="form-item">
-                            <label>Tên thiết bị <span class="required">*</span></label>
-                            <input type="text" class="filter-input">
-                        </div>
-                        <div class="form-item">
-                            <label>Loại thiết bị <span class="required">*</span></label>
-                            <select class="filter-input">
-                                <option selected>Chọn</option>
-                                <option>Tủ</option>
-                                <option>Chống sét</option>
-                                <option>Dao cách ly</option>
-                                <option>Máy biến áp lực (Full)</option>
-                            </select>
-                        </div>
-                        <div class="form-item">
-                            <label>Trạng thái</label>
-                            <select class="filter-input">
-                                <option selected>Hoạt động</option>
-                                <option>Tạm dừng</option>
-                                <option>Bảo trì</option>
-                            </select>
-                        </div>
-                    </div>
+        <!-- DRAWER FOR ADD/EDIT DEVICE -->
+        <div class="drawer-overlay" id="deviceDrawer">
+            <div class="drawer drawer-lg">
+                <div class="drawer-header">
+                    <h3>Thông tin thiết bị</h3>
+                    <button class="close-drawer" onclick="closeDrawer()">&times;</button>
                 </div>
-
-                <!-- Monitoring Points Section -->
-                <div class="monitoring-table">
-                    <div class="mt-header">
-                        <div>Tên bộ phận</div>
-                        <div>Điểm giám sát</div>
-                        <div></div>
-                    </div>
-
-                    <!-- Parent Row -->
-                    <div class="mt-row">
-                        <div style="display: flex; align-items: center; gap: 10px;">
-                            <svg width="12" height="12" viewBox="0 0 24 24" fill="var(--text-sub)">
-                                <path d="M7 10l5 5 5-5z" />
-                            </svg>
-                            <span>Đầu pha</span>
-                        </div>
-                        <div style="display: flex; gap: 8px;">
-                            <span class="point-tag point-tag-solid">CS1T1</span>
-                        </div>
-                        <button class="btn-action-sm" onclick="openPointDrawer()">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2">
-                                <circle cx="12" cy="12" r="5"></circle>
-                                <line x1="12" y1="1" x2="12" y2="3"></line>
-                                <line x1="12" y1="21" x2="12" y2="23"></line>
-                                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-                                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-                                <line x1="1" y1="12" x2="3" y2="12"></line>
-                                <line x1="21" y1="12" x2="23" y2="12"></line>
-                                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-                                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-                            </svg>
-                        </button>
-                    </div>
-
-                    <!-- Child Row 1 -->
-                    <div class="mt-row">
-                        <div class="mt-nested">Pha A</div>
-                        <div style="display: flex; gap: 8px;">
-                            <span class="point-tag point-tag-solid">CS1T1-A</span>
-                            <span class="point-tag point-tag-outline">CS1T1_A</span>
-                        </div>
-                        <button class="btn-action-sm" onclick="openPointDrawer()">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2">
-                                <circle cx="12" cy="12" r="5"></circle>
-                                <line x1="12" y1="1" x2="12" y2="3"></line>
-                                <line x1="12" y1="21" x2="12" y2="23"></line>
-                                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-                                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-                                <line x1="1" y1="12" x2="3" y2="12"></line>
-                                <line x1="21" y1="12" x2="23" y2="12"></line>
-                                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-                                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-                            </svg>
-                        </button>
-                    </div>
-
-                    <!-- Child Row 2 -->
-                    <div class="mt-row">
-                        <div class="mt-nested">Pha B</div>
-                        <div style="display: flex; gap: 8px;">
-                            <span class="point-tag point-tag-solid">CS1T1-B</span>
-                            <span class="point-tag point-tag-outline">CS1T1_B</span>
-                        </div>
-                        <button class="btn-action-sm" onclick="openPointDrawer()">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2">
-                                <circle cx="12" cy="12" r="5"></circle>
-                                <line x1="12" y1="1" x2="12" y2="3"></line>
-                                <line x1="12" y1="21" x2="12" y2="23"></line>
-                                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-                                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-                                <line x1="1" y1="12" x2="3" y2="12"></line>
-                                <line x1="21" y1="12" x2="23" y2="12"></line>
-                                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-                                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-                            </svg>
-                        </button>
-                    </div>
-
-                    <!-- Child Row 3 -->
-                    <div class="mt-row">
-                        <div class="mt-nested">Pha C</div>
-                        <div style="display: flex; gap: 8px;">
-                            <span class="point-tag point-tag-solid">CS1T1-C</span>
-                            <span class="point-tag point-tag-outline">CS1T1_C</span>
-                        </div>
-                        <button class="btn-action-sm" onclick="openPointDrawer()">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2">
-                                <circle cx="12" cy="12" r="5"></circle>
-                                <line x1="12" y1="1" x2="12" y2="3"></line>
-                                <line x1="12" y1="21" x2="12" y2="23"></line>
-                                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-                                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-                                <line x1="1" y1="12" x2="3" y2="12"></line>
-                                <line x1="21" y1="12" x2="23" y2="12"></line>
-                                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-                                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-            </div>
-            <div class="drawer-footer">
-                <button class="btn-cancel" onclick="closeDrawer()">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <line x1="18" y1="6" x2="6" y2="18"></line>
-                        <line x1="6" y1="6" x2="18" y2="18"></line>
-                    </svg>
-                    Hủy
-                </button>
-                <button class="btn-save" onclick="closeDrawer()">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
-                        <polyline points="17 21 17 13 7 13 7 21"></polyline>
-                        <polyline points="7 3 7 8 15 8"></polyline>
-                    </svg>
-                    Lưu
-                </button>
-            </div>
-        </div>
-    </div>
-    <div class="drawer-overlay" id="pointDrawer" style="z-index: 2000;">
-        <div class="drawer drawer-lg" style="width: 900px; right: -900px;">
-            <div class="drawer-header">
-                <div style="display: flex; gap: 10px;">
+                <div class="drawer-body">
                     <style>
-                        .tab-btn {
-                            padding: 6px 16px;
-                            border-radius: 6px;
-                            border: 1px solid var(--border);
-                            background: transparent;
-                            color: var(--text-main);
-                            font-size: 14px;
-                            font-weight: 600;
-                            cursor: pointer;
-                            display: flex;
+                        .form-grid {
+                            display: grid;
+                            grid-template-columns: 1fr 1fr;
+                            gap: 24px;
+                            margin-bottom: 24px;
+                        }
+
+                        .form-item {
+                            display: grid;
+                            grid-template-columns: 150px 1fr;
                             align-items: center;
-                            gap: 12px;
-                            min-width: 120px;
-                            justify-content: space-between;
+                            gap: 15px;
                         }
 
-                        .tab-btn.active {
-                            border-color: #3b82f6;
-                            color: #3b82f6;
-                            background: rgba(59, 130, 246, 0.05);
+                        .form-item label {
+                            font-size: 13px;
+                            font-weight: 600;
+                            color: var(--text-main);
                         }
 
-                        .btn-orange-full {
+                        .form-item label .required {
+                            color: var(--danger);
+                            margin-left: 3px;
+                        }
+
+                        .btn-coord {
                             background: #F59E0B;
                             color: white;
                             border: none;
-                            padding: 10px 24px;
+                            padding: 10px 16px;
                             border-radius: 6px;
+                            font-size: 13px;
                             font-weight: 600;
                             cursor: pointer;
+                            text-align: center;
+                            transition: 0.2s;
+                            width: 100%;
+                        }
+
+                        .btn-coord:hover {
+                            background: #D97706;
+                            transform: translateY(-1px);
+                        }
+
+                        /* New Part - Monitoring Points Styles */
+                        .monitoring-table {
+                            width: 100%;
+                            border: 1px solid var(--border);
+                            border-radius: 8px;
+                            overflow: hidden;
+                            margin-top: 10px;
+                        }
+
+                        .mt-header {
+                            display: grid;
+                            grid-template-columns: 1fr 1fr 50px;
+                            background: rgba(255, 255, 255, 0.05);
+                            padding: 12px 20px;
+                            font-size: 13px;
+                            font-weight: 700;
+                            color: var(--text-main);
+                            border-bottom: 1px solid var(--border);
+                        }
+
+                        .mt-row {
+                            display: grid;
+                            grid-template-columns: 1fr 1fr 50px;
+                            padding: 12px 20px;
+                            font-size: 13px;
+                            align-items: center;
+                            border-bottom: 1px solid var(--border);
+                            background: var(--bg-card);
+                        }
+
+                        .mt-row:last-child {
+                            border-bottom: none;
+                        }
+
+                        .mt-nested {
+                            padding-left: 45px;
+                        }
+
+                        .point-tag {
+                            padding: 4px 10px;
+                            border-radius: 4px;
+                            font-size: 12px;
+                            font-weight: 600;
+                        }
+
+                        .point-tag-outline {
+                            background: rgba(59, 130, 246, 0.1);
+                            color: #3b82f6;
+                            border: 1px solid rgba(59, 130, 246, 0.4);
+                        }
+
+                        .point-tag-solid {
+                            background: #1e293b;
+                            color: var(--text-main);
+                            border: 1px solid var(--border);
+                        }
+
+                        .btn-action-sm {
+                            width: 32px;
+                            height: 32px;
+                            border-radius: 6px;
+                            border: 1px solid var(--border);
+                            background: transparent;
+                            color: var(--text-sub);
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            cursor: pointer;
+                        }
+
+                        .btn-action-sm:hover {
+                            background: rgba(255, 255, 255, 0.05);
+                            color: var(--primary);
+                        }
+
+                        @media screen and (max-width: 768px) {
+                            .form-grid {
+                                grid-template-columns: 1fr;
+                                gap: 15px;
+                            }
+
+                            .form-item {
+                                grid-template-columns: 1fr;
+                                gap: 8px;
+                            }
+
+                            .mt-header,
+                            .mt-row {
+                                grid-template-columns: 1fr 1fr 40px;
+                                padding: 12px 10px;
+                            }
+
+                            .mt-nested {
+                                padding-left: 20px;
+                            }
+                        }
+                    </style>
+
+                    <div class="form-grid">
+                        <!-- Column 1 -->
+                        <div style="display: flex; flex-direction: column; gap: 20px;">
+                            <div class="form-item">
+                                <label>Khu vực <span class="required">*</span></label>
+                                <select class="filter-input">
+                                    <option>Chọn</option>
+                                    <option selected>Công ty</option>
+                                    <option>Trạm 110kV Nam Phú Quốc</option>
+                                    <option>SD1S_Liên Trì</option>
+                                </select>
+                            </div>
+                            <div class="form-item">
+                                <label>Mã thiết bị <span class="required">*</span></label>
+                                <input type="text" class="filter-input">
+                            </div>
+                            <div class="form-item" style="align-items: flex-start;">
+                                <label style="margin-top: 10px;">Chu kỳ lấy data (phút) <span
+                                        class="required">*</span></label>
+                                <input type="number" class="filter-input">
+                            </div>
+                        </div>
+
+                        <!-- Column 2 -->
+                        <div style="display: flex; flex-direction: column; gap: 20px;">
+                            <div class="form-item">
+                                <label>Tọa độ</label>
+                                <button class="btn-coord">Chọn tọa độ trên ảnh</button>
+                            </div>
+                            <div class="form-item">
+                                <label>Tên thiết bị <span class="required">*</span></label>
+                                <input type="text" class="filter-input">
+                            </div>
+                            <div class="form-item">
+                                <label>Loại thiết bị <span class="required">*</span></label>
+                                <select class="filter-input">
+                                    <option selected>Chọn</option>
+                                    <option>Tủ</option>
+                                    <option>Chống sét</option>
+                                    <option>Dao cách ly</option>
+                                    <option>Máy biến áp lực (Full)</option>
+                                </select>
+                            </div>
+                            <div class="form-item">
+                                <label>Trạng thái</label>
+                                <select class="filter-input">
+                                    <option selected>Hoạt động</option>
+                                    <option>Tạm dừng</option>
+                                    <option>Bảo trì</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Monitoring Points Section -->
+                    <div class="monitoring-table">
+                        <div class="mt-header">
+                            <div>Tên bộ phận</div>
+                            <div>Điểm giám sát</div>
+                            <div></div>
+                        </div>
+
+                        <!-- Parent Row -->
+                        <div class="mt-row">
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="var(--text-sub)">
+                                    <path d="M7 10l5 5 5-5z" />
+                                </svg>
+                                <span>Đầu pha</span>
+                            </div>
+                            <div style="display: flex; gap: 8px;">
+                                <span class="point-tag point-tag-solid">CS1T1</span>
+                            </div>
+                            <button class="btn-action-sm" onclick="openPointDrawer()">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <circle cx="12" cy="12" r="5"></circle>
+                                    <line x1="12" y1="1" x2="12" y2="3"></line>
+                                    <line x1="12" y1="21" x2="12" y2="23"></line>
+                                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                                    <line x1="1" y1="12" x2="3" y2="12"></line>
+                                    <line x1="21" y1="12" x2="23" y2="12"></line>
+                                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                                </svg>
+                            </button>
+                        </div>
+
+                        <!-- Child Row 1 -->
+                        <div class="mt-row">
+                            <div class="mt-nested">Pha A</div>
+                            <div style="display: flex; gap: 8px;">
+                                <span class="point-tag point-tag-solid">CS1T1-A</span>
+                                <span class="point-tag point-tag-outline">CS1T1_A</span>
+                            </div>
+                            <button class="btn-action-sm" onclick="openPointDrawer()">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <circle cx="12" cy="12" r="5"></circle>
+                                    <line x1="12" y1="1" x2="12" y2="3"></line>
+                                    <line x1="12" y1="21" x2="12" y2="23"></line>
+                                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                                    <line x1="1" y1="12" x2="3" y2="12"></line>
+                                    <line x1="21" y1="12" x2="23" y2="12"></line>
+                                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                                </svg>
+                            </button>
+                        </div>
+
+                        <!-- Child Row 2 -->
+                        <div class="mt-row">
+                            <div class="mt-nested">Pha B</div>
+                            <div style="display: flex; gap: 8px;">
+                                <span class="point-tag point-tag-solid">CS1T1-B</span>
+                                <span class="point-tag point-tag-outline">CS1T1_B</span>
+                            </div>
+                            <button class="btn-action-sm" onclick="openPointDrawer()">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <circle cx="12" cy="12" r="5"></circle>
+                                    <line x1="12" y1="1" x2="12" y2="3"></line>
+                                    <line x1="12" y1="21" x2="12" y2="23"></line>
+                                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                                    <line x1="1" y1="12" x2="3" y2="12"></line>
+                                    <line x1="21" y1="12" x2="23" y2="12"></line>
+                                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                                </svg>
+                            </button>
+                        </div>
+
+                        <!-- Child Row 3 -->
+                        <div class="mt-row">
+                            <div class="mt-nested">Pha C</div>
+                            <div style="display: flex; gap: 8px;">
+                                <span class="point-tag point-tag-solid">CS1T1-C</span>
+                                <span class="point-tag point-tag-outline">CS1T1_C</span>
+                            </div>
+                            <button class="btn-action-sm" onclick="openPointDrawer()">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <circle cx="12" cy="12" r="5"></circle>
+                                    <line x1="12" y1="1" x2="12" y2="3"></line>
+                                    <line x1="12" y1="21" x2="12" y2="23"></line>
+                                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                                    <line x1="1" y1="12" x2="3" y2="12"></line>
+                                    <line x1="21" y1="12" x2="23" y2="12"></line>
+                                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="drawer-footer">
+                    <button class="btn-cancel" onclick="closeDrawer()">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"></line>
+                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                        </svg>
+                        Hủy
+                    </button>
+                    <button class="btn-save" onclick="closeDrawer()">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
+                            <polyline points="17 21 17 13 7 13 7 21"></polyline>
+                            <polyline points="7 3 7 8 15 8"></polyline>
+                        </svg>
+                        Lưu
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="drawer-overlay" id="pointDrawer" style="z-index: 2000;">
+            <div class="drawer drawer-lg" style="width: 900px; right: -900px;">
+                <div class="drawer-header">
+                    <div style="display: flex; gap: 10px;">
+                        <style>
+                            .tab-btn {
+                                padding: 6px 16px;
+                                border-radius: 6px;
+                                border: 1px solid var(--border);
+                                background: transparent;
+                                color: var(--text-main);
+                                font-size: 14px;
+                                font-weight: 600;
+                                cursor: pointer;
+                                display: flex;
+                                align-items: center;
+                                gap: 12px;
+                                min-width: 120px;
+                                justify-content: space-between;
+                            }
+
+                            .tab-btn.active {
+                                border-color: #3b82f6;
+                                color: #3b82f6;
+                                background: rgba(59, 130, 246, 0.05);
+                            }
+
+                            .btn-orange-full {
+                                background: #F59E0B;
+                                color: white;
+                                border: none;
+                                padding: 10px 24px;
+                                border-radius: 6px;
+                                font-weight: 600;
+                                cursor: pointer;
+                                transition: 0.2s;
+                            }
+
+                            .btn-orange-full:hover {
+                                background: #D97706;
+                            }
+
+                            .point-tag-item {
+                                background: rgba(255, 255, 255, 0.05);
+                                border: 1px solid var(--border);
+                                padding: 6px 14px;
+                                border-radius: 6px;
+                                font-size: 13px;
+                                display: flex;
+                                align-items: center;
+                                gap: 10px;
+                                width: fit-content;
+                            }
+
+                            .point-tag-item .remove-tag {
+                                color: var(--text-sub);
+                                cursor: pointer;
+                                font-size: 16px;
+                            }
+
+                            .form-item-v {
+                                display: flex;
+                                flex-direction: column;
+                                gap: 8px;
+                                margin-bottom: 16px;
+                            }
+
+                            .form-item-v label {
+                                font-size: 13px;
+                                font-weight: 600;
+                                color: var(--text-main);
+                            }
+                        </style>
+                        <button class="tab-btn active">CS1T1-A <span style="font-size: 18px;">&times;</span></button>
+                        <button class="tab-btn" style="min-width: 50px; justify-content: center;">+</button>
+                    </div>
+                    <button class="close-drawer" onclick="closePointDrawer()">&times;</button>
+                </div>
+                <div class="drawer-body">
+                    <div class="form-grid">
+                        <div class="form-item-v">
+                            <label>Tên</label>
+                            <input type="text" class="filter-input" value="CS1T1-A">
+                        </div>
+                        <div class="form-item-v">
+                            <label>Tọa độ</label>
+                            <button class="btn-coord"
+                                style="background: #FBBF24; color: #000; border: none; height: 38px;">Chọn tọa độ trên
+                                ảnh</button>
+                        </div>
+                    </div>
+
+                    <div class="form-item-v">
+                        <label>Bộ phận cha</label>
+                        <select class="filter-input">
+                            <option>CS1T1</option>
+                        </select>
+                    </div>
+
+                    <div class="form-grid">
+                        <div class="form-item-v">
+                            <label>Camera</label>
+                            <select class="filter-input">
+                                <option>Cam nhiệt cố định</option>
+                            </select>
+                        </div>
+                        <div class="form-item-v">
+                            <label>Sensor</label>
+                            <select class="filter-input">
+                                <option>Nhiệt độ môi trường</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-item-v">
+                        <label>Điểm giám sát của camera được chọn</label>
+                        <div style="position: relative;">
+                            <select class="filter-input" style="padding-left: 45px;">
+                                <option></option>
+                            </select>
+                            <div
+                                style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); background: transparent; border: 1px solid var(--border); border-radius: 4px; padding: 0 8px; font-size: 16px; color: var(--text-sub); line-height: 20px;">
+                                &times;
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-item-v">
+                        <label>Điểm giám sát của Sensor được chọn</label>
+                        <select class="filter-input">
+                            <option value="">Chọn điểm giám sát</option>
+                        </select>
+                    </div>
+
+                    <div class="form-item-v">
+                        <label>Danh sách điểm giám sát của camera</label>
+                        <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 5px;">
+                            <div class="point-tag-item">
+                                CS1T1_A <span class="remove-tag">&times;</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="drawer-footer">
+                    <button class="btn-cancel" onclick="closePointDrawer()">
+                        Hủy
+                    </button>
+                    <button class="btn-orange-full" onclick="openThresholdDrawer()" style="margin-right: auto;">Thiết
+                        lập
+                        ngưỡng nhiệt</button>
+                    <button class="btn-save" onclick="closePointDrawer()">
+                        Lưu
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- DRAWER FOR ALARM THRESHOLD -->
+        <div class="drawer-overlay" id="thresholdDrawer" style="z-index: 2200;">
+            <div class="drawer" style="width: 850px; right: -850px;">
+                <div class="drawer-header">
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="#F59E0B">
+                            <path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z" />
+                        </svg>
+                        <h3 style="font-size: 16px;">Thiết lập ngưỡng cảnh báo</h3>
+                    </div>
+                    <button class="close-drawer" onclick="closeThresholdDrawer()">&times;</button>
+                </div>
+                <div class="drawer-body">
+                    <style>
+                        .threshold-top-nav {
+                            display: flex;
+                            gap: 12px;
+                            margin-bottom: 24px;
+                        }
+
+                        .nav-btn-large {
+                            flex: 1;
+                            padding: 12px;
+                            border-radius: 8px;
+                            border: 1px solid var(--border);
+                            background: rgba(255, 255, 255, 0.02);
+                            color: var(--text-sub);
+                            font-weight: 600;
+                            font-size: 13px;
+                            cursor: pointer;
+                            text-align: center;
+                        }
+
+                        .nav-btn-large.active {
+                            border-color: #3b82f6;
+                            background: rgba(59, 130, 246, 0.05);
+                            color: #3b82f6;
+                        }
+
+                        .threshold-tabs {
+                            display: flex;
+                            gap: 30px;
+                            border-bottom: 1px solid var(--border);
+                            margin-bottom: 24px;
+                            position: relative;
+                        }
+
+                        .th-tab {
+                            padding: 12px 0;
+                            color: var(--text-sub);
+                            font-size: 13px;
+                            font-weight: 600;
+                            cursor: pointer;
+                            position: relative;
+                            white-space: nowrap;
+                        }
+
+                        .th-tab.active {
+                            color: #3b82f6;
+                        }
+
+                        .th-tab.active::after {
+                            content: '';
+                            position: absolute;
+                            bottom: -1px;
+                            left: 0;
+                            right: 0;
+                            height: 2px;
+                            background: #3b82f6;
+                        }
+
+                        .filter-badge {
+                            background: #1e293b;
+                            border: 1px solid var(--border);
+                            padding: 6px 14px;
+                            border-radius: 20px;
+                            font-size: 12px;
+                            display: flex;
+                            align-items: center;
+                            gap: 8px;
+                            color: var(--text-main);
+                            cursor: pointer;
+                            position: absolute;
+                            right: 0;
+                            top: 4px;
+                            z-index: 10;
+                        }
+
+                        /* Filter Dropdown Styles */
+                        .filter-dropdown {
+                            position: absolute;
+                            top: calc(100% + 8px);
+                            right: 0;
+                            width: 300px;
+                            background: #1a202c;
+                            border: 1px solid var(--border);
+                            border-radius: 12px;
+                            padding: 16px;
+                            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+                            display: none;
+                            flex-direction: column;
+                            gap: 12px;
+                            z-index: 100;
+                        }
+
+                        .filter-dropdown.show {
+                            display: flex;
+                        }
+
+                        .fd-title {
+                            font-size: 14px;
+                            font-weight: 700;
+                            color: var(--text-main);
+                            padding-bottom: 12px;
+                            border-bottom: 1px solid var(--border);
+                            margin-bottom: 4px;
+                        }
+
+                        .fd-item {
+                            display: flex;
+                            align-items: center;
+                            gap: 12px;
+                            padding: 8px 0;
+                            cursor: pointer;
+                        }
+
+                        .fd-checkbox {
+                            width: 18px;
+                            height: 18px;
+                            border: 1.5px solid #3b82f6;
+                            border-radius: 4px;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
                             transition: 0.2s;
                         }
 
-                        .btn-orange-full:hover {
-                            background: #D97706;
+                        .fd-checkbox.checked {
+                            background: #3b82f6;
                         }
 
-                        .point-tag-item {
-                            background: rgba(255, 255, 255, 0.05);
-                            border: 1px solid var(--border);
-                            padding: 6px 14px;
-                            border-radius: 6px;
+                        .fd-checkbox svg {
+                            width: 12px;
+                            height: 12px;
+                            color: white;
+                            display: none;
+                        }
+
+                        .fd-checkbox.checked svg {
+                            display: block;
+                        }
+
+                        .fd-label {
                             font-size: 13px;
-                            display: flex;
-                            align-items: center;
-                            gap: 10px;
-                            width: fit-content;
-                        }
-
-                        .point-tag-item .remove-tag {
-                            color: var(--text-sub);
-                            cursor: pointer;
-                            font-size: 16px;
-                        }
-
-                        .form-item-v {
-                            display: flex;
-                            flex-direction: column;
-                            gap: 8px;
-                            margin-bottom: 16px;
-                        }
-
-                        .form-item-v label {
-                            font-size: 13px;
-                            font-weight: 600;
                             color: var(--text-main);
                         }
+
+                        .btn-apply-filter {
+                            background: #3b82f6;
+                            color: white;
+                            border: none;
+                            padding: 12px;
+                            border-radius: 8px;
+                            font-weight: 600;
+                            font-size: 13px;
+                            cursor: pointer;
+                            margin-top: 8px;
+                            transition: 0.2s;
+                        }
+
+                        .btn-apply-filter:hover {
+                            background: #2563eb;
+                        }
+
+                        .level-block {
+                            padding: 16px;
+                            border-radius: 8px;
+                            margin-bottom: 16px;
+                            display: flex;
+                            align-items: center;
+                            gap: 20px;
+                            border: 1px solid var(--border);
+                            background: var(--bg-card);
+                        }
+
+                        .level-info {
+                            display: flex;
+                            align-items: center;
+                            gap: 15px;
+                            flex: 1;
+                        }
+
+                        .lvl-icon {
+                            width: 40px;
+                            height: 40px;
+                            border-radius: 8px;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                        }
+
+                        .lvl-text h4 {
+                            margin: 0;
+                            font-size: 14px;
+                            font-weight: 700;
+                        }
+
+                        .lvl-text p {
+                            margin: 4px 0 0;
+                            font-size: 12px;
+                            color: var(--text-sub);
+                        }
+
+                        .lvl-inputs {
+                            display: flex;
+                            align-items: center;
+                            gap: 15px;
+                        }
+
+                        .range-group {
+                            display: flex;
+                            align-items: center;
+                            gap: 8px;
+                        }
+
+                        .range-label {
+                            font-size: 11px;
+                            font-weight: 700;
+                            color: var(--text-sub);
+                            text-transform: uppercase;
+                        }
+
+                        .val-box {
+                            display: flex;
+                            align-items: center;
+                            background: #111827;
+                            border: 1px solid var(--border);
+                            border-radius: 6px;
+                            padding-left: 10px;
+                            width: 75px;
+                        }
+
+                        .val-box input {
+                            background: transparent;
+                            border: none;
+                            color: white;
+                            width: 35px;
+                            padding: 8px 0;
+                            font-weight: 700;
+                            font-family: inherit;
+                            outline: none;
+                            text-align: center;
+                            font-size: 13px;
+                        }
+
+                        .val-box span {
+                            color: var(--text-sub);
+                            font-size: 10px;
+                            margin-right: 5px;
+                        }
+
+                        .val-ctrl {
+                            display: flex;
+                            align-items: center;
+                            background: #111827;
+                            border: 1px solid var(--border);
+                            border-radius: 6px;
+                            width: 120px;
+                        }
+
+                        .btn-step {
+                            background: transparent;
+                            border: none;
+                            color: var(--text-sub);
+                            width: 30px;
+                            height: 32px;
+                            cursor: pointer;
+                            font-size: 18px;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                        }
+
+                        .lvl-1 {
+                            border-left: 4px solid #10b981;
+                        }
+
+                        .lvl-1 .lvl-icon {
+                            background: rgba(16, 185, 129, 0.1);
+                            color: #10b981;
+                        }
+
+                        .lvl-1 h4 {
+                            color: #10b981;
+                        }
+
+                        .lvl-2 {
+                            border-left: 4px solid #3b82f6;
+                        }
+
+                        .lvl-2 .lvl-icon {
+                            background: rgba(59, 130, 246, 0.1);
+                            color: #3b82f6;
+                        }
+
+                        .lvl-2 h4 {
+                            color: #3b82f6;
+                        }
+
+                        .lvl-3 {
+                            border-left: 4px solid #f59e0b;
+                        }
+
+                        .lvl-3 .lvl-icon {
+                            background: rgba(245, 158, 11, 0.1);
+                            color: #f59e0b;
+                        }
+
+                        .lvl-3 h4 {
+                            color: #f59e0b;
+                        }
+
+                        .lvl-4 {
+                            border-left: 4px solid #ef4444;
+                        }
+
+                        .lvl-4 .lvl-icon {
+                            background: rgba(239, 68, 68, 0.1);
+                            color: #ef4444;
+                        }
+
+                        .lvl-4 h4 {
+                            color: #ef4444;
+                        }
+
+                        /* Status Badges */
+                        .status-badge {
+                            padding: 4px 10px;
+                            border-radius: 20px;
+                            font-size: 11px;
+                            font-weight: 700;
+                            text-transform: uppercase;
+                            display: inline-flex;
+                            align-items: center;
+                            gap: 5px;
+                            white-space: nowrap;
+                        }
+
+                        .status-success {
+                            background: rgba(16, 185, 129, 0.1);
+                            color: #10b981 !important;
+                            border: 1px solid rgba(16, 185, 129, 0.2);
+                        }
+
+                        .status-danger {
+                            background: rgba(239, 68, 68, 0.1);
+                            color: #ef4444 !important;
+                            border: 1px solid rgba(239, 68, 68, 0.2);
+                        }
+
+                        @media screen and (max-width: 768px) {
+                            .threshold-top-nav {
+                                flex-direction: column;
+                                gap: 8px;
+                            }
+
+                            .threshold-tabs {
+                                overflow-x: auto;
+                                -webkit-overflow-scrolling: touch;
+                                padding-right: 60px;
+                                /* space for filter badge if it was absolute, but it's handled in responsive-fixes */
+                            }
+
+                            .level-block {
+                                flex-direction: column;
+                                align-items: flex-start;
+                                gap: 15px;
+                            }
+
+                            .level-info {
+                                width: 100%;
+                            }
+
+                            .lvl-inputs {
+                                width: 100%;
+                                justify-content: space-between;
+                            }
+
+                            .val-ctrl {
+                                width: 110px;
+                            }
+                        }
                     </style>
-                    <button class="tab-btn active">CS1T1-A <span style="font-size: 18px;">&times;</span></button>
-                    <button class="tab-btn" style="min-width: 50px; justify-content: center;">+</button>
-                </div>
-                <button class="close-drawer" onclick="closePointDrawer()">&times;</button>
-            </div>
-            <div class="drawer-body">
-                <div class="form-grid">
-                    <div class="form-item-v">
-                        <label>Tên</label>
-                        <input type="text" class="filter-input" value="CS1T1-A">
-                    </div>
-                    <div class="form-item-v">
-                        <label>Tọa độ</label>
-                        <button class="btn-coord"
-                            style="background: #FBBF24; color: #000; border: none; height: 38px;">Chọn tọa độ trên
-                            ảnh</button>
-                    </div>
-                </div>
 
-                <div class="form-item-v">
-                    <label>Bộ phận cha</label>
-                    <select class="filter-input">
-                        <option>CS1T1</option>
-                    </select>
-                </div>
-
-                <div class="form-grid">
-                    <div class="form-item-v">
-                        <label>Camera</label>
-                        <select class="filter-input">
-                            <option>Cam nhiệt cố định</option>
-                        </select>
-                    </div>
-                    <div class="form-item-v">
-                        <label>Sensor</label>
-                        <select class="filter-input">
-                            <option>Nhiệt độ môi trường</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="form-item-v">
-                    <label>Điểm giám sát của camera được chọn</label>
-                    <div style="position: relative;">
-                        <select class="filter-input" style="padding-left: 45px;">
-                            <option></option>
-                        </select>
-                        <div
-                            style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); background: transparent; border: 1px solid var(--border); border-radius: 4px; padding: 0 8px; font-size: 16px; color: var(--text-sub); line-height: 20px;">
-                            &times;
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-item-v">
-                    <label>Điểm giám sát của Sensor được chọn</label>
-                    <select class="filter-input">
-                        <option value="">Chọn điểm giám sát</option>
-                    </select>
-                </div>
-
-                <div class="form-item-v">
-                    <label>Danh sách điểm giám sát của camera</label>
-                    <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 5px;">
-                        <div class="point-tag-item">
-                            CS1T1_A <span class="remove-tag">&times;</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="drawer-footer">
-                <button class="btn-cancel" onclick="closePointDrawer()">
-                    Hủy
-                </button>
-                <button class="btn-orange-full" onclick="openThresholdDrawer()" style="margin-right: auto;">Thiết lập
-                    ngưỡng nhiệt</button>
-                <button class="btn-save" onclick="closePointDrawer()">
-                    Lưu
-                </button>
-            </div>
-        </div>
-    </div>
-    <!-- DRAWER FOR ALARM THRESHOLD -->
-    <div class="drawer-overlay" id="thresholdDrawer" style="z-index: 2200;">
-        <div class="drawer" style="width: 850px; right: -850px;">
-            <div class="drawer-header">
-                <div style="display: flex; align-items: center; gap: 10px;">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="#F59E0B">
-                        <path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z" />
-                    </svg>
-                    <h3 style="font-size: 16px;">Thiết lập ngưỡng cảnh báo</h3>
-                </div>
-                <button class="close-drawer" onclick="closeThresholdDrawer()">&times;</button>
-            </div>
-            <div class="drawer-body">
-                <style>
-                    .threshold-top-nav {
-                        display: flex;
-                        gap: 12px;
-                        margin-bottom: 24px;
-                    }
-
-                    .nav-btn-large {
-                        flex: 1;
-                        padding: 12px;
-                        border-radius: 8px;
-                        border: 1px solid var(--border);
-                        background: rgba(255, 255, 255, 0.02);
-                        color: var(--text-sub);
-                        font-weight: 600;
-                        font-size: 13px;
-                        cursor: pointer;
-                        text-align: center;
-                    }
-
-                    .nav-btn-large.active {
-                        border-color: #3b82f6;
-                        background: rgba(59, 130, 246, 0.05);
-                        color: #3b82f6;
-                    }
-
-                    .threshold-tabs {
-                        display: flex;
-                        gap: 30px;
-                        border-bottom: 1px solid var(--border);
-                        margin-bottom: 24px;
-                        position: relative;
-                    }
-
-                    .th-tab {
-                        padding: 12px 0;
-                        color: var(--text-sub);
-                        font-size: 14px;
-                        font-weight: 600;
-                        cursor: pointer;
-                        position: relative;
-                    }
-
-                    .th-tab.active {
-                        color: #3b82f6;
-                    }
-
-                    .th-tab.active::after {
-                        content: '';
-                        position: absolute;
-                        bottom: -1px;
-                        left: 0;
-                        right: 0;
-                        height: 2px;
-                        background: #3b82f6;
-                    }
-
-                    .filter-badge {
-                        background: #1e293b;
-                        border: 1px solid var(--border);
-                        padding: 6px 14px;
-                        border-radius: 20px;
-                        font-size: 12px;
-                        display: flex;
-                        align-items: center;
-                        gap: 8px;
-                        color: var(--text-main);
-                        cursor: pointer;
-                        position: absolute;
-                        right: 0;
-                        top: 4px;
-                        z-index: 10;
-                    }
-
-                    /* Filter Dropdown Styles */
-                    .filter-dropdown {
-                        position: absolute;
-                        top: calc(100% + 8px);
-                        right: 0;
-                        width: 300px;
-                        background: #1a202c;
-                        border: 1px solid var(--border);
-                        border-radius: 12px;
-                        padding: 16px;
-                        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
-                        display: none;
-                        flex-direction: column;
-                        gap: 12px;
-                        z-index: 100;
-                    }
-
-                    .filter-dropdown.show {
-                        display: flex;
-                    }
-
-                    .fd-title {
-                        font-size: 14px;
-                        font-weight: 700;
-                        color: var(--text-main);
-                        padding-bottom: 12px;
-                        border-bottom: 1px solid var(--border);
-                        margin-bottom: 4px;
-                    }
-
-                    .fd-item {
-                        display: flex;
-                        align-items: center;
-                        gap: 12px;
-                        padding: 8px 0;
-                        cursor: pointer;
-                    }
-
-                    .fd-checkbox {
-                        width: 18px;
-                        height: 18px;
-                        border: 1.5px solid #3b82f6;
-                        border-radius: 4px;
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                        transition: 0.2s;
-                    }
-
-                    .fd-checkbox.checked {
-                        background: #3b82f6;
-                    }
-
-                    .fd-checkbox svg {
-                        width: 12px;
-                        height: 12px;
-                        color: white;
-                        display: none;
-                    }
-
-                    .fd-checkbox.checked svg {
-                        display: block;
-                    }
-
-                    .fd-label {
-                        font-size: 13px;
-                        color: var(--text-main);
-                    }
-
-                    .btn-apply-filter {
-                        background: #3b82f6;
-                        color: white;
-                        border: none;
-                        padding: 12px;
-                        border-radius: 8px;
-                        font-weight: 600;
-                        font-size: 13px;
-                        cursor: pointer;
-                        margin-top: 8px;
-                        transition: 0.2s;
-                    }
-
-                    .btn-apply-filter:hover {
-                        background: #2563eb;
-                    }
-
-                    .level-block {
-                        padding: 16px;
-                        border-radius: 8px;
-                        margin-bottom: 16px;
-                        display: flex;
-                        align-items: center;
-                        gap: 20px;
-                        border: 1px solid var(--border);
-                        background: var(--bg-card);
-                    }
-
-                    .level-info {
-                        display: flex;
-                        align-items: center;
-                        gap: 15px;
-                        flex: 1;
-                    }
-
-                    .lvl-icon {
-                        width: 40px;
-                        height: 40px;
-                        border-radius: 8px;
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                    }
-
-                    .lvl-text h4 {
-                        margin: 0;
-                        font-size: 14px;
-                        font-weight: 700;
-                    }
-
-                    .lvl-text p {
-                        margin: 4px 0 0;
-                        font-size: 12px;
-                        color: var(--text-sub);
-                    }
-
-                    .lvl-inputs {
-                        display: flex;
-                        align-items: center;
-                        gap: 15px;
-                    }
-
-                    .range-group {
-                        display: flex;
-                        align-items: center;
-                        gap: 8px;
-                    }
-
-                    .range-label {
-                        font-size: 11px;
-                        font-weight: 700;
-                        color: var(--text-sub);
-                        text-transform: uppercase;
-                    }
-
-                    .val-box {
-                        display: flex;
-                        align-items: center;
-                        background: #111827;
-                        border: 1px solid var(--border);
-                        border-radius: 6px;
-                        padding-left: 12px;
-                        width: 80px;
-                    }
-
-                    .val-box input {
-                        background: transparent;
-                        border: none;
-                        color: white;
-                        width: 40px;
-                        padding: 8px 0;
-                        font-weight: 700;
-                        font-family: inherit;
-                        outline: none;
-                        text-align: center;
-                    }
-
-                    .val-box span {
-                        color: var(--text-sub);
-                        font-size: 11px;
-                        margin-right: 8px;
-                    }
-
-                    .val-ctrl {
-                        display: flex;
-                        align-items: center;
-                        background: #111827;
-                        border: 1px solid var(--border);
-                        border-radius: 6px;
-                        width: 130px;
-                    }
-
-                    .btn-step {
-                        background: transparent;
-                        border: none;
-                        color: var(--text-sub);
-                        width: 32px;
-                        height: 32px;
-                        cursor: pointer;
-                        font-size: 18px;
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                    }
-
-                    .lvl-1 {
-                        border-left: 4px solid #10b981;
-                    }
-
-                    .lvl-1 .lvl-icon {
-                        background: rgba(16, 185, 129, 0.1);
-                        color: #10b981;
-                    }
-
-                    .lvl-1 h4 {
-                        color: #10b981;
-                    }
-
-                    .lvl-2 {
-                        border-left: 4px solid #3b82f6;
-                    }
-
-                    .lvl-2 .lvl-icon {
-                        background: rgba(59, 130, 246, 0.1);
-                        color: #3b82f6;
-                    }
-
-                    .lvl-2 h4 {
-                        color: #3b82f6;
-                    }
-
-                    .lvl-3 {
-                        border-left: 4px solid #f59e0b;
-                    }
-
-                    .lvl-3 .lvl-icon {
-                        background: rgba(245, 158, 11, 0.1);
-                        color: #f59e0b;
-                    }
-
-                    .lvl-3 h4 {
-                        color: #f59e0b;
-                    }
-
-                    .lvl-4 {
-                        border-left: 4px solid #ef4444;
-                    }
-
-                    .lvl-4 .lvl-icon {
-                        background: rgba(239, 68, 68, 0.1);
-                        color: #ef4444;
-                    }
-
-                    .lvl-4 h4 {
-                        color: #ef4444;
-                    }
-                </style>
-
-                <div class="threshold-top-nav">
-                    <button class="nav-btn-large active">Khai báo chung từ loại thiết bị</button>
-                    <button class="nav-btn-large">Khai báo riêng</button>
-                </div>
-
-                <div class="threshold-tabs" style="position: relative;">
-                    <div class="th-tab active">So với môi trường</div>
-                    <div class="th-tab">So với ngưỡng nhiệt</div>
-                    <div class="th-tab">So với pha min</div>
-                    <div class="filter-badge" onclick="toggleThresholdFilterDevice()" id="btnFilterThresholdDevice">
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2">
-                            <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
-                        </svg>
-                        Lọc <span
-                            style="background: #3b82f6; color: white; border-radius: 10px; padding: 0 6px; font-size: 10px;">3</span>
+                    <div class="threshold-top-nav">
+                        <button class="nav-btn-large active">Khai báo chung từ loại thiết bị</button>
+                        <button class="nav-btn-large">Khai báo riêng</button>
                     </div>
 
-                    <!-- Filter Dropdown (Responsive) -->
-                    <div class="filter-dropdown-content" id="thresholdFilterDropdownDevice">
-                        <div class="fd-header">
-                            <span>Chọn loại ngưỡng hiển thị</span>
-                            <a href="#" onclick="toggleAllThresholdsDevice(event)">Chọn tất cả</a>
-                        </div>
-                        <div class="fd-list">
-                            <label class="fd-item"><input type="checkbox" checked> So với môi trường</label>
-                            <label class="fd-item"><input type="checkbox" checked> So với ngưỡng nhiệt</label>
-                            <label class="fd-item"><input type="checkbox" checked> So với pha min</label>
-                            <label class="fd-item"><input type="checkbox" checked> So với phần tử cùng loại</label>
-                            <label class="fd-item"><input type="checkbox"> So với pha min toàn trạm</label>
-                            <label class="fd-item"><input type="checkbox"> So với phần tử cùng loại toàn trạm</label>
-                        </div>
-                        <div class="fd-footer">
-                            <button class="btn-apply-filter" onclick="closeThresholdFilterDevice()">Áp dụng</button>
-                        </div>
-                    </div>
-                </div>
-
-                <script>
-                    function toggleThresholdFilterDevice() {
-                        const dropdown = document.getElementById('thresholdFilterDropdownDevice');
-                        if (dropdown.style.display === 'flex') {
-                            dropdown.style.display = 'none';
-                        } else {
-                            dropdown.style.display = 'flex';
-                        }
-                    }
-
-                    function closeThresholdFilterDevice() {
-                        document.getElementById('thresholdFilterDropdownDevice').style.display = 'none';
-                    }
-
-                    function toggleAllThresholdsDevice(e) {
-                        e.preventDefault();
-                        const inputs = document.querySelectorAll('#thresholdFilterDropdownDevice .fd-item input[type="checkbox"]');
-                        inputs.forEach(input => input.checked = true);
-                    }
-
-                    // Close when clicking outside
-                    document.addEventListener('click', function (event) {
-                        const dropdown = document.getElementById('thresholdFilterDropdownDevice');
-                        const btn = document.getElementById('btnFilterThresholdDevice');
-                        if (dropdown && !dropdown.contains(event.target) && !btn.contains(event.target)) {
-                            dropdown.style.display = 'none';
-                        }
-                    });
-                </script>
-
-                <!-- Level 1 -->
-                <div class="level-block lvl-1">
-                    <div class="level-info">
-                        <div class="lvl-icon">✓</div>
-                        <div class="lvl-text">
-                            <h4>Mức 1 - Tốt</h4>
-                            <p>Nhiệt độ bình thường</p>
-                        </div>
-                    </div>
-                    <div class="lvl-inputs">
-                        <div class="range-group">
-                            <span class="range-label">Từ</span>
-                            <div class="val-box">
-                                <input type="text" value="0">
-                                <span>°C</span>
-                            </div>
-                        </div>
-                        <span style="color:var(--text-sub)">→</span>
-                        <div class="range-group">
-                            <span class="range-label">Đến</span>
-                            <div class="val-ctrl">
-                                <button class="btn-step">-</button>
-                                <div style="flex:1; text-align:center; font-weight:700">10</div>
-                                <span style="font-size:11px; color:var(--text-sub); margin-right:5px">°C</span>
-                                <button class="btn-step">+</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Level 2 -->
-                <div class="level-block lvl-2">
-                    <div class="level-info">
-                        <div class="lvl-icon">!</div>
-                        <div class="lvl-text">
-                            <h4>Mức 2 - Chú ý</h4>
-                            <p>Cần theo dõi</p>
-                        </div>
-                    </div>
-                    <div class="lvl-inputs">
-                        <div class="range-group">
-                            <span class="range-label">Từ</span>
-                            <div class="val-box">
-                                <input type="text" value="10">
-                                <span>°C</span>
-                            </div>
-                        </div>
-                        <span style="color:var(--text-sub)">→</span>
-                        <div class="range-group">
-                            <span class="range-label">Đến</span>
-                            <div class="val-ctrl">
-                                <button class="btn-step">-</button>
-                                <div style="flex:1; text-align:center; font-weight:700">20</div>
-                                <span style="font-size:11px; color:var(--text-sub); margin-right:5px">°C</span>
-                                <button class="btn-step">+</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Level 3 -->
-                <div class="level-block lvl-3">
-                    <div class="level-info">
-                        <div class="lvl-icon">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M12 2L1 21h22L12 2zm0 14h-1v-4h2v4h-1zm0 2h-1v2h2v-2h-1z" />
+                    <div class="threshold-tabs" style="position: relative;">
+                        <div class="th-tab active">So với môi trường</div>
+                        <div class="th-tab">So với ngưỡng nhiệt</div>
+                        <div class="th-tab">So với pha min</div>
+                        <div class="filter-badge" onclick="toggleThresholdFilterDevice()" id="btnFilterThresholdDevice">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
                             </svg>
+                            Lọc <span
+                                style="background: #3b82f6; color: white; border-radius: 10px; padding: 0 6px; font-size: 10px;">3</span>
                         </div>
-                        <div class="lvl-text">
-                            <h4>Mức 3 - Cảnh báo</h4>
-                            <p>Cần xử lý sớm</p>
-                        </div>
-                    </div>
-                    <div class="lvl-inputs">
-                        <div class="range-group">
-                            <span class="range-label">Từ</span>
-                            <div class="val-box">
-                                <input type="text" value="20">
-                                <span>°C</span>
-                            </div>
-                        </div>
-                        <span style="color:var(--text-sub)">→</span>
-                        <div class="range-group">
-                            <span class="range-label">Đến</span>
-                            <div class="val-ctrl">
-                                <button class="btn-step">-</button>
-                                <div style="flex:1; text-align:center; font-weight:700">35</div>
-                                <span style="font-size:11px; color:var(--text-sub); margin-right:5px">°C</span>
-                                <button class="btn-step">+</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
-                <!-- Level 4 -->
-                <div class="level-block lvl-4">
-                    <div class="level-info">
-                        <div class="lvl-icon">&times;</div>
-                        <div class="lvl-text">
-                            <h4>Mức 4 - Nguy hiểm</h4>
-                            <p>Cần xử lý ngay</p>
-                        </div>
-                    </div>
-                    <div class="lvl-inputs">
-                        <div class="range-group">
-                            <span class="range-label">Từ</span>
-                            <div class="val-box">
-                                <input type="text" value="35">
-                                <span>°C</span>
+                        <!-- Filter Dropdown (Responsive) -->
+                        <div class="filter-dropdown-content" id="thresholdFilterDropdownDevice">
+                            <div class="fd-header">
+                                <span>Chọn loại ngưỡng hiển thị</span>
+                                <a href="#" onclick="toggleAllThresholdsDevice(event)">Chọn tất cả</a>
+                            </div>
+                            <div class="fd-list">
+                                <label class="fd-item"><input type="checkbox" checked> So với môi trường</label>
+                                <label class="fd-item"><input type="checkbox" checked> So với ngưỡng nhiệt</label>
+                                <label class="fd-item"><input type="checkbox" checked> So với pha min</label>
+                                <label class="fd-item"><input type="checkbox" checked> So với phần tử cùng loại</label>
+                                <label class="fd-item"><input type="checkbox"> So với pha min toàn trạm</label>
+                                <label class="fd-item"><input type="checkbox"> So với phần tử cùng loại toàn
+                                    trạm</label>
+                            </div>
+                            <div class="fd-footer">
+                                <button class="btn-apply-filter" onclick="closeThresholdFilterDevice()">Áp dụng</button>
                             </div>
                         </div>
-                        <span style="color:var(--text-sub)">→</span>
-                        <div class="range-group">
-                            <span class="range-label">Đến</span>
-                            <div class="val-ctrl">
-                                <div style="flex:1; text-align:center; font-weight:700">∞</div>
-                                <span
-                                    style="font-size:11px; color:var(--text-sub); margin-right:5px; margin-left:10px">°C</span>
+                    </div>
+
+                    <script>
+                        function toggleThresholdFilterDevice() {
+                            const dropdown = document.getElementById('thresholdFilterDropdownDevice');
+                            if (dropdown.style.display === 'flex') {
+                                dropdown.style.display = 'none';
+                            } else {
+                                dropdown.style.display = 'flex';
+                            }
+                        }
+
+                        function closeThresholdFilterDevice() {
+                            document.getElementById('thresholdFilterDropdownDevice').style.display = 'none';
+                        }
+
+                        function toggleAllThresholdsDevice(e) {
+                            e.preventDefault();
+                            const inputs = document.querySelectorAll('#thresholdFilterDropdownDevice .fd-item input[type="checkbox"]');
+                            inputs.forEach(input => input.checked = true);
+                        }
+
+                        // Close when clicking outside
+                        document.addEventListener('click', function (event) {
+                            const dropdown = document.getElementById('thresholdFilterDropdownDevice');
+                            const btn = document.getElementById('btnFilterThresholdDevice');
+                            if (dropdown && !dropdown.contains(event.target) && !btn.contains(event.target)) {
+                                dropdown.style.display = 'none';
+                            }
+                        });
+                    </script>
+
+                    <!-- Level 1 -->
+                    <div class="level-block lvl-1">
+                        <div class="level-info">
+                            <div class="lvl-icon">✓</div>
+                            <div class="lvl-text">
+                                <h4>Mức 1 - Tốt</h4>
+                                <p>Nhiệt độ bình thường</p>
+                            </div>
+                        </div>
+                        <div class="lvl-inputs">
+                            <div class="range-group">
+                                <span class="range-label">Từ</span>
+                                <div class="val-box">
+                                    <input type="text" value="0">
+                                    <span>°C</span>
+                                </div>
+                            </div>
+                            <span style="color:var(--text-sub)">→</span>
+                            <div class="range-group">
+                                <span class="range-label">Đến</span>
+                                <div class="val-ctrl">
+                                    <button class="btn-step">-</button>
+                                    <div style="flex:1; text-align:center; font-weight:700">10</div>
+                                    <span style="font-size:11px; color:var(--text-sub); margin-right:5px">°C</span>
+                                    <button class="btn-step">+</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Level 2 -->
+                    <div class="level-block lvl-2">
+                        <div class="level-info">
+                            <div class="lvl-icon">!</div>
+                            <div class="lvl-text">
+                                <h4>Mức 2 - Chú ý</h4>
+                                <p>Cần theo dõi</p>
+                            </div>
+                        </div>
+                        <div class="lvl-inputs">
+                            <div class="range-group">
+                                <span class="range-label">Từ</span>
+                                <div class="val-box">
+                                    <input type="text" value="10">
+                                    <span>°C</span>
+                                </div>
+                            </div>
+                            <span style="color:var(--text-sub)">→</span>
+                            <div class="range-group">
+                                <span class="range-label">Đến</span>
+                                <div class="val-ctrl">
+                                    <button class="btn-step">-</button>
+                                    <div style="flex:1; text-align:center; font-weight:700">20</div>
+                                    <span style="font-size:11px; color:var(--text-sub); margin-right:5px">°C</span>
+                                    <button class="btn-step">+</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Level 3 -->
+                    <div class="level-block lvl-3">
+                        <div class="level-info">
+                            <div class="lvl-icon">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M12 2L1 21h22L12 2zm0 14h-1v-4h2v4h-1zm0 2h-1v2h2v-2h-1z" />
+                                </svg>
+                            </div>
+                            <div class="lvl-text">
+                                <h4>Mức 3 - Cảnh báo</h4>
+                                <p>Cần xử lý sớm</p>
+                            </div>
+                        </div>
+                        <div class="lvl-inputs">
+                            <div class="range-group">
+                                <span class="range-label">Từ</span>
+                                <div class="val-box">
+                                    <input type="text" value="20">
+                                    <span>°C</span>
+                                </div>
+                            </div>
+                            <span style="color:var(--text-sub)">→</span>
+                            <div class="range-group">
+                                <span class="range-label">Đến</span>
+                                <div class="val-ctrl">
+                                    <button class="btn-step">-</button>
+                                    <div style="flex:1; text-align:center; font-weight:700">35</div>
+                                    <span style="font-size:11px; color:var(--text-sub); margin-right:5px">°C</span>
+                                    <button class="btn-step">+</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Level 4 -->
+                    <div class="level-block lvl-4">
+                        <div class="level-info">
+                            <div class="lvl-icon">&times;</div>
+                            <div class="lvl-text">
+                                <h4>Mức 4 - Nguy hiểm</h4>
+                                <p>Cần xử lý ngay</p>
+                            </div>
+                        </div>
+                        <div class="lvl-inputs">
+                            <div class="range-group">
+                                <span class="range-label">Từ</span>
+                                <div class="val-box">
+                                    <input type="text" value="35">
+                                    <span>°C</span>
+                                </div>
+                            </div>
+                            <span style="color:var(--text-sub)">→</span>
+                            <div class="range-group">
+                                <span class="range-label">Đến</span>
+                                <div class="val-ctrl">
+                                    <div style="flex:1; text-align:center; font-weight:700">∞</div>
+                                    <span
+                                        style="font-size:11px; color:var(--text-sub); margin-right:5px; margin-left:10px">°C</span>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="drawer-footer">
-                <button class="btn-cancel" onclick="closeThresholdDrawer()">Hủy</button>
-                <button class="btn-save" onclick="closeThresholdDrawer()">Lưu cấu hình</button>
+                <div class="drawer-footer">
+                    <button class="btn-cancel" onclick="closeThresholdDrawer()">Hủy</button>
+                    <button class="btn-save" onclick="closeThresholdDrawer()">Lưu cấu hình</button>
+                </div>
             </div>
         </div>
-    </div>
 </body>
 
 </html>
