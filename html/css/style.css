@@ -1185,38 +1185,49 @@ body {
     overflow: hidden;
 }
 
+/* --- 8. AREA TREE COMPONENT (Premium Screenshot Style) --- */
 .tree-sidebar {
     width: 320px;
-    background: var(--bg-card);
-    border-right: 1px solid var(--border);
+    background: #111827;
+    /* Darker Slate */
+    border-right: 1px solid rgba(255, 255, 255, 0.05);
     display: flex;
     flex-direction: column;
-    padding: 24px;
+    padding: 24px 20px;
     flex-shrink: 0;
+    z-index: 100;
 }
 
 .tree-title {
-    font-size: 16px;
+    font-size: 15px;
     font-weight: 700;
-    margin-bottom: 16px;
+    color: #f8fafc;
+    margin-bottom: 20px;
+    letter-spacing: 0.3px;
 }
 
 .tree-search-box {
     width: 100%;
-    padding: 10px 14px;
-    background: var(--bg-body);
-    border: 1px solid var(--border);
-    border-radius: 8px;
+    padding: 12px 16px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
     font-size: 13px;
-    color: var(--text-main);
-    margin-bottom: 20px;
+    color: #f8fafc;
+    margin-bottom: 24px;
+    outline: none;
+    transition: 0.2s;
 }
 
-/* --- 8. AREA TREE COMPONENT (Standardized) --- */
+.tree-search-box:focus {
+    border-color: #3b82f6;
+    background: rgba(255, 255, 255, 0.05);
+}
+
 .area-tree {
     flex: 1;
     overflow-y: auto;
-    padding: 0 4px;
+    padding-right: 4px;
 }
 
 .at-node {
@@ -1227,30 +1238,28 @@ body {
 .at-item {
     display: flex;
     align-items: center;
-    padding: 10px 12px;
+    padding: 8px 10px;
     cursor: pointer;
-    border-radius: 8px;
-    transition: all 0.2s;
-    font-size: 14px;
-    gap: 10px;
-    color: var(--text-main);
+    border-radius: 6px;
+    transition: 0.2s;
+    font-size: 13.5px;
+    gap: 8px;
+    color: #cbd5e1;
     position: relative;
     z-index: 2;
-    font-weight: 500;
 }
 
 .at-item:hover {
-    background: rgba(255, 255, 255, 0.05);
-    color: var(--primary);
+    background: rgba(255, 255, 255, 0.04);
+    color: #f8fafc;
 }
 
 .at-arrow {
-    width: 14px !important;
-    height: 14px !important;
-    min-width: 14px;
-    min-height: 14px;
-    transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    opacity: 0.6;
+    width: 12px !important;
+    height: 12px !important;
+    min-width: 12px;
+    transition: 0.2s;
+    opacity: 0.5;
     flex-shrink: 0;
 }
 
@@ -1259,31 +1268,30 @@ body {
 }
 
 .at-children {
-    padding-left: 28px;
+    padding-left: 24px;
     display: none;
     position: relative;
-}
-
-/* Vertical line for hierarchy */
-.at-children::before {
-    content: '';
-    position: absolute;
-    left: 18px;
-    top: -10px;
-    bottom: 20px;
-    width: 1.5px;
-    background: var(--border);
-    opacity: 0.3;
 }
 
 .at-node.expanded>.at-children {
     display: block;
 }
 
+/* Vertical line for hierarchy */
+.at-children::before {
+    content: '';
+    position: absolute;
+    left: 15px;
+    top: -4px;
+    bottom: 12px;
+    width: 1px;
+    background: rgba(255, 255, 255, 0.1);
+}
+
 .at-leaf {
-    padding: 8px 12px;
+    padding: 8px 10px;
     font-size: 13px;
-    color: var(--text-sub);
+    color: #94a3b8;
     cursor: pointer;
     border-radius: 6px;
     display: flex;
@@ -1291,32 +1299,50 @@ body {
     justify-content: space-between;
     position: relative;
     transition: 0.2s;
-    margin-bottom: 2px;
 }
 
 /* Horizontal line for hierarchy */
 .at-leaf::before {
     content: '';
     position: absolute;
-    left: -10px;
+    left: -9px;
     top: 50%;
     width: 10px;
-    height: 1.5px;
-    background: var(--border);
-    opacity: 0.3;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.1);
 }
 
 .at-leaf:hover {
-    background: rgba(59, 130, 246, 0.08);
-    color: var(--primary);
-    padding-left: 16px;
+    background: rgba(255, 255, 255, 0.04);
+    color: #3b82f6;
 }
 
-.at-active {
-    background: rgba(59, 130, 246, 0.12) !important;
-    color: var(--primary) !important;
+.at-leaf.active {
+    background: rgba(37, 99, 235, 0.1);
+    color: #3b82f6 !important;
     font-weight: 600;
-    box-shadow: inset 0 0 0 1px rgba(59, 130, 246, 0.2);
+}
+
+.at-leaf-icon {
+    width: 14px;
+    height: 14px;
+    opacity: 0.6;
+    margin-right: 2px;
+    /* Small space between horizontal line and icon */
+    flex-shrink: 0;
+}
+
+.at-leaf span {
+    flex: 1;
+    text-align: right;
+    padding-left: 20px;
+}
+
+.at-folder-icon {
+    width: 14px;
+    height: 14px;
+    opacity: 0.7;
+    flex-shrink: 0;
 }
 
 .at-badge {
