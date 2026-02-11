@@ -822,7 +822,7 @@
     }
 
     /* Modern Filter Section Responsive (Tab Stats) */
-    .filter-section-modern {
+    .filter-section-modern:not(details) {
         background: transparent !important;
         border: none !important;
         padding: 0 !important;
@@ -1947,5 +1947,34 @@
     /* Measurement Tools Container */
     #measure-start-btn {
         margin-bottom: 15px !important;
+    }
+}
+
+/* === TEMPERATURE HISTORY PAGE RESPONSIVE OVERRIDES === */
+@media (max-width: 768px) {
+
+    /* Force card view and hide table view for nhatky-nhietdo page */
+    .page-history-temp #tableView {
+        display: none !important;
+    }
+
+    .page-history-temp #cardView {
+        display: grid !important;
+    }
+
+    /* Hide the view switcher as we only want card view on mobile */
+    .page-history-temp .view-switcher {
+        display: none !important;
+    }
+
+    /* Ensure card grid is 1 column on mobile */
+    .page-history-temp .card-view-grid {
+        grid-template-columns: 1fr !important;
+        padding: 12px 0 !important;
+        gap: 16px !important;
+    }
+
+    .page-history-temp .sensor-card-item {
+        padding: 16px !important;
     }
 }

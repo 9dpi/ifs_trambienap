@@ -275,7 +275,9 @@ window.addEventListener('orientationchange', function () {
 // Add filter toggle button for mobile
 function addFilterToggle() {
     if (window.innerWidth <= 768) {
-        const filters = document.querySelectorAll('.filter-section-modern, .filter-section, .filter-card');
+        // Exclude <details> elements because they already have built-in summary toggle
+        const filters = Array.from(document.querySelectorAll('.filter-section-modern, .filter-section, .filter-card'))
+            .filter(el => el.tagName.toLowerCase() !== 'details');
 
         filters.forEach((filter, index) => {
             // Check if toggle already exists
