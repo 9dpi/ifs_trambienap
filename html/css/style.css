@@ -1322,10 +1322,9 @@ body {
 }
 
 .at-leaf-icon-box {
-    width: 28px;
-    height: 28px;
-    background: rgba(148, 163, 184, 0.1);
-    border-radius: 4px;
+    width: 16px;
+    height: 16px;
+    background: none;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1334,14 +1333,19 @@ body {
     color: #94a3b8;
 }
 
+.at-leaf-icon-box svg {
+    width: 14px;
+    height: 14px;
+}
+
 .at-leaf.active .at-leaf-icon-box {
     color: #f1f5f9;
 }
 
 .online-dot {
     position: absolute;
-    top: 4px;
-    right: 4px;
+    top: 0px;
+    right: -8px;
     width: 4px;
     height: 4px;
     background: #10b981;
@@ -1354,7 +1358,6 @@ body {
 
 .at-leaf.thermal .at-leaf-icon-box {
     color: #ef4444;
-    background: rgba(239, 68, 68, 0.1);
 }
 
 .at-leaf.thermal .online-dot {
