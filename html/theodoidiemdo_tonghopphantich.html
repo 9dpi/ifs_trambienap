@@ -97,9 +97,9 @@
         .filter-group-inline {
             display: flex;
             flex-direction: column;
-            align-items: flex-start;
+            align-items: stretch;
             gap: 6px;
-            flex: unset;
+            flex: 1;
         }
 
         .filter-group-inline label {
@@ -141,6 +141,11 @@
             /* Optional: Add a fade effect to the right */
             mask-image: linear-gradient(to right, black 85%, transparent 100%);
             -webkit-mask-image: linear-gradient(to right, black 85%, transparent 100%);
+        }
+
+        .select-single-modern,
+        .date-range-box input {
+            width: 100% !important;
         }
 
         .tag-pill {
@@ -1037,7 +1042,7 @@
                     <div class="filter-row-inline">
                         <div class="filter-group-inline">
                             <label>Khu vực</label>
-                            <select class="select-single-modern" style="width: 220px;">
+                            <select class="select-single-modern">
                                 <option>Tất cả khu vực</option>
                                 <option>Trạm 110kV Nam Phú Quốc</option>
                             </select>
