@@ -872,11 +872,6 @@
             background: #3b82f6;
             transform: translateY(-1px);
         }
-
-        /* Fix ApexCharts Legend Position */
-        .apexcharts-legend.apexcharts-align-right.apx-legend-position-top {
-            top: 0 !important;
-        }
     </style>
 </head>
 
@@ -1140,9 +1135,9 @@
             },
             grid: { borderColor: 'rgba(255,255,255,0.05)', strokeDashArray: 4 },
             legend: {
-                position: 'top',
-                horizontalAlign: 'right',
-                offsetY: -10,
+                position: 'bottom',
+                horizontalAlign: 'center',
+                offsetY: 8,
                 labels: { colors: '#94A3B8' },
                 markers: { radius: 12 }
             },
