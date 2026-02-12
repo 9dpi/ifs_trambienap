@@ -162,6 +162,13 @@ function toggleUserDropdown(e) {
     if (dropdown) dropdown.classList.toggle('show');
 }
 
+// Notif Dropdown Toggle
+function toggleNotifDropdown(e) {
+    if (e) e.stopPropagation();
+    const dropdown = document.getElementById('notifDropdown');
+    if (dropdown) dropdown.classList.toggle('show');
+}
+
 // Global click handler to close dropdowns
 document.addEventListener('click', (e) => {
     // Close user dropdown if clicking outside
@@ -170,6 +177,15 @@ document.addEventListener('click', (e) => {
     if (userDropdown && userDropdown.classList.contains('show')) {
         if (!userDropdown.contains(e.target) && (!userProfile || !userProfile.contains(e.target))) {
             userDropdown.classList.remove('show');
+        }
+    }
+
+    // Close notif dropdown if clicking outside
+    const notifDropdown = document.getElementById('notifDropdown');
+    const notifBtn = document.querySelector('.notif-btn');
+    if (notifDropdown && notifDropdown.classList.contains('show')) {
+        if (!notifDropdown.contains(e.target) && (!notifBtn || !notifBtn.contains(e.target))) {
+            notifDropdown.classList.remove('show');
         }
     }
 });
