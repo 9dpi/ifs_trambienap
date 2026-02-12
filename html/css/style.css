@@ -1896,7 +1896,8 @@ body {
     flex: 1;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
+    grid-template-rows: auto;
+    align-content: start;
     gap: 15px;
     padding: 15px;
     overflow-y: auto;
@@ -1908,6 +1909,7 @@ body {
     overflow: hidden;
     position: relative;
     border: 1px solid var(--border);
+    aspect-ratio: 16 / 9;
 }
 
 .cam-img {

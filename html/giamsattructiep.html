@@ -826,7 +826,8 @@
             const grid = document.getElementById('mainCamGrid');
             const cols = Math.sqrt(cells);
             grid.style.gridTemplateColumns = `repeat(${cols}, 1fr)`;
-            grid.style.gridTemplateRows = `repeat(${cols}, 1fr)`;
+            grid.style.gridTemplateRows = 'auto';
+            grid.style.alignContent = 'start';
         }
         function applySettings() { closeDrawer(); alert('Đã cập nhật thiết lập hiển thị'); }
         document.getElementById('drawerOverlay').addEventListener('click', function (e) { if (e.target === this) closeDrawer(); });
