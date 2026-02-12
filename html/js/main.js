@@ -145,6 +145,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+
 // Standard Tree Toggle Function
 function toggleAreaNode(el) {
     const node = el.closest('.at-node') || el.closest('.modern-at-node') || el.closest('.tree-node');
@@ -153,3 +154,22 @@ function toggleAreaNode(el) {
         node.classList.toggle('open'); // Compatibility with old styles
     }
 }
+
+// User Dropdown Toggle
+function toggleUserDropdown(e) {
+    if (e) e.stopPropagation();
+    const dropdown = document.getElementById('userDropdown');
+    if (dropdown) dropdown.classList.toggle('show');
+}
+
+// Global click handler to close dropdowns
+document.addEventListener('click', (e) => {
+    // Close user dropdown if clicking outside
+    const userDropdown = document.getElementById('userDropdown');
+    const userProfile = document.querySelector('.user-profile');
+    if (userDropdown && userDropdown.classList.contains('show')) {
+        if (!userDropdown.contains(e.target) && (!userProfile || !userProfile.contains(e.target))) {
+            userDropdown.classList.remove('show');
+        }
+    }
+});
