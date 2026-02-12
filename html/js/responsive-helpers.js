@@ -5,7 +5,7 @@
 
 // Toggle sidebar on mobile (for giamsattructiep.html)
 function toggleSidebar() {
-    const sidebar = document.querySelector('.tree-sidebar') || document.querySelector('.live-sidebar');
+    const sidebar = document.querySelector('.modern-tree-sidebar') || document.querySelector('.tree-sidebar') || document.querySelector('.live-sidebar');
     const overlay = document.querySelector('.sidebar-overlay');
 
     if (sidebar) {
@@ -192,7 +192,7 @@ window.addEventListener('resize', function () {
                 if (toggle) toggle.remove();
 
                 // Ensure sidebar is visible
-                const sidebar = document.querySelector('.tree-sidebar');
+                const sidebar = document.querySelector('.modern-tree-sidebar') || document.querySelector('.tree-sidebar');
                 if (sidebar) sidebar.classList.remove('open');
 
                 const overlay = document.querySelector('.sidebar-overlay');
@@ -229,7 +229,7 @@ document.addEventListener('touchend', function (event) {
 
 // Add swipe gesture to close sidebar (optional enhancement)
 function addSwipeGesture() {
-    const sidebar = document.querySelector('.tree-sidebar');
+    const sidebar = document.querySelector('.modern-tree-sidebar') || document.querySelector('.tree-sidebar');
     if (!sidebar) return;
 
     let touchStartX = 0;
