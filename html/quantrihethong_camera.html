@@ -189,9 +189,10 @@
                     <a href="theodoidiemdo_canhbaoai.html" class="menu-link">Cảnh báo AI</a>
                     <a href="theodoidiemdo_canhbao.html" class="menu-link">Nhiệt độ vượt ngưỡng</a>
                     <a href="theodoidiemdo_nhatkynhietdo.html" class="menu-link">Nhật ký nhiệt độ</a>
-                    <a href="#" class="menu-link">Tổng hợp phân tích</a>
+                    <a href="theodoidiemdo_tonghopphantich.html" class="menu-link">Tổng hợp phân tích</a>
                 </div>
             </div>
+
             <div class="nav-wrapper">
                 <div class="nav-link active-link">QUẢN TRỊ HỆ THỐNG <svg class="nav-arrow" width="10"
                         viewBox="0 0 24 24">
@@ -208,13 +209,38 @@
                     </div>
                     <div class="mega-col">
                         <div class="col-header">THIẾT LẬP CẢNH BÁO</div>
-                        <a href="thietlapcanhbao_kenhcanhbao.html" class="menu-link">Kênh Cảnh báo</a>
-                        <a href="theodoidiemdo_bocanhbao.html" class="menu-link">Bộ cảnh báo</a>
+                        <a href="thietlapcanhbao_kenhcanhbao.html" class="menu-link menu-item-with-bg">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+                            </svg>
+                            Kênh Cảnh báo
+                        </a>
+                        <a href="theodoidiemdo_bocanhbao.html" class="menu-link menu-item-with-bg">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M5 12.55a11 11 0 0 1 14.08 0"></path>
+                                <path d="M1.42 9a16 16 0 0 1 21.16 0"></path>
+                                <path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path>
+                                <line x1="12" y1="20" x2="12.01" y2="20"></line>
+                            </svg>
+                            Bộ cảnh báo
+                        </a>
                     </div>
                     <div class="mega-col">
                         <div class="col-header">QUẢN LÝ NGƯỜI DÙNG</div>
-                        <a href="quantrihethong_nguoidung.html" class="menu-link">Người dùng</a>
-                        <a href="#" class="menu-link">Hướng dẫn sử dụng</a>
+                        <a href="quantrihethong_nguoidung.html" class="menu-link menu-item-with-bg">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="12" cy="7" r="4"></circle>
+                            </svg>
+                            Người dùng
+                        </a>
+                        <a href="#" class="menu-link menu-item-with-bg">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+                            </svg>
+                            Hướng dẫn sử dụng
+                        </a>
                     </div>
                 </div>
             </div>
@@ -224,9 +250,99 @@
             <div class="theme-switch" onclick="toggleTheme()">
                 <div class="switch-knob"></div>
             </div>
-            <div
-                style="width:32px; height:32px; background:#E5E7EB; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:700; color:#4B5563">
-                A</div>
+
+            <div class="notif-wrapper">
+                <button class="notif-btn" onclick="toggleNotifDropdown(event)">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                        <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                    </svg>
+                    <span class="notif-badge">99+</span>
+                </button>
+
+                <div class="notif-dropdown" id="notifDropdown">
+                    <div class="notif-list">
+                        <a href="#" class="notif-item">
+                            <div class="notif-title">Quá nhiệt</div>
+                            <div class="notif-main-row">
+                                <div class="notif-source">SĐ1S_Liên Trì</div>
+                                <div class="notif-time">2026-02-12 08:12:25</div>
+                            </div>
+                            <div class="notif-bottom-row">
+                                <span>132</span>
+                                <span>132_Cin</span>
+                            </div>
+                        </a>
+                        <a href="#" class="notif-item">
+                            <div class="notif-title">Quá nhiệt</div>
+                            <div class="notif-main-row">
+                                <div class="notif-source">SĐ1S_Liên Trì</div>
+                                <div class="notif-time">2026-02-12 08:12:25</div>
+                            </div>
+                            <div class="notif-bottom-row">
+                                <span>132</span>
+                                <span>132_Cou</span>
+                            </div>
+                        </a>
+                        <a href="#" class="notif-item">
+                            <div class="notif-title">Quá nhiệt</div>
+                            <div class="notif-main-row">
+                                <div class="notif-source">SĐ1S_Liên Trì</div>
+                                <div class="notif-time">2026-02-12 07:58:25</div>
+                            </div>
+                            <div class="notif-bottom-row">
+                                <span>132</span>
+                                <span>132_Cou</span>
+                            </div>
+                        </a>
+                        <a href="#" class="notif-item">
+                            <div class="notif-title">Quá nhiệt</div>
+                            <div class="notif-main-row">
+                                <div class="notif-source">SĐ1S_Liên Trì</div>
+                                <div class="notif-time">2026-02-12 07:58:25</div>
+                            </div>
+                            <div class="notif-bottom-row">
+                                <span>132</span>
+                                <span>132_Cou</span>
+                            </div>
+                        </a>
+                        <a href="#" class="notif-item">
+                            <div class="notif-title">Quá nhiệt</div>
+                            <div class="notif-main-row">
+                                <div class="notif-source">SĐ1S_Liên Trì</div>
+                                <div class="notif-time">2026-02-12 07:49:25</div>
+                            </div>
+                            <div class="notif-bottom-row">
+                                <span>132</span>
+                                <span>132_Cin</span>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="notif-footer">
+                        <a href="#" class="btn-view-all">Xem tất cả</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="user-wrapper">
+                <div class="user-profile" onclick="toggleUserDropdown(event)">
+                    <div class="user-avatar-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="12" cy="7" r="4"></circle>
+                        </svg>
+                    </div>
+                    <span class="user-name">thangdv</span>
+                </div>
+
+                <div class="user-dropdown" id="userDropdown">
+                    <a href="dashboard.html" class="dropdown-item">Home</a>
+                    <a href="#" class="dropdown-item">Quên mật khẩu</a>
+                    <div class="user-dropdown-divider"></div>
+                    <a href="#" class="dropdown-item logout">Log Out</a>
+                </div>
+            </div>
         </div>
     </nav>
 
