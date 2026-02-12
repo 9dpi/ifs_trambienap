@@ -396,7 +396,7 @@
     /* Camera grid adjustments */
     .cam-grid {
         grid-template-columns: 1fr !important;
-        grid-template-rows: auto !important;
+        grid-auto-rows: min-content !important;
         gap: 12px;
         padding: 12px;
     }
@@ -1688,7 +1688,7 @@
     /* Camera Grid refinement */
     .cam-grid {
         grid-template-columns: 1fr !important;
-        /* Force 1 column on mobile */
+        grid-auto-rows: min-content !important;
         padding: 10px !important;
         gap: 10px !important;
     }
@@ -1737,6 +1737,7 @@
     /* Removing redundant monitor-top-bar block */
 
     .cam-grid {
+        grid-auto-rows: min-content !important;
         padding: 8px !important;
         gap: 8px !important;
     }
