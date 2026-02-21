@@ -93,6 +93,7 @@ body {
     top: 0;
     z-index: 1000;
     box-shadow: var(--shadow);
+    margin-bottom: 10px;
 }
 
 .brand {
@@ -548,10 +549,9 @@ body {
 }
 
 .bread-crumb {
-    font-size: 13px;
-    color: var(--text-sub);
-    margin-bottom: 20px;
+    display: none;
 }
+
 
 .bread-crumb span {
     color: var(--primary);
@@ -1047,9 +1047,11 @@ body {
 .container {
     max-width: 100%;
     margin: 0 auto;
-    padding: 24px;
+    padding: 5px 24px 24px 24px;
+    /* Reduced top padding to push content up */
     width: 100%;
 }
+
 
 .grid {
     display: grid;
@@ -2401,3 +2403,73 @@ body {
     background: #64748B;
     transform: translateY(-1px);
 }
+
+/* --- CUSTOM OVERRIDES --- */
+.card>div[style*='padding: 20px'][style*='border-bottom'],
+.card>div[style*='padding:20px'][style*='border-bottom'] {
+    padding: 12px 20px !important;
+}
+
+.summary-header {
+    margin-bottom: 12px !important;
+    padding-bottom: 8px !important;
+}
+
+.table-container-full {
+    padding: 5px 20px !important;
+}
+/* --- FILTER DRAWER PREMIUM STYLES --- */
+.filter-group {
+    border-bottom: 1px solid var(--border);
+    background: rgba(0, 0, 0, 0.1);
+}
+
+.filter-group-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 20px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.filter-group-header:hover {
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.filter-header-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text-main);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.filter-count-badge {
+    background: var(--primary);
+    color: white;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 7px;
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(59, 130, 246, 0.3);
+}
+
+.collapsible-arrow {
+    transition: transform 0.3s ease;
+    color: var(--text-sub);
+    opacity: 0.7;
+}
+
+.filter-group.collapsed .collapsible-arrow {
+    transform: rotate(-90deg);
+}
+
+.filter-group.collapsed .filter-group-content {
+    display: none;
+}
+
+.filter-group-content {
+    padding: 5px 0 15px 0;
+}
+
