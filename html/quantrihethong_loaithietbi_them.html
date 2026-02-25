@@ -572,7 +572,7 @@
 
     <!-- DRAWER FOR THRESHOLD SETTINGS -->
     <div class="drawer-overlay" id="thresholdDrawer" style="z-index: 3000;">
-        <div class="drawer" style="width: 850px; right: -850px;">
+        <div class="drawer" style="width: 600px; right: -600px;">
             <div class="drawer-header">
                 <div style="display: flex; align-items: center; gap: 12px;">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2.5">
@@ -596,10 +596,11 @@
                     .th-tab {
                         padding: 12px 0;
                         color: var(--text-sub);
-                        font-size: 14px;
+                        font-size: 13px;
                         font-weight: 600;
                         cursor: pointer;
                         position: relative;
+                        white-space: nowrap;
                     }
 
                     .th-tab.active {
@@ -617,26 +618,140 @@
                         box-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
                     }
 
-                    .filter-icon-btn {
+                    .filter-badge {
+                        background: #1e293b;
+                        border: 1px solid var(--border);
+                        padding: 6px 14px;
+                        border-radius: 20px;
+                        font-size: 12px;
                         display: flex;
                         align-items: center;
-                        justify-content: center;
-                        width: 36px;
-                        height: 36px;
-                        background: rgba(255, 255, 255, 0.03);
-                        border: 1px solid var(--border);
-                        border-radius: 8px;
-                        color: var(--text-sub);
+                        gap: 8px;
+                        color: var(--text-main);
                         cursor: pointer;
                         position: absolute;
                         right: 0;
-                        top: 2px;
+                        top: 4px;
+                        z-index: 10;
+                    }
+
+                    .filter-dropdown {
+                        position: absolute;
+                        top: calc(100% + 12px);
+                        right: 0;
+                        width: 280px;
+                        background: var(--bg-card);
+                        border: 1px solid var(--border);
+                        border-radius: 12px;
+                        padding: 20px;
+                        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+                        display: none;
+                        flex-direction: column;
+                        gap: 16px;
+                        z-index: 100;
+                        animation: fdFadeIn 0.2s ease-out;
+                    }
+
+                    @keyframes fdFadeIn {
+                        from {
+                            opacity: 0;
+                            transform: translateY(10px);
+                        }
+
+                        to {
+                            opacity: 1;
+                            transform: translateY(0);
+                        }
+                    }
+
+                    .filter-dropdown.show {
+                        display: flex;
+                    }
+
+                    .fd-title {
+                        font-size: 14px;
+                        font-weight: 700;
+                        color: var(--primary);
+                        text-transform: uppercase;
+                        letter-spacing: 0.5px;
+                        margin-bottom: 4px;
+                    }
+
+                    .fd-header-actions {
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        padding-bottom: 12px;
+                        border-bottom: 1px solid var(--border);
+                    }
+
+                    .fd-header-actions a {
+                        color: #3b82f6;
+                        text-decoration: none;
+                        font-size: 12px;
+                        font-weight: 600;
+                    }
+
+                    .fd-list {
+                        display: flex;
+                        flex-direction: column;
+                        gap: 4px;
+                    }
+
+                    .fd-item {
+                        display: flex;
+                        align-items: center;
+                        gap: 12px;
+                        padding: 8px 10px;
+                        cursor: pointer;
+                        border-radius: 6px;
                         transition: 0.2s;
                     }
 
-                    .filter-icon-btn:hover {
-                        background: rgba(255, 255, 255, 0.08);
+                    .fd-item:hover {
+                        background: rgba(255, 255, 255, 0.05);
+                    }
+
+                    .fd-checkbox-custom {
+                        position: relative;
+                        width: 18px;
+                        height: 18px;
+                        border: 2px solid var(--border);
+                        border-radius: 4px;
+                        transition: 0.2s;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        background: rgba(255, 255, 255, 0.02);
+                    }
+
+                    .fd-item.checked .fd-checkbox-custom {
+                        background: #3b82f6;
+                        border-color: #3b82f6;
+                    }
+
+                    .fd-checkbox-custom svg {
+                        width: 12px;
+                        height: 12px;
+                        color: white;
+                        display: none;
+                    }
+
+                    .fd-item.checked .fd-checkbox-custom svg {
+                        display: block;
+                    }
+
+                    .fd-label {
+                        font-size: 13px;
+                        font-weight: 500;
                         color: var(--text-main);
+                    }
+
+                    .fd-footer {
+                        padding-top: 15px;
+                        border-top: 1px solid var(--border);
+                        display: flex;
+                        justify-content: flex-end;
                     }
 
                     .level-block {
@@ -644,18 +759,20 @@
                         border-radius: 12px;
                         margin-bottom: 16px;
                         display: flex;
-                        align-items: center;
-                        justify-content: space-between;
-                        /* Đẩy 2 phần về 2 đầu */
-                        gap: 20px;
+                        flex-direction: column;
+                        gap: 12px;
                         border: 1px solid var(--border);
-                        background: rgba(15, 23, 42, 0.3);
-                        transition: 0.2s;
+                        background: rgba(30, 41, 59, 0.4);
+                        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                        position: relative;
+                        overflow: hidden;
                     }
 
                     .level-block:hover {
-                        background: rgba(15, 23, 42, 0.5);
-                        border-color: rgba(59, 130, 246, 0.3);
+                        background: rgba(30, 41, 59, 0.7);
+                        border-color: rgba(59, 130, 246, 0.4);
+                        transform: translateY(-2px);
+                        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
                     }
 
                     .level-info {
@@ -665,52 +782,96 @@
                     }
 
                     .lvl-icon {
-                        width: 44px;
-                        height: 44px;
+                        width: 48px;
+                        height: 48px;
                         border-radius: 10px;
                         display: flex;
                         align-items: center;
                         justify-content: center;
                         background: rgba(255, 255, 255, 0.03);
                         flex-shrink: 0;
+                        box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.05);
                     }
 
                     .lvl-text h4 {
                         margin: 0;
                         font-size: 15px;
                         font-weight: 700;
+                        letter-spacing: 0.3px;
                     }
 
                     .lvl-text p {
-                        margin: 4px 0 0;
-                        font-size: 13px;
+                        margin: 2px 0 0;
+                        font-size: 12px;
                         color: var(--text-sub);
+                        opacity: 0.8;
                     }
 
-                    .lvl-inputs {
+                    .level-range-row {
                         display: flex;
                         align-items: center;
-                        gap: 15px;
-                        flex-shrink: 0;
+                        gap: 10px;
+                        width: 100%;
+                        padding: 12px 14px;
+                        background: rgba(15, 23, 42, 0.3);
+                        border-radius: 8px;
+                        border: 1px solid rgba(255, 255, 255, 0.03);
                     }
 
-                    .range-label {
+                    .rng-label {
                         font-size: 11px;
-                        font-weight: 700;
+                        font-weight: 600;
                         color: var(--text-sub);
                         text-transform: uppercase;
-                        letter-spacing: 0.5px;
-                        margin-right: 5px;
+                        letter-spacing: 1px;
+                        opacity: 0.7;
+                    }
+
+                    .rng-val-box {
+                        display: flex;
+                        align-items: center;
+                        background: rgba(15, 23, 42, 0.6);
+                        border: 1px solid var(--border);
+                        border-radius: 6px;
+                        height: 36px;
+                        padding: 0 10px;
+                        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                    }
+
+                    .rng-input {
+                        background: transparent;
+                        border: none;
+                        color: white;
+                        width: 32px;
+                        text-align: center;
+                        font-weight: 700;
+                        font-size: 14px;
+                        outline: none;
+                    }
+
+                    .rng-unit {
+                        font-size: 11px;
+                        color: var(--text-sub);
+                        margin-left: 2px;
+                    }
+
+                    .rng-arrow {
+                        color: var(--text-sub);
+                        font-size: 16px;
+                        opacity: 0.5;
+                        margin: 0 4px;
                     }
 
                     .val-ctrl-modern {
                         display: flex;
                         align-items: center;
-                        background: rgba(0, 0, 0, 0.2);
+                        background: rgba(15, 23, 42, 0.6);
                         border: 1px solid var(--border);
-                        border-radius: 8px;
+                        border-radius: 6px;
                         overflow: hidden;
-                        height: 40px;
+                        height: 36px;
+                        min-width: 140px;
+                        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
                     }
 
                     .btn-step-modern {
@@ -728,25 +889,57 @@
                     }
 
                     .btn-step-modern:hover {
-                        background: rgba(255, 255, 255, 0.05);
+                        background: rgba(255, 255, 255, 0.08);
+                        color: #3b82f6;
                     }
 
                     .val-input-modern {
                         background: transparent;
                         border: none;
                         color: white;
-                        width: 50px;
-                        height: 100%;
+                        flex: 1;
                         text-align: center;
                         font-weight: 700;
-                        font-size: 16px;
+                        font-size: 14px;
                         outline: none;
                     }
 
                     .val-unit-modern {
-                        font-size: 12px;
+                        font-size: 11px;
                         color: var(--text-sub);
-                        margin-right: 10px;
+                        margin-right: 8px;
+                    }
+
+                    @media (max-width: 768px) {
+                        .level-block {
+                            padding: 14px;
+                        }
+
+                        .level-range-row {
+                            padding: 10px;
+                            flex-wrap: nowrap !important;
+                            gap: 6px !important;
+                            justify-content: space-between !important;
+                        }
+
+                        .rng-label {
+                            letter-spacing: 0.5px;
+                        }
+
+                        .rng-val-box {
+                            min-width: 50px !important;
+                            height: 32px !important;
+                        }
+
+                        .val-ctrl-modern {
+                            min-width: 90px !important;
+                            height: 32px !important;
+                            max-width: 110px !important;
+                        }
+
+                        .btn-step-modern {
+                            width: 26px !important;
+                        }
                     }
 
                     .lvl-1 {
@@ -754,7 +947,7 @@
                     }
 
                     .lvl-1 .lvl-icon {
-                        background: rgba(16, 185, 129, 0.08);
+                        background: rgba(16, 185, 129, 0.1);
                         color: #10b981;
                     }
 
@@ -767,7 +960,7 @@
                     }
 
                     .lvl-2 .lvl-icon {
-                        background: rgba(59, 130, 246, 0.08);
+                        background: rgba(59, 130, 246, 0.1);
                         color: #3b82f6;
                     }
 
@@ -780,7 +973,7 @@
                     }
 
                     .lvl-3 .lvl-icon {
-                        background: rgba(245, 158, 11, 0.08);
+                        background: rgba(245, 158, 11, 0.1);
                         color: #f59e0b;
                     }
 
@@ -793,199 +986,71 @@
                     }
 
                     .lvl-4 .lvl-icon {
-                        background: rgba(239, 68, 68, 0.08);
+                        background: rgba(239, 68, 68, 0.1);
                         color: #ef4444;
                     }
 
                     .lvl-4 h4 {
                         color: #ef4444;
                     }
-
-                    @media (max-width: 768px) {
-                        .level-block {
-                            display: grid !important;
-                            grid-template-columns: 1fr auto !important;
-                            /* Phân tách rõ rệt 2 vùng */
-                            padding: 12px 10px !important;
-                            gap: 10px !important;
-                            align-items: center !important;
-                            width: 100% !important;
-                            box-sizing: border-box !important;
-                        }
-
-                        .level-info {
-                            display: flex !important;
-                            align-items: center !important;
-                            gap: 8px !important;
-                            min-width: 0 !important;
-                            overflow: hidden !important;
-                        }
-
-                        .lvl-icon {
-                            width: 32px !important;
-                            height: 32px !important;
-                            flex-shrink: 0 !important;
-                            border-radius: 6px !important;
-                        }
-
-                        .lvl-text {
-                            min-width: 0 !important;
-                            flex: 1 !important;
-                        }
-
-                        .lvl-text h4 {
-                            font-size: 11px !important;
-                            white-space: nowrap !important;
-                            overflow: hidden !important;
-                            text-overflow: ellipsis !important;
-                            margin: 0 !important;
-                        }
-
-                        .lvl-text p {
-                            display: none !important;
-                        }
-
-                        .lvl-inputs {
-                            display: flex !important;
-                            align-items: center !important;
-                            gap: 6px !important;
-                            justify-self: end !important;
-                            /* Đẩy sát lề phải */
-                            flex-shrink: 0 !important;
-                        }
-
-                        .range-label {
-                            font-size: 9px !important;
-                            white-space: nowrap !important;
-                            color: var(--text-sub) !important;
-                        }
-
-                        .val-ctrl-modern {
-                            height: 34px !important;
-                            width: 100px !important;
-                            flex-shrink: 0 !important;
-                        }
-
-                        .val-input-modern {
-                            width: 25px !important;
-                            font-size: 13px !important;
-                        }
-
-                        .val-unit-modern {
-                            font-size: 10px !important;
-                            margin-right: 4px !important;
-                        }
-                    }
-
-                    /* Dropdown Styles */
-                    .filter-dropdown-content {
-                        display: none;
-                        position: absolute;
-                        top: 45px;
-                        right: 0;
-                        width: 320px;
-                        background: #1e293b;
-                        border: 1px solid #334155;
-                        border-radius: 8px;
-                        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
-                        z-index: 100;
-                        flex-direction: column;
-                    }
-
-                    .filter-dropdown-content.show {
-                        display: flex;
-                    }
-
-                    .fd-header {
-                        display: flex;
-                        justify-content: space-between;
-                        padding: 12px 16px;
-                        border-bottom: 1px solid #334155;
-                        font-size: 13px;
-                        font-weight: 700;
-                        color: white;
-                    }
-
-                    .fd-header a {
-                        color: #3b82f6;
-                        text-decoration: none;
-                        font-weight: 600;
-                    }
-
-                    .fd-list {
-                        padding: 10px 0;
-                        max-height: 250px;
-                        overflow-y: auto;
-                    }
-
-                    .fd-item {
-                        display: flex;
-                        align-items: center;
-                        gap: 10px;
-                        padding: 8px 16px;
-                        cursor: pointer;
-                        color: #cbd5e1;
-                        font-size: 13px;
-                        transition: 0.2s;
-                    }
-
-                    .fd-item:hover {
-                        background: rgba(255, 255, 255, 0.05);
-                    }
-
-                    .fd-item input[type="checkbox"] {
-                        accent-color: #3b82f6;
-                        width: 16px;
-                        height: 16px;
-                    }
-
-                    .fd-footer {
-                        padding: 12px 16px;
-                        border-top: 1px solid #334155;
-                        display: flex;
-                        justify-content: flex-end;
-                    }
-
-                    .btn-apply-filter {
-                        background: #3b82f6;
-                        color: white;
-                        border: none;
-                        padding: 6px 16px;
-                        border-radius: 4px;
-                        font-weight: 600;
-                        font-size: 13px;
-                        cursor: pointer;
-                    }
                 </style>
 
 
-                <div class="threshold-tabs" style="position: relative;">
+                <div class="threshold-tabs">
                     <div class="th-tab active">So với môi trường</div>
                     <div class="th-tab">So với ngưỡng nhiệt</div>
                     <div class="th-tab">So với pha min</div>
-                    <div class="filter-icon-btn" onclick="toggleThresholdFilter()" id="btnFilterThreshold">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    <div class="filter-badge" onclick="toggleThresholdFilter()" id="btnFilterThreshold">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="2">
                             <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
                         </svg>
+                        <span>Bộ lọc</span>
                     </div>
 
                     <!-- Filter Dropdown -->
-                    <div class="filter-dropdown-content" id="thresholdFilterDropdown">
-                        <div class="fd-header">
-                            <span>Chọn loại ngưỡng hiển thị</span>
+                    <div class="filter-dropdown" id="thresholdFilterDropdown">
+                        <div class="fd-header-actions">
+                            <span class="fd-title">Loại ngưỡng</span>
                             <a href="#" onclick="toggleAllThresholds(event)">Chọn tất cả</a>
                         </div>
                         <div class="fd-list">
-                            <label class="fd-item"><input type="checkbox" checked> So với môi trường</label>
-                            <label class="fd-item"><input type="checkbox" checked> So với ngưỡng nhiệt</label>
-                            <label class="fd-item"><input type="checkbox" checked> So với pha min</label>
-                            <label class="fd-item"><input type="checkbox" checked> So với phần tử cùng loại</label>
-                            <label class="fd-item"><input type="checkbox"> So với pha min toàn trạm</label>
-                            <label class="fd-item"><input type="checkbox"> So với phần tử cùng loại toàn trạm</label>
+                            <div class="fd-item checked" onclick="this.classList.toggle('checked')">
+                                <div class="fd-checkbox-custom">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg>
+                                </div>
+                                <span class="fd-label">So với môi trường</span>
+                            </div>
+                            <div class="fd-item checked" onclick="this.classList.toggle('checked')">
+                                <div class="fd-checkbox-custom">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg>
+                                </div>
+                                <span class="fd-label">So với ngưỡng nhiệt</span>
+                            </div>
+                            <div class="fd-item checked" onclick="this.classList.toggle('checked')">
+                                <div class="fd-checkbox-custom">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg>
+                                </div>
+                                <span class="fd-label">So với pha min</span>
+                            </div>
+                            <div class="fd-item" onclick="this.classList.toggle('checked')">
+                                <div class="fd-checkbox-custom">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg>
+                                </div>
+                                <span class="fd-label">So với pha min toàn trạm</span>
+                            </div>
                         </div>
                         <div class="fd-footer">
-                            <button class="btn-apply-filter" onclick="closeThresholdFilter()">Áp dụng</button>
+                            <button class="btn-save" onclick="closeThresholdFilter()"
+                                style="padding: 6px 16px; font-size: 12px; height: 32px;">Áp dụng</button>
                         </div>
                     </div>
                 </div>
@@ -994,7 +1059,7 @@
                 <div class="level-block lvl-1">
                     <div class="level-info">
                         <div class="lvl-icon">
-                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                 stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
                                 <polyline points="20 6 9 17 4 12"></polyline>
                             </svg>
@@ -1004,15 +1069,19 @@
                             <p>Nhiệt độ bình thường</p>
                         </div>
                     </div>
-                    <div class="lvl-inputs">
-                        <div style="display: flex; align-items: center; gap: 10px;">
-                            <span class="range-label">TỪ 0°C ĐẾN</span>
-                            <div class="val-ctrl-modern">
-                                <button class="btn-step-modern">-</button>
-                                <input type="text" class="val-input-modern" value="10">
-                                <span class="val-unit-modern">°C</span>
-                                <button class="btn-step-modern">+</button>
-                            </div>
+                    <div class="level-range-row">
+                        <span class="rng-label">TỪ</span>
+                        <div class="rng-val-box">
+                            <input type="text" class="rng-input" value="0" readonly>
+                            <span class="rng-unit">°C</span>
+                        </div>
+                        <span class="rng-arrow">→</span>
+                        <span class="rng-label">ĐẾN</span>
+                        <div class="val-ctrl-modern">
+                            <button class="btn-step-modern">-</button>
+                            <input type="text" class="val-input-modern" value="10">
+                            <span class="val-unit-modern">°C</span>
+                            <button class="btn-step-modern">+</button>
                         </div>
                     </div>
                 </div>
@@ -1021,10 +1090,11 @@
                 <div class="level-block lvl-2">
                     <div class="level-info">
                         <div class="lvl-icon">
-                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                 stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
                                 <line x1="12" y1="8" x2="12" y2="12"></line>
                                 <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                                <circle cx="12" cy="12" r="10"></circle>
                             </svg>
                         </div>
                         <div class="lvl-text">
@@ -1032,15 +1102,19 @@
                             <p>Cần theo dõi</p>
                         </div>
                     </div>
-                    <div class="lvl-inputs">
-                        <div style="display: flex; align-items: center; gap: 10px;">
-                            <span class="range-label">ĐẾN</span>
-                            <div class="val-ctrl-modern">
-                                <button class="btn-step-modern">-</button>
-                                <input type="text" class="val-input-modern" value="20">
-                                <span class="val-unit-modern">°C</span>
-                                <button class="btn-step-modern">+</button>
-                            </div>
+                    <div class="level-range-row">
+                        <span class="rng-label">TỪ</span>
+                        <div class="rng-val-box">
+                            <input type="text" class="rng-input" value="10" readonly>
+                            <span class="rng-unit">°C</span>
+                        </div>
+                        <span class="rng-arrow">→</span>
+                        <span class="rng-label">ĐẾN</span>
+                        <div class="val-ctrl-modern">
+                            <button class="btn-step-modern">-</button>
+                            <input type="text" class="val-input-modern" value="20">
+                            <span class="val-unit-modern">°C</span>
+                            <button class="btn-step-modern">+</button>
                         </div>
                     </div>
                 </div>
@@ -1049,7 +1123,7 @@
                 <div class="level-block lvl-3">
                     <div class="level-info">
                         <div class="lvl-icon">
-                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                 stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                                 <path
                                     d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z">
@@ -1063,15 +1137,19 @@
                             <p>Cần xử lý sớm</p>
                         </div>
                     </div>
-                    <div class="lvl-inputs">
-                        <div style="display: flex; align-items: center; gap: 10px;">
-                            <span class="range-label">ĐẾN</span>
-                            <div class="val-ctrl-modern">
-                                <button class="btn-step-modern">-</button>
-                                <input type="text" class="val-input-modern" value="35">
-                                <span class="val-unit-modern">°C</span>
-                                <button class="btn-step-modern">+</button>
-                            </div>
+                    <div class="level-range-row">
+                        <span class="rng-label">TỪ</span>
+                        <div class="rng-val-box">
+                            <input type="text" class="rng-input" value="20" readonly>
+                            <span class="rng-unit">°C</span>
+                        </div>
+                        <span class="rng-arrow">→</span>
+                        <span class="rng-label">ĐẾN</span>
+                        <div class="val-ctrl-modern">
+                            <button class="btn-step-modern">-</button>
+                            <input type="text" class="val-input-modern" value="35">
+                            <span class="val-unit-modern">°C</span>
+                            <button class="btn-step-modern">+</button>
                         </div>
                     </div>
                 </div>
@@ -1080,7 +1158,7 @@
                 <div class="level-block lvl-4">
                     <div class="level-info">
                         <div class="lvl-icon">
-                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                 stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
                                 <line x1="18" y1="6" x2="6" y2="18"></line>
                                 <line x1="6" y1="6" x2="18" y2="18"></line>
@@ -1091,26 +1169,27 @@
                             <p>Cần xử lý ngay</p>
                         </div>
                     </div>
-                    <div class="lvl-inputs">
-                        <div style="display: flex; align-items: center; gap: 10px;">
-                            <span class="range-label">ĐẾN</span>
-                            <div class="val-ctrl-modern" style="background: rgba(255,255,255,0.05);">
-                                <div style="width: 32px;"></div>
-                                <input type="text" class="val-input-modern" value="∞" readonly>
-                                <span class="val-unit-modern">°C</span>
-                                <div style="width: 32px;"></div>
-                            </div>
+                    <div class="level-range-row">
+                        <span class="rng-label">TỪ</span>
+                        <div class="rng-val-box">
+                            <input type="text" class="rng-input" value="35" readonly>
+                            <span class="rng-unit">°C</span>
+                        </div>
+                        <span class="rng-arrow">→</span>
+                        <span class="rng-label">ĐẾN</span>
+                        <div class="rng-val-box"
+                            style="background: rgba(255, 255, 255, 0.05); min-width: 160px; justify-content: center;">
+                            <span style="font-size: 20px; font-weight: 700; color: white;">∞</span>
+                            <span class="rng-unit" style="margin-left: 8px;">°C</span>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="drawer-footer"
                 style="padding: 24px; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border); background: var(--bg-card);">
-                <button class="btn-cancel" onclick="closeThresholdDrawer()"
-                    style="background: rgba(255,255,255,0.05); border: 1px solid var(--border); border-radius: 8px; font-weight: 600;">Hủy</button>
-                <button class="btn-save"
-                    style="background: #3b82f6; width: auto; font-weight: 600; padding: 10px 24px; border-radius: 8px;"
-                    onclick="closeThresholdDrawer()">Lưu cấu hình</button>
+                <button class="btn-cancel" onclick="closeThresholdDrawer()">Hủy</button>
+                <button class="btn-save" onclick="closeThresholdDrawer()" style="background: #3b82f6;">Lưu cấu
+                    hình</button>
             </div>
         </div>
     </div>
@@ -1134,6 +1213,26 @@
             document.getElementById('thresholdDrawer').classList.remove('open');
         }
 
+        // JS for Threshold Filter
+        function toggleThresholdFilter() {
+            const dropdown = document.getElementById('thresholdFilterDropdown');
+            dropdown.classList.toggle('show');
+        }
+
+        function closeThresholdFilter() {
+            document.getElementById('thresholdFilterDropdown').classList.remove('show');
+        }
+
+        function toggleAllThresholds(e) {
+            if (e) e.preventDefault();
+            const items = document.querySelectorAll('#thresholdFilterDropdown .fd-item');
+            const allChecked = Array.from(items).every(item => item.classList.contains('checked'));
+            items.forEach(item => {
+                if (allChecked) item.classList.remove('checked');
+                else item.classList.add('checked');
+            });
+        }
+
         // Attach to main add button
         document.querySelector('.btn-add').addEventListener('click', openDrawer);
 
@@ -1141,6 +1240,7 @@
         document.querySelectorAll('.btn-edit-round').forEach(btn => {
             btn.addEventListener('click', openDrawer);
         });
+
     </script>
 </body>
 

@@ -1230,14 +1230,16 @@
             </div>
         </div>
         <!-- DRAWER FOR ALARM THRESHOLD -->
-        <div class="drawer-overlay" id="thresholdDrawer" style="z-index: 2200;">
-            <div class="drawer" style="width: 850px; right: -850px;">
+        <div class="drawer-overlay" id="thresholdDrawer" style="z-index: 3000;">
+            <div class="drawer" style="width: 600px; right: -600px;">
                 <div class="drawer-header">
-                    <div style="display: flex; align-items: center; gap: 10px;">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="#F59E0B">
-                            <path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z" />
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2.5">
+                            <path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"></path>
                         </svg>
-                        <h3 style="font-size: 16px;">Thiết lập ngưỡng cảnh báo</h3>
+                        <h3 style="color: #3b82f6; font-size: 18px; text-transform: uppercase;">THIẾT LẬP NGƯỠNG CẢNH
+                            BÁO
+                        </h3>
                     </div>
                     <button class="close-drawer" onclick="closeThresholdDrawer()">&times;</button>
                 </div>
@@ -1495,72 +1497,120 @@
                             border-radius: 12px;
                             margin-bottom: 16px;
                             display: flex;
-                            align-items: center;
-                            justify-content: space-between;
-                            gap: 20px;
+                            flex-direction: column;
+                            gap: 12px;
                             border: 1px solid var(--border);
-                            background: rgba(15, 23, 42, 0.3);
-                            transition: 0.2s;
+                            background: rgba(30, 41, 59, 0.4);
+                            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                            position: relative;
+                            overflow: hidden;
                         }
 
                         .level-block:hover {
-                            background: rgba(15, 23, 42, 0.5);
-                            border-color: rgba(59, 130, 246, 0.3);
+                            background: rgba(30, 41, 59, 0.7);
+                            border-color: rgba(59, 130, 246, 0.4);
+                            transform: translateY(-2px);
+                            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
                         }
 
                         .level-info {
                             display: flex;
                             align-items: center;
                             gap: 16px;
+                            width: 100%;
                         }
 
                         .lvl-icon {
-                            width: 44px;
-                            height: 44px;
+                            width: 48px;
+                            height: 48px;
                             border-radius: 10px;
                             display: flex;
                             align-items: center;
                             justify-content: center;
                             background: rgba(255, 255, 255, 0.03);
                             flex-shrink: 0;
+                            box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.05);
                         }
 
                         .lvl-text h4 {
                             margin: 0;
                             font-size: 15px;
                             font-weight: 700;
+                            letter-spacing: 0.3px;
                         }
 
                         .lvl-text p {
-                            margin: 4px 0 0;
-                            font-size: 13px;
+                            margin: 2px 0 0;
+                            font-size: 12px;
                             color: var(--text-sub);
+                            opacity: 0.8;
                         }
 
-                        .lvl-inputs {
+                        .level-range-row {
                             display: flex;
                             align-items: center;
-                            gap: 15px;
-                            flex-shrink: 0;
+                            gap: 10px;
+                            width: 100%;
+                            padding: 12px 14px;
+                            background: rgba(15, 23, 42, 0.3);
+                            border-radius: 8px;
+                            border: 1px solid rgba(255, 255, 255, 0.03);
                         }
 
-                        .range-label {
+                        .rng-label {
                             font-size: 11px;
-                            font-weight: 700;
+                            font-weight: 600;
                             color: var(--text-sub);
                             text-transform: uppercase;
-                            letter-spacing: 0.5px;
-                            margin-right: 5px;
+                            letter-spacing: 1px;
+                            opacity: 0.7;
+                        }
+
+                        .rng-val-box {
+                            display: flex;
+                            align-items: center;
+                            background: rgba(15, 23, 42, 0.6);
+                            border: 1px solid var(--border);
+                            border-radius: 6px;
+                            height: 36px;
+                            padding: 0 10px;
+                            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                        }
+
+                        .rng-input {
+                            background: transparent;
+                            border: none;
+                            color: white;
+                            width: 32px;
+                            text-align: center;
+                            font-weight: 700;
+                            font-size: 14px;
+                            outline: none;
+                        }
+
+                        .rng-unit {
+                            font-size: 11px;
+                            color: var(--text-sub);
+                            margin-left: 2px;
+                        }
+
+                        .rng-arrow {
+                            color: var(--text-sub);
+                            font-size: 16px;
+                            opacity: 0.5;
+                            margin: 0 4px;
                         }
 
                         .val-ctrl-modern {
                             display: flex;
                             align-items: center;
-                            background: rgba(0, 0, 0, 0.2);
+                            background: rgba(15, 23, 42, 0.6);
                             border: 1px solid var(--border);
-                            border-radius: 8px;
+                            border-radius: 6px;
                             overflow: hidden;
-                            height: 40px;
+                            height: 36px;
+                            min-width: 140px;
+                            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
                         }
 
                         .btn-step-modern {
@@ -1578,25 +1628,25 @@
                         }
 
                         .btn-step-modern:hover {
-                            background: rgba(255, 255, 255, 0.05);
+                            background: rgba(255, 255, 255, 0.08);
+                            color: #3b82f6;
                         }
 
                         .val-input-modern {
                             background: transparent;
                             border: none;
                             color: white;
-                            width: 50px;
-                            height: 100%;
+                            flex: 1;
                             text-align: center;
                             font-weight: 700;
-                            font-size: 16px;
+                            font-size: 14px;
                             outline: none;
                         }
 
                         .val-unit-modern {
-                            font-size: 12px;
+                            font-size: 11px;
                             color: var(--text-sub);
-                            margin-right: 10px;
+                            margin-right: 8px;
                         }
 
                         .lvl-1 {
@@ -1604,7 +1654,7 @@
                         }
 
                         .lvl-1 .lvl-icon {
-                            background: rgba(16, 185, 129, 0.08);
+                            background: rgba(16, 185, 129, 0.1);
                             color: #10b981;
                         }
 
@@ -1617,7 +1667,7 @@
                         }
 
                         .lvl-2 .lvl-icon {
-                            background: rgba(59, 130, 246, 0.08);
+                            background: rgba(59, 130, 246, 0.1);
                             color: #3b82f6;
                         }
 
@@ -1630,7 +1680,7 @@
                         }
 
                         .lvl-3 .lvl-icon {
-                            background: rgba(245, 158, 11, 0.08);
+                            background: rgba(245, 158, 11, 0.1);
                             color: #f59e0b;
                         }
 
@@ -1643,7 +1693,7 @@
                         }
 
                         .lvl-4 .lvl-icon {
-                            background: rgba(239, 68, 68, 0.08);
+                            background: rgba(239, 68, 68, 0.1);
                             color: #ef4444;
                         }
 
@@ -1652,81 +1702,64 @@
                         }
 
                         @media (max-width: 768px) {
-                            .threshold-top-nav {
-                                flex-direction: column;
-                                gap: 10px;
-                            }
-
                             .level-block {
-                                display: grid !important;
-                                grid-template-columns: 1fr auto !important;
-                                padding: 12px 10px !important;
+                                padding: 14px !important;
                                 gap: 10px !important;
-                                align-items: center !important;
-                                width: 100% !important;
-                                box-sizing: border-box !important;
                             }
 
-                            .level-info {
-                                display: flex !important;
-                                align-items: center !important;
-                                gap: 8px !important;
-                                min-width: 0 !important;
-                                overflow: hidden !important;
-                            }
-
-                            .lvl-icon {
-                                width: 32px !important;
-                                height: 32px !important;
-                                flex-shrink: 0 !important;
-                                border-radius: 6px !important;
-                            }
-
-                            .lvl-text {
-                                min-width: 0 !important;
-                                flex: 1 !important;
-                            }
-
-                            .lvl-text h4 {
-                                font-size: 11px !important;
-                                white-space: nowrap !important;
-                                overflow: hidden !important;
-                                text-overflow: ellipsis !important;
-                                margin: 0 !important;
-                            }
-
-                            .lvl-text p {
-                                display: none !important;
-                            }
-
-                            .lvl-inputs {
-                                display: flex !important;
-                                align-items: center !important;
+                            .level-range-row {
+                                padding: 8px 10px !important;
+                                flex-wrap: nowrap !important;
                                 gap: 6px !important;
-                                justify-self: end !important;
-                                flex-shrink: 0 !important;
+                                justify-content: space-between !important;
                             }
 
-                            .range-label {
+                            .rng-label {
                                 font-size: 9px !important;
-                                white-space: nowrap !important;
-                                color: var(--text-sub) !important;
+                                letter-spacing: 0.5px !important;
                             }
 
-                            .val-ctrl-modern {
-                                height: 34px !important;
-                                width: 100px !important;
-                                flex-shrink: 0 !important;
+                            .rng-val-box {
+                                min-width: 60px !important;
+                                flex: 0 0 auto !important;
+                                padding: 0 8px !important;
                             }
 
-                            .val-input-modern {
-                                width: 25px !important;
+                            .rng-input {
+                                width: 20px !important;
                                 font-size: 13px !important;
                             }
 
+                            .rng-arrow {
+                                display: none;
+                            }
+
+                            .val-ctrl-modern {
+                                min-width: 90px !important;
+                                height: 34px !important;
+                                flex: 1 !important;
+                                max-width: 120px !important;
+                            }
+
+                            .btn-step-modern {
+                                width: 24px !important;
+                            }
+
+                            .val-input-modern {
+                                font-size: 13px !important;
+                                width: 20px !important;
+                            }
+
                             .val-unit-modern {
-                                font-size: 10px !important;
                                 margin-right: 4px !important;
+                            }
+
+                            .btn-step-modern {
+                                width: 28px !important;
+                            }
+
+                            .val-input-modern {
+                                font-size: 14px !important;
                             }
                         }
                     </style>
@@ -1823,8 +1856,8 @@
                     <div class="level-block lvl-1">
                         <div class="level-info">
                             <div class="lvl-icon">
-                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
                                     <polyline points="20 6 9 17 4 12"></polyline>
                                 </svg>
                             </div>
@@ -1833,8 +1866,14 @@
                                 <p>Nhiệt độ bình thường</p>
                             </div>
                         </div>
-                        <div class="lvl-inputs">
-                            <span class="range-label">TỪ 0°C ĐẾN</span>
+                        <div class="level-range-row">
+                            <span class="rng-label">TỪ</span>
+                            <div class="rng-val-box">
+                                <input type="text" class="rng-input" value="0" readonly>
+                                <span class="rng-unit">°C</span>
+                            </div>
+                            <span class="rng-arrow">→</span>
+                            <span class="rng-label">ĐẾN</span>
                             <div class="val-ctrl-modern">
                                 <button class="btn-step-modern">-</button>
                                 <input type="text" class="val-input-modern" value="10">
@@ -1848,8 +1887,8 @@
                     <div class="level-block lvl-2">
                         <div class="level-info">
                             <div class="lvl-icon">
-                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
                                     <line x1="12" y1="8" x2="12" y2="12"></line>
                                     <line x1="12" y1="16" x2="12.01" y2="16"></line>
                                     <circle cx="12" cy="12" r="10"></circle>
@@ -1860,8 +1899,14 @@
                                 <p>Cần theo dõi</p>
                             </div>
                         </div>
-                        <div class="lvl-inputs">
-                            <span class="range-label">ĐẾN</span>
+                        <div class="level-range-row">
+                            <span class="rng-label">TỪ</span>
+                            <div class="rng-val-box">
+                                <input type="text" class="rng-input" value="10" readonly>
+                                <span class="rng-unit">°C</span>
+                            </div>
+                            <span class="rng-arrow">→</span>
+                            <span class="rng-label">ĐẾN</span>
                             <div class="val-ctrl-modern">
                                 <button class="btn-step-modern">-</button>
                                 <input type="text" class="val-input-modern" value="20">
@@ -1875,7 +1920,7 @@
                     <div class="level-block lvl-3">
                         <div class="level-info">
                             <div class="lvl-icon">
-                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                     stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                                     <path
                                         d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z">
@@ -1889,8 +1934,14 @@
                                 <p>Cần xử lý sớm</p>
                             </div>
                         </div>
-                        <div class="lvl-inputs">
-                            <span class="range-label">ĐẾN</span>
+                        <div class="level-range-row">
+                            <span class="rng-label">TỪ</span>
+                            <div class="rng-val-box">
+                                <input type="text" class="rng-input" value="20" readonly>
+                                <span class="rng-unit">°C</span>
+                            </div>
+                            <span class="rng-arrow">→</span>
+                            <span class="rng-label">ĐẾN</span>
                             <div class="val-ctrl-modern">
                                 <button class="btn-step-modern">-</button>
                                 <input type="text" class="val-input-modern" value="35">
@@ -1904,8 +1955,8 @@
                     <div class="level-block lvl-4">
                         <div class="level-info">
                             <div class="lvl-icon">
-                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
                                     <line x1="18" y1="6" x2="6" y2="18"></line>
                                     <line x1="6" y1="6" x2="18" y2="18"></line>
                                 </svg>
@@ -1915,16 +1966,24 @@
                                 <p>Cần xử lý ngay</p>
                             </div>
                         </div>
-                        <div class="lvl-inputs">
-                            <span class="range-label">ĐẾN</span>
-                            <div class="val-ctrl-modern" style="opacity: 0.8; background: rgba(255,255,255,0.05);">
-                                <input type="text" class="val-input-modern" value="∞" readonly style="width: 60px;">
-                                <span class="val-unit-modern">°C</span>
+                        <div class="level-range-row">
+                            <span class="rng-label">TỪ</span>
+                            <div class="rng-val-box">
+                                <input type="text" class="rng-input" value="35" readonly>
+                                <span class="rng-unit">°C</span>
+                            </div>
+                            <span class="rng-arrow">→</span>
+                            <span class="rng-label">ĐẾN</span>
+                            <div class="rng-val-box"
+                                style="background: rgba(255, 255, 255, 0.05); min-width: 160px; justify-content: center;">
+                                <span style="font-size: 20px; font-weight: 700; color: white;">∞</span>
+                                <span class="rng-unit" style="margin-left: 8px;">°C</span>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="drawer-footer">
+                <div class="drawer-footer"
+                    style="padding: 24px; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border); background: var(--bg-card);">
                     <button class="btn-cancel" onclick="closeThresholdDrawer()">Hủy</button>
                     <button class="btn-save" onclick="closeThresholdDrawer()" style="background: #3b82f6;">Lưu cấu
                         hình</button>
