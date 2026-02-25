@@ -614,63 +614,76 @@
                         right: 0;
                         height: 2px;
                         background: #3b82f6;
+                        box-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
                     }
 
-                    .filter-badge {
-                        background: #1e293b;
-                        border: 1px solid var(--border);
-                        padding: 6px 14px;
-                        border-radius: 20px;
-                        font-size: 12px;
+                    .filter-icon-btn {
                         display: flex;
                         align-items: center;
-                        gap: 8px;
-                        color: var(--text-main);
+                        justify-content: center;
+                        width: 36px;
+                        height: 36px;
+                        background: rgba(255, 255, 255, 0.03);
+                        border: 1px solid var(--border);
+                        border-radius: 8px;
+                        color: var(--text-sub);
                         cursor: pointer;
                         position: absolute;
                         right: 0;
-                        top: 4px;
-                        z-index: 10;
+                        top: 2px;
+                        transition: 0.2s;
+                    }
+
+                    .filter-icon-btn:hover {
+                        background: rgba(255, 255, 255, 0.08);
+                        color: var(--text-main);
                     }
 
                     .level-block {
-                        padding: 16px;
-                        border-radius: 8px;
+                        padding: 16px 20px;
+                        border-radius: 12px;
                         margin-bottom: 16px;
                         display: flex;
                         align-items: center;
+                        justify-content: space-between;
+                        /* Đẩy 2 phần về 2 đầu */
                         gap: 20px;
                         border: 1px solid var(--border);
-                        background: rgba(30, 41, 59, 0.5);
+                        background: rgba(15, 23, 42, 0.3);
+                        transition: 0.2s;
+                    }
+
+                    .level-block:hover {
+                        background: rgba(15, 23, 42, 0.5);
+                        border-color: rgba(59, 130, 246, 0.3);
                     }
 
                     .level-info {
                         display: flex;
                         align-items: center;
-                        gap: 15px;
-                        flex: 1;
+                        gap: 16px;
                     }
 
                     .lvl-icon {
-                        width: 40px;
-                        height: 40px;
-                        border-radius: 8px;
+                        width: 44px;
+                        height: 44px;
+                        border-radius: 10px;
                         display: flex;
                         align-items: center;
                         justify-content: center;
-                        font-size: 18px;
-                        font-weight: 700;
+                        background: rgba(255, 255, 255, 0.03);
+                        flex-shrink: 0;
                     }
 
                     .lvl-text h4 {
                         margin: 0;
-                        font-size: 14px;
+                        font-size: 15px;
                         font-weight: 700;
                     }
 
                     .lvl-text p {
                         margin: 4px 0 0;
-                        font-size: 12px;
+                        font-size: 13px;
                         color: var(--text-sub);
                     }
 
@@ -678,12 +691,7 @@
                         display: flex;
                         align-items: center;
                         gap: 15px;
-                    }
-
-                    .range-group {
-                        display: flex;
-                        align-items: center;
-                        gap: 8px;
+                        flex-shrink: 0;
                     }
 
                     .range-label {
@@ -691,56 +699,54 @@
                         font-weight: 700;
                         color: var(--text-sub);
                         text-transform: uppercase;
+                        letter-spacing: 0.5px;
+                        margin-right: 5px;
                     }
 
-                    .val-box {
+                    .val-ctrl-modern {
                         display: flex;
                         align-items: center;
-                        background: #111827;
+                        background: rgba(0, 0, 0, 0.2);
                         border: 1px solid var(--border);
-                        border-radius: 6px;
-                        padding-left: 12px;
-                        width: 80px;
+                        border-radius: 8px;
+                        overflow: hidden;
+                        height: 40px;
                     }
 
-                    .val-box input {
+                    .btn-step-modern {
                         background: transparent;
                         border: none;
-                        color: white;
-                        width: 40px;
-                        padding: 8px 0;
-                        font-weight: 700;
-                        font-family: inherit;
-                        outline: none;
-                        text-align: center;
-                    }
-
-                    .val-box span {
-                        color: var(--text-sub);
-                        font-size: 11px;
-                        margin-right: 8px;
-                    }
-
-                    .val-ctrl {
-                        display: flex;
-                        align-items: center;
-                        background: #111827;
-                        border: 1px solid var(--border);
-                        border-radius: 6px;
-                        width: 130px;
-                    }
-
-                    .btn-step {
-                        background: transparent;
-                        border: none;
-                        color: var(--text-sub);
+                        color: var(--text-main);
                         width: 32px;
-                        height: 32px;
+                        height: 100%;
                         cursor: pointer;
-                        font-size: 18px;
+                        font-size: 16px;
                         display: flex;
                         align-items: center;
                         justify-content: center;
+                        transition: 0.2s;
+                    }
+
+                    .btn-step-modern:hover {
+                        background: rgba(255, 255, 255, 0.05);
+                    }
+
+                    .val-input-modern {
+                        background: transparent;
+                        border: none;
+                        color: white;
+                        width: 50px;
+                        height: 100%;
+                        text-align: center;
+                        font-weight: 700;
+                        font-size: 16px;
+                        outline: none;
+                    }
+
+                    .val-unit-modern {
+                        font-size: 12px;
+                        color: var(--text-sub);
+                        margin-right: 10px;
                     }
 
                     .lvl-1 {
@@ -748,7 +754,7 @@
                     }
 
                     .lvl-1 .lvl-icon {
-                        background: rgba(16, 185, 129, 0.1);
+                        background: rgba(16, 185, 129, 0.08);
                         color: #10b981;
                     }
 
@@ -761,7 +767,7 @@
                     }
 
                     .lvl-2 .lvl-icon {
-                        background: rgba(59, 130, 246, 0.1);
+                        background: rgba(59, 130, 246, 0.08);
                         color: #3b82f6;
                     }
 
@@ -774,7 +780,7 @@
                     }
 
                     .lvl-3 .lvl-icon {
-                        background: rgba(245, 158, 11, 0.1);
+                        background: rgba(245, 158, 11, 0.08);
                         color: #f59e0b;
                     }
 
@@ -787,12 +793,88 @@
                     }
 
                     .lvl-4 .lvl-icon {
-                        background: rgba(239, 68, 68, 0.1);
+                        background: rgba(239, 68, 68, 0.08);
                         color: #ef4444;
                     }
 
                     .lvl-4 h4 {
                         color: #ef4444;
+                    }
+
+                    @media (max-width: 768px) {
+                        .level-block {
+                            display: grid !important;
+                            grid-template-columns: 1fr auto !important;
+                            /* Phân tách rõ rệt 2 vùng */
+                            padding: 12px 10px !important;
+                            gap: 10px !important;
+                            align-items: center !important;
+                            width: 100% !important;
+                            box-sizing: border-box !important;
+                        }
+
+                        .level-info {
+                            display: flex !important;
+                            align-items: center !important;
+                            gap: 8px !important;
+                            min-width: 0 !important;
+                            overflow: hidden !important;
+                        }
+
+                        .lvl-icon {
+                            width: 32px !important;
+                            height: 32px !important;
+                            flex-shrink: 0 !important;
+                            border-radius: 6px !important;
+                        }
+
+                        .lvl-text {
+                            min-width: 0 !important;
+                            flex: 1 !important;
+                        }
+
+                        .lvl-text h4 {
+                            font-size: 11px !important;
+                            white-space: nowrap !important;
+                            overflow: hidden !important;
+                            text-overflow: ellipsis !important;
+                            margin: 0 !important;
+                        }
+
+                        .lvl-text p {
+                            display: none !important;
+                        }
+
+                        .lvl-inputs {
+                            display: flex !important;
+                            align-items: center !important;
+                            gap: 6px !important;
+                            justify-self: end !important;
+                            /* Đẩy sát lề phải */
+                            flex-shrink: 0 !important;
+                        }
+
+                        .range-label {
+                            font-size: 9px !important;
+                            white-space: nowrap !important;
+                            color: var(--text-sub) !important;
+                        }
+
+                        .val-ctrl-modern {
+                            height: 34px !important;
+                            width: 100px !important;
+                            flex-shrink: 0 !important;
+                        }
+
+                        .val-input-modern {
+                            width: 25px !important;
+                            font-size: 13px !important;
+                        }
+
+                        .val-unit-modern {
+                            font-size: 10px !important;
+                            margin-right: 4px !important;
+                        }
                     }
 
                     /* Dropdown Styles */
@@ -881,13 +963,11 @@
                     <div class="th-tab active">So với môi trường</div>
                     <div class="th-tab">So với ngưỡng nhiệt</div>
                     <div class="th-tab">So với pha min</div>
-                    <div class="filter-badge" onclick="toggleThresholdFilter()" id="btnFilterThreshold">
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    <div class="filter-icon-btn" onclick="toggleThresholdFilter()" id="btnFilterThreshold">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="2">
                             <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
                         </svg>
-                        Lọc <span
-                            style="background: #3b82f6; color: white; border-radius: 10px; padding: 0 6px; font-size: 10px;">3</span>
                     </div>
 
                     <!-- Filter Dropdown -->
@@ -910,62 +990,28 @@
                     </div>
                 </div>
 
-                <script>
-                    function toggleThresholdFilter() {
-                        const dropdown = document.getElementById('thresholdFilterDropdown');
-                        // Toggle display
-                        if (dropdown.style.display === 'flex') {
-                            dropdown.style.display = 'none';
-                        } else {
-                            dropdown.style.display = 'flex';
-                        }
-                    }
-
-                    function closeThresholdFilter() {
-                        document.getElementById('thresholdFilterDropdown').style.display = 'none';
-                    }
-
-                    function toggleAllThresholds(e) {
-                        e.preventDefault();
-                        const inputs = document.querySelectorAll('.fd-item input[type="checkbox"]');
-                        inputs.forEach(input => input.checked = true);
-                    }
-
-                    // Close when clicking outside
-                    document.addEventListener('click', function (event) {
-                        const dropdown = document.getElementById('thresholdFilterDropdown');
-                        const btn = document.getElementById('btnFilterThreshold');
-                        if (!dropdown.contains(event.target) && !btn.contains(event.target)) {
-                            dropdown.style.display = 'none';
-                        }
-                    });
-                </script>
-
                 <!-- Level 1 -->
                 <div class="level-block lvl-1">
                     <div class="level-info">
-                        <div class="lvl-icon">✓</div>
+                        <div class="lvl-icon">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                        </div>
                         <div class="lvl-text">
                             <h4>Mức 1 - Tốt</h4>
                             <p>Nhiệt độ bình thường</p>
                         </div>
                     </div>
                     <div class="lvl-inputs">
-                        <div class="range-group">
-                            <span class="range-label">Từ</span>
-                            <div class="val-box">
-                                <input type="text" value="0">
-                                <span>°C</span>
-                            </div>
-                        </div>
-                        <span style="color:var(--text-sub)">→</span>
-                        <div class="range-group">
-                            <span class="range-label">Đến</span>
-                            <div class="val-ctrl">
-                                <button class="btn-step">-</button>
-                                <div style="flex:1; text-align:center; font-weight:700">10</div>
-                                <span style="font-size:11px; color:var(--text-sub); margin-right:5px">°C</span>
-                                <button class="btn-step">+</button>
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <span class="range-label">TỪ 0°C ĐẾN</span>
+                            <div class="val-ctrl-modern">
+                                <button class="btn-step-modern">-</button>
+                                <input type="text" class="val-input-modern" value="10">
+                                <span class="val-unit-modern">°C</span>
+                                <button class="btn-step-modern">+</button>
                             </div>
                         </div>
                     </div>
@@ -974,28 +1020,26 @@
                 <!-- Level 2 -->
                 <div class="level-block lvl-2">
                     <div class="level-info">
-                        <div class="lvl-icon">!</div>
+                        <div class="lvl-icon">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="12" y1="8" x2="12" y2="12"></line>
+                                <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                            </svg>
+                        </div>
                         <div class="lvl-text">
                             <h4>Mức 2 - Chú ý</h4>
                             <p>Cần theo dõi</p>
                         </div>
                     </div>
                     <div class="lvl-inputs">
-                        <div class="range-group">
-                            <span class="range-label">Từ</span>
-                            <div class="val-box">
-                                <input type="text" value="10">
-                                <span>°C</span>
-                            </div>
-                        </div>
-                        <span style="color:var(--text-sub)">→</span>
-                        <div class="range-group">
-                            <span class="range-label">Đến</span>
-                            <div class="val-ctrl">
-                                <button class="btn-step">-</button>
-                                <div style="flex:1; text-align:center; font-weight:700">20</div>
-                                <span style="font-size:11px; color:var(--text-sub); margin-right:5px">°C</span>
-                                <button class="btn-step">+</button>
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <span class="range-label">ĐẾN</span>
+                            <div class="val-ctrl-modern">
+                                <button class="btn-step-modern">-</button>
+                                <input type="text" class="val-input-modern" value="20">
+                                <span class="val-unit-modern">°C</span>
+                                <button class="btn-step-modern">+</button>
                             </div>
                         </div>
                     </div>
@@ -1005,8 +1049,13 @@
                 <div class="level-block lvl-3">
                     <div class="level-info">
                         <div class="lvl-icon">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M12 2L1 21h22L12 2zm0 14h-1v-4h2v4h-1zm0 2h-1v2h2v-2h-1z" />
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path
+                                    d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z">
+                                </path>
+                                <line x1="12" y1="9" x2="12" y2="13"></line>
+                                <line x1="12" y1="17" x2="12.01" y2="17"></line>
                             </svg>
                         </div>
                         <div class="lvl-text">
@@ -1015,21 +1064,13 @@
                         </div>
                     </div>
                     <div class="lvl-inputs">
-                        <div class="range-group">
-                            <span class="range-label">Từ</span>
-                            <div class="val-box">
-                                <input type="text" value="20">
-                                <span>°C</span>
-                            </div>
-                        </div>
-                        <span style="color:var(--text-sub)">→</span>
-                        <div class="range-group">
-                            <span class="range-label">Đến</span>
-                            <div class="val-ctrl">
-                                <button class="btn-step">-</button>
-                                <div style="flex:1; text-align:center; font-weight:700">35</div>
-                                <span style="font-size:11px; color:var(--text-sub); margin-right:5px">°C</span>
-                                <button class="btn-step">+</button>
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <span class="range-label">ĐẾN</span>
+                            <div class="val-ctrl-modern">
+                                <button class="btn-step-modern">-</button>
+                                <input type="text" class="val-input-modern" value="35">
+                                <span class="val-unit-modern">°C</span>
+                                <button class="btn-step-modern">+</button>
                             </div>
                         </div>
                     </div>
@@ -1038,36 +1079,38 @@
                 <!-- Level 4 -->
                 <div class="level-block lvl-4">
                     <div class="level-info">
-                        <div class="lvl-icon">&times;</div>
+                        <div class="lvl-icon">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="18" y1="6" x2="6" y2="18"></line>
+                                <line x1="6" y1="6" x2="18" y2="18"></line>
+                            </svg>
+                        </div>
                         <div class="lvl-text">
                             <h4>Mức 4 - Nguy hiểm</h4>
                             <p>Cần xử lý ngay</p>
                         </div>
                     </div>
                     <div class="lvl-inputs">
-                        <div class="range-group">
-                            <span class="range-label">Từ</span>
-                            <div class="val-box">
-                                <input type="text" value="35">
-                                <span>°C</span>
-                            </div>
-                        </div>
-                        <span style="color:var(--text-sub)">→</span>
-                        <div class="range-group">
-                            <span class="range-label">Đến</span>
-                            <div class="val-ctrl">
-                                <div style="flex:1; text-align:center; font-weight:700">∞</div>
-                                <span
-                                    style="font-size:11px; color:var(--text-sub); margin-right:5px; margin-left:10px">°C</span>
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <span class="range-label">ĐẾN</span>
+                            <div class="val-ctrl-modern" style="background: rgba(255,255,255,0.05);">
+                                <div style="width: 32px;"></div>
+                                <input type="text" class="val-input-modern" value="∞" readonly>
+                                <span class="val-unit-modern">°C</span>
+                                <div style="width: 32px;"></div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="drawer-footer" style="padding: 24px;">
-                <button class="btn-cancel" onclick="closeThresholdDrawer()">Hủy</button>
-                <button class="btn-save" style="background: #3b82f6; width: auto;" onclick="closeThresholdDrawer()">Lưu
-                    cấu hình</button>
+            <div class="drawer-footer"
+                style="padding: 24px; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border); background: var(--bg-card);">
+                <button class="btn-cancel" onclick="closeThresholdDrawer()"
+                    style="background: rgba(255,255,255,0.05); border: 1px solid var(--border); border-radius: 8px; font-weight: 600;">Hủy</button>
+                <button class="btn-save"
+                    style="background: #3b82f6; width: auto; font-weight: 600; padding: 10px 24px; border-radius: 8px;"
+                    onclick="closeThresholdDrawer()">Lưu cấu hình</button>
             </div>
         </div>
     </div>
