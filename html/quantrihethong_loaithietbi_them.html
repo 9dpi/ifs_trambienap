@@ -830,23 +830,27 @@
                     .rng-val-box {
                         display: flex;
                         align-items: center;
+                        justify-content: center;
                         background: rgba(15, 23, 42, 0.6);
                         border: 1px solid var(--border);
                         border-radius: 6px;
                         height: 36px;
-                        padding: 0 10px;
+                        width: 85px;
+                        flex-shrink: 0;
                         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                        padding: 0;
                     }
 
                     .rng-input {
                         background: transparent;
                         border: none;
                         color: white;
-                        width: 32px;
-                        text-align: center;
+                        width: 28px;
+                        text-align: right;
                         font-weight: 700;
                         font-size: 14px;
                         outline: none;
+                        padding: 0;
                     }
 
                     .rng-unit {
@@ -865,49 +869,57 @@
                     .val-ctrl-modern {
                         display: flex;
                         align-items: center;
-                        background: rgba(15, 23, 42, 0.6);
+                        background: rgba(15, 23, 42, 0.8);
                         border: 1px solid var(--border);
                         border-radius: 6px;
-                        overflow: hidden;
                         height: 36px;
-                        min-width: 140px;
-                        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                        width: 260px;
+                        flex-shrink: 0;
+                        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+                        padding: 0;
+                        overflow: hidden;
                     }
 
                     .btn-step-modern {
-                        background: transparent;
+                        background: rgba(255, 255, 255, 0.05);
                         border: none;
-                        color: var(--text-main);
-                        width: 32px;
+                        color: #ffffff !important;
+                        width: 36px;
                         height: 100%;
                         cursor: pointer;
-                        font-size: 16px;
+                        font-size: 18px;
                         display: flex;
                         align-items: center;
                         justify-content: center;
                         transition: 0.2s;
+                        flex-shrink: 0;
                     }
 
                     .btn-step-modern:hover {
-                        background: rgba(255, 255, 255, 0.08);
-                        color: #3b82f6;
+                        background: rgba(59, 130, 246, 0.2);
+                        color: #3b82f6 !important;
                     }
 
                     .val-input-modern {
                         background: transparent;
                         border: none;
-                        color: white;
-                        flex: 1;
-                        text-align: center;
+                        color: #ffffff !important;
+                        width: 28px;
+                        height: 100%;
+                        text-align: right;
                         font-weight: 700;
-                        font-size: 14px;
+                        font-size: 15px;
                         outline: none;
+                        padding: 0;
+                        margin: 0;
                     }
 
                     .val-unit-modern {
-                        font-size: 11px;
+                        font-size: 12px;
+                        font-weight: 600;
                         color: var(--text-sub);
-                        margin-right: 8px;
+                        margin: 0;
+                        flex-shrink: 0;
                     }
 
                     @media (max-width: 768px) {
@@ -916,29 +928,38 @@
                         }
 
                         .level-range-row {
-                            padding: 10px;
-                            flex-wrap: nowrap !important;
-                            gap: 6px !important;
-                            justify-content: space-between !important;
+                            padding: 8px 10px !important;
+                            flex-wrap: wrap !important;
+                            gap: 10px 6px !important;
+                            justify-content: center !important;
                         }
 
                         .rng-label {
+                            font-size: 10px !important;
                             letter-spacing: 0.5px;
                         }
 
                         .rng-val-box {
-                            min-width: 50px !important;
+                            width: 70px !important;
                             height: 32px !important;
+                        }
+
+                        .rng-arrow {
+                            display: none;
                         }
 
                         .val-ctrl-modern {
-                            min-width: 90px !important;
-                            height: 32px !important;
-                            max-width: 110px !important;
+                            width: 220px !important;
+                            height: 34px !important;
+                            flex-shrink: 0 !important;
                         }
 
                         .btn-step-modern {
-                            width: 26px !important;
+                            width: 32px !important;
+                        }
+
+                        .val-input-modern {
+                            width: 40px !important;
                         }
                     }
 
@@ -1071,7 +1092,7 @@
                     </div>
                     <div class="level-range-row">
                         <span class="rng-label">TỪ</span>
-                        <div class="rng-val-box">
+                        <div class="rng-val-box" style="justify-content: center;">
                             <input type="text" class="rng-input" value="0" readonly>
                             <span class="rng-unit">°C</span>
                         </div>
@@ -1079,8 +1100,10 @@
                         <span class="rng-label">ĐẾN</span>
                         <div class="val-ctrl-modern">
                             <button class="btn-step-modern">-</button>
-                            <input type="text" class="val-input-modern" value="10">
-                            <span class="val-unit-modern">°C</span>
+                            <div style="flex: 1; display: flex; align-items: center; justify-content: center;">
+                                <input type="text" class="val-input-modern" value="10">
+                                <span class="val-unit-modern">°C</span>
+                            </div>
                             <button class="btn-step-modern">+</button>
                         </div>
                     </div>
@@ -1104,7 +1127,7 @@
                     </div>
                     <div class="level-range-row">
                         <span class="rng-label">TỪ</span>
-                        <div class="rng-val-box">
+                        <div class="rng-val-box" style="justify-content: center;">
                             <input type="text" class="rng-input" value="10" readonly>
                             <span class="rng-unit">°C</span>
                         </div>
@@ -1112,8 +1135,10 @@
                         <span class="rng-label">ĐẾN</span>
                         <div class="val-ctrl-modern">
                             <button class="btn-step-modern">-</button>
-                            <input type="text" class="val-input-modern" value="20">
-                            <span class="val-unit-modern">°C</span>
+                            <div style="flex: 1; display: flex; align-items: center; justify-content: center;">
+                                <input type="text" class="val-input-modern" value="20">
+                                <span class="val-unit-modern">°C</span>
+                            </div>
                             <button class="btn-step-modern">+</button>
                         </div>
                     </div>
@@ -1139,7 +1164,7 @@
                     </div>
                     <div class="level-range-row">
                         <span class="rng-label">TỪ</span>
-                        <div class="rng-val-box">
+                        <div class="rng-val-box" style="justify-content: center;">
                             <input type="text" class="rng-input" value="20" readonly>
                             <span class="rng-unit">°C</span>
                         </div>
@@ -1147,8 +1172,10 @@
                         <span class="rng-label">ĐẾN</span>
                         <div class="val-ctrl-modern">
                             <button class="btn-step-modern">-</button>
-                            <input type="text" class="val-input-modern" value="35">
-                            <span class="val-unit-modern">°C</span>
+                            <div style="flex: 1; display: flex; align-items: center; justify-content: center;">
+                                <input type="text" class="val-input-modern" value="35">
+                                <span class="val-unit-modern">°C</span>
+                            </div>
                             <button class="btn-step-modern">+</button>
                         </div>
                     </div>
@@ -1171,16 +1198,20 @@
                     </div>
                     <div class="level-range-row">
                         <span class="rng-label">TỪ</span>
-                        <div class="rng-val-box">
+                        <div class="rng-val-box" style="justify-content: center;">
                             <input type="text" class="rng-input" value="35" readonly>
                             <span class="rng-unit">°C</span>
                         </div>
                         <span class="rng-arrow">→</span>
                         <span class="rng-label">ĐẾN</span>
-                        <div class="rng-val-box"
-                            style="background: rgba(255, 255, 255, 0.05); min-width: 160px; justify-content: center;">
-                            <span style="font-size: 20px; font-weight: 700; color: white;">∞</span>
-                            <span class="rng-unit" style="margin-left: 8px;">°C</span>
+                        <div class="val-ctrl-modern"
+                            style="background: rgba(255, 255, 255, 0.05); border-color: rgba(255, 255, 255, 0.1);">
+                            <button class="btn-step-modern" style="visibility: hidden;">-</button>
+                            <div style="flex: 1; display: flex; align-items: center; justify-content: center;">
+                                <span style="font-size: 20px; font-weight: 700; color: white;">∞</span>
+                                <span class="val-unit-modern">°C</span>
+                            </div>
+                            <button class="btn-step-modern" style="visibility: hidden;">+</button>
                         </div>
                     </div>
                 </div>
