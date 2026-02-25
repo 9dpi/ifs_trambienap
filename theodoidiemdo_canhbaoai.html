@@ -1,15 +1,99 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="vi" data-theme="dark">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IFS - AI | Bộ cảnh báo</title>
+    <title>IFS - AI | Cảnh báo AI</title>
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/responsive-fixes.css">
+    <style>
+        .ai-thumb {
+            width: 80px;
+            height: 45px;
+            object-fit: cover;
+            border-radius: 4px;
+            border: 1px solid var(--border);
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .ai-thumb:hover {
+            transform: scale(1.2);
+            z-index: 10;
+        }
+
+        /* Filter Refinement */
+        .filter-grid-ai {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: nowrap;
+        }
+
+        .filter-group-ai {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex: 1;
+        }
+
+        .filter-group-ai label {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--text-main);
+            white-space: nowrap;
+            /* Removed min-width to save space in single row layout */
+        }
+
+        .input-icon-wrapper {
+            position: relative;
+            flex: 1;
+        }
+
+        .input-icon-wrapper .filter-input {
+            padding-left: 35px !important;
+            height: 38px;
+        }
+
+        .input-icon-wrapper .input-icon {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-sub);
+            opacity: 0.7;
+            pointer-events: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .btn-search-ai {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0 24px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            height: 38px;
+            transition: 0.2s;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-search-ai:hover {
+            opacity: 0.9;
+            transform: translateY(-1px);
+        }
+    </style>
 </head>
 
 <body>
@@ -27,7 +111,7 @@
                         stroke-linejoin="round">
                         <path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"></path>
                     </svg>
-                </div> IFS - AI
+                </div> IFS - TRẠM BIẾN ÁP
             </a>
         </div>
 
@@ -35,11 +119,12 @@
             <div class="nav-wrapper"><a href="dashboard.html" class="nav-link">TRANG CHỦ</a></div>
             <div class="nav-wrapper"><a href="giamsattructiep.html" class="nav-link">GIÁM SÁT TRỰC TIẾP</a></div>
             <div class="nav-wrapper">
-                <div class="nav-link">THEO DÕI ĐIỂM ĐO <svg class="nav-arrow" width="10" viewBox="0 0 24 24">
+                <div class="nav-link active-link">THEO DÕI ĐIỂM ĐO <svg class="nav-arrow" width="10"
+                        viewBox="0 0 24 24">
                         <path d="M7 10l5 5 5-5z" />
                     </svg></div>
                 <div class="dropdown-menu">
-                    <a href="theodoidiemdo_canhbaoai.html" class="menu-link">Cảnh báo AI</a>
+                    <a href="theodoidiemdo_canhbaoai.html" class="menu-link active-link">Cảnh báo AI</a>
                     <a href="theodoidiemdo_canhbao.html" class="menu-link">Nhiệt độ vượt ngưỡng</a>
                     <a href="theodoidiemdo_nhatkynhietdo.html" class="menu-link">Nhật ký nhiệt độ</a>
                     <a href="theodoidiemdo_tonghopphantich.html" class="menu-link">Tổng hợp phân tích</a>
@@ -47,8 +132,7 @@
             </div>
 
             <div class="nav-wrapper">
-                <div class="nav-link active-link">QUẢN TRỊ HỆ THỐNG <svg class="nav-arrow" width="10"
-                        viewBox="0 0 24 24">
+                <div class="nav-link">QUẢN TRỊ HỆ THỐNG <svg class="nav-arrow" width="10" viewBox="0 0 24 24">
                         <path d="M7 10l5 5 5-5z" />
                     </svg></div>
                 <div class="dropdown-menu mega-menu">
@@ -68,7 +152,7 @@
                             </svg>
                             Kênh Cảnh báo
                         </a>
-                        <a href="theodoidiemdo_bocanhbao.html" class="menu-link active-link menu-item-with-bg">
+                        <a href="theodoidiemdo_bocanhbao.html" class="menu-link menu-item-with-bg">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M5 12.55a11 11 0 0 1 14.08 0"></path>
                                 <path d="M1.42 9a16 16 0 0 1 21.16 0"></path>
@@ -200,50 +284,82 @@
     </nav>
 
     <div class="container">
-        <div class="bread-crumb">Quản trị hệ thống / Thiết lập cảnh báo / <span>Bộ cảnh báo</span></div>
+
 
         <div class="grid">
             <!-- Filter Section -->
             <div class="card filter-card">
-                <div class="filter-row">
-                    <div class="filter-item">
-                        <div class="filter-label">Bộ cảnh báo</div>
-                        <input type="text" class="filter-input" placeholder="Nhập tên bộ cảnh báo...">
+                <div class="filter-grid-ai">
+                    <!-- Row 1 -->
+                    <div class="filter-group-ai">
+                        <label>Thời gian từ</label>
+                        <div class="input-icon-wrapper">
+                            <div class="input-icon">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <polyline points="12 6 12 12 16 14"></polyline>
+                                </svg>
+                            </div>
+                            <input type="text" class="filter-input" value="2026-01-21 00:00:00">
+                        </div>
                     </div>
-                    <div class="filter-item">
-                        <div class="filter-label">Kênh cảnh báo</div>
+                    <div class="filter-group-ai">
+                        <label>Thời gian đến</label>
+                        <div class="input-icon-wrapper">
+                            <div class="input-icon">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <polyline points="12 6 12 12 16 14"></polyline>
+                                </svg>
+                            </div>
+                            <input type="text" class="filter-input" placeholder="Thời gian kết thúc">
+                        </div>
+                    </div>
+                    <div class="filter-group-ai">
+                        <label>Khu vực</label>
                         <select class="filter-input">
-                            <option>Chọn kênh</option>
-                            <option>Nội bộ</option>
-                            <option>Email</option>
-                            <option>Telegram</option>
+                            <option>Phú Quốc</option>
+                            <option>Biển đảo</option>
+                            <option>Liên Trì</option>
                         </select>
                     </div>
-                    <div class="filter-item">
-                        <div class="filter-label">Sự kiện</div>
+
+                    <!-- Row 2 -->
+                    <div class="filter-group-ai">
+                        <label>Camera</label>
                         <select class="filter-input">
-                            <option>Chọn sự kiện</option>
-                            <option>Quá nhiệt</option>
+                            <option selected disabled>Chọn</option>
+                            <option>CAM01</option>
+                            <option>CAM02</option>
+                            <option>CAM03</option>
+                        </select>
+                    </div>
+                    <div class="filter-group-ai">
+                        <label>Loại cảnh báo</label>
+                        <select class="filter-input">
+                            <option selected disabled>Chọn</option>
+                            <option>Khói</option>
+                            <option>Lửa</option>
                             <option>Phát hiện người</option>
                             <option>Phát hiện ô tô</option>
+                            <option>Phát hiện tàu thuyền</option>
+                            <option>Phát hiện xe đạp</option>
+                            <option>Phát hiện xe máy</option>
+                            <option>Phát hiện xe tải</option>
                         </select>
                     </div>
-                    <div class="filter-item">
-                        <div class="filter-label">Khu vực</div>
-                        <select class="filter-input">
-                            <option>Chọn khu vực</option>
-                            <option>Trạm 110kV Nam Phú Quốc</option>
-                            <option>Trạm 110kV Liên Trì</option>
-                        </select>
+                    <div class="filter-group-ai" style="justify-content: flex-end;">
+                        <button class="btn-search-ai">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <circle cx="11" cy="11" r="8"></circle>
+                                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                            </svg>
+                            Tìm kiếm
+                        </button>
                     </div>
-                    <button class="btn-search">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2">
-                            <circle cx="11" cy="11" r="8"></circle>
-                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                        </svg>
-                        Tìm kiếm
-                    </button>
                 </div>
             </div>
 
@@ -252,7 +368,7 @@
                 <div
                     style="padding: 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border)">
                     <div style="font-size: 15px; font-weight: 700; color: var(--primary); text-transform: uppercase;">
-                        Danh sách cảnh báo hệ thống</div>
+                        Danh sách Cảnh báo AI</div>
                     <div style="display: flex; align-items: center; gap: 15px;">
                         <div class="view-switcher">
                             <button class="view-btn active" onclick="switchView('table')">
@@ -276,7 +392,6 @@
                                 </svg>
                             </button>
                         </div>
-                        <button class="btn-add">+ Thêm</button>
                     </div>
                 </div>
 
@@ -285,34 +400,68 @@
                     <table class="data-table">
                         <thead>
                             <tr>
-                                <th style="width: 60px;">STT</th>
-                                <th>Bộ cảnh báo</th>
-                                <th>Kênh cảnh báo</th>
-                                <th>Sự kiện</th>
-                                <th>Trạng thái</th>
-                                <th style="width: 140px; text-align: center;">Hành động</th>
+                                <th style="width: 100px; text-align: center;">Hình ảnh</th>
+                                <th>Ngày</th>
+                                <th>Giờ</th>
+                                <th>Khu vực</th>
+                                <th>Tên camera</th>
+                                <th>Loại cảnh báo</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td>1</td>
-                                <td>BCB01</td>
-                                <td>Nội bộ</td>
-                                <td>Quá nhiệt, Phát hiện người, Phát hiện ô tô</td>
-                                <td><span style="color:var(--success)">Đang sử dụng</span></td>
-                                <td style="text-align: center;"><button
-                                        class="action-btn-circle btn-edit-round">✎</button><button
-                                        class="action-btn-circle btn-delete-round">🗑</button></td>
+                                <td style="text-align: center;"><img src="images/cam-01.png" class="ai-thumb"
+                                        alt="AI Event"></td>
+                                <td style="font-family: 'JetBrains Mono'">2026-01-24</td>
+                                <td style="font-family: 'JetBrains Mono'">11:47:44</td>
+                                <td>Biển đảo</td>
+                                <td>Camera cột 149</td>
+                                <td><span style="color:var(--danger)">Phát hiện tàu thuyền</span></td>
                             </tr>
                             <tr>
-                                <td>2</td>
-                                <td>BCB02</td>
-                                <td>Email, Telegram</td>
-                                <td>Nhiệt độ MBA cao</td>
-                                <td><span style="color:var(--success)">Đang sử dụng</span></td>
-                                <td style="text-align: center;"><button
-                                        class="action-btn-circle btn-edit-round">✎</button><button
-                                        class="action-btn-circle btn-delete-round">🗑</button></td>
+                                <td style="text-align: center;"><img src="images/cam-02.png" class="ai-thumb"
+                                        alt="AI Event"></td>
+                                <td style="font-family: 'JetBrains Mono'">2026-01-24</td>
+                                <td style="font-family: 'JetBrains Mono'">11:46:52</td>
+                                <td>Biển đảo</td>
+                                <td>Camera cột 149</td>
+                                <td><span style="color:var(--danger)">Phát hiện tàu thuyền</span></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center;"><img src="images/cam-03.png" class="ai-thumb"
+                                        alt="AI Event"></td>
+                                <td style="font-family: 'JetBrains Mono'">2026-01-24</td>
+                                <td style="font-family: 'JetBrains Mono'">11:45:44</td>
+                                <td>Biển đảo</td>
+                                <td>Camera cột 149</td>
+                                <td><span style="color:var(--danger)">Phát hiện tàu thuyền</span></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center;"><img src="images/cam-04.png" class="ai-thumb"
+                                        alt="AI Event"></td>
+                                <td style="font-family: 'JetBrains Mono'">2026-01-24</td>
+                                <td style="font-family: 'JetBrains Mono'">11:44:44</td>
+                                <td>Biển đảo</td>
+                                <td>Camera cột 149</td>
+                                <td><span style="color:var(--danger)">Phát hiện tàu thuyền</span></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center;"><img src="images/cam-01.png" class="ai-thumb"
+                                        alt="AI Event"></td>
+                                <td style="font-family: 'JetBrains Mono'">2026-01-24</td>
+                                <td style="font-family: 'JetBrains Mono'">11:43:46</td>
+                                <td>Biển đảo</td>
+                                <td>Camera cột 149</td>
+                                <td><span style="color:var(--danger)">Phát hiện tàu thuyền</span></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center;"><img src="images/cam-02.png" class="ai-thumb"
+                                        alt="AI Event"></td>
+                                <td style="font-family: 'JetBrains Mono'">2026-01-24</td>
+                                <td style="font-family: 'JetBrains Mono'">11:42:46</td>
+                                <td>Biển đảo</td>
+                                <td>Camera cột 149</td>
+                                <td><span style="color:var(--danger)">Phát hiện tàu thuyền</span></td>
                             </tr>
                         </tbody>
                     </table>
@@ -320,41 +469,42 @@
 
                 <!-- CARD VIEW -->
                 <div id="cardView" class="card-view-grid hidden-view">
+                    <!-- AI Card 1 -->
                     <div class="sensor-card-item">
-                        <div class="sc-header"><span class="sc-id">BCB01</span><span
-                                style="color:var(--success); font-size:12px">● Active</span></div>
-                        <div class="sc-name">Bộ cảnh báo trạm PQ</div>
+                        <div class="sc-header"><span class="sc-id">2026-01-24</span><span
+                                style="color:var(--danger); font-size:12px">● Alert</span></div>
+                        <div class="sc-img-wrap"><img src="images/cam-01.png" class="sc-img" alt="AI Event"></div>
+                        <div class="sc-name">Phát hiện tàu thuyền</div>
                         <div class="sc-info">
-                            <div class="sc-info-item">
-                                <svg style="width:14px; height:14px; margin-right:4px; vertical-align:middle"
-                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M11 5L6 9H2v6h4l5 4V5z"></path>
-                                    <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
-                                </svg>
-                                Kênh: Nội bộ
-                            </div>
-                            <div class="sc-info-item">
-                                <svg style="width:14px; height:14px; margin-right:4px; vertical-align:middle"
-                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
-                                    <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
-                                </svg>
-                                Sự kiện: Quá nhiệt, Phát hiện người
-                            </div>
+                            <div class="sc-info-item">🕒 11:47:44</div>
+                            <div class="sc-info-item">📍 Biển đảo</div>
+                            <div class="sc-info-item">🎥 Camera cột 149</div>
                         </div>
-                        <div class="sc-actions"><button class="action-btn-circle btn-edit-round">✎</button><button
-                                class="action-btn-circle btn-delete-round">🗑</button></div>
+                    </div>
+                    <!-- AI Card 2 -->
+                    <div class="sensor-card-item">
+                        <div class="sc-header"><span class="sc-id">2026-01-24</span><span
+                                style="color:var(--danger); font-size:12px">● Alert</span></div>
+                        <div class="sc-img-wrap"><img src="images/cam-02.png" class="sc-img" alt="AI Event"></div>
+                        <div class="sc-name">Phát hiện tàu thuyền</div>
+                        <div class="sc-info">
+                            <div class="sc-info-item">🕒 11:46:52</div>
+                            <div class="sc-info-item">📍 Biển đảo</div>
+                            <div class="sc-info-item">🎥 Camera cột 149</div>
+                        </div>
                     </div>
                 </div>
 
                 <div class="page-info-bar">
-                    <div>Hiển thị từ 1 đến 2 trong tổng số 2</div>
+                    <div>Hiển thị từ 1 đến 6 trong tổng số 24</div>
                     <div class="pagination-group">
                         <select class="select-page-size">
                             <option>10/trang</option>
                             <option>20/trang</option>
                         </select>
                         <button class="btn-page active">1</button>
+                        <button class="btn-page">2</button>
+                        <button class="btn-page">3</button>
                         <div style="font-size: 11px; margin: 0 5px;">Nhảy tới</div>
                         <input type="text" class="filter-input"
                             style="width: 40px; height: 32px; padding: 0 5px; text-align: center;" value="1">
@@ -371,7 +521,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 
